@@ -1,0 +1,154 @@
+\begin{thebibliography}{10}
+
+\bibitem{Gartner:IoTSecurity:2023}
+{Gartner}.
+\newblock {IoT security surveys and reports}.
+\newblock Technical report, {Gartner}, 2023.
+\newblock Consultado en 2023.
+
+\bibitem{Kaspersky:Mirai:2025}
+{Kaspersky Security}.
+\newblock {Mirai Botnet and IoT-Based DDoS Attacks: Evolution and Current
+  Threats}.
+\newblock \url{https://www.kaspersky.com/resource-center/threats/mirai-botnet},
+  2025.
+\newblock Análisis de botnets IoT y ataques DDoS masivos impulsados por
+  dispositivos comprometidos.
+
+\bibitem{Ibrahim:AoT:2023}
+Muhammad Ibrahim, Andrea Continella, and Antonio Bianchi.
+\newblock {AoT - Attack on Things: A security analysis of IoT firmware
+  updates}.
+\newblock In {\em 2023 IEEE 8th European Symposium on Security and Privacy
+  (EuroS\&P)}, pages 1047--1064, 2023.
+
+\bibitem{Hassan:IIoTSecurity:2023}
+Yewande~Goodness Hassan, Anuoluwapo Collins, Gideon~Opeyemi Babatunde,
+  Abidemi~Adeleye Alabi, and Sikirat~Damilola Mustapha.
+\newblock {Security Challenges in Industrial IoT: Update Mechanisms and
+  Firmware Vulnerabilities}.
+\newblock {\em {International Journal/Conference Name}}, 04(01):697--703,
+  January-February 2023.
+\newblock Received: 12-12-2022; Accepted: 19-01-2023.
+
+\bibitem{Cisco:IoTForecast:2025}
+{Cisco Systems}.
+\newblock {Cisco Annual Internet Report (2018–2023) and IoT Forecast}.
+\newblock Technical report, {Cisco Systems}, 2025.
+\newblock Proyección de más de 29 mil millones de dispositivos IoT conectados
+  para 2025.
+
+\bibitem{Fortinet:IoTVulnerabilities}
+{Fortinet}.
+\newblock {Top 10 IoT Vulnerabilities and Security Threats}.
+\newblock \url{https://www.fortinet.com/resources/cyberglossary/iot-security},
+  2024.
+\newblock Informe sobre las principales vulnerabilidades en dispositivos IoT,
+  incluyendo mecanismos de actualización inseguros y firmware obsoleto.
+
+\bibitem{Bitdefender:TUTK:2024}
+{Bitdefender Labs}.
+\newblock {Critical Vulnerabilities in ThroughTek Kalay Platform Affect Over
+  100 Million IoT Devices}.
+\newblock Technical report, {Bitdefender}, May 2024.
+\newblock Vulnerabilidades críticas en la plataforma TUTK que afectan a más
+  de 100 millones de dispositivos IoT globalmente.
+
+\bibitem{SWUpdate}
+{SWUpdate Project}.
+\newblock {SWUpdate - Software Update for Embedded Linux Devices}, 2024.
+\newblock Framework de código abierto para actualizaciones de firmware en
+  sistemas Linux embebidos con soporte para actualizaciones atómicas A/B y
+  firmas RSA/ECDSA.
+
+\bibitem{hawkBit}
+{Eclipse Foundation}.
+\newblock {Eclipse hawkBit - IoT Update Management}, 2024.
+\newblock Plataforma backend de código abierto para gestión de
+  actualizaciones OTA a escala empresarial con rollout progresivo y gestión de
+  campañas.
+
+\bibitem{Mender}
+{Northern.tech}.
+\newblock {Mender - Over-the-Air Software Updates for IoT}, 2024.
+\newblock Plataforma OTA que integra cliente y servidor para actualizaciones
+  con gestión de flotas, rollback automático e interfaz gráfica.
+
+\bibitem{Balena}
+{Balena Inc.}
+\newblock {Balena - IoT Fleet Management Platform}, 2024.
+\newblock Plataforma de gestión de flotas IoT basada en contenedores Docker
+  para despliegue y actualización de aplicaciones.
+
+\bibitem{RAUC}
+{RAUC Project}.
+\newblock {RAUC - Robust Auto-Update Controller}, 2024.
+\newblock Framework de código abierto para actualizaciones seguras de sistemas
+  Linux embebidos con soporte para múltiples esquemas de particionado.
+
+\bibitem{NIST:SP800232:2023}
+{National Institute of Standards and Technology (NIST)}.
+\newblock {Lightweight Cryptography: Program Document}.
+\newblock Special Publication (SP) 800-232, {U.S. Department of Commerce},
+  2023.
+
+\bibitem{NIST:SP800232:Ascon}
+{National Institute of Standards and Technology (NIST)}.
+\newblock {Ascon-Based Lightweight Cryptography Standards for Constrained
+  Devices}.
+\newblock Special Publication (SP) 800-232, {U.S. Department of Commerce},
+  2025.
+\newblock Estándar oficial de criptografía ligera del NIST basado en ASCON
+  para dispositivos con recursos limitados.
+
+\bibitem{AsconStatusUpdate2022}
+Christoph Dobraunig, Maria Eichlseder, Florian Mendel, and Martin
+  Schl{\"a}ffer.
+\newblock {Status Update on Ascon v1.2}.
+\newblock Status update, {NIST Lightweight Cryptography Standardization
+  Process}, September 2022.
+\newblock Finalist Round Status Update con benchmarks de rendimiento en
+  dispositivos con recursos limitados.
+
+\bibitem{RaspberryPi:Website}
+{Raspberry Pi Foundation}.
+\newblock {Raspberry Pi}, 2025.
+\newblock Sitio web oficial de Raspberry Pi.
+
+\bibitem{ArduinoIDE:Website}
+{Arduino}.
+\newblock {Arduino IDE}, 2025.
+\newblock Entorno de desarrollo integrado oficial para Arduino.
+
+\bibitem{ASCON:Code:2023}
+{Christoph Dobraunig and others}.
+\newblock {ASCON C Implementation}, 2023.
+\newblock Implementación oficial de ASCON recomendada por NIST.
+
+\bibitem{NIST:Website}
+{U.S. Department of Commerce}.
+\newblock {National Institute of Standards and Technology (NIST)}, 2025.
+\newblock Sitio web oficial del NIST.
+
+\bibitem{shor1997}
+Peter~W. Shor.
+\newblock Polynomial-time algorithms for prime factorization and discrete
+  logarithms on a quantum computer.
+\newblock {\em SIAM Journal on Computing}, 26(5):1484--1509, 1997.
+
+\bibitem{NIST:FIPS204}
+{National Institute of Standards and Technology (NIST)}.
+\newblock {Module-Lattice-Based Digital Signature Standard}, 2024.
+
+\bibitem{Yocto:SystemUpdate}
+{Yocto Project}.
+\newblock {System Update}.
+\newblock \url{https://wiki.yoctoproject.org/wiki/System_Update}, 2024.
+\newblock Accessed: 2025-12-11.
+
+\bibitem{WFX}
+Wfx.
+\newblock \url{https://siemens.github.io/wfx/}.
+\newblock Accessed: 2025-12-11.
+
+\end{thebibliography}

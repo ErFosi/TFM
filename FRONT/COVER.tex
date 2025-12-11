@@ -1,0 +1,35 @@
+%*****************************************************
+% Cover 1 - Cubierta
+%****************************************************
+%	
+\backgroundsetup{
+	scale=1,
+	angle=0,
+	opacity=.4,
+	contents={\includegraphics[width=\paperwidth,height=\paperheight]{Logos/tfm_cubierta.png}}
+}
+
+\begin{titlepage}
+	\newgeometry{top=5in,bottom=2cm,right=7cm,left=0.5cm}
+	\hypersetup{pageanchor=false}
+	
+	\begin{centering}
+		\null
+	\bigskip
+		\vfill
+		{\renewcommand\baselinestretch{0.75}\color{white}\Huge\bfseries\myTitle}
+		
+		\bigskip
+		{\vfill}
+		
+		
+		{\hfill\large\bfseries\color{white}{\myName}}
+	
+		{\hfill\large\bfseries\color{white}{\myDate}}
+		
+		{\hfill\small\bfseries\color{white}{\myStudies}}
+		
+	\end{centering}
+	
+\end{titlepage}
+\hypersetup{pageanchor=true}  

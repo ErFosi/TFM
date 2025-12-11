@@ -1,0 +1,502 @@
+\section{Bases Teóricas de la criptografía }
+En el mundo de la seguridad digital, la criptografía desempeña un papel fundamental en el cifrado y descifrado de información. Su objetivo principal es asegurar la confidencialidad e integridad de los datos, protegiéndolos contra accesos no autorizados durante la transmisión o almacenamiento. Esta sección explora la evolución histórica de la criptografía y sus fundamentos básicos, con un énfasis particular en dos formas principales: la criptografía simétrica y asimétrica.
+
+La criptografía es una disciplina antigua cuya evolución se puede rastrear desde los métodos más simples de ocultamiento de mensajes hasta los complejos algoritmos computacionales utilizados en la actualidad. Para entender su historia es importante definir algunos conceptos generales:
+
+\begin{itemize}
+    \item \textbf{Mensaje}: Es la información original que se desea proteger.
+    \item \textbf{Criptograma}: Es el resultado del proceso de cifrado, que oculta el mensaje original utilizando algún algoritmo criptográfico.
+    \item \textbf{Criptoanálisis}: Es el estudio de los sistemas criptográficos con el fin de encontrar debilidades que permitan recuperar el mensaje original sin conocer la clave de cifrado.
+\end{itemize}
+Por otro lado, existen principios clave que son esenciales para proteger la información y los sistemas informáticos de accesos no autorizados, alteraciones y destrucción. Estos principios son la base de cualquier estrategia de seguridad y son fundamentales para garantizar la protección de los datos. A continuación, se presentan brevemente estos principios:
+\begin{itemize}
+    \item \textbf{Confidencialidad:} Este principio asegura que la información es accesible solo para aquellas personas autorizadas a tener acceso. Protege los datos de accesos no autorizados y garantiza la privacidad de la información.
+    
+    \item \textbf{Integridad:} La integridad se refiere a la exactitud y completitud de la información y los métodos de procesamiento. Este principio asegura que la información no ha sido alterada de manera no autorizada y que se mantiene tal como fue creada, enviada y recibida.
+    
+    \item \textbf{No repudio:} Garantiza que una vez realizada una transacción, no se pueda negar su autoría, proporcionando evidencia de la participación de las partes involucradas.
+    
+    \item \textbf{Autenticidad:} La autenticidad garantiza que las transacciones, las comunicaciones y los datos son genuinos y que las identidades de las partes involucradas son verificadas. Este principio evita la suplantación de identidad y asegura que los datos provienen de una fuente legítima.
+\end{itemize}
+
+A continuación, se presenta una cronología de la criptografía, abarcando desde sus orígenes hasta el futuro próximo.
+
+\subsection{Inicios de la criptografía - cifrado simétrico}
+La criptografía antes del siglo XIX se centraba en el uso de técnicas manuales y físicas para cifrar y descifrar el mensaje. Estos métodos se basaban en la sustitución y transposición de letras o números.
+Uno de los métodos más conocidos de este periodo de tiempo es el cifrado César.
+\subsubsection{Cifrado César}
+Un ejemplo de cifrado simétrico es el cifrado César, que consiste en avanzar $n$ posiciones por cada letra respecto al abecedario.
+\newline
+
+\[
+ E(x) = (x + n)\  \text{mod}\ {26}
+\]
+
+
+Asumiendo que $n$ es 1 y $x$ la posición de la palabra en el abecedario, la palabra ``Hola" pasaría a ser ``Ipmb".
+
+Estas técnicas son conocidas como criptografía de clave simétrica ya que, dada una conexión entre dos personas, ambas deben conocer la llave, o método, para poder cifrar y descifrar el mensaje. En el ejemplo anterior la 
+llave sería cuantas letras se desplaza en el alfabeto.
+
+
+La criptografía simétrica, dado que se basa en el uso de una única clave compartida entre el emisor y el receptor, puede ser limitante. Primero, la clave debe ser transmitida de manera segura entre ambas partes, lo cual puede ser un reto significativo. Si la clave es interceptada o descubierta por un tercero, toda la comunicación cifrada con esa clave se vuelve insegura. Además, a medida que el número de participantes en un sistema de comunicación aumenta, el manejo de claves se vuelve más complejo y difícil de gestionar, ya que cada par de usuarios necesita una clave única y segura.
+
+\subsection{Cifrado a partir del siglo XIX }
+La evolución de la criptografía desde el siglo XIX hasta la creación del cifrado asimétrico marcó un cambio significativo en la protección de la información. En el siglo XIX, la criptografía era principalmente artesanal, con algunos avances en sistemas de cifrado y el uso de las primeras máquinas mecánicas para cifrar mensajes. Durante la Primera Guerra Mundial, se intensificó el uso de dispositivos mecánicos y electromecánicos, siendo la máquina Enigma un ejemplo destacado de este periodo. La Segunda Guerra Mundial fue crucial para la criptografía, con la ruptura del cifrado de Enigma por los Aliados y el desarrollo de las primeras computadoras, como Colossus, para el criptoanálisis. Los años 70 marcaron el comienzo de la era digital en criptografía con el desarrollo de algoritmos de cifrado asimétrico. 
+\newline
+\newline
+
+En 1976, Whitfield Diffie y Martin Hellman introdujeron la criptografía de clave pública, o cifrado asimétrico, que mejora sobre el cifrado simétrico al permitir el uso de un par de claves: una pública para cifrar y una privada para descifrar, asegurando una comunicación más segura y eficiente. En 1978, el algoritmo RSA, propuesto por Ron Rivest, Adi Shamir y Leonard Adleman, se convirtió en el primer algoritmo práctico de cifrado asimétrico, permitiendo tanto el cifrado de datos como la firma digital, y estableciendo un pilar fundamental para la seguridad digital.
+
+
+\subsubsection{Criptografía asimétrica \label{sub:crpasim}}
+
+La criptografía asimétrica introduce un enfoque revolucionario mediante el uso de un par de claves: una pública y una privada. La clave pública, como su nombre indica, se puede compartir abiertamente, mientras que la clave privada se mantiene en secreto por el usuario. 
+La razón de la existencia de dos claves distintas en los sistemas de criptografía asimétrica radica en el hecho de que lo que es cifrado utilizando la clave pública solo puede ser descifrado por su correspondiente clave privada, y viceversa.
+
+En la criptografía asimétrica, el par de claves (pública y privada) están relacionadas matemáticamente y se generan al mismo tiempo. Esta relación matemática permite que lo que es cifrado con una clave pública solo pueda ser descifrado de manera efectiva con su clave privada correspondiente, y viceversa. Esto se logra mediante algoritmos específicos, que utilizan principios matemáticos avanzados basados en problemas computacionales difíciles de invertir.
+\begin{itemize}
+    \item \textbf{Cifrado}: \hspace{1pt} $C = E\_{k_{\text{publica}}}(M)$
+    \item\textbf{Descifrado}: \hspace{1pt} $M = D\_{k_{\text{privada}}}(C)$
+\end{itemize}
+
+La criptografía de clave pública y privada se puede entender mediante el símil de una caja con dos cerraduras, cada una correspondiente a una llave. Inicialmente, cualquiera de las dos llaves puede cerrar la caja, pero para abrirla se debe utilizar la llave opuesta. Imaginemos el siguiente escenario con Alice y Bob. Para este ejemplo, Bob tiene dos tipos de llaves: una pública y otra privada. La clave pública la hará disponible para todos, haciendo copias de ella y dándoselas a cualquiera que la pida. La clave privada, en cambio, será mantenida en secreto y solo Bob dispondrá de ella (ver~\autoref{fig:llaves_creadas}).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{imagenes/diagramas/bob_crea_llaves (1) (2).jpg}
+    \caption{Creación de las llaves por parte de Bob}
+    \label{fig:llaves_creadas}
+\end{figure}
+\begin{enumerate}
+    \item \textbf{Cerrando la caja (Encriptación con la clave pública):} \\Alice quiere enviar un mensaje confidencial a Bob, para hacerlo primero coloca el mensaje en la caja,  posteriormente, utiliza la llave pública de Bob para cerrar la caja. Al cerrar la caja con la llave pública de Bob, Alice garantiza que solo Bob podrá abrirla, dado que solo él posee la llave privada correspondiente para esa cerradura. De este modo, aunque alguien más tenga acceso a la caja, no podrán abrirla sin la llave privada de Bob (ver~\autoref{fig:caja_cerr}).
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/diagramas/alice_cierra.jpg}
+    \caption{Alice introduce el mensaje en la caja y la cierra.}
+    \label{fig:caja_cerr}
+\end{figure}
+    
+    \item \textbf{Abriendo la caja (Descifrado con la clave privada):} \\
+    Cuando Bob recibe la caja cerrada, utiliza su llave privada para abrirla. Esta llave privada es única y está en su exclusiva posesión. Al emplear su llave privada en la cerradura correspondiente, Bob puede abrir la caja y acceder al mensaje original que Alice colocó dentro. Nadie más puede abrir la caja porque no disponen de la llave privada de Bob, garantizando así que el mensaje permanece seguro y solo accesible para Bob (ver~\autoref{fig:caja_abr}).
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{imagenes/diagramas/primera_parte_foto2.drawio.jpg}
+    \caption{Bob abre la caja y obtiene el mensaje.}
+    \label{fig:caja_abr}
+\end{figure}
+\end{enumerate}
+
+
+En el ejemplo anterior se ha demostrado como la criptografía asimétrica puede garantizar la confidencialidad, pero, además, puede garantizar la autenticidad. Para ello pongamos el siguiente ejemplo donde Bob quiere enviarle un mensaje a Alice y quiere demostrar que es Bob realmente el que lo ha escrito.
+
+\begin{enumerate}
+\item \textbf{Cerrando la caja (Encriptación con la llave privada):} Bob coloca el mensaje en la caja y la cierra utilizando su llave privada (ver~\autoref{fig:bob_usa_priv_2}). Esto asegura que cualquier persona con acceso a su llave pública puede abrir la caja y leer el mensaje, pero garantiza que solo Bob pudo haberla cerrado, ya que solo él posee la llave privada.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/diagramas/Bob usa su clave privada.drawio.jpg}
+    \caption{Bob inserta el mensaje y usa su llave privada.}
+    \label{fig:bob_usa_priv_2}
+\end{figure}
+
+
+\item \textbf{Abriendo la caja (Descifrado con la clave pública):} \\
+Alice recibe la caja y utiliza la clave pública de Bob para abrirla (ver~\autoref{fig:alice_usa_clvpb2}). Al hacerlo, Alice puede estar segura de que el mensaje fue realmente enviado por Bob, ya que solo la llave pública de Bob puede abrir la caja que fue cerrada con su llave privada, la cual es única y solo posee Bob. Esto proporciona autenticidad y no repudio, ya que Bob no puede negar haber enviado el mensaje.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{imagenes/diagramas/segunda parte_2.drawio.jpg}
+    \caption{Alice utiliza la clave pública de Bob para abrir la caja y verificar la autenticidad del mensaje.}
+    \label{fig:alice_usa_clvpb2}
+\end{figure}
+\end{enumerate}
+Mediante estos dos mecanismos, la criptografía asimétrica ofrece no solo confidencialidad, sino también no repudio y autenticidad.
+
+\subsubsection{Creación de los pares de claves}
+La creación de pares de claves en el cifrado asimétrico se basa en principios matemáticos complejos, siendo este un componente esencial en la seguridad de las comunicaciones digitales. Este proceso implica la generación de dos claves, una pública y otra privada, que están matemáticamente vinculadas entre sí. La clave pública puede ser compartida libremente, mientras que la clave privada debe mantenerse en secreto.
+\newline
+Los fundamentos matemáticos mas utilizados son los siguientes:
+\begin{itemize}
+    \item \textbf{Números primos y factorización}: Muchos algoritmos de cifrado asimétrico se basan en la dificultad de factorizar un producto de dos números primos grandes. Esta tarea es computacionalmente exigente, lo que contribuye a la seguridad del algoritmo.
+    \item \textbf{Logaritmos Discretos}: Otra base matemática común involucra la dificultad de calcular logaritmos discretos en un grupo finito, como el grupo de puntos en una curva elíptica.
+    
+\end{itemize}
+Los métodos para la creación más comunes para la creación de clave basados en dichos fundamentos matemáticos son RSA y ECC, respectivamente.
+
+\subsubsection{RSA}
+El algoritmo RSA es un método de cifrado asimétrico, que utiliza la factorización de un producto de dos números primos.
+
+\begin{enumerate}
+    \item \textbf{Selección de Primos}: Se eligen dos números primos grandes, \( p \) y \( q \), de forma aleatoria y secreta.
+    \item \textbf{Cálculo del Módulo \( n \)}: Se calcula \( n = p \times q \). El tamaño de \( n \) (en bits) determina la fortaleza del cifrado.
+    \item \textbf{Función $\varphi$ de Euler de \( n \)}: Se calcula \( \varphi(n) = (p-1) \times (q-1) \) aprovechando las propiedades de la función de Euler.
+    \begin{itemize}
+        \item $\varphi(p)=p-1$ si \( p \) es primo
+        \item Si $m$ y $n$ son primos entre si, entonces $\varphi(mn)=\varphi(m)\varphi(n)$
+    \end{itemize}
+     \item \textbf{Elección de la Clave Pública}: Se elige un número \( e \) tal que \( 1 < e < \varphi(n) \) y \( e \) sea coprimo\footnote{Dos números se consideran \textit{coprimos} si su máximo común divisor es 1. Esto significa que no tienen otros divisores comunes aparte del 1.} con \( \varphi(n) \), este número \( e \) elegido es el exponente de la clave pública.
+    \item \textbf{Cálculo de la Clave Privada}: Se calcula \( d \) como el inverso multiplicativo de \( e \) módulo \( \varphi(n) \), es decir, $ d\times e \equiv 1 \modulo{\varphi(n)} $.
+    \begin{itemize}
+        \item De otra manera, $d \times e - 1$ es dividido por $\varphi(n)=(p-1)\times(q-1)$, y se suele calcular con el algoritmo extendido de Euclides
+        \item $d$ se guarda como el exponente para la clave privada
+    \end{itemize}
+\end{enumerate}
+La clave publica es $(n,e)$, esto es, el módulo y el exponente de cifrado mientras que la clave privada es $(n,d)$, el modulo y el exponente de descifrado.
+
+\subsubsection{Cifrado de un mensaje mediante RSA}
+Dado un mensaje $m$ y una clave pública $(n,e)$ el cifrado se realiza de la siguiente manera:
+\[  C \equiv m^e \modulo n \]
+
+De esta manera conseguimos el criptograma \(\ C.\)
+\subsubsection{Descifrado del mensaje}
+Para poder recuperar $m$ a partir del mensaje cifrado $c$ se usa el exponente $d$ de la clave privada mediante el siguiente cálculo:
+
+\[ m \equiv c^d \modulo n \]
+
+Este procedimiento es válido dado que hemos elegido $d$ y $e$ de forma que $ed = 1 + k\varphi(n)$, cumpliendo $m^{ed}=m^{1+k\varphi (n)}=m(m^{\varphi (n)})^{k}\equiv m \modulo(n) $ dado que $m$ es coprimo con $n$.
+
+\subsubsection{Ejemplo de cifrado con RSA}
+En este ejemplo veremos como dado un mensaje y un par de claves podemos cifrar y descifrar el mensaje.
+\begin{enumerate}
+    \item Partiendo de los siguientes datos:
+    \begin{itemize}
+        \item $p = 61$, primer número primo privado
+        \item $q = 53$, segundo número primo privado
+        \item $n = p \cdot q = 3233$, producto de $p$ y $q$
+        \item $e = 17$, exponente público
+        \item $d = 2753$, exponente privado
+        \item La clave pública
+    \end{itemize}
+    \item Donde $m$ es el texto sin cifrar.
+    \item La función de descifrado es:\hspace{1pt} $m \equiv c^d \modulo n = c^{2753} \modulo 3233$.
+    \item Donde $c$ es el texto cifrado.
+    \item Para cifrar el valor del texto sin cifrar 123, nosotros calculamos:\hspace{1pt}  $C \equiv 123^{17} \modulo 3233 = 855$.
+    \item Para descifrar el valor del texto cifrado, nosotros calculamos:\hspace{1pt}  $m \equiv 855^{2753} \modulo 3233 = 123$.
+\end{enumerate}
+
+\subsection{Principios de la seguridad informática asegurados con cifrado asimétrico}
+En esta sección se desarrollará como, gracias al cifrado asimétrico se consigue cumplir con los principios fundamentales de la ciberseguridad. En primer lugar, con el cifrado asimétrico únicamente se logran los siguientes principios:
+
+\begin{itemize}
+    \item \textbf{Confidencialidad:} Se cumple, ya que el cifrado asimétrico permite proteger los datos para que solo sean accesibles por las personas autorizadas con la clave privada correspondiente.
+    
+    \item \textbf{Integridad:} No se puede asegurar completamente, ya que no hay un mecanismo inherente en el cifrado asimétrico que garantice que los datos no han sido alterados.
+    
+    \item \textbf{No repudio:} No se puede garantizar completamente, ya que el cifrado asimétrico por sí solo no proporciona una manera de evitar que una de las partes niegue haber realizado una acción.
+    
+    
+    \item \textbf{Autenticidad:} No se puede asegurar completamente, ya que el cifrado asimétrico por sí solo no proporciona un método para verificar la identidad de manera confiable, no se puede verificar si la clave pública de un individuo es de quien dice ser en una comunicación no física.
+\end{itemize}
+
+Es decir, solo podemos verificar la confidencialidad de los datos, en los siguientes apartados se verán los métodos existentes para cumplir el resto.
+
+\subsection{Firma digital}
+Una firma digital es un mecanismo de seguridad electrónica que imita la funcionalidad de una firma manuscrita en el entorno digital. Utiliza la criptografía asimétrica.
+
+Al firmar digitalmente un documento o mensaje, se utiliza la clave privada para generar un código único (la firma) basado en el contenido del mensaje mediante una función hash\footnote{Una función hash convierte datos de cualquier tamaño en una cadena de texto de tamaño fijo, conocida como hash. Cada conjunto único de datos produce un hash único, y cualquier cambio en los datos cambia el hash.}. Este código se adjunta después al mensaje o documento. Cuando el receptor obtiene el mensaje firmado, puede usar la clave pública del remitente para verificar si la firma es válida tal y como se detalló anteriormente con el segundo ejemplo de cifrado asimétrico donde Bob envía un mensaje a Alice asegurando así la autenticidad del remitente (ver~\autoref{fig:bob_usa_priv_2} y~\autoref{fig:alice_usa_clvpb2}).
+
+Para crear la firma se siguen los siguientes pasos:
+\begin{itemize}
+    \item \textbf{Creación del hash}: Primero, el remitente crea un resumen del mensaje original utilizando una función hash criptográfica. 
+    \item \textbf{Firmado del hash}: A continuación, el remitente cifra el hash del mensaje con su clave privada. Este paso es crucial: la firma digital no es el cifrado completo del mensaje, sino el cifrado del hash del mensaje.
+    \item \textbf{Adjuntar al mensaje}: El hash cifrado (la firma) se adjunta al mensaje original. Este mensaje firmado se puede enviar al receptor.
+\end{itemize}
+
+Y para verificar la firma:
+\begin{itemize}
+    \item \textbf{Separar la firma y el mensaje}.
+    \item \textbf{Descifrar la firma}: El receptor utiliza la clave pública del remitente para descifrar la firma, obteniendo así el hash del mensaje que el remitente calculó.
+    \item \textbf{Calcular el hash del mensaje}: El receptor calcula el hash del mensaje recibido utilizando la misma función hash que usó el remitente.
+    \item \textbf{Comparar los hashes}: El receptor compara el hash que acaba de calcular con el hash descifrado de la firma. Si ambos hashes coinciden, la firma es válida; esto significa que el mensaje no ha sido alterado y que el remitente es quien dice ser.
+\end{itemize}
+
+De esta manera se puede garantizar la autenticidad, la integridad y el no repudio.
+\subsubsection{Ejemplo de firmado digital}
+
+Retomando el ejemplo de la~\autoref{sub:crpasim} donde Bob desea enviar un mensaje a Alice y se busca que la identidad de Bob como remitente sea verificable y que Bob no pueda negar haber enviado el mensaje (ver~\autoref{fig:bob_usa_priv_2} y~\autoref{fig:alice_usa_clvpb2}). Cuando Alice recibe el mensaje, lleva a cabo un proceso de verificación que cumple con tres propósitos críticos:
+
+\begin{itemize}
+    \item \textbf{Integridad}:
+Cuando Alice recibe el mensaje, puede usar la clave pública de Bob para verificar la firma. Si la verificación es exitosa, Alice puede estar segura de que el mensaje no ha sido alterado desde que Bob lo firmó.
+ 
+\item \textbf{Autenticidad:} Cuando Alice verifica con éxito la firma digital de Bob, no solo confirma la integridad del mensaje, sino también que el mensaje fue realmente enviado por Bob, ya que solo él tiene acceso a su clave privada correspondiente a la clave pública que Alice utilizó para la verificación. Cabe destacar que en una comunicación no física es imposible verificar completamente que Bob es quien dice ser, ya que no se puede garantizar la identidad solo mediante medios digitales.
+
+\item \textbf{No Repudio}:
+Una vez que Bob envía un mensaje firmado digitalmente, no puede negar haberlo enviado. Esto se debe a que la firma digital creada con su clave privada es única y verificable por cualquier persona que tenga su clave pública. Por lo tanto, Bob no puede negar la autoría del mensaje, proporcionando una prueba irrefutable de su participación en la comunicación.
+
+\end{itemize}
+
+Al combinar esto con el cifrado asimétrico convencional, también se garantiza la confidencialidad. Sin embargo, la autenticidad completa solo se puede lograr con la introducción de autoridades certificadoras (CA), que se discutirá en la siguiente sección.
+
+\subsection{Autoridades Certificadoras y certificados digitales}
+En las comunicaciones digitales, es crucial garantizar que las partes involucradas sean quienes dicen ser. Aquí es donde entra en juego la Autoridad Certificadora (CA). Una CA es una entidad de confianza que emite certificados digitales, los cuales verifican la identidad de los individuos, servidores u otras entidades. Sin una CA, sería muy difícil establecer una relación de confianza en entornos donde las partes no se conocen previamente. En un ejemplo más coloquial, imaginemos que en una ciudad hay un notario conocido y respetado por todos. Si alguien necesita verificar la identidad de una persona o la autenticidad de un documento, acuden al notario, quien certifica y da fe de que dicha persona es quien dice ser o que el documento es legítimo. De manera similar, en el mundo digital, la CA actúa como ese notario, proporcionando confianza y seguridad en las interacciones digitales.
+
+\subsubsection{Autoridad Certificadora}
+Una Autoridad Certificadora (CA) es una organización responsable de emitir y gestionar certificados digitales. La CA actúa como un tercero de confianza en el ecosistema de la infraestructura de clave pública (PKI). Su papel principal incluye:
+
+\begin{itemize}
+    \item Verificar la identidad de las entidades que solicitan un certificado digital.
+    \item Emitir certificados digitales que enlazan una clave pública con la identidad del solicitante.
+    \item Revocar certificados digitales si ya no son válidos o se comprometen.
+    \item Publicar listas de certificados revocados (CRL).
+\end{itemize}
+
+\subsubsection{Certificado digital}
+Un certificado digital es un documento electrónico que utiliza una firma digital para enlazar una clave pública con la identidad del propietario del certificado. Esto se consigue firmando la clave pública del propietario del certificado con la clave privada de la autoridad certificadora. Un certificado digital contiene varios campos clave:
+
+\begin{itemize}
+    \item \textbf{Nombre del propietario}: Identifica al propietario del certificado.
+    \item \textbf{Clave pública del propietario}: La clave pública asociada con el propietario.
+    \item \textbf{Nombre de la CA}: La entidad que emitió el certificado.
+    \item \textbf{Firma digital de la CA}: La firma digital de la CA que valida el certificado.
+    \item \textbf{Período de validez}: Las fechas de inicio y expiración del certificado.
+    \item \textbf{Número de serie del certificado}: Un número único para identificar el certificado.
+\end{itemize}
+
+Los certificados digitales siguen el estándar X.509, que establece el formato y las reglas para su emisión y procesamiento en sistemas de infraestructura de clave pública (PKI). Según este estándar, los certificados digitales están codificados en base64\footnote{Base64 es un esquema de codificación que representa datos binarios en un formato de texto ASCII utilizando 64 caracteres diferentes.} y encapsulados dentro de un formato PEM (\textit{Privacy Enhanced Mail}) ó DER (\textit{Distinguished Encoding Rules}). Por lo general, se prefiere el formato PEM debido a su facilidad de tratamiento en comparación con DER, por lo tanto, para los ejemplos presentados, se utilizará el formato PEM para los certificados digitales, este formato codifica en base64 y se delimita por las líneas ''-----BEGIN CERTIFICATE-----'' y ''-----END CERTIFICATE-----''.
+Tal y como se ve en el siguiente ejemplo:~\cite{amazon_cert}
+\begin{verbatim}
+-----BEGIN CERTIFICATE-----
+MIID5DCCAsygAwIBAgITBntQTYPTyyjojPpIvZY3qGHvkjANBgkqhkiG9w0BAQsF
+ADCBmDELMAkGA1UEBhMCVVMxEDAOBgNVBAgTB0FyaXpvbmExEzARBgNVBAcTClNj
+b3R0c2RhbGUxJTAjBgNVBAoTHFN0YXJmaWVsZCBUZWNobm9sb2dpZXMsIEluYy4x
+OzA5BgNVBAMTMlN0YXJmaWVsZCBTZXJ2aWNlcyBSb290IENlcnRpZmljYXRlIEF1
+dGhvcml0eSAtIEcyMB4XDTE1MTAyMTIyMjExOVoXDTM3MTIzMTAwMDAwMFowOTEL
+MAkGA1UEBhMCVVMxDzANBgNVBAoTBkFtYXpvbjEZMBcGA1UEAxMQQW1hem9uIFJv
+b3QgQ0EgNDB2MBAGByqGSM49AgEGBSuBBAAiA2IABNKrijdPo1MN/sGKe0uoe0ZL
+Y7Bi9i0b2whxIdIA6GO9mif78DluXeo9pcmBqqNbIJhFXRbb/egQbeOc4OO9X4Ri
+83BkM6DLJC9wuoihKqB1+IGuYgbEgds5bimwHvouXKOCATEwggEtMA8GA1UdEwEB
+/wQFMAMBAf8wDgYDVR0PAQH/BAQDAgGGMB0GA1UdDgQWBBTT7Mc6ZW7M4dp2mlb7
+nPOGbVflgTAfBgNVHSMEGDAWgBScXwDfqgHXMCs4iKK4bUqc8hGRgzB4BggrBgEF
+BQcBAQRsMGowLgYIKwYBBQUHMAGGImh0dHA6Ly9vY3NwLnJvb3RnMi5hbWF6b250
+cnVzdC5jb20wOAYIKwYBBQUHMAKGLGh0dHA6Ly9jcmwucm9vdGcyLmFtYXpvbnRy
+dXN0LmNvbS9yb290ZzIuY2VyMD0GA1UdHwQ2MDQwMqAwoC6GLGh0dHA6Ly9jcmwu
+cm9vdGcyLmFtYXpvbnRydXN0LmNvbS9yb290ZzIuY3JsMBEGA1UdIAQKMAgwBgYE
+VR0gADANBgkqhkiG9w0BAQsFAAOCAQEAF3mt42HgwmotsJFevpdpgIOw/YdRPrRX
+nrWBvf+PoyqZ5oyb1I92hTHST4Mj1juRw5oymBmx/3HA8IECIQG+uCQv3qdTm8xk
+Nt9cVt8H1w4Sl6EPlT0b/Zy4zqNdN689yAxT7z9GStsgS3eGXQq6LrsABVDZ9yev
+UM9EoFnxOfwix1hjHaaUw+m5zprwAawanvTHg5Fv0NQ1XZJqh1rY++i2saHbu7mL
+ANG6m4F1aUcpKY5WzOiKesadGWqsNy2n2ZfceEoXRPFpA8ldQktNBiL7MO2SEmj8
+Yt/5HN2eEldSGsiVPO11+qgWaqYHkR4mzfayZZbBp2pDkCkLo28LCw==
+-----END CERTIFICATE-----
+\end{verbatim}
+
+Si decodificamos dicho certificado veremos toda la información del certificado:~\cite{cert_decoder}
+
+\begin{verbatim}
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            06:7b:50:4d:83:d3:cb:28:e8:8c:fa:48:bd:96:37:a8:61:ef:92
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer:
+            commonName                = Starfield Services Root 
+            Certificate Authority - G2
+            organizationName          = Starfield Technologies, Inc.
+            localityName              = Scottsdale
+            stateOrProvinceName       = Arizona
+            countryName               = US
+        Validity
+            Not Before: Oct 21 22:21:19 2015 GMT
+            Not After : Dec 31 00:00:00 2037 GMT
+        Subject:
+            commonName                = Amazon Root CA 4
+            organizationName          = Amazon
+            countryName               = US
+        Subject Public Key Info:
+            Public Key Algorithm: id-ecPublicKey
+                Public-Key: (384 bit)
+                pub: 
+                    04:d2:ab:8a:37:4f:a3:53:0d:fe:c1:8a:7b:4b:a8:
+                    7b:46:4b:63:b0:62:f6:2d:1b:db:08:71:21:d2:00:
+                    e8:63:bd:9a:27:fb:f0:39:6e:5d:ea:3d:a5:c9:81:
+                    aa:a3:5b:20:98:45:5d:16:db:fd:e8:10:6d:e3:9c:
+                    e0:e3:bd:5f:84:62:f3:70:64:33:a0:cb:24:2f:70:
+                    ba:88:a1:2a:a0:75:f8:81:ae:62:06:c4:81:db:39:
+                    6e:29:b0:1e:fa:2e:5c
+                ASN1 OID: secp384r1
+        X509v3 extensions:
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+            X509v3 Key Usage: critical
+                Digital Signature, Certificate Sign, CRL Sign
+            X509v3 Subject Key Identifier: 
+                D3:EC:C7:3A:65:6E:CC:E1:DA:76:9A:56:FB:9C:F3:86:6D:57:E5
+                :81
+            X509v3 Authority Key Identifier: 
+                keyid:9C:5F:00:DF:AA:01:D7:30:2B:38:88:A2:B8:6D:4A:9C:F2
+                :11:91:83
+
+            Authority Information Access: 
+                OCSP - URI:http://ocsp.rootg2.amazontrust.com
+                CA Issuers - URI:http://crl.rootg2.amazontrust.com
+                /rootg2.cer
+
+            X509v3 CRL Distribution Points: 
+
+                Full Name:
+                  URI:http://crl.rootg2.amazontrust.com/rootg2.crl
+
+            X509v3 Certificate Policies: 
+                Policy: X509v3 Any Policy
+
+    Signature Algorithm: sha256WithRSAEncryption
+         17:79:ad:e3:61:e0:c2:6a:2d:b0:91:5e:be:97:69:80:83:b0:
+         fd:87:51:3e:b4:57:9e:b5:81:bd:ff:8f:a3:2a:99:e6:8c:9b:
+         d4:8f:76:85:31:d2:4f:83:23:d6:3b:91:c3:9a:32:98:19:b1:
+         ff:71:c0:f0:81:02:21:01:be:b8:24:2f:de:a7:53:9b:cc:64:
+         36:df:5c:56:df:07:d7:0e:12:97:a1:0f:95:3d:1b:fd:9c:b8:
+         ce:a3:5d:37:af:3d:c8:0c:53:ef:3f:46:4a:db:20:4b:77:86:
+         5d:0a:ba:2e:bb:00:05:50:d9:f7:27:af:50:cf:44:a0:59:f1:
+         39:fc:22:c7:58:63:1d:a6:94:c3:e9:b9:ce:9a:f0:01:ac:1a:
+         9e:f4:c7:83:91:6f:d0:d4:35:5d:92:6a:87:5a:d8:fb:e8:b6:
+         b1:a1:db:bb:b9:8b:00:d1:ba:9b:81:75:69:47:29:29:8e:56:
+         cc:e8:8a:7a:c6:9d:19:6a:ac:37:2d:a7:d9:97:dc:78:4a:17:
+         44:f1:69:03:c9:5d:42:4b:4d:06:22:fb:30:ed:92:12:68:fc:
+         62:df:f9:1c:dd:9e:12:57:52:1a:c8:95:3c:ed:75:fa:a8:16:
+         6a:a6:07:91:1e:26:cd:f6:b2:65:96:c1:a7:6a:43:90:29:0b:
+         a3:6f:0b:0b
+\end{verbatim}
+\subsubsection{Proceso de Verificación de Certificados}
+
+\begin{enumerate}
+    \item \textbf{Firma del Certificado}: La CA utiliza su clave privada para firmar el certificado digital del propietario.
+    \item \textbf{Verificación del Certificado}: Cualquier entidad que reciba el certificado puede usar la clave pública de la CA (generalmente disponible y conocida) para verificar la firma del certificado. Si la verificación es exitosa, se confía en la identidad del propietario del certificado.
+\end{enumerate}
+
+\subsubsection{Jerarquía de las Autoridades Certificadoras}
+
+Las CA se organizan en una jerarquía, donde las CA de nivel superior, la CA raíz (root CA), firman los certificados de las CA subordinadas (CA intermedio), y estas, a su vez, pueden firmar certificados para usuarios finales o servidores. Esto crea una cadena de confianza que puede ser verificada siguiendo el camino desde un certificado de usuario final hasta la raíz CA.
+
+En la \autoref{fig:ca-hierarchy}, se presenta un diagrama en LaTeX que ilustra esta jerarquía :
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=3cm, auto]
+
+\tikzstyle{every node}=[font=\footnotesize]
+\tikzstyle{ca} = [rectangle, draw, text centered, rounded corners, minimum height=2em, minimum width=6em]
+\tikzstyle{line} = [draw, -latex']
+
+% Nodos
+\node[ca] (rootca) {CA Raíz};
+\node[ca, below of=rootca] (intermediateca) {CA Intermedio};
+\node[ca, below left of=intermediateca, xshift=-2cm] (servercert1) {Certificado de Servidor 1};
+\node[ca, below right of=intermediateca, xshift=2cm] (servercert2) {Certificado de Servidor 2};
+\node[ca, below of=intermediateca] (usercert) {Certificado Usuario};
+
+% Lines
+\path[line] (rootca) -- (intermediateca);
+\path[line] (intermediateca) -- (servercert1);
+\path[line] (intermediateca) -- (servercert2);
+\path[line] (intermediateca) -- (usercert);
+
+\end{tikzpicture}
+\caption{Jerarquía de las Autoridades Certificadoras.}
+\label{fig:ca-hierarchy}
+\end{figure}
+
+
+\subsection{TLS (Transport Layer Security)}
+TLS es un protocolo criptográfico diseñado para proporcionar comunicaciones seguras a través de una red, como Internet. Como se ha explicado previamente, el cifrado asimétrico eleva significativamente el nivel de seguridad en comparación con la criptografía simétrica, pero también implica un costo computacional considerablemente mayor. En una conexión, se envían una gran cantidad de mensajes y utilizar cifrado asimétrico para cada uno de ellos no es viable debido a la carga computacional que conlleva. 
+
+Es por esto que TLS combina ambas tecnologías para optimizar recursos y mantener un intercambio seguro de información. Para ello, se establece un \textit{handshake}, un proceso en el cual el cliente y el servidor negocian los parámetros de la conexión y acuerdan cómo establecer una comunicación segura utilizando cifrado asimétrico. Posteriormente, se procede con el intercambio de claves simétricas para cifrar los datos durante la comunicación. Esta combinación permite garantizar la seguridad de las transmisiones sin comprometer la eficiencia, asegurando que los datos transmitidos estén protegidos contra la interceptación y manipulación por parte de terceros no autorizados.
+
+
+El handshake en TLS generalmente consta de los siguientes pasos:
+
+
+\begin{enumerate}
+    \item \textbf{Inicio de la comunicación:} El cliente inicia la conexión con el servidor, enviando un mensaje de solicitud de conexión.
+    \item \textbf{Respuesta del servidor:} El servidor responde al cliente, indicando su disponibilidad para establecer una conexión segura y proporcionando su certificado digital.
+    \item \textbf{Autenticación del servidor:} El cliente verifica la autenticidad del certificado digital del servidor para asegurarse de que está comunicándose con la entidad correcta, la CA.
+    \item \textbf{Negociación de parámetros de cifrado:} Cliente y servidor acuerdan sobre los algoritmos de cifrado y otros parámetros de seguridad que utilizarán para la comunicación.
+    \item \textbf{Intercambio de claves:} Se realiza un intercambio de claves para establecer una sesión de cifrado simétrico. En el contexto de TLS, el proceso de intercambio de claves para establecer una sesión de cifrado simétrico se conoce como KEM (\textit{Key Encapsulation Mechanism}).
+    \item \textbf{Confirmación y finalización:} Una vez que se han completado los pasos anteriores, el cliente y el servidor confirman la autenticidad del otro y la clave de sesión (la clave simétrica) se establece. A partir de este momento, la comunicación entre cliente y servidor está protegida.
+\end{enumerate}
+
+En resumidas cuentas, todo el proceso se puede resumir en 3 pasos: autenticación del servidor, intercambio de claves asimétricas y establecimiento de la clave simétrica para la comunicación.
+
+Un ejemplo típico de aplicación de TLS es el protocolo HTTPS, utilizado para asegurar las transacciones en línea y proteger la privacidad de los usuarios en navegadores web.
+
+TLS se emplea en HTTPS para asegurar las comunicaciones entre clientes (el navegador en el caso de uso común) y servidores web en Internet. Cuando un cliente solicita establecer una conexión segura con un servidor web mediante HTTPS, el proceso sigue estos pasos:
+
+\begin{enumerate}
+    \item El cliente envía una solicitud al servidor para establecer una conexión segura mediante HTTPS.
+    \item El servidor responde enviando su certificado digital, el cual contiene su clave pública y está firmado por una autoridad certificadora (CA) confiable.
+    \item El cliente verifica la autenticidad del certificado del servidor para asegurarse de que está interactuando con la entidad correcta.
+    \item Cliente y servidor negocian los parámetros de cifrado y otros detalles de seguridad para la comunicación segura.
+    \item Se realiza un intercambio de claves para establecer una clave de sesión simétrica, la cual será utilizada exclusivamente para cifrar los datos durante la sesión HTTPS.
+    \item Una vez establecida la clave de sesión, la comunicación entre cliente y servidor se realiza de manera segura utilizando cifrado simétrico.
+\end{enumerate}
+
+Al utilizar una combinación de criptografía asimétrica para la autenticación y el intercambio seguro de claves, y criptografía simétrica para el cifrado y descifrado de datos durante la comunicación, TLS logra un equilibrio entre seguridad y eficiencia. Esto permite que las comunicaciones se realicen de manera segura y rápida, protegiendo los datos transmitidos contra la interceptación y manipulación por parte de terceros no autorizados. 
+
+\subsection{Vulnerabilidad y posibles problemas}
+La criptografía moderna se basa en gran medida en el cifrado asimétrico, un pilar fundamental en ciberseguridad. La seguridad de estos sistemas se sustenta en la dificultad computacional de ciertos problemas matemáticos, como la factorización de números grandes en sus factores primos.
+
+En este contexto, el algoritmo de Shor representa un avance significativo. Este algoritmo cuántico tiene el potencial de factorizar números enteros grandes en tiempo polinomial utilizando un ordenador cuántico suficientemente potente. Si se lograra implementar con éxito, Shor podría comprometer la seguridad de sistemas criptográficos ampliamente utilizados, como RSA.
+
+Por ejemplo, al factorizar el producto de dos números primos grandes que forman parte de la clave pública de RSA, se podría derivar la clave privada correspondiente. Esto llevaría a la posibilidad de una variedad de ataques entre los que se encuentran:
+\begin{itemize}
+    \item \textbf{Ataque man in the middle}: Un ataque \textit{man in the middle} consiste en que un atacante intercepte la información de una comunicación entre dos partes sin que ellas lo sepan, permitiéndole así manipularla. Si se pudiera obtener las claves privadas de ambas partes se podría tener control absoluto sobre la comunicación pudiéndola manipular a su antojo, suplantar la identidad de cualquiera de las partes o simplemente obtener la información transmitida por ese canal.
+    \item \textbf{Compromiso de la confidencialidad}: Si se obtienen las claves privadas  cualquier comunicación cifrada con dichas claves puede ser descifrada. Esto incluye correos electrónicos, mensajes y documentos cifrados.
+    \item \textbf{Falsificación de firmas}: Si se puede obtener la clave privada cualquiera podría falsificar firmas y alterar mensajes o documentos firmados digitalmente sin dejar trazas. 
+    \item \textbf{Acceso a datos}: La información confidencial, como datos financieros, registros médicos, información privada estarían en riesgo de ser accedidos.
+    \item \textbf{Manipulación de transacciones}: Las transacciones que dependan de la criptografía asimétrica pueden ser manipuladas resultando en robos y fraudes.
+    \item \textbf{Infraestructuras críticas}:Los sistemas de seguridad nacional e infraestructuras que utilicen criptografía asimétrica podrían ser comprometidas resultando en riesgos de seguridad nacional.
+
+\end{itemize}
+
+\subsection{Criptografía post cuántica}
+La criptografía post cuántica se refiere al desarrollo de algoritmos criptográficos que son seguros contra un ataque tanto de un equipo cuántico como uno clásico. A diferencia de la criptografía clásica, que depende en gran medida de la dificultad de factorizar grandes números primos (como en RSA) o de la complejidad de los problemas de logaritmos discretos (como en ECC), la criptografía post cuántica busca crear algoritmos seguros basados en otros problemas matemáticos como redes de retícula multidimensionales y códigos correctores de errores, como se detallará más adelante.
+
+El interés en la criptografía post cuántica surge de la amenaza que representan las computadoras cuánticas para la seguridad de los sistemas criptográficos actuales. Las computadoras cuánticas, en teoría, pueden realizar ciertos cálculos mucho más rápido que sus contrapartes clásicas mediante el uso de principios de superposición y entrelazamiento cuántico. Esto incluye la capacidad de factorizar rápidamente números grandes y resolver logaritmos discretos, métodos usados en la mayoría de la criptografía actual, lo que podría permitirles romper muchos de los sistemas criptográficos en uso hoy en día. Por lo tanto, existe un esfuerzo mundial para desarrollar nuevos sistemas criptográficos que puedan resistir tales ataques.
+
+En este campo, la contribución del NIST, National Institute of Standards and Technology, ha sido y sigue siendo fundamental. Este organismo inició en 2016 un proceso de selección pública para estandarizar nuevos algoritmos criptográficos post cuánticos~\cite{NIST-PQC}. A través de múltiples rondas, donde se publican nuevos  y versiones actualizadas y mejoradas de algoritmos, se revisan y realizan pruebas a éstos teniendo en cuenta varias características como la eficiencia computacional y tamaño de claves.
+
+Gracias a este proceso, numerosos científicos han propuesto varios candidatos de algoritmos post cuánticos. Aunque varios de estos algoritmos parecen prometer, aún están en fase de evaluación para determinar su viabilidad a largo plazo y su resistencia ante las capacidades futuras tanto de computadoras cuánticas como clásicas.
+
+Por esta razón, la criptografía post-cuántica busca desarrollar nuevos algoritmos que puedan resistir los ataques de las futuras computadoras cuánticas. Existen varias familias de algoritmos que se consideran prometedores para la criptografía post-cuántica.
+
+\begin{itemize}
+    \item \textbf{Algoritmos basados en código (CBC, Code Based Cryptography )}: Este tipo de algoritmos se basan en la teoría de códigos correctores de errores. 
+La clave pública es generada a partir de un código corrector de errores de manera que sea difícil decodificarla sin conocer información secreta.La clave privada es la descripción del código corrector de errores, como una \textit{matriz generadora}, la cual se utiliza para construir códigos que pueden detectar y corregir errores en la transmisión o en el almacenamiento de datos.
+
+Para el cifrado el emisor introduce errores en el código que solo se podrán decodificar usando la clave privada, de esta manera el receptor, que tiene la clave privada, puede obtener el mensaje.
+Uno de los algoritmos propuestos por el NIST en este campo es el algoritmo de McEliece  que utiliza códigos lineales de Goopa que aplican propiedades algebraicas para conseguir un código corrector de errores~\cite{mceliece}.
+
+    \item \textbf{Algoritmos basados en  redes de rejilla (LBC, Lattice Based Cryptography)}: Esta familia de algoritmos de criptografía se basan en la dificultad de resolver ciertos problemas matemáticos definidos sobre redes. Estas redes son un conjunto de puntos en en un espacio de n dimensiones (a mayor cantidad de dimensiones mas difícil será resolver el problema).
+
+    Estos problemas se basan en problemas matemáticos como el problema del vector mas corto (SVP, Shortest Vector Problem) y el problema del vector más cercano (CVP, Closest Vector Problem).
+    \begin{itemize}
+        \item \textbf{SVP}: Consiste en encontrar el vector no nulo más corto dentro de una red.
+        \item \textbf{CVP}: Consiste en encontrar el punto de la red más cercano dado a otro punto que no pertenece a dicha red.
+    \end{itemize}
+
+    La dificultad de estos problemas aumenta a mayor cantidad de dimensiones utilizadas para crear la red, adicionalmente, estos tipos de algoritmos se pueden agrupar en distintas familias según su metodología. 
+
+    \begin{itemize}
+        \item \textbf{NTRU}: NTRU, que proviene de un juego de palabras ``Number Theorists 'R' Us" , fue uno de los primeros algoritmos basados en lattice, su funcionamiento se basa en la creación de polinomios en un anillo\footnote{Un anillo, en matemáticas y específicamente en álgebra abstracta, es una estructura algebraica compuesta por un conjunto de elementos junto con dos operaciones binarias: adición y multiplicación} donde los coeficientes enteros generan los vectores base de la red~\cite{ntru}.
+        \item \textbf{LWE, Learning With Errors}: Esta familia de algoritmos se basan en la dificultad de resolver sistemas de ecuaciones lineales que han sido modificadas intencionadamente por un error.
+        \\La idea básica es generar una matriz de números aleatorios que se multiplica por un vector secreto al que posteriormente se agrega el error, de esa manera obtener el vector secreto se convierte en una tarea computacionalmente muy compleja~\cite{lwe}.
+        \item \textbf{Ringed-LWE}: Es una variante de LWE que introduce los anillos de polinomios, de esta manera se obtiene un algoritmo mas eficiente ya que utiliza operaciones polinómicas en lugar de operaciones matriciales~\cite{ringlwe}.
+    \end{itemize}
+
+    Los algoritmos basados en redes de rejillas más comentados y presentes en el NIST son los siguientes:
+    \begin{itemize}
+        \item \textbf{CRYSTALS-KYBER}: Este algoritmo fue propuesto en la categoría de cifrado y establecimiento de claves. Es el recomendado por el NIST gracias a su eficiencia y seguridad, basado en LWE~\cite{crystalskyber}.
+        \item \textbf{CRYSTALS-DILITHIUM}: Este algoritmo fue propuesto en la categoria de firma digital, es un algoritmo basado en Ring-LWE muy prometedor también recomendado por el NIST~\cite{crystalsdilithium}.
+        \item \textbf{FALCON}: FALCON  ha sido propuesto en la categoria de firma digital. Está basado en NTRU y utiliza técnicas de reducción de lattice para generar firmas digitales compactas y eficientes, destacándose en la categoría de firma digital del proceso de selección del NIST~\cite{falcon}.
+    \end{itemize}
+
+    \item \textbf{Basados en Hash criptográfico}: Estos algoritmos utilizan funciones hash criptográficas como base para su seguridad. Las funciones hash, mencionadas anteriormente, para ser consideradas seguras deben cumplir con varias propiedades importantes como la resistencia a colisiones, es decir, que a partir de dos mensajes se obtenga el mismo hash. Además es fundamental que sea inviable obtener el mensaje original a partir del resumen o hash y que sea imposible obtener dos hashes diferentes a partir de un mismo mensaje.
+    \\
+    Los algoritmos basados en hash se consideran prometedores en este contexto por varias razones:
+    \begin{enumerate}
+        \item \textbf{Resistencia Cuántica:} A diferencia de los problemas de factorización y los logaritmos discretos, que son susceptibles a ataques cuánticos eficientes (como el algoritmo de Shor), no se conocen algoritmos cuánticos que rompan las propiedades fundamentales de las funciones hash de manera eficiente. Esto hace que la criptografía basada en hash sea intrínsecamente resistente a los ataques cuánticos.
+        \\
+        \item \textbf{Simplicidad}: La criptografía basada en hash suele ser mas simple en su implementación y ampliamente disponibles lo que facilita su desarrollo.
+    \end{enumerate}
+
+    Uno de los algoritmos más destacados en el NIST es \textbf{SPHINCS}. A diferencia de los esquemas de firma tradicionales, que  son Statefull \footnote{Se dice que un esquema de firma es "statefull", con estado, cuando se requiere de cierta información  para asegurar que la firma sea única, un ejemplo claro es la firma que usa números aleatorios en el que es necesario no reutilizar un número aleatorio en más de una firma.}, SPHINCS es stateless, esto lo consigue gracias a que, en su estructura de arbol el hash genera el camino hasta el nodo firma ,lo que significa que no requiere mantener ningún estado entre firmas~\cite{sphincs}. 
+\end{itemize}

@@ -1,0 +1,147 @@
+%*****************************
+% DEFINICIONES del documento
+%*****************************
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Margenes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[left=2cm,right=2cm,top=2.5cm,bottom=2.54cm]{geometry}
+%\setlength\evensidemargin{\oddsidemargin}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fonts (LA PARTE CRÍTICA)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fontspec}
+
+% Fuentes compatibles con Linux
+\setmainfont[Ligatures=TeX]{TeX Gyre Termes}
+\setsansfont{TeX Gyre Heros}
+
+% Ajuste de interlineado (setspace es mejor que linespread)
+\usepackage{setspace}
+\setstretch{1.15} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Citas y comillas
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{csquotes}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Graficos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{calc,graphicx}
+\usepackage{subcaption}
+\usepackage{caption}
+\captionsetup[figure]{labelfont={small,bf},textfont={small,it}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Paragraph
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ajuste simplificado para evitar saltos extraños
+\setlength{\parskip}{1.2ex}
+\setlength{\parindent}{0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Matematicas
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath,amsfonts,amssymb}
+\renewcommand{\theequation}{\arabic{equation}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Listas
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[shortlabels]{enumitem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tablas
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{booktabs}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{nicematrix}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Logo para cabecera
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newsavebox{\logobox}
+\savebox{\logobox}{\includegraphics[width=0.18\linewidth]{Logos/AF-MU-LOGOS}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cabecera y Pie
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\setlength{\headheight}{42pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\slshape \nouppercase{\leftmark}}
+\fancyhead[RE,LO]{\usebox{\logobox}}
+\fancyfoot[RE,LO]{\myTitleCorto}
+\fancyfoot[LE,RO]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\headsep=20pt
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter / Section / Subsection
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[newparttoc]{titlesec}
+\newcommand{\hsp}{\hspace{20pt}}
+
+% --- CAPÍTULO (Corregido: Eliminada duplicidad) ---
+\titleformat{name=\chapter}[hang]{\huge\sffamily\bfseries}%
+{\thechapter{.}\hsp}{0pt}{\huge\sffamily\bfseries}%
+[\vspace{1ex}\titlerule]
+\assignpagestyle{\chapter}{empty}
+
+% --- CAPÍTULO SIN NÚMERO ---
+\titleformat{name=\chapter,numberless}[hang]{\huge\sffamily\bfseries}%
+{\hsp}{0pt}{\huge\sffamily\bfseries}%
+[\vspace{1ex}\titlerule]
+
+% --- SECCIÓN ---
+\titleformat{\section}[hang]{\large\sffamily\bfseries}{ \thesection }{10pt}{\large\sffamily\bfseries}
+
+% --- SUBSECCIÓN ---
+\titleformat{\subsection}[hang]{\sffamily\bfseries}{ \thesubsection }{10pt}{\sffamily\bfseries}
+
+% --- PARTE ---
+\titleformat{name=\part}[display]{\Huge\bfseries}%
+{}{0pt}{\huge\bfseries\sc}[\vspace{1ex}\titlerule\thispagestyle{empty}]
+
+% --- ESPACIADOS ---
+\titlespacing*{\chapter}{0pt}{50pt}{30pt}
+\titlespacing*{\section}{0pt}{4.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+\titlespacing*{\subsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus.2ex}
+
+\setcounter{secnumdepth}{3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Otros paquetes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tikz}
+\usetikzlibrary{babel}
+\usepackage{emptypage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TOC LOF LOT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[titles]{tocloft}
+\renewcommand{\cftchapfont}{\sffamily}
+\renewcommand{\cftchappagefont}{\cftchapfont}
+\renewcommand{\cftpartfont}{\sffamily}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[square,numbers,sort&compress]{natbib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Indices y Utilidades
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{imakeidx}
+\makeindex[columns=3, title = Índice Alfabético]
+
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{shadows}

@@ -1,0 +1,404 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{Gartner:IoTSecurity:2023}{report}{}
+      \name{author}{1}{}{%
+        {{hash=18bfab6309a4addeb7e1dae07d2a4b89}{%
+           family={{Gartner}},
+           familyi={G\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Gartner}%
+      }
+      \strng{namehash}{18bfab6309a4addeb7e1dae07d2a4b89}
+      \strng{fullhash}{18bfab6309a4addeb7e1dae07d2a4b89}
+      \strng{bibnamehash}{18bfab6309a4addeb7e1dae07d2a4b89}
+      \strng{authorbibnamehash}{18bfab6309a4addeb7e1dae07d2a4b89}
+      \strng{authornamehash}{18bfab6309a4addeb7e1dae07d2a4b89}
+      \strng{authorfullhash}{18bfab6309a4addeb7e1dae07d2a4b89}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Consultado en 2023}
+      \field{title}{{IoT security surveys and reports}}
+      \field{type}{techreport}
+      \field{year}{2023}
+    \endentry
+    \entry{Kaspersky:Mirai:2025}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=cc3c7e446c720ad2f1000905d22975e6}{%
+           family={{Kaspersky Security}},
+           familyi={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{cc3c7e446c720ad2f1000905d22975e6}
+      \strng{fullhash}{cc3c7e446c720ad2f1000905d22975e6}
+      \strng{bibnamehash}{cc3c7e446c720ad2f1000905d22975e6}
+      \strng{authorbibnamehash}{cc3c7e446c720ad2f1000905d22975e6}
+      \strng{authornamehash}{cc3c7e446c720ad2f1000905d22975e6}
+      \strng{authorfullhash}{cc3c7e446c720ad2f1000905d22975e6}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.kaspersky.com/resource-center/threats/mirai-botnet}}
+      \field{note}{Análisis de botnets IoT y ataques DDoS masivos impulsados por dispositivos comprometidos}
+      \field{title}{{Mirai Botnet and IoT-Based DDoS Attacks: Evolution and Current Threats}}
+      \field{year}{2025}
+    \endentry
+    \entry{Ibrahim:AoT:2023}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=a041ada5f42664313ddcbf8ae28cdcbf}{%
+           family={Ibrahim},
+           familyi={I\bibinitperiod},
+           given={Muhammad},
+           giveni={M\bibinitperiod}}}%
+        {{hash=cd3cfc182bb5ed1de25c6068401feb18}{%
+           family={Continella},
+           familyi={C\bibinitperiod},
+           given={Andrea},
+           giveni={A\bibinitperiod}}}%
+        {{hash=8854cd8d7a8aac96065b6aefa7f7013e}{%
+           family={Bianchi},
+           familyi={B\bibinitperiod},
+           given={Antonio},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{0467ec548ecd17193f1f082d5544db4e}
+      \strng{fullhash}{0467ec548ecd17193f1f082d5544db4e}
+      \strng{bibnamehash}{0467ec548ecd17193f1f082d5544db4e}
+      \strng{authorbibnamehash}{0467ec548ecd17193f1f082d5544db4e}
+      \strng{authornamehash}{0467ec548ecd17193f1f082d5544db4e}
+      \strng{authorfullhash}{0467ec548ecd17193f1f082d5544db4e}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2023 IEEE 8th European Symposium on Security and Privacy (EuroS\&P)}
+      \field{title}{{AoT - Attack on Things: A security analysis of IoT firmware updates}}
+      \field{year}{2023}
+      \field{pages}{1047\bibrangedash 1064}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.1109/EuroSP57164.2023.00065
+      \endverb
+      \keyw{IoT Security; Firmware Updates; Android Companion Apps; IoT DFU; IoT Firmware Updates}
+    \endentry
+    \entry{Hassan:IIoTSecurity:2023}{article}{}
+      \name{author}{5}{}{%
+        {{hash=06040245fd3b094124f18241a9a1c95a}{%
+           family={Hassan},
+           familyi={H\bibinitperiod},
+           given={Yewande\bibnamedelima Goodness},
+           giveni={Y\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=c9f19449f494a7f664c3aaf835d89bcb}{%
+           family={Collins},
+           familyi={C\bibinitperiod},
+           given={Anuoluwapo},
+           giveni={A\bibinitperiod}}}%
+        {{hash=ef8d118e22a7542fcdb8848aa0ac132c}{%
+           family={Babatunde},
+           familyi={B\bibinitperiod},
+           given={Gideon\bibnamedelima Opeyemi},
+           giveni={G\bibinitperiod\bibinitdelim O\bibinitperiod}}}%
+        {{hash=82e9c4f37c4c2c8988adb07c9427485b}{%
+           family={Alabi},
+           familyi={A\bibinitperiod},
+           given={Abidemi\bibnamedelima Adeleye},
+           giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=69e5ee343223a63135d2acffbd2fd059}{%
+           family={Mustapha},
+           familyi={M\bibinitperiod},
+           given={Sikirat\bibnamedelima Damilola},
+           giveni={S\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \strng{namehash}{93a12511e7242ff485d2ca73d8ab175f}
+      \strng{fullhash}{4e8996cc4e7734a897b1fe54f47e30e2}
+      \strng{bibnamehash}{93a12511e7242ff485d2ca73d8ab175f}
+      \strng{authorbibnamehash}{93a12511e7242ff485d2ca73d8ab175f}
+      \strng{authornamehash}{93a12511e7242ff485d2ca73d8ab175f}
+      \strng{authorfullhash}{4e8996cc4e7734a897b1fe54f47e30e2}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2582-7138}
+      \field{journaltitle}{{International Journal/Conference Name}}
+      \field{month}{1}
+      \field{note}{Received: 12-12-2022; Accepted: 19-01-2023}
+      \field{number}{01}
+      \field{title}{{Security Challenges in Industrial IoT: Update Mechanisms and Firmware Vulnerabilities}}
+      \field{volume}{04}
+      \field{year}{2023}
+      \field{pages}{697\bibrangedash 703}
+      \range{pages}{7}
+    \endentry
+    \entry{Cisco:IoTForecast:2025}{report}{}
+      \name{author}{1}{}{%
+        {{hash=e7a0a20878b9ace66e080da0fa1eb97f}{%
+           family={{Cisco Systems}},
+           familyi={C\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Cisco Systems}%
+      }
+      \strng{namehash}{e7a0a20878b9ace66e080da0fa1eb97f}
+      \strng{fullhash}{e7a0a20878b9ace66e080da0fa1eb97f}
+      \strng{bibnamehash}{e7a0a20878b9ace66e080da0fa1eb97f}
+      \strng{authorbibnamehash}{e7a0a20878b9ace66e080da0fa1eb97f}
+      \strng{authornamehash}{e7a0a20878b9ace66e080da0fa1eb97f}
+      \strng{authorfullhash}{e7a0a20878b9ace66e080da0fa1eb97f}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Proyección de más de 29 mil millones de dispositivos IoT conectados para 2025}
+      \field{title}{{Cisco Annual Internet Report (2018–2023) and IoT Forecast}}
+      \field{type}{techreport}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://www.cisco.com/c/en/us/solutions/collateral/executive-perspectives/annual-internet-report/white-paper-c11-741490.html
+      \endverb
+      \verb{url}
+      \verb https://www.cisco.com/c/en/us/solutions/collateral/executive-perspectives/annual-internet-report/white-paper-c11-741490.html
+      \endverb
+    \endentry
+    \entry{Fortinet:IoTVulnerabilities}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=1f25b8a9986a2e7a04ee9538c462e578}{%
+           family={{Fortinet}},
+           familyi={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{1f25b8a9986a2e7a04ee9538c462e578}
+      \strng{fullhash}{1f25b8a9986a2e7a04ee9538c462e578}
+      \strng{bibnamehash}{1f25b8a9986a2e7a04ee9538c462e578}
+      \strng{authorbibnamehash}{1f25b8a9986a2e7a04ee9538c462e578}
+      \strng{authornamehash}{1f25b8a9986a2e7a04ee9538c462e578}
+      \strng{authorfullhash}{1f25b8a9986a2e7a04ee9538c462e578}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.fortinet.com/resources/cyberglossary/iot-security}}
+      \field{note}{Informe sobre las principales vulnerabilidades en dispositivos IoT, incluyendo mecanismos de actualización inseguros y firmware obsoleto}
+      \field{title}{{Top 10 IoT Vulnerabilities and Security Threats}}
+      \field{year}{2024}
+    \endentry
+    \entry{Bitdefender:TUTK:2024}{report}{}
+      \name{author}{1}{}{%
+        {{hash=e60a7c99de57c3b3a5c42c437e28b1ac}{%
+           family={{Bitdefender Labs}},
+           familyi={B\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Bitdefender}%
+      }
+      \strng{namehash}{e60a7c99de57c3b3a5c42c437e28b1ac}
+      \strng{fullhash}{e60a7c99de57c3b3a5c42c437e28b1ac}
+      \strng{bibnamehash}{e60a7c99de57c3b3a5c42c437e28b1ac}
+      \strng{authorbibnamehash}{e60a7c99de57c3b3a5c42c437e28b1ac}
+      \strng{authornamehash}{e60a7c99de57c3b3a5c42c437e28b1ac}
+      \strng{authorfullhash}{e60a7c99de57c3b3a5c42c437e28b1ac}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{5}
+      \field{note}{Vulnerabilidades críticas en la plataforma TUTK que afectan a más de 100 millones de dispositivos IoT globalmente}
+      \field{title}{{Critical Vulnerabilities in ThroughTek Kalay Platform Affect Over 100 Million IoT Devices}}
+      \field{type}{techreport}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://www.bitdefender.com/blog/labs/notes-on-throughtek-kalay-vulnerabilities-and-their-impact/
+      \endverb
+      \verb{url}
+      \verb https://www.bitdefender.com/blog/labs/notes-on-throughtek-kalay-vulnerabilities-and-their-impact/
+      \endverb
+    \endentry
+    \entry{SWUpdate}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=ac3169a9371babdfa091ff02811bb4a8}{%
+           family={{SWUpdate Project}},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{ac3169a9371babdfa091ff02811bb4a8}
+      \strng{fullhash}{ac3169a9371babdfa091ff02811bb4a8}
+      \strng{bibnamehash}{ac3169a9371babdfa091ff02811bb4a8}
+      \strng{authorbibnamehash}{ac3169a9371babdfa091ff02811bb4a8}
+      \strng{authornamehash}{ac3169a9371babdfa091ff02811bb4a8}
+      \strng{authorfullhash}{ac3169a9371babdfa091ff02811bb4a8}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Framework de código abierto para actualizaciones de firmware en sistemas Linux embebidos con soporte para actualizaciones atómicas A/B y firmas RSA/ECDSA}
+      \field{title}{{SWUpdate - Software Update for Embedded Linux Devices}}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://swupdate.org/
+      \endverb
+      \verb{url}
+      \verb https://swupdate.org/
+      \endverb
+    \endentry
+    \entry{hawkBit}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=ba965a2360c8acdc8182fb5f00ea04f0}{%
+           family={{Eclipse Foundation}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{ba965a2360c8acdc8182fb5f00ea04f0}
+      \strng{fullhash}{ba965a2360c8acdc8182fb5f00ea04f0}
+      \strng{bibnamehash}{ba965a2360c8acdc8182fb5f00ea04f0}
+      \strng{authorbibnamehash}{ba965a2360c8acdc8182fb5f00ea04f0}
+      \strng{authornamehash}{ba965a2360c8acdc8182fb5f00ea04f0}
+      \strng{authorfullhash}{ba965a2360c8acdc8182fb5f00ea04f0}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Plataforma backend de código abierto para gestión de actualizaciones OTA a escala empresarial con rollout progresivo y gestión de campañas}
+      \field{title}{{Eclipse hawkBit - IoT Update Management}}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://www.eclipse.org/hawkbit/
+      \endverb
+      \verb{url}
+      \verb https://www.eclipse.org/hawkbit/
+      \endverb
+    \endentry
+    \entry{Mender}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=981a1d110b9e9affc03d6c97e8bbece7}{%
+           family={{Northern.tech}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{981a1d110b9e9affc03d6c97e8bbece7}
+      \strng{fullhash}{981a1d110b9e9affc03d6c97e8bbece7}
+      \strng{bibnamehash}{981a1d110b9e9affc03d6c97e8bbece7}
+      \strng{authorbibnamehash}{981a1d110b9e9affc03d6c97e8bbece7}
+      \strng{authornamehash}{981a1d110b9e9affc03d6c97e8bbece7}
+      \strng{authorfullhash}{981a1d110b9e9affc03d6c97e8bbece7}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Plataforma OTA que integra cliente y servidor para actualizaciones con gestión de flotas, rollback automático e interfaz gráfica}
+      \field{title}{{Mender - Over-the-Air Software Updates for IoT}}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://mender.io/
+      \endverb
+      \verb{url}
+      \verb https://mender.io/
+      \endverb
+    \endentry
+    \entry{Balena}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=95a84066c40d86bfdc996e56d03a3bbf}{%
+           family={{Balena Inc.}},
+           familyi={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{95a84066c40d86bfdc996e56d03a3bbf}
+      \strng{fullhash}{95a84066c40d86bfdc996e56d03a3bbf}
+      \strng{bibnamehash}{95a84066c40d86bfdc996e56d03a3bbf}
+      \strng{authorbibnamehash}{95a84066c40d86bfdc996e56d03a3bbf}
+      \strng{authornamehash}{95a84066c40d86bfdc996e56d03a3bbf}
+      \strng{authorfullhash}{95a84066c40d86bfdc996e56d03a3bbf}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Plataforma de gestión de flotas IoT basada en contenedores Docker para despliegue y actualización de aplicaciones}
+      \field{title}{{Balena - IoT Fleet Management Platform}}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://www.balena.io/
+      \endverb
+      \verb{url}
+      \verb https://www.balena.io/
+      \endverb
+    \endentry
+    \entry{RAUC}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=770b2dd08ee62f8efe9a18cba950d483}{%
+           family={{RAUC Project}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{770b2dd08ee62f8efe9a18cba950d483}
+      \strng{fullhash}{770b2dd08ee62f8efe9a18cba950d483}
+      \strng{bibnamehash}{770b2dd08ee62f8efe9a18cba950d483}
+      \strng{authorbibnamehash}{770b2dd08ee62f8efe9a18cba950d483}
+      \strng{authornamehash}{770b2dd08ee62f8efe9a18cba950d483}
+      \strng{authorfullhash}{770b2dd08ee62f8efe9a18cba950d483}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Framework de código abierto para actualizaciones seguras de sistemas Linux embebidos con soporte para múltiples esquemas de particionado}
+      \field{title}{{RAUC - Robust Auto-Update Controller}}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://rauc.io/
+      \endverb
+      \verb{url}
+      \verb https://rauc.io/
+      \endverb
+    \endentry
+    \entry{NIST:SP800232:2023}{report}{}
+      \name{author}{1}{}{%
+        {{hash=3890a878cf9ff4b382a676b5d7d51181}{%
+           family={{National Institute of Standards and Technology (NIST)}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {U.S. Department of Commerce}%
+      }
+      \strng{namehash}{3890a878cf9ff4b382a676b5d7d51181}
+      \strng{fullhash}{3890a878cf9ff4b382a676b5d7d51181}
+      \strng{bibnamehash}{3890a878cf9ff4b382a676b5d7d51181}
+      \strng{authorbibnamehash}{3890a878cf9ff4b382a676b5d7d51181}
+      \strng{authornamehash}{3890a878cf9ff4b382a676b5d7d51181}
+      \strng{authorfullhash}{3890a878cf9ff4b382a676b5d7d51181}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{800-232}
+      \field{series}{{NIST Special Publication 800-232}}
+      \field{title}{{Lightweight Cryptography: Program Document}}
+      \field{type}{Special Publication (SP)}
+      \field{year}{2023}
+      \verb{doi}
+      \verb 10.6028/NIST.SP.800-232.ipd
+      \endverb
+      \verb{urlraw}
+      \verb https://csrc.nist.gov/pubs/sp/800/232/ipd
+      \endverb
+      \verb{url}
+      \verb https://csrc.nist.gov/pubs/sp/800/232/ipd
+      \endverb
+    \endentry
+  \enddatalist
+  \missing{IIoTSecurity:2023}
+\endrefsection
+\endinput
+

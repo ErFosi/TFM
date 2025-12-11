@@ -1,0 +1,137 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% TRABAJO FIN DE MÁSTER
+% Plataforma OTA segura para IoT
+%
+% Este documento usa tipos de letra
+% disponibles en el sistema
+% de forma que debe compilarse con 
+% XeLaTeX 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%-----------------------------
+% Plantilla 
+%-----------------------------
+\documentclass[a4paper,12pt,fleqn,oneside,openany]{book}%
+
+%-----------------------------
+% Language
+%-----------------------------
+\usepackage[english,basque,spanish,es-tabla]{babel}
+%-----------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{format}%formato del documento
+\input{comandos}%incluye definiciones personales
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% DATOS necesarios para generar 
+% las páginas de título
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\myTitle}{Plataforma OTA segura y escalable para dispositivos IoT con criptografía ligera y post-cuántica}
+\newcommand{\myTitleCorto}{Plataforma OTA segura para IoT}
+\newcommand{\mySubtitle}{Trabajo presentado para la obtención del título de Máster}
+\newcommand{\myDoc}{\sc Trabajo Fin de Máster }
+\newcommand{\myDegree}{Máster en análisis de datos, ciberseguridad y computación en la nube}
+\newcommand{\myName}{Díez-Andino Herrera, Álvaro}%Apellidos, Nombre
+\newcommand{\myProf}{Iñaki Garitano}
+\newcommand{\myOtherProf}{Dr. Segundo profesor tutor}
+\newcommand{\mySupervisor}{Haritz Saiz}
+\newcommand{\myFaculty}{Escuela Politécnica Superior de MU}
+\newcommand{\myStudies}{Máster en análisis de datos, ciberseguridad y computación en la nube}
+\newcommand{\myEmpresa}{Ikerlan S. Coop.}
+\newcommand{\myUni}{Mondagon Unibertsitatea}
+\newcommand{\myLocation}{Arrasate-Mondragón}
+\newcommand{\myDate}{2025-2026}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[firstpage=true]{background}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Hyperref
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[colorlinks=true,%
+citecolor = darkgreen,
+linkcolor = darkblue,
+urlcolor = darkgreen,
+]{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENTO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%
+\frontmatter
+\normalsize
+%%%%%%%%%%%%%%%%%%
+
+\input{FRONT/COVER}% Cubierta
+\input{FRONT/COVER2}% Portada completa
+\include{FRONT/Abstract}
+\include{FRONT/Acknowledgments}
+
+%************************************
+% LOF LOT en TOC
+%************************************
+\tableofcontents
+
+\listoffigures
+
+\listoftables
+%*************************************
+
+\include{FRONT/Acronyms}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagenumbering{arabic}
+\normalsize
+
+\include{Chapters/01-Introduccion}
+\include{Chapters/02-Planificacion}
+\include{Chapters/03-Desarrollo}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliografia
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\nocite{*}
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+\addcontentsline{toc}{part}{Bibliografía}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Apéndices
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\appendix
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\backmatter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\addcontentsline{toc}{part}{Índice alfabético}
+\printindex
+
+%%%%%%%%%%%%%%%%%%%
+% Contracubierta
+%%%%%%%%%%%%%%%%%%%
+\newpage
+\begin{tikzpicture}[remember picture,overlay]
+	\node[inner sep=0] at (current page.center)
+	{\includegraphics[width=\paperwidth,height=\paperheight]{Logos/tfm_contra.png}};
+\end{tikzpicture}
+\thispagestyle{empty}
+
+\end{document}
+%%% End 

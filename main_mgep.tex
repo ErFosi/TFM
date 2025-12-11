@@ -1,0 +1,705 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\includegraphics[width=8.25995in,height=11.68377in]{media/image1.jpg}
+
+\begin{center}
+  {\LARGE \textbf{Plataforma segura de actualizaciones para dispositivos IoT}} \\
+  \vspace{1cm}
+  TRABAJO DE FIN DE MÁSTER PRESENTADO EN: Escuela Politécnica Superior de Mondragon Unibertsitatea\\
+  \vspace{0.5cm}
+  AUTOR/A: Nombres de los autores \\
+  \vspace{0.2cm}
+  DIRECTOR/A: \dotfill \\
+  TUTOR/A: \dotfill \\
+  CURSO ACADÉMICO: 2024/2025
+\end{center}
+
+
+\hypertarget{resumen}{%
+\subsection{Resumen}\label{resumen}}
+
+El Trabajo de Fin de Máster propone el diseño, implementación y evaluación de una plataforma de actualización remota (OTA) segura y escalable para dispositivos IoT. La motivación principal radica en la elevada cantidad de dispositivos que sufren por vulnerabilidades y la falta de actualizaciones para solucionarlas, lo que crea vectores de ataque a gran escala. Esta plataforma permite la distribución de actualizaciones firmadas y cifradas a flotas de dispositivos para garantizar la autenticidad, integridad y confidencialidad del software desplegado.
+
+Para cubrir tanto dispositivos con recursos limitados como escenarios que requieren resistencia ante futuros ataques cuánticos, el sistema proporciona soporte para dos familias de algoritmos criptográficos: algoritmos de cifrado y firma con resistencia post-cuántica, y algoritmos de criptografía ligera (lightweight cryptography) optimizados para dispositivos con restricciones de memoria, CPU y energía.
+
+El trabajo incluye un análisis del estado de la práctica sobre actualizaciones OTA en IoT y de las necesidades de seguridad actuales, mostrando la importancia de incorporar criptografía ligera para dispositivos con recursos limitados y la opción de soluciones resistentes a la computación cuántica cuando el contexto lo requiera. Además, se desarrolla un prototipo de plataforma, desplegable en la nube y diseñado para escalar horizontalmente, que se prueba en un banco de dispositivos heterogéneos.
+
+	extbf{Palabras claves:} OTA, IoT, actualizaciones seguras, post-cuántico, criptografía ligera, firma digital, cifrado.
+
+\textbf{Impacto en los Objetivos de Desarrollo Sostenible (ODS):} xxx,
+xxx, xxx, xxx.
+
+\hypertarget{laburpena}{%
+\subsection{Laburpena}\label{laburpena}}
+
+Idatzi laburpena hemen.
+
+\textbf{Hitz gakoak:} xxx, xxx, xxx, xxx.
+
+\textbf{Garapen Jasangarriko Helburuetan (GJH) eragina:} xxx, xxx, xxx,
+xxx.
+
+\hypertarget{abstract}{%
+\subsection{Abstract}\label{abstract}}
+
+This Master's thesis proposes the design, implementation and evaluation of a secure and scalable over-the-air (OTA) update platform for IoT devices. The platform targets the large number of vulnerable devices that remain unpatched and provides mechanisms for signed and encrypted updates. It supports both post-quantum cryptography and lightweight cryptography to accommodate different device capabilities. The thesis also analyzes current OTA practices and demonstrates the need for lightweight cryptography as well as the optional use of post-quantum primitives when required. A cloud-deployable, horizontally scalable prototype is developed and tested across heterogeneous devices, with an experimental evaluation measuring update latency, resource usage, success rates and energy consumption.
+
+	extbf{Keywords:} OTA, IoT, secure updates, post-quantum, lightweight cryptography, digital signatures, encryption.
+
+\textbf{Sustainable Development Goals (SDG) impact:} xxx, xxx, xxx, xxx.
+
+\hypertarget{agradecimientos}{%
+\subsection{Agradecimientos}\label{agradecimientos}}
+
+A las empresas que han subvencionado este trabajo.
+
+A los que han revisado este documento.
+
+A los que me han proporcionado información.
+
+\textbf{NOTA.} Escribir aquí los agradecimientos y, si no se va a usar,
+borrar la página.
+
+\hypertarget{uxedndice-de-contenidos}{%
+\section*{Índice de contenidos}\label{uxedndice-de-contenidos}}
+\addcontentsline{toc}{section}{Índice de contenidos}
+
+\protect\hyperlink{uxedndice-de-figuras}{Índice de Figuras
+\protect\hyperlink{uxedndice-de-figuras}{viii}}
+
+\protect\hyperlink{uxedndice-de-tablas}{Índice de Tablas
+\protect\hyperlink{uxedndice-de-tablas}{ix}}
+
+\protect\hyperlink{_Toc136514373}{Tabla 1 Elementos geométricos 11
+\protect\hyperlink{_Toc136514373}{ix}}
+
+\protect\hyperlink{suxedmbolos-y-abreviaturas}{Símbolos y abreviaturas
+\protect\hyperlink{suxedmbolos-y-abreviaturas}{ix}}
+
+\protect\hyperlink{introducciuxf3n}{1. Introducción
+\protect\hyperlink{introducciuxf3n}{1}}
+
+\protect\hyperlink{problemuxe1tica}{1.1 Problemática
+\protect\hyperlink{problemuxe1tica}{1}}
+
+\protect\hyperlink{antecedentes}{1.2 Antecedentes
+\protect\hyperlink{antecedentes}{1}}
+
+\protect\hyperlink{estado-del-arte}{1.3 Estado del arte
+\protect\hyperlink{estado-del-arte}{1}}
+
+\protect\hyperlink{objetivos}{1.4 Objetivos
+\protect\hyperlink{objetivos}{1}}
+
+\protect\hyperlink{planificaciuxf3n-del-proyecto}{1.5 Planificación del
+Proyecto \protect\hyperlink{planificaciuxf3n-del-proyecto}{2}}
+
+\protect\hyperlink{pliego-de-condiciones}{1.6 Pliego de condiciones
+\protect\hyperlink{pliego-de-condiciones}{2}}
+
+\protect\hyperlink{desarrollo}{2. Desarrollo
+\protect\hyperlink{desarrollo}{3}}
+
+\protect\hyperlink{teoruxedacuxe1lculos}{3. Teoría/cálculos
+\protect\hyperlink{teoruxedacuxe1lculos}{3}}
+
+\protect\hyperlink{resultados}{4. Resultados
+\protect\hyperlink{resultados}{4}}
+
+\protect\hyperlink{discusiuxf3n}{5. Discusión
+\protect\hyperlink{discusiuxf3n}{4}}
+
+\protect\hyperlink{memoria-econuxf3mica}{6. Memoria económica
+\protect\hyperlink{memoria-econuxf3mica}{4}}
+
+\protect\hyperlink{conclusiones}{7. Conclusiones
+\protect\hyperlink{conclusiones}{5}}
+
+\protect\hyperlink{luxedneas-futuras}{8. Líneas futuras
+\protect\hyperlink{luxedneas-futuras}{5}}
+
+\protect\hyperlink{valoraciuxf3n-personal}{9. Valoración personal
+\protect\hyperlink{valoraciuxf3n-personal}{5}}
+
+\protect\hyperlink{bibliografuxeda}{10. Bibliografía
+\protect\hyperlink{bibliografuxeda}{5}}
+
+\protect\hyperlink{uxedndice-alfabuxe9tico}{11. Índice alfabético
+\protect\hyperlink{uxedndice-alfabuxe9tico}{6}}
+
+\protect\hyperlink{capuxedtulo-de-muestra}{12. Capítulo de muestra
+\protect\hyperlink{capuxedtulo-de-muestra}{6}}
+
+\protect\hyperlink{cinemuxe1tica}{12.1 Cinemática
+\protect\hyperlink{cinemuxe1tica}{7}}
+
+\protect\hyperlink{rapidez-y-aceleraciuxf3n}{12.2 Rapidez y aceleración
+\protect\hyperlink{rapidez-y-aceleraciuxf3n}{8}}
+
+\protect\hyperlink{anexos}{13. Anexos \protect\hyperlink{anexos}{10}}
+
+\protect\hyperlink{anexos-1}{Anexo A. Anexos
+\protect\hyperlink{anexos-1}{11}}
+
+\protect\hyperlink{cuxe1lculos-de-resistencia}{Anexo B. Cálculos de
+resistencia \protect\hyperlink{cuxe1lculos-de-resistencia}{12}}
+
+\hypertarget{uxedndice-de-figuras}{%
+\subsection{\texorpdfstring{Índice de Figuras
+}{Índice de Figuras }}\label{uxedndice-de-figuras}}
+
+\protect\hyperlink{_Ref116248452}{Figura 1 Suma de dos vectores
+\protect\hyperlink{_Ref116248452}{9}}
+
+\protect\hyperlink{_Ref116285295}{Figura A-1 Figura del anexo A
+\protect\hyperlink{_Ref116285295}{13}}
+
+\textbf{NOTA.} Introducir el Índice de Figuras. Recuerda también
+referenciar las figuras si no son propias. Incluir materiales ajenos
+suele conllevar la petición de derechos para su uso
+
+\hypertarget{uxedndice-de-tablas}{%
+\subsection{Índice de Tablas}\label{uxedndice-de-tablas}}
+
+\protect\hyperlink{_Ref116248762}{\protect\hypertarget{_Toc136514373}{}{}Tabla
+1 Elementos geométricos \protect\hyperlink{_Ref116248762}{11}}
+
+\textbf{NOTA.} Introducir el Índice de Tablas, en caso de utilizarlas en
+la memoria. Recuerda también referenciar las tablas si no son propias.
+Incluir materiales ajenos suele conllevar la petición de derechos para
+su uso.
+
+\hypertarget{suxedmbolos-y-abreviaturas}{%
+\subsection{Símbolos y abreviaturas}\label{suxedmbolos-y-abreviaturas}}
+
+ODS Objetivos de Desarrollo Sostenible
+
+TFM Trabajo Fin de Máster
+
+\textbf{NOTA.} Introducir los símbolos y abreviaturas utilizadas en la
+memoria.
+
+\hypertarget{introducciuxf3n}{%
+\section{Introducción}\label{introducciuxf3n}}
+
+La introducción ha de aclarar qué tipo de documento es el entregado, qué
+representa, cuál es el trabajo desarrollado que se incluye en él, qué
+apartados, su importancia y qué aporta.
+
+Este documento integra una orientación sobre la preparación del Trabajo
+Fin de Grado (TFG), Trabajo Fin de Máster (TFM) de Ingeniería realizada
+en la Escuela Politécnica Superior de Mondragon Unibertsitatea\\
+\strut \\
+\strut \\
+{[}1{]}.
+
+En el documento encontrará ejemplos para el formato y la presentación de
+los resultados, así como para la organización de los capítulos del
+TFG/TFM y su contenido. Este documento se puede utilizar como una
+plantilla para la composición de la propia memoria\\
+\strut \\
+\strut \\
+{[}2,3{]}. La forma, en la preparación de la memoria no es menos
+importante que el contenido. Por lo tanto, debe poner el máximo interés
+y respeto por la gramática y la sintaxis de la lengua en la que ésta se
+redacte.
+
+En cuanto a la elección del pronombre personal con el que se expresen,
+se recomienda que el uso del pronombre impersonal, incluso en
+combinación con la primera persona del singular. En beneficio de la
+claridad, es aconsejable evitar frases largas, el uso frecuente de
+cursiva, negrita y subrayado en el texto.
+
+\hypertarget{problemuxe1tica}{%
+\subsection{Problemática}\label{problemuxe1tica}}
+
+El objetivo es explicar y delimitar de forma clara y precisa el problema
+que abordará el proyecto.
+
+Se debe seleccionar y relacionar la temática del proyecto con las
+competencias del perfil de ingeniería en el que se enmarca.
+
+\hypertarget{antecedentes}{%
+\subsection{\texorpdfstring{Antecedentes
+}{Antecedentes }}\label{antecedentes}}
+
+El apartado de antecedentes puede ser opcional, dependerá del tipo de
+proyecto, en función de si el proyecto ha tenido fases previas o forma
+parte de un proyecto mayor, etc.
+
+\hypertarget{estado-del-arte}{%
+\subsection{Estado del arte}\label{estado-del-arte}}
+
+El apartado del estado del arte requiere aportar la situación en la
+comunidad científica o en el mercado de la tecnología, la metodología o
+los productos técnico-tecnológicos afectados (incluir citas en el texto,
+las cuales, incluyen algún conocimiento de vanguardia de su especialidad
+de ingeniería).
+
+\hypertarget{objetivos}{%
+\subsection{Objetivos}\label{objetivos}}
+
+Se deben establecer objetivos claros, Medibles, Alcanzables, Retadores,
+Temporalizados y Específicos MARTE/SMART (Specific, Measurable,
+Achievable, Realistic and Time-bound)\footnote{https://www.mindtools.com/pages/article/smart-goals.htm}\textsuperscript{.,}
+alineándolos con los siguientes elementos: impacto social, seguridad y
+salud, sostenibilidad medioambiental, económico e industrial.
+
+Incluir, tanto los objetivos del proyecto técnico, como los objetivos de
+aprendizaje.
+
+\hypertarget{planificaciuxf3n-del-proyecto}{%
+\subsection{Planificación del
+Proyecto}\label{planificaciuxf3n-del-proyecto}}
+
+Se identifican las actividades, hitos, entregables, recursos necesarios,
+personas responsables y tiempos del proyecto. Se suele representar a
+través de un diagrama de Gantt.
+
+\hypertarget{pliego-de-condiciones}{%
+\subsection{Pliego de condiciones}\label{pliego-de-condiciones}}
+
+El pliego de condiciones ha de recoger recursos, requisitos, condiciones
+específicas y normas y reglamentos (normas UNE) necesarios para la
+realización del proyecto.
+
+\hypertarget{desarrollo}{%
+\section{Desarrollo}\label{desarrollo}}
+
+El desarrollo se estructura en capítulos en los que se abordan los
+diferentes temas del trabajo. Los capítulos han de tener títulos
+representativos de su contenido, su número es variable y se subdividen
+en epígrafes.
+
+Tener en cuenta los siguientes aspectos:
+
+-\textgreater{} El marco teórico, las técnicas y métodos de análisis,
+diseño e investigación aplicados y sus limitaciones.
+
+-\textgreater Las destrezas prácticas aplicadas para la resolución de
+problemas complejos, la realización de diseños de ingeniería complejos y
+la realización de investigaciones.
+
+-\textgreater Los materiales, equipamiento y herramientas aplicados, así
+como las tecnologías y procesos de ingeniería aplicados; y sus
+respectivas limitaciones dentro de su ámbito de especialidad.
+
+-\textgreater La aplicación de las normas asociadas a la práctica.
+
+\hypertarget{teoruxedacuxe1lculos}{%
+\section{Teoría/cálculos}\label{teoruxedacuxe1lculos}}
+
+Opcional. Utilizar este apartado si procede. Si se aporta alguna novedad
+en relación con los artículos citados en la introducción, ésta debe
+desarrollarse en esta sección, no hay que repetir lo que ya está
+publicado.
+
+Los cálculos deben desarrollarse a partir de la base teórica citada o
+presentada.
+
+\hypertarget{resultados}{%
+\section{Resultados}\label{resultados}}
+
+Se presentan los logros del proyecto. Los datos comúnmente se presentan
+en formato de tablas, cuadros, gráficos u otras figuras explicando su
+significado.
+
+\hypertarget{discusiuxf3n}{%
+\section{\texorpdfstring{Discusión }{Discusión }}\label{discusiuxf3n}}
+
+A veces es apropiado poner los resultados y la correspondiente discusión
+en una misma sección. Debe explorar el significado de los resultados del
+trabajo, no repetirlos. Evitar demasiadas citas y discusiones en torno a
+la literatura publicada.
+
+\hypertarget{memoria-econuxf3mica}{%
+\section{Memoria económica}\label{memoria-econuxf3mica}}
+
+Analiza la viabilidad económica del Proyecto. Ha de contemplar el
+análisis de coste de materiales, horas de dedicación, inversiones,
+costes de explotación, financiación, retorno de la inversión, etc.
+
+\hypertarget{conclusiones}{%
+\section{\texorpdfstring{Conclusiones
+}{Conclusiones }}\label{conclusiones}}
+
+Relacionar los resultados del proyecto con los objetivos, es decir,
+aportando conclusiones de aspectos técnicos, metodológicas, de salud y
+seguridad laboral, económicas, relativas al impacto en los Objetivos de
+Desarrollo Sostenible (ODS).
+
+\hypertarget{luxedneas-futuras}{%
+\section{Líneas futuras}\label{luxedneas-futuras}}
+
+El apartado de Líneas futuras debe expresar las ideas o los estudios que
+se podrían llevar a cabo para ampliar o mejorar los resultados
+obtenidos. Podría ser el punto de partida para la continuación del
+trabajo realizado en el proyecto.
+
+\hypertarget{valoraciuxf3n-personal}{%
+\section{Valoración personal}\label{valoraciuxf3n-personal}}
+
+Identificación de las aportaciones, lo que ha supuesto el TFM en materia
+de aprendizaje. Valoración de las tareas desarrolladas y los
+conocimientos y competencias adquiridos en relación con los estudios
+universitarios
+
+\hypertarget{bibliografuxeda}{%
+\section{Bibliografía}\label{bibliografuxeda}}
+
+Todo trabajo académico y de investigación necesita estar documentado.
+Para ello es necesario consultar información ya disponible en obras
+ajenas (artículos, libros, webs, normas técnicas, prensa,
+informes\ldots). Toda esta información consultada conforma la base
+bibliográfica de tu propio trabajo y debe aparecer reflejada en citas,
+referencias bibliográficas y en la bibliografía\footnote{https://mondragon.libguides.com/como-redactar-citas-referencias-bibliografia}.
+
+Se recomienda utilizar aplicaciones de gestión de referencias
+bibliográficas como Mendeley O Zotero. Importante insertar y vincular
+adecuadamente las citas bibliográficas y la bibliografía en la memoria.
+
+Se incluyen los enlaces a los programas citados y a los plugins para
+crear citas y bibliografía automáticamente en los programas de texto
+como Word:
+
+Mendeley \url{https://www.mendeley.com/}
+
+Citar con Mendeley: Cite
+\url{https://www.mendeley.com/reference-management/mendeley-cite}
+
+Zotero \url{https://www.zotero.org/}
+
+Citar con Zotero \url{https://www.zotero.org/download} (Los plugin para
+Word etc. se instalan junto con Zotero en el pc)
+
+Se incluye un breve ejemplo de referencias (pueden utilizarse otros
+formatos más afines a la titulación).
+
+{[}1{]} C. Vogt (1999). Creating Long Documents using Microsoft Word,
+Published Web University Waterloo.
+
+{[}2{]} J.L. Caivano (1995). Guía para realizar, escribir y publicar
+trabajos de investigación.
+
+{[}3{]} M. Corcelles, M. Cano, G.B. Faz, N. Vega (2013)., Enseñar a
+escribir textos científico-académicos mediante la revisión colaborativa.
+REDU Revista Docencia Universitaria.
+
+{[}4{]} Asociación Española de Normalización y Certificación (1991).
+Cables para aparatos de elevación: Criterios de examen y de sustitución
+de los cables. AENOR. Norma UNE 157001, 2014
+
+{[}5{]} Robinson, A., \& Stern, S. (1998). Corporate creativity: how
+innovation and improvement actually happen. Berrett Koehler. ISBN
+1-57675-049-3.
+
+{[}6{]} Kramer, M.S. {[}et al.{]}. (2001). Promotion of Breastfeeding
+Intervention Trial {[}en línea{]}. JAMA. January 24/31, vol. 285, No. 4.
+\url{http://jama.jamanetwork.com/article.aspx?articleid=193490}
+
+\hypertarget{uxedndice-alfabuxe9tico}{%
+\section{Índice alfabético}\label{uxedndice-alfabuxe9tico}}
+
+Opcional. En los libros y en las tesis doctorales además de la tabla de
+contenidos, los índices de tablas y figuras, es muy habitual encontrarse
+con un índice alfabético donde se listan palabras claves y la página
+correspondiente en la que dichas palabras están citadas.
+
+En general el índice alfabético se coloca al final del documento después
+de la Bibliografía.
+
+\hypertarget{capuxedtulo-de-muestra}{%
+\section{Capítulo de muestra}\label{capuxedtulo-de-muestra}}
+
+\textbf{NOTA}: Eliminar este capítulo de la versión definitiva.
+
+En este capítulo hay un texto de muestra que incluye ecuaciones,
+gráficos y una tabla.
+
+La mecánica (o mecánica clásica) es la rama principal de la llamada
+Física Clásica, dedicada al estudio de los movimientos y estados en que
+se encuentran los cuerpos. Describe y predice las condiciones de reposo
+y movimiento debido a la acción de las fuerzas.
+
+Se divide en tres partes:
+
+\begin{itemize}
+\item
+  \emph{Cinemática:} Estudia las diferentes clases de movimiento de los
+  cuerpos sin atender a las causas que lo producen.
+\item
+  \emph{Dinámica:} Estudia los efectos de la interacción entre un
+  sistema con su entorno, sobre su estado de movimiento.
+\item
+  \emph{Estática:} está comprendida dentro del estudio de la
+  \emph{dinámica} y analiza las condiciones que permiten el equilibrio
+  de los cuerpos.
+\end{itemize}
+
+\hypertarget{cinemuxe1tica}{%
+\subsection{Cinemática}\label{cinemuxe1tica}}
+
+La cinemática es una rama de la física dedicada al estudio del
+movimiento de los cuerpos en el espacio, sin atender a las causas que lo
+producen (lo que llamamos fuerzas). Por tanto, la cinemática sólo
+estudia el movimiento en sí, a diferencia de la dinámica que estudia las
+interacciones que lo producen. El
+\href{http://es.wikibooks.org/w/index.php?title=An\%C3\%A1lisis_Vectorial\&action=edit\&redlink=1}{Análisis
+Vectorial} es la herramienta matemática más adecuada para ellos.
+
+En cinemática distinguimos las siguientes partes:
+
+\begin{itemize}
+\item
+  \href{http://es.wikibooks.org/wiki/F\%C3\%ADsica/Cinem\%C3\%A1tica/Cinem\%C3\%A1tica_del_punto}{Cinemática
+  de la partícula}
+\item
+  \href{http://es.wikibooks.org/w/index.php?title=Cinem\%C3\%A1tica_del_s\%C3\%B3lido_r\%C3\%ADgido\&action=edit\&redlink=1}{Cinemática
+  del sólido rígido}
+\end{itemize}
+
+La magnitud vectorial de la Cinemática fundamental es el
+\enquote{desplazamiento} Δ\emph{s}, que experimenta un cuerpo durante un lapso
+Δ\emph{t}. Como el desplazamiento es un vector, por consiguiente, sigue
+la ley del paralelogramo, o la ley de suma vectorial. Así si un cuerpo
+realiza un desplazamiento \enquote{consecutivo} o \enquote{al mismo tiempo} dos
+desplazamientos \textquotesingle a\textquotesingle{} y
+\textquotesingle b\textquotesingle, nos da un deslazamiento igual a la
+suma vectorial de \textquotesingle a\textquotesingle{} +
+\textquotesingle b\textquotesingle{} como un solo desplazamiento como se
+ilustra en la Figura 2.
+
+\includegraphics[width=2.49399in,height=1.3565in]{media/image5.png}
+
+\protect\hypertarget{_Ref116248452}{}{}Figura 1 Suma de dos vectores
+
+Dos movimientos al mismo tiempo entran principalmente, cuando un cuerpo
+se mueve respecto a un sistema de referencia y ese sistema de referencia
+se mueve relativamente a otro sistema de referencia.
+
+Ejemplo: El movimiento de un viajero en un tren en movimiento, que está
+siendo visto por un observador desde el terraplén. O cuando uno viaja en
+coche y observa las montañas y los árboles a su alrededor.
+
+\hypertarget{rapidez-y-aceleraciuxf3n}{%
+\subsection{Rapidez y aceleración}\label{rapidez-y-aceleraciuxf3n}}
+
+Diariamente escuchamos los conceptos de rapidez y aceleración como
+velocidad y aceleración solamente. Pero en física la velocidad y la
+aceleración son vectores, por lo que es claro y necesario su
+diferenciación y entendimiento. De aquí en adelante (más por costumbre
+que por ganas) llamaremos tanto a la rapidez y a la aceleración
+solamente como velocidad y aceleración (a menos que se especifique lo
+contrario).
+
+Si cubre una masa puntual en un punto P en un tiempo Δ\emph{t} el tramo
+Δ\emph{s}, se llamará al cociente Δ\emph{s}/Δ\emph{t} su velocidad media
+\(v_{m}\) en el intervalo de tiempo Δ\emph{t} o en el tramo Δ\emph{s}.
+
+Se observa que Δ\emph{s} aquí no es el desplazamiento, sino la longitud
+de arco: es el camino recorrido.
+
+La llamamos velocidad media porque la masa puntual no se mueve por el
+trayecto uniforme trazado. O sea, estamos tomando sólo los puntos final
+e inicial para hacer los cálculos.
+
+Hagamos el trayecto como Δ\emph{s} (de manera diferencial, o sea
+infinitesimal), al igual que al intervalo de tiempo Δ\emph{t}. Para
+Δ\emph{s} cercano a cero (o Δ\emph{t} cercano a cero, que tienda a cero)
+el cociente Δ\emph{s}/Δ\emph{t} como valor al límite, nos da la
+velocidad \emph{v} de la masa puntual en el punto P. En el análisis se
+puede calcular ese valor al límite también como d\emph{s}/d\emph{t}.
+
+Tomemos luego una masa puntual que tiene en el punto P y en el tiempo
+\emph{t} la velocidad \emph{v}; y en el tiempo \emph{t} + Δ\emph{t} y la
+velocidad \emph{v} + Δ\textbf{v}. Podemos calcular el cociente
+Δ\emph{v}/Δ\emph{t} como la aceleración media de la masa puntual en el
+intervalo de tiempo Δ\emph{t}. Para Δ\emph{t} cercano a cero se aspira a
+que ese cociente tenga un valor límite, la aceleración \emph{a} de la
+masa puntual para el tiempo \emph{t}.
+
+Es el camino descrito como una función analítica del tiempo \emph{t},
+así \emph{s}=\emph{s}(\emph{t}), la función de velocidad
+\emph{v}(\emph{t}) es la primera derivada de la función
+\emph{s}(\emph{t}) con respecto al tiempo, la función de aceleración
+\emph{a}(\emph{t}) es la segunda derivada. La derivación con respecto al
+tiempo se puede también escribir como un punto sobre las variables. En
+sentido contrario se puede encontrar la función de velocidad y la
+función de la trayectoria a través de la integración como se expresa en
+(12.1)
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.8697}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.1303}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\[v(t) = \int_{}^{}{a(t)\ dt\ \ \ \ \ \ \ \ \ }s(t) = \int_{}^{}{v(t)\ dt} = \iint_{}^{}{a(t)\ dt\ }dt\]
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+(12.1)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\end{longtable}
+
+Ejemplo: En caída libre una masa puntual se encuentra con una
+aceleración constante \emph{g}. Esto es, cuando el tiempo \emph{t}=0
+verticalmente de arriba hacia abajo, tiene la velocidad y sus
+coordenadas como se expresa en (12.2).
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.8382}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.1618}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\[v(t) = g\int_{}^{}{dt = g\ t + \ v_{0}\ \ \ \ \ \ \ }s(t) = \int_{}^{}{(g\ t + \ v_{0})\ dt} = \frac{1}{2}g\ t^{2} + v_{0}t + s_{0}\]
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+(12.2)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\end{longtable}
+
+En la Tabla 1 se ve bla bla.
+
+\protect\hypertarget{_Ref116248762}{}{}Tabla 1 Elementos geométricos
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1588}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3491}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4921}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Elemento
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Descripción}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Imagen}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Baricentro & El baricentro o
+\href{http://es.wikipedia.org/wiki/Centroide}{centroide} de una
+superficie plana donde cada circunferencia une un punto con otros
+contenida en una
+\href{http://es.wikipedia.org/wiki/Figura_geom\%C3\%A9trica}{figura
+geométrica} plana, es un punto tal, que cualquier recta que pasa por él,
+divide a dicha superficie en dos partes de igual
+\href{http://es.wikipedia.org/wiki/Momento_de_un_vector}{momento}
+respecto a dicha recta. &
+\includegraphics[width=2.625in,height=1.14583in]{media/image6.png} \\
+Centroide & El centroide es un concepto puramente geométrico que depende
+de la forma del sistema; el centro de masas depende de la distribución
+de materia, mientras que el centro de gravedad depende también del campo
+gravitatorio. &
+\includegraphics[width=1.58289in,height=1.27849in]{media/image7.png} \\
+\end{longtable}
+
+\hypertarget{anexos}{%
+\section{Anexos}\label{anexos}}
+
+Los Anexos han de identificare con letras o números. Las fórmulas tablas
+y figuras de los anexos tienen numeración propia (A-1), (B-1)\ldots.
+
+\hypertarget{anexos-1}{%
+\subsection{Anexos}\label{anexos-1}}
+
+Podemos numerar las figuras como se ilustra en la Figura A-1:
+
+\includegraphics[width=2.82042in,height=2.09375in]{media/image8.jpeg}
+
+\protect\hypertarget{_Ref116285295}{}{}Figura A-1 Figura del anexo A
+
+\hypertarget{section}{%
+\subsection*{}\label{section}}
+\addcontentsline{toc}{subsection}{}
+
+\hypertarget{cuxe1lculos-de-resistencia}{%
+\subsection{Cálculos de resistencia}\label{cuxe1lculos-de-resistencia}}
+
+\includegraphics[width=8.17824in,height=11.56833in]{media/image9.jpg}
+
+\end{document}

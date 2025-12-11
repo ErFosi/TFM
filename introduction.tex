@@ -1,0 +1,203 @@
+\section{Introducción}
+
+El Internet de las Cosas (IoT) ha transformado radicalmente la forma en que los dispositivos interactúan con el entorno físico y digital. Sin embargo, este crecimiento exponencial ha expuesto una brecha crítica: la falta de mecanismos robustos para mantener la seguridad de estos dispositivos a lo largo de su ciclo de vida operativo. Esta introducción presenta el contexto del problema, examina el estado actual de la investigación y la práctica industrial, y define los objetivos de este Trabajo de Fin de Máster.
+
+\subsection{Problemática}
+
+El ecosistema IoT ha experimentado un crecimiento sin precedentes, con miles de millones de dispositivos conectados desplegados en entornos industriales, domésticos, sanitarios y de infraestructuras críticas. A pesar de este despliegue masivo, la seguridad no ha evolucionado al mismo ritmo. Una cantidad alarmante de dispositivos permanece sin actualizar debido a la ausencia de mecanismos efectivos de actualización remota, convirtiéndose en vectores de ataque a gran escala.
+
+Las actualizaciones OTA (Over-The-Air) inseguras, o directamente inexistentes, son uno de los mayores riesgos en el IoT. Datos de la industria \cite{Gartner:IoTSecurity:2023} dicen que cerca del 20\% de las organizaciones han sufrido ataques que venían de dispositivos IoT comprometidos, y que la mayoría de las empresas tienen un riesgo importante por culpa de aparatos sin parchear.
+
+Este problema se complica por dos retos técnicos básicos:
+
+\begin{enumerate}
+	\item \textbf{Recursos limitados:} Los dispositivos IoT son muy variados, desde chips muy simples de 8 bits con poquísima memoria hasta sistemas más potentes. Esta variedad hace que no se puedan usar las mismas soluciones de seguridad que usamos en ordenadores normales.
+
+	\item \textbf{La amenaza cuántica:} Los algoritmos usados actualmente para firmar actualizaciones podrían ser vulnerables a los ordenadores cuánticos del futuro. Como los dispositivos IoT suelen durar muchos años, es buena idea pensar en esto desde el principio para los casos donde la seguridad a largo plazo sea clave.
+\end{enumerate}
+Si a esto se le suma la cantidad de dispositivos que hay, las actualizaciones poco seguras y las amenazas futuras, tenemos un escenario de riesgo importante. Por eso hace falta buscar soluciones nuevas, aprovechando lo que dice la investigación y la experiencia de la industria.
+
+\subsection{Motivaci\'on}
+
+Lo interesante, y lo que motiva este trabajo, es que ambas perspectivas cuentan historias diferentes pero complementarias. La academia ha demostrado que es posible construir sistemas de actualización seguros, eficientes y adaptados a dispositivos con recursos limitados. La industria, sin embargo, muestra que estas soluciones no se han adoptado de forma generalizada: los frameworks más usados siguen dependiendo de criptografía tradicional, ninguno integra algoritmos ligeros como ASCON ni esquemas post-cuánticos como MLDSA.
+
+Para abordar esta problemática de forma rigurosa, este trabajo adopta una doble perspectiva. Por un lado, el \textbf{estado del arte académico}: qué dice la investigación sobre las vulnerabilidades reales, qué arquitecturas de actualización segura se han propuesto, y qué avances hay en criptografía ligera y post-cuántica. Por otro lado, el \textbf{estado de la práctica}: qué soluciones existen realmente en el mercado (SWUpdate, Mender, hawkBit...), qué limitaciones tienen, y por qué las empresas siguen desplegando dispositivos vulnerables a pesar de que técnicamente existen alternativas mejores.
+
+Ese hueco entre lo que se puede hacer técnicamente y lo que se hace en realidad es donde se centra este TFM. El objetivo es demostrar que se pueden juntar herramientas probadas como SWUpdate con criptografía moderna (ligera y post-cuántica) en una plataforma centralizada que permita gestionar grandes flotas de forma segura.
+
+\subsection{Antecedentes}
+
+Este trabajo surge de una necesidad identificada durante las prácticas laborales realizadas en Ikerlan, donde se trabajó agregando funcionalidades a Lamassu, una Infraestructura de Clave Pública (PKI) especializada en dispositivos IoT. Lamassu proporciona gestión centralizada de dispositivos IoT y sus certificados digitales, cubriendo el ciclo de vida completo de las identidades criptográficas: desde la provisión inicial de certificados hasta su renovación y revocación de forma segura a escala. Sin embargo, durante este trabajo se identificó una brecha significativa: mientras que Lamassu gestiona exitosamente la identidad criptográfica de los dispositivos, la plataforma carecía de mecanismos integrados para distribuir y actualizar el firmware de forma segura y auditada. Esta carencia motivó la necesidad de desarrollar una solución de actualizaciones OTA que aprovechara la infraestructura de PKI existente para garantizar que cada dispositivo recibiera únicamente actualizaciones auténticas y autorizadas.
+
+Antes de profundizar en el estado del arte, conviene entender cómo hemos llegado hasta aquí. El concepto de actualización remota de software no es nuevo: los sistemas operativos de escritorio llevan décadas recibiendo parches a través de internet, y los smartphones popularizaron las actualizaciones OTA hace más de quince años. Sin embargo, trasladar este modelo al mundo IoT ha resultado ser mucho más complicado de lo que parecía inicialmente.
+
+Este trabajo se centra explícitamente en la distribución de actualizaciones remotas para dispositivos IoT que ejecutan Linux embebido, el entorno mayoritario en dispositivos industriales y comerciales. \enquote{Linux embebido} hace referencia a distribuciones y stacks (Buildroot, Yocto, u-boot, etc.) y a imágenes rootfs y toolchains optimizados para entornos con recursos limitados; no debe confundirse con una instalación de Linux de escritorio o servidor con servicios y recursos plenos. Por tanto, las adaptaciones que este entorno exige son tanto de naturaleza operativa como de límite de recursos.
+
+El problema de fondo es que los dispositivos IoT no son ordenadores ni teléfonos. Un sensor industrial, una bombilla inteligente o un monitor de salud tienen restricciones de hardware muy diferentes: procesadores de bajo consumo, memoria limitada y fuentes de energía restringidas. Aplicar los mismos mecanismos de actualización que usamos en un PC simplemente no funciona, y eso ha llevado a prácticas inseguras: fabricantes que envían actualizaciones sin cifrar, dispositivos que aceptan firmware sin verificar su origen, o productos que salen al mercado sin capacidad de actualización. Estos problemas han facilitado la creación de botnets y ataques DDoS a gran escala en el pasado, por ejemplo, Mirai \cite{Kaspersky:Mirai:2025}. Estudios académicos han identificado además la presencia de SDKs y flujos de actualización inseguros que amplían la superficie de ataque a millones de dispositivos \cite{Ibrahim:AoT:2023}.
+
+Por otra parte, los dispositivos IoT tienen ciclos de vida muy largos: un router doméstico puede funcionar durante más de diez años y algunos sistemas industriales durante décadas, lo que complica la gestión de vulnerabilidades y actualizaciones en el tiempo \cite{Hassan:IIoTSecurity:2023}. Durante ese plazo, aparecen nuevas vulnerabilidades, se descubren fallos en algoritmos criptográficos y la amenaza de la computación cuántica pone en evidencia la necesidad de pensar en opciones resistentes a largo plazo. Adicionalmente, se identificó la necesidad de un método centralizado de gestión de actualizaciones que permitiera controlar despliegues, auditar cambios y gestionar rollbacks en flotas de dispositivos, un requisito que se vuelve aún más importante con la entrada en vigor de la Cyber Resilience Act (CRA) de la Unión Europea, que impone obligaciones a fabricantes de hardware y software para garantizar que los equipos desplegados sean mantenidos, actualizados y auditables.
+
+\subsection{Estado del arte}
+
+Esta sección analiza sistemáticamente la literatura académica y las soluciones tecnológicas existentes para identificar las contribuciones científicas, las limitaciones de las implementaciones actuales, y las brechas que justifican la propuesta de este trabajo. El análisis se estructura en cuatro partes: evidencia empírica sobre vulnerabilidades, plataformas OTA existentes, familias de algoritmos criptográficos emergentes, y análisis crítico de las limitaciones identificadas.
+
+\subsubsection{Panorama de vulnerabilidades en dispositivos IoT}
+
+Es evidente que la seguridad en IoT es un problema grave, tanto si miramos informes de la industria como estudios académicos. Todos coinciden en que hacen falta soluciones sólidas para actualizar el firmware.
+
+\textbf{Evidencia desde la industria:}
+
+Los informes de la industria pintan un panorama preocupante. Se estima que más de 5.600 millones de dispositivos IoT serán vulnerables en los próximos años, sobre todo con la llegada del 5G y el crecimiento masivo de dispositivos conectados \cite{Cisco:IoTForecast:2025}.
+
+Reportes de seguridad \cite{Gartner:IoTSecurity:2023} evidencian que aproximadamente el 20\% de las organizaciones han detectado ataques basados en dispositivos IoT en sus infraestructuras, y que la gran mayoría de entornos corporativos presentan exposición significativa a riesgos derivados de dispositivos comprometidos o sin actualizar. Esta situación refleja una superficie de ataque en constante expansión, donde la falta de procedimientos de mantenimiento y actualización constituye una debilidad estructural.
+
+Los informes de seguridad destacan consistentemente que los \textit{mecanismos de actualización inseguros} y el \textit{firmware/software obsoleto} se encuentran entre las 10 principales vulnerabilidades de IoT \cite{Fortinet:IoTVulnerabilities}. La falta de aplicación de parches y la antigüedad del código base de muchos dispositivos representa un punto de entrada preferente para los atacantes, siendo a menudo el eslabón más débil de la cadena de seguridad.
+
+Un ejemplo particularmente preocupante de vulnerabilidades en componentes de terceros se reveló en mayo de 2024, cuando se identificaron fallos críticos en la plataforma IoT ThroughTek Kalay (TUTK), afectando a más de cien millones de dispositivos a nivel global, incluyendo cámaras de vigilancia y sistemas de seguridad. La explotación en cadena de estas vulnerabilidades permite comprometer completamente el dispositivo, subrayando cómo un fallo en un componente de terceros puede tener un impacto masivo en todo el ecosistema de productos \cite{Bitdefender:TUTK:2024}.
+
+Adicionalmente, el firmware desactualizado continúa siendo el principal motor de las botnets IoT, como Mirai, que explotan credenciales por defecto o vulnerabilidades conocidas para reclutar dispositivos y lanzar ataques de denegación de servicio distribuido (DDoS) masivos. Incidentes recientes han documentado ataques DDoS sin precedentes impulsados por routers y dispositivos IoT comprometidos \cite{Kaspersky:Mirai:2025}, demostrando que el problema no solo persiste, sino que se amplifica con el crecimiento del ecosistema.
+
+\textbf{Evidencia desde la literatura académica:}
+
+Desde una perspectiva más técnica, el estudio \enquote{AoT: Attack on Things} de Ibrahim et al. \cite{Ibrahim:AoT:2023} ofrece datos empíricos alarmantes sobre la prevalencia de SDKs vulnerables en el ecosistema de actualizaciones OTA. Los autores analizaron 23 dispositivos IoT comerciales y sus aplicaciones móviles asociadas, identificando seis SDKs de actualización de firmware (DFU, Device Firmware Update) que presentan vulnerabilidades críticas. Mediante un análisis automatizado a gran escala, el estudio reveló que 1,356 aplicaciones disponibles en Google Play Store dependen de estos SDKs vulnerables y que, en conjunto, estas aplicaciones gestionan al menos 61 modelos de dispositivos IoT ampliamente distribuidos. Esta cadena de dependencias inseguras subraya la magnitud del problema: millones de dispositivos en el campo son potencialmente explotables a través de vectores de actualización comprometidos.
+
+Investigaciones recientes sobre IoT industrial \cite{IIoTSecurity:2023} confirman estos problemas: firmware que raramente se actualiza tras el despliegue, mecanismos de actualización inseguros, y dispositivos con ciclos de vida de décadas sin mantenimiento adecuado. Todo esto subraya la urgencia de plataformas automatizadas de actualización segura que puedan operar de forma continua a lo largo de toda la vida útil del dispositivo.
+
+La evidencia convergente desde múltiples fuentes establece que las vulnerabilidades en mecanismos de actualización no son casos aislados, sino un problema sistémico que afecta a millones de dispositivos desplegados. Esta constatación motiva el análisis de las soluciones tecnológicas existentes para determinar si abordan adecuadamente estos desafíos.
+
+\subsubsection{Plataformas OTA existentes: análisis comparativo}
+
+En respuesta a las necesidades documentadas de actualización segura, la comunidad de código abierto y diversos proveedores comerciales han desarrollado plataformas especializadas. Sin embargo, el análisis comparativo revela limitaciones significativas en relación con los requisitos identificados.
+
+\textbf{SWUpdate} \cite{SWUpdate} es un framework de código abierto para actualizaciones en sistemas Linux embebidos, con soporte para actualizaciones atómicas (esquemas A/B) y firmas RSA/ECDSA, pero sin gestión centralizada de flotas. En resumen, es un software capaz de instalar las actualizaciones de forma segura en el dispositivo, pero no proporciona una solución completa para la gestión de actualizaciones a gran escala. La gran ventaja de SWUpdate es su adaptabilidad gracias a los modulos y su customización.
+
+\textbf{Eclipse hawkBit} \cite{hawkBit} ofrece gestión backend de actualizaciones OTA a escala empresarial con rollout progresivo, aunque la seguridad criptográfica depende de la implementación del cliente.
+
+\textbf{Mender} \cite{Mender} integra cliente y servidor para actualizaciones OTA con gestión de flotas, pero utiliza exclusivamente algoritmos tradicionales (RSA y ECC) sin soporte para criptografía ligera ni post-cuántica.
+
+\textbf{Balena} \cite{Balena} proporciona gestión de flotas basada en contenedores Docker, introduciendo overhead significativo que lo hace inadecuado para dispositivos muy restringidos.
+
+	extbf{RAUC} \cite{RAUC} es similar a SWUpdate en funcionalidades de actualización atómica, pero tampoco incluye familias de algoritmos criptográficos avanzadas.
+
+La Tabla \ref{tab:comparativa_ota} resume las características principales de estas plataformas.
+
+\begin{table}[htbp]
+\centering
+\caption{Comparativa de plataformas OTA existentes}
+\label{tab:comparativa_ota}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+\textbf{Plataforma} & \textbf{Firmas} & \textbf{Cifrado} & \textbf{LWC} & \textbf{PQC} & \textbf{Gestión flota} \\
+\hline
+SWUpdate & Sí & Sí & No & No & Externa \\
+\hline
+hawkBit & Delegada & Delegado & No & No & Sí \\
+\hline
+Mender & Sí & Sí & No & No & Sí \\
+\hline
+Balena & Sí & Sí & No & No & Sí \\
+\hline
+RAUC & Sí & Sí & No & No & Externa \\
+\hline
+\end{tabular}
+\smallskip
+
+\footnotesize{LWC: Lightweight Cryptography; PQC: Post-Quantum Cryptography}
+\end{table}
+
+Como se observa, ninguna de las soluciones existentes ofrece soporte simultáneo para criptografía ligera y post-cuántica. Esta carencia representa una limitación significativa dado el crecimiento de dispositivos con recursos extremadamente limitados y la amenaza emergente de la computación cuántica. El presente trabajo se construye sobre SWUpdate como agente de actualización en el dispositivo, aprovechando su madurez y robustez probada, pero extendiéndolo gracias a su personalización y facil agregación de modulos con una capa de gestión centralizada que incorpora las familias de algoritmos criptográficos avanzadas ausentes en las soluciones actuales.
+
+Este análisis revela una brecha clara: mientras existen frameworks robustos para gestión de actualizaciones y organismos de estandarización que han definido familias de algoritmos criptográficos avanzadas, ninguna solución integra ambas. La siguiente subsección examina el estado de estas familias de algoritmos criptográficos emergentes.
+
+\subsubsection{Necesidad de algoritmos criptográficos eficientes}
+
+La enorme variedad de dispositivos IoT, desde chips minúsculos hasta sistemas potentes, hace que necesitemos diferentes tipos de criptografía. Para las actualizaciones OTA, hay dos familias clave: la criptografía ligera para los dispositivos pequeños, y la post-cuántica para protegernos del futuro.
+
+\textbf{Criptografía ligera: ASCON y el estándar NIST LWC.}
+
+El NIST ha elegido ASCON \cite{NIST:SP800232:2023} como el estándar para criptografía ligera. Está hecho a medida para dispositivos con pocos recursos y ofrece cifrado autenticado (AEAD), lo que garantiza que los datos son confidenciales y no han sido modificados.
+
+Para las actualizaciones OTA, ASCON es ideal: es hasta cinco veces más eficiente que AES si no tienes hardware dedicado, consume muy poca memoria y protege tanto el firmware como sus metadatos, evitando ataques de repetición o modificación.
+
+\textbf{Criptografía post-cuántica: preparación ante amenazas futuras.}
+
+Los ordenadores cuánticos son una amenaza real a medio plazo para los algoritmos que usamos hoy (RSA, ECDSA). Como los dispositivos IoT duran muchos años, es de sentido común pensar en esto desde ya.
+
+El NIST ha seleccionado tres esquemas de firma post-cuántica: MLDSA (buen equilibrio), Falcon (firmas pequeñas) y SPHINCS+ (muy seguro teóricamente). Las firmas digitales son clave para asegurar que el firmware es auténtico, incluso frente a ataques cuánticos.
+
+Que el NIST haya estandarizado estos algoritmos significa que técnicamente es posible usarlos. Pero integrarlos en plataformas reales va despacio. En este proyecto he elegido MLDSA como esquema principal para las firmas digitales, combinándolo con cifrado ligero.
+
+
+\subsection{Objetivos}
+
+A partir del análisis de la problemática y lo comentado previamente, se establecen los siguientes objetivos para este Trabajo de Fin de Máster.
+
+\subsubsection{Propósito y alcance}
+
+Visto el panorama de vulnerabilidades en el ecosistema IoT, las limitaciones de las plataformas OTA existentes y la brecha entre la investigación y la aplicación, este trabajo propone una solución que combina tecnologías consolidadas con algoritmos criptográficos modernos y necesarios.
+
+La estrategia adoptada consiste en utilizar \textbf{SWUpdate} como instalador de actualizaciones en el dispositivo, aprovechando su madurez y robustez probada en entornos de producción industrial, pero extendiendo sus capacidades criptográficas para incluir soporte tanto para \textbf{algoritmos de criptografía ligera (LWC)} como para \textbf{esquemas post-cuánticos}. Esta extensión se integra con una \textbf{plataforma de gestión centralizada de flotas de dispositivos}, diseñada para escalar horizontalmente y proporcionar trazabilidad completa del ciclo de vida de las actualizaciones.
+
+
+\textbf{Objetivo general:}
+
+Diseñar, implementar y evaluar una plataforma de actualización OTA segura y escalable para dispositivos IoT basada en SWUpdate, extendida con soporte para criptografía ligera (LWC) y post-cuántica, e integrada con una arquitectura de gestión centralizada de flotas, abordando las limitaciones identificadas en soluciones existentes.
+
+\textbf{Objetivos específicos:}
+
+\begin{enumerate}
+	\item \textbf{Implementar verificación criptográfica robusta:} Desarrollar mecanismos de firma digital basados en algoritmos tradicionales (RSA/ECDSA) y post-cuánticos (MLDSA) para garantizar la autenticidad e integridad de cada paquete de actualización, mitigando el riesgo de distribución de firmware malicioso documentado en estudios como \enquote{AoT: Attack on Things} \cite{Ibrahim:AoT:2023}.
+
+	\item \textbf{Integrar nuevas opciones criptográficas:} Dar soporte a algoritmos ligeros (ASCON) y post-cuánticos (MLDSA), para cubrir tanto dispositivos muy limitados como aquellos que necesitan protegerse del futuro.
+
+	\item \textbf{Arquitectura escalable en la nube:} Crear una plataforma de gestión que pueda crecer horizontalmente para administrar muchos dispositivos y tener control total sobre las actualizaciones (saber si han fallado, reintentarlas, etc.).
+	
+	\item \textbf{Integrar frameworks maduros de actualización:} Construir la solución sobre SWUpdate como agente de actualización en el dispositivo, aprovechando su robustez probada en entornos de producción industrial mientras se añade la capa de gestión centralizada y las familias de algoritmos criptográficos avanzadas ausentes en su implementación estándar.
+	
+\end{enumerate}
+
+\subsection{Planificación}
+
+Para la consecución de los objetivos de este Trabajo de Fin de Máster, se ha definido un plan de trabajo dividido en tres fases principales, que abarcan desde la investigación inicial hasta el despliegue y validación de la plataforma.
+
+\subsubsection{Fase 1: Investigación}
+
+El objetivo de esta fase es establecer las bases teóricas y técnicas del proyecto, analizando el estado del arte y seleccionando las tecnologías más adecuadas. En esencia, se busca analizar los estándares actuales, identificar qué algoritmos son usados comúnmente y evaluar las nuevas alternativas disponibles, tal como se ha comentado en la introducción.
+
+\begin{description}
+    \item[1.1 Revisión de estándares actuales.] Se realizará un estudio exhaustivo de las normativas y recomendaciones de seguridad vigentes para dispositivos IoT (como las guías de NIST y ETSI), así como de los mecanismos de actualización OTA utilizados actualmente en la industria.
+    \item[1.2 Evaluación de algoritmos lightweight y post-cuánticos.] Se analizarán y compararán diferentes algoritmos criptográficos, poniendo el foco en aquellos de la familia de criptografía ligera (LWC) para dispositivos con recursos limitados y en los esquemas de criptografía post-cuántica (PQC) para garantizar la seguridad a largo plazo.
+    \item[1.3 Elección de algoritmos para los escenarios planteados.] Basándose en la evaluación anterior, se seleccionarán los algoritmos de firma y cifrado más adecuados para los distintos escenarios de uso definidos, equilibrando seguridad y rendimiento.
+\end{description}
+
+\subsubsection{Fase 2: Diseño e integración de módulos de seguridad para dispositivos IoT}
+
+Esta fase constituye el núcleo del desarrollo técnico, donde se diseñan e implementan los componentes de la plataforma. Se incluye el desarrollo del frontend, que es la web que permitirá a los desarrolladores hacer uso de toda la infraestructura.
+
+\begin{description}
+    \item[2.1 Diseño de la arquitectura requerida.] Definición de la arquitectura global del sistema, especificando los componentes del backend, la base de datos, la API de comunicación y la estructura del cliente en el dispositivo IoT.
+    \item[2.2 Integración de algoritmos de cifrado y/o firma.] Implementación e integración de las librerías criptográficas seleccionadas en la Fase 1 dentro de los servicios de la plataforma, habilitando las capacidades de firma digital y cifrado de los paquetes de actualización tanto en el backend como en el dispositivo IoT.
+    \item[2.3 Desarrollo del módulo de distribución segura de actualizaciones.] Creación del servicio encargado de gestionar el repositorio de actualizaciones, verificar la autenticidad de las peticiones y distribuir los binarios de forma segura a los dispositivos autorizados.
+    \item[2.4 Integración de firma y cifrado Backend y Frontend.] Desarrollo de la interfaz web (frontend) y su conexión con el backend, permitiendo a los administradores y desarrolladores subir nuevos firmwares, firmarlos criptográficamente y gestionar las campañas de actualización de manera intuitiva.
+    \item[2.5 Contenerización y despliegue en k8s.] Empaquetado de todos los microservicios de la plataforma en contenedores (Docker) y orquestación de su despliegue en un clúster de Kubernetes (k8s) para garantizar la escalabilidad, disponibilidad y facilidad de gestión.
+\end{description}
+
+\subsubsection{Fase 3: Automatización de pruebas, despliegue y ciclo de vida}
+
+La fase final se centra en la calidad, la automatización y la validación del sistema en entornos realistas.
+
+\begin{description}
+    \item[3.1 Creación o adaptación del pipeline CICD.] Implementación de flujos de Integración y Despliegue Continuo (CI/CD) para automatizar la construcción de las imágenes, la ejecución de pruebas y el despliegue de nuevas versiones de la plataforma.
+    \item[3.2 Definición de tests unitarios y e2e.] Desarrollo de una batería de pruebas automatizadas que incluya tests unitarios para validar la lógica de los componentes individuales y tests de extremo a extremo (e2e) para verificar el flujo completo de actualización OTA.
+    \item[3.3 Monitorización y validación para entornos de desarrollo y producción.] Puesta en marcha de herramientas de observabilidad y monitorización para supervisar el rendimiento y la salud del sistema, validando su correcto funcionamiento tanto en entornos de prueba como en producción.
+\end{description}
+
+La planificación temporal de estas fases y tareas se detalla en el diagrama de Gantt de la Figura \ref{fig:gantt}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{imagenes/gantt.png}
+    \caption{Planificación temporal del proyecto (Diagrama de Gantt)}
+    \label{fig:gantt}
+\end{figure}
+

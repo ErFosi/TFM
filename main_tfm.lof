@@ -1,0 +1,19 @@
+\babel@toc {spanish}{}\relax 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Planificación temporal del proyecto (Diagrama de Gantt)}}{9}{figure.caption.10}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Uso de cifrado simétrico}}{11}{figure.caption.11}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Creación de las llaves por parte de Bob}}{13}{figure.caption.12}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Alice introduce el mensaje en la caja y la cierra con la clave pública de Bob.}}{14}{figure.caption.13}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Bob abre la caja y obtiene el mensaje.}}{14}{figure.caption.14}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Bob inserta el mensaje y usa su llave privada.}}{14}{figure.caption.15}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Alice utiliza la clave pública de Bob para abrir la caja y verificar la autenticidad del mensaje.}}{15}{figure.caption.16}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Jerarquía de las Autoridades Certificadoras.}}{18}{figure.caption.17}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Resultados de rendimiento en Raspberry Pi 3}}{21}{figure.caption.18}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Resultados de rendimiento en Arduino UNO R4}}{21}{figure.caption.19}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Tamaño máximo de texto plano admitido en Arduino}}{22}{figure.caption.20}%
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Bytes adicionales requeridos por algoritmos AEAD}}{22}{figure.caption.21}%
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Proceso de instalación de actualización A/B.}}{25}{figure.caption.22}%
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Diagrama de estados del Workflow Directo.}}{29}{figure.caption.24}%
+\contentsline {figure}{\numberline {2.14}{\ignorespaces Diagrama de estados del Workflow Por Fases.}}{30}{figure.caption.26}%
+\contentsline {figure}{\numberline {2.15}{\ignorespaces Estructura de la entidad Job en WFX.}}{31}{figure.caption.27}%
