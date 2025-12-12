@@ -14,6 +14,8 @@
 \contentsline {figure}{\numberline {2.10}{\ignorespaces Tamaño máximo de texto plano admitido en Arduino}}{22}{figure.caption.20}%
 \contentsline {figure}{\numberline {2.11}{\ignorespaces Bytes adicionales requeridos por algoritmos AEAD}}{22}{figure.caption.21}%
 \contentsline {figure}{\numberline {2.12}{\ignorespaces Proceso de instalación de actualización A/B.}}{25}{figure.caption.22}%
-\contentsline {figure}{\numberline {2.13}{\ignorespaces Diagrama de estados del Workflow Directo.}}{29}{figure.caption.24}%
-\contentsline {figure}{\numberline {2.14}{\ignorespaces Diagrama de estados del Workflow Por Fases.}}{30}{figure.caption.26}%
-\contentsline {figure}{\numberline {2.15}{\ignorespaces Estructura de la entidad Job en WFX.}}{31}{figure.caption.27}%
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Diagrama de estados del Workflow Directo.}}{29}{figure.caption.23}%
+\contentsline {figure}{\numberline {2.14}{\ignorespaces Diagrama de estados del Workflow Por Fases.}}{30}{figure.caption.24}%
+\contentsline {figure}{\numberline {2.15}{\ignorespaces Estructura de la entidad Job en WFX.}}{31}{figure.caption.25}%
+\contentsline {figure}{\numberline {2.16}{\ignorespaces Arquitectura de la plataforma de actualizaciones propuesta}}{33}{figure.caption.26}%
+\contentsline {figure}{\numberline {2.17}{\ignorespaces Diagrama del modelo de datos de la plataforma}}{40}{figure.caption.27}%

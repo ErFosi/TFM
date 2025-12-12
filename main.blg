@@ -1,19 +1,19 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
-[0] Config.pm:310> INFO - Logfile is 'main.blg'
-[111] biber:340> INFO - === Thu Dec 11, 2025, 14:55:02
-[134] Biber.pm:419> INFO - Reading 'main.bcf'
-[238] Biber.pm:979> INFO - Found 14 citekeys in bib section 0
-[257] Biber.pm:4419> INFO - Processing section 0
-[274] Biber.pm:4610> INFO - Looking for bibtex file 'references.bib' for section 0
-[276] bibtex.pm:1713> INFO - LaTeX decoding ...
-[310] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
-[440] UCollate.pm:68> INFO - Overriding locale 'eu-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[441] UCollate.pm:68> INFO - Overriding locale 'eu-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
-[441] Biber.pm:4239> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'eu-ES'
-[441] Biber.pm:4245> INFO - No sort tailoring available for locale 'eu-ES'
-[458] bbl.pm:660> INFO - Writing 'main.bbl' with encoding 'UTF-8'
-[466] bbl.pm:763> INFO - Output to main.bbl
-[467] Biber.pm:131> WARN - legacy month field 'January-February' in entry 'Hassan:IIoTSecurity:2023' is not an integer - this will probably not sort properly.
-[467] Biber.pm:131> WARN - legacy month field 'May' in entry 'Bitdefender:TUTK:2024' is not an integer - this will probably not sort properly.
-[467] Biber.pm:131> WARN - I didn't find a database entry for 'IIoTSecurity:2023' (section 0)
-[468] Biber.pm:133> INFO - WARNINGS: 3
+[1] Config.pm:310> INFO - Logfile is 'main.blg'
+[185] biber:340> INFO - === Fri Dec 12, 2025, 12:33:00
+[222] Biber.pm:419> INFO - Reading 'main.bcf'
+[376] Biber.pm:979> INFO - Found 14 citekeys in bib section 0
+[406] Biber.pm:4419> INFO - Processing section 0
+[432] Biber.pm:4610> INFO - Looking for bibtex file 'references.bib' for section 0
+[436] bibtex.pm:1713> INFO - LaTeX decoding ...
+[482] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
+[673] UCollate.pm:68> INFO - Overriding locale 'eu-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
+[673] UCollate.pm:68> INFO - Overriding locale 'eu-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[674] Biber.pm:4239> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'eu-ES'
+[674] Biber.pm:4245> INFO - No sort tailoring available for locale 'eu-ES'
+[701] bbl.pm:660> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[713] bbl.pm:763> INFO - Output to main.bbl
+[714] Biber.pm:131> WARN - legacy month field 'January-February' in entry 'Hassan:IIoTSecurity:2023' is not an integer - this will probably not sort properly.
+[714] Biber.pm:131> WARN - legacy month field 'May' in entry 'Bitdefender:TUTK:2024' is not an integer - this will probably not sort properly.
+[715] Biber.pm:131> WARN - I didn't find a database entry for 'IIoTSecurity:2023' (section 0)
+[715] Biber.pm:133> INFO - WARNINGS: 3

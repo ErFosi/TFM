@@ -9,44 +9,46 @@ A level-1 auxiliary file: Chapters/02-Planificacion.aux
 A level-1 auxiliary file: Chapters/03-Desarrollo.aux
 The style file: unsrt.bst
 Database file #1: references.bib
-You've used 23 entries,
+Warning--empty author in IEC62443
+You've used 26 entries,
             1791 wiz_defined-function locations,
-            582 strings with 8162 characters,
-and the built_in function-call counts, 3566 in all, are:
-= -- 319
-> -- 119
+            599 strings with 8664 characters,
+and the built_in function-call counts, 3916 in all, are:
+= -- 352
+> -- 125
 < -- 3
-+ -- 54
-- -- 31
-* -- 110
-:= -- 577
-add.period$ -- 77
-call.type$ -- 23
-change.case$ -- 27
++ -- 58
+- -- 32
+* -- 117
+:= -- 625
+add.period$ -- 86
+call.type$ -- 26
+change.case$ -- 31
 chr.to.int$ -- 0
-cite$ -- 23
-duplicate$ -- 149
-empty$ -- 416
-format.name$ -- 31
-if$ -- 817
+cite$ -- 27
+duplicate$ -- 165
+empty$ -- 464
+format.name$ -- 32
+if$ -- 902
 int.to.chr$ -- 0
-int.to.str$ -- 23
+int.to.str$ -- 26
 missing$ -- 3
-newline$ -- 126
-num.names$ -- 22
-pop$ -- 110
+newline$ -- 141
+num.names$ -- 23
+pop$ -- 126
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 70
+skip$ -- 78
 stack$ -- 0
 substring$ -- 92
-swap$ -- 31
+swap$ -- 33
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 0
-while$ -- 28
-width$ -- 25
-write$ -- 256
+warning$ -- 1
+while$ -- 29
+width$ -- 28
+write$ -- 287
+(There was 1 warning)

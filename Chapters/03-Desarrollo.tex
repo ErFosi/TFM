@@ -479,6 +479,14 @@ El proceso de actualización en este proyecto sigue un modelo de "pulling" (sond
     \item \textbf{Confirmación:} Una vez finalizada la instalación, el dispositivo reporta el éxito o fracaso de la operación al servidor.
 \end{enumerate}
 
+\subsection{Generación de paquetes: SWUGenerator}
+
+Para la creación de los paquetes de actualización \texttt{.swu}, existe una herramienta complementaria denominada \textbf{SWUGenerator} \cite{SWUGenerator}. Esta utilidad, escrita en Python y desarrollada por los mismos creadores de SWUpdate (Stefano Babic), simplifica significativamente el proceso de empaquetado.
+
+SWUGenerator toma como entrada los archivos que componen la actualización (imágenes de sistema, scripts, etc.) y un archivo de configuración simplificado, y se encarga de construir automáticamente el contenedor CPIO dado el descriptor y ficheros.
+
+Una de las características más potentes de SWUGenerator es su capacidad para integrar la seguridad en el proceso de construcción. Permite, mediante parámetros de línea de comandos o configuración, firmar digitalmente el paquete utilizando los mismos algoritmos criptográficos soportados por SWUpdate (RSA, CMS, etc.). Asimismo, cabe destacar que los mecanismos de cifrado y firma son los mismos que los utilizados en SWUpdate, garantizando la compatibilidad total entre la generación y la instalación de los paquetes. Esto supone que, de añadir nuevos algoritmos en SWUpdate, SWUGenerator también necesitaría ser actualizado para soportarlos.
+
 \subsection{WFX: Workflow Executioner}
 
 WFX (\textit{Workflow Executioner}) es una herramienta desarrollada por Siemens y escrita en el lenguaje de programación Go, diseñada para gestionar la ejecución de flujos de trabajo (\textit{workflows}) en entornos distribuidos. En el contexto de este proyecto, WFX actúa como el gestor del sistema de actualizaciones OTA, orquestando el ciclo de vida de las actualizaciones desde que se definen hasta que se instalan en los dispositivos.
@@ -495,7 +503,6 @@ Para facilitar esta interacción, WFX expone dos APIs diferenciadas:
 
 WFX integra flujos de trabajo específicos para la actualización de artefactos en dispositivos, conocidos como DAU (\textit{Device Artifact Update}). El sistema soporta dos modalidades principales: \textit{Direct} (Directo) y \textit{Phased} (Por fases).
 
-\paragraph{Workflow Directo}
 
 El \textbf{Workflow Directo} es un proceso automatizado diseñado para despliegues rápidos donde no se requiere intervención manual. Una vez creado el trabajo, el dispositivo procede a la descarga e instalación sin pausas intermedias, como se muestra en la Figura \ref{fig:workflow_direct}.
 
@@ -506,9 +513,8 @@ El \textbf{Workflow Directo} es un proceso automatizado diseñado para despliegu
     \label{fig:workflow_direct}
 \end{figure}
 
-\paragraph{Workflow Por Fases}
 
-El \textbf{Workflow Por Fases} introduce puntos de control manual para una gestión más controlada del despliegue. Es fundamental notar los estados marcados con los símbolos \texttt{<>} en el diagrama de la Figura \ref{fig:workflow_phased}. Estos estados indican que la transición no es automática, sino que requiere una acción explícita por parte del desarrollador a través de la API Norte. Específicamente, estas intervenciones son necesarias para dar inicio a la actualización y para activarla una vez instalada, permitiendo un control granular sobre el despliegue (por ejemplo, para coordinar reinicios en ventanas de mantenimiento).
+El \textbf{Workflow Por Fases} introduce puntos de control manual para una gestión más controlada del despliegue. Es fundamental notar los estados marcados con los símbolos \texttt{<>} en el diagrama de la Figura \ref{fig:workflow_phased}. Estos estados indican que la transición no es automática, sino que requiere una acción explícita por parte del desarrollador a través de la API Norte. Específicamente, estas intervenciones son necesarias para dar inicio a la actualización y para activarla una vez instalada, permitiendo un control granular sobre el despliegue.
 
 \begin{figure}[H]
     \centering
@@ -516,6 +522,9 @@ El \textbf{Workflow Por Fases} introduce puntos de control manual para una gesti
     \caption{Diagrama de estados del Workflow Por Fases.}
     \label{fig:workflow_phased}
 \end{figure}
+
+
+Además de los flujos de trabajo predefinidos, WFX permite la creación de \textbf{Workflows personalizados}. Estos flujos pueden adaptarse a necesidades específicas del proyecto, incorporando estados adicionales, transiciones únicas o integraciones con otros sistemas. La flexibilidad para definir workflows personalizados es una característica poderosa que permite a los desarrolladores diseñar procesos de actualización que se alineen perfectamente con los requisitos operativos y de seguridad de su entorno. Sin embargo, esto supone un esfuerzo adicional también en la implementación del lado del dispositivo, ya que el agente SWUpdate debe ser capaz de manejar los nuevos estados y transiciones definidos.
 
 \subsubsection{La Entidad Job}
 
@@ -546,8 +555,251 @@ Un \textit{Job} encapsula toda la información necesaria para realizar la actual
 Un componente crítico del \textit{Job} es el campo \textbf{Definition} (metadatos). Este campo se almacena como un objeto JSON y contiene los detalles técnicos de la actualización que el dispositivo necesita procesar. En este proyecto, el campo \textit{Definition} se ha utilizado para inyectar identificadores y configuraciones específicas:
 
 \begin{itemize}
-    \item \textbf{Artifacts:} Lista de objetos a instalar. Cada artefacto incluye un \textbf{Name} y una \textbf{Uri} (ruta de descarga).
+    \item \textbf{Artifacts:} Lista de objetos a instalar. Cada artefacto incluye un \textbf{Name} y una \textbf{Uri} (ruta de descarga para el dispositivo).
     \item \textbf{Version:} Versión del paquete de software.
     \item \textbf{Type:} Tipo de actualización.
     \item \textbf{DMSID y LaunchID:} Etiquetas utilizadas como identificadores únicos para búsquedas y trazabilidad dentro del sistema de gestión.
 \end{itemize}
+
+\subsection{Lamassu IoT}
+
+Lamassu es una infraestructura de clave pública (PKI) diseñada específicamente para dispositivos IoT. Ofrece capacidades completas para la gestión de claves asimétricas, autoridades certificadoras (CA) y certificados digitales. Esta infraestructura se integra directamente con los dispositivos, permitiéndoles utilizar estos materiales criptográficos para procesos de autenticación robusta.
+
+Un concepto central en Lamassu es el DMS (\textit{Device Management System}). Un DMS actúa como una agrupación lógica de dispositivos, permitiendo administrar flotas de dispositivos de manera organizada. En el contexto de una arquitectura IoT, un DMS puede representar una zona geográfica, un tipo de dispositivo específico o un cliente particular.
+
+En el alcance de este proyecto, Lamassu desempeña un papel fundamental como proveedor de identidad y seguridad:
+\begin{itemize}
+    \item \textbf{Gestión de Dispositivos:} Provee las listas de dispositivos autorizados y sus agrupaciones (DMS).
+    \item \textbf{Infraestructura de Confianza:} Suministra los mecanismos de firma digital y emisión de certificados necesarios para validar la autenticidad del firmware y de los propios dispositivos.
+\end{itemize}
+
+Es importante destacar que, en su estado actual, Lamassu no dispone de un sistema de gestión de claves (KMS) para criptografía simétrica. El desarrollo de este soporte, habilitando el uso de algoritmos como AES y ASCON para el cifrado de datos, forma parte de los objetivos de este trabajo y se detallará en las secciones de implementación.
+
+\section{Infraestructura Planteada}
+
+La arquitectura propuesta para la plataforma de actualizaciones seguras se ha diseñado con el objetivo de desacoplar la complejidad de la gestión de actualizaciones de la lógica de negocio, proporcionando una interfaz unificada y segura para los desarrolladores.
+
+Como se ha mencionado anteriormente, \textbf{WFX} actúa como el motor de distribución de las actualizaciones. Es el componente encargado de mantener el estado de los despliegues y servir las actualizaciones a los dispositivos. En el lado del dispositivo, la herramienta \textbf{SWUpdate} es la responsable de realizar el \textit{polling} periódico hacia WFX para comprobar si existen nuevas tareas asignadas, y en caso afirmativo, descargar e instalar la actualización siguiendo el flujo definido.
+
+Para orquestar todo este proceso y facilitar su gestión, se introduce un nuevo servicio denominado \textbf{Updates}. Este módulo actúa como una capa de abstracción y control sobre WFX. Sus responsabilidades principales incluyen:
+
+\begin{itemize}
+    \item \textbf{Construcción de Paquetes:} Utilizar la herramienta \textbf{SWUGenerator} para crear los paquetes de actualización a partir de los ficheros proporcionados por el desarrollador, generando el formato SWU requerido por SWUpdate.
+    \item \textbf{Gestión de Versiones:} Administrar el catálogo de versiones de software disponibles.
+    \item \textbf{Gestión de Despliegues:} Coordinar la creación y supervisión de las campañas de actualización.
+    \item \textbf{Interacción con WFX:} Comunicarse con la API de WFX para crear los trabajos (\textit{Jobs}) y monitorizar su progreso, ocultando esta complejidad al usuario final.
+    \item \textbf{Integración con Lamassu:} Utilizar los servicios de \textbf{KMS} (Key Management System) para las operaciones criptográficas (cifrado y firma de paquetes) y el servicio \textbf{DMS} (Device Management System) para obtener la información de los dispositivos y sus agrupaciones.
+\end{itemize}
+
+De esta manera, el desarrollador puede desplegar actualizaciones utilizando este servicio sin necesidad de interactuar directamente con los detalles de bajo nivel de WFX o la gestión de claves.
+
+Adicionalmente, se ha desarrollado una \textbf{Interfaz Web} que proporciona una experiencia de usuario visual para la gestión del sistema. Esta interfaz se comunica con la API REST expuesta por el servicio de Updates, permitiendo a los administradores subir nuevos firmwares, definir estrategias de actualización y visualizar el estado de la flota de dispositivos en tiempo real.
+
+La arquitectura global de la solución y la interacción entre estos componentes se ilustra en la \autoref{fig:plataforma_arquitectura}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/desarrollo/plataforma.png}
+    \caption{Arquitectura de la plataforma de actualizaciones propuesta}
+    \label{fig:plataforma_arquitectura}
+\end{figure}
+
+\section{Integración de Criptografía Ligera y Post-Cuántica}
+
+Una de las contribuciones principales de este trabajo es la integración de algoritmos criptográficos ligeros (LWC) y resistentes a ataques cuánticos (PQ) en la cadena de actualización de dispositivos IoT. Esta integración ha requerido modificaciones tanto en SWUpdate como en SWUGenerator, presentando desafíos técnicos considerables.
+
+\subsection{Integración de Algoritmos de Cifrado Simétrico}
+
+La incorporación de nuevas alternativas de criptografía simétrica, en particular ASCON, si bien swupdate es muy personalizable, este cambio ha supuesto una dificultad considerable. Originalmente, SWUpdate únicamente admitía cifrado simétrico mediante AES-CBC, sin ningún mecanismo de selección de algoritmo. Esta restricción se debía a que, al existir una sola opción, no se requería un selector explícito en el diseño original.
+
+Para superar esta limitación, se ha modificado el código fuente de SWUpdate para incorporar las siguientes capacidades:
+
+\begin{itemize}
+    \item \textbf{Selector de algoritmo:} Posibilidad de definir explícitamente qué algoritmo de cifrado se utilizará.
+    \item \textbf{Soporte para variantes de AES:} Integración de las variantes CBC, CTR y GCM de AES para las longitudes de clave de 128, 192 y 256 bits.
+    \item \textbf{Soporte para ASCON:} Integración de la implementación en C de ASCON en su variante más eficiente.
+\end{itemize}
+
+Por defecto, el sistema asume que las claves criptográficas se encuentran almacenadas en \texttt{/etc/swupdate/keys/alg\_variant.key}, siguiendo una convención de nomenclatura que incluye el algoritmo con sub variante, el IV y la clave.
+
+\subsubsection{Instalación Nativa}
+
+Para mantener la flexibilidad y no cerrar puertas a diferentes escenarios de uso, se ha conservado la opción de instalación nativa. Esto puede ocurrir si se requiere de una instalación mediante USB practica muy común en el ambito de dispositivos linux embebidos. En este modo, el algoritmo y la clave se especifican directamente por línea de comandos:
+
+\begin{verbatim}
+swupdate -i test_aes_192_ctr.swu -K ./aes192-ctr.txt
+\end{verbatim}
+
+
+\subsubsection{Integración con WFX}
+
+En el caso de despliegues orquestados mediante WFX, la información del algoritmo de cifrado se transmite a través de los metadatos del Job. Al recibir una tarea pendiente, el agente SWUpdate extrae el algoritmo especificado en el campo \textit{definition}, que WFX proporciona para usos personalizados.
+
+El formato de metadatos utilizado en los Jobs de WFX es el siguiente:
+
+\begin{lstlisting}[language=json, caption={Formato de metadatos del Job en WFX}, label={lst:wfx_metadata}]
+{
+  "id": "update-001",
+  "definition": {
+    "artifacts": [
+      {
+        "uri": "https://cdn.example.com/firmware.swu.enc",
+        "ivt": "0123456789abcdef0123456789abcdef",
+        "algorithm": "aes256-cbc"
+      }
+    ]
+  }
+}
+\end{lstlisting}
+
+Los campos clave son:
+\begin{itemize}
+    \item \textbf{uri:} Ubicación desde donde el dispositivo descargará el paquete de actualización.
+    \item \textbf{ivt:} Vector de inicialización utilizado en el cifrado.
+    \item \textbf{algorithm:} Algoritmo de cifrado empleado (ej. \texttt{aes256-cbc}, \texttt{ascon-128a}).
+\end{itemize}
+
+\subsection{Integración de Firma Digital Post-Cuántica}
+
+La integración de mecanismos de firma digital resistentes a ataques cuánticos resultó relativamente más sencilla que la del cifrado simétrico. El proceso requirió dos modificaciones principales:
+
+\begin{enumerate}
+    \item \textbf{Habilitación en menuconfig:} SWUpdate utiliza un sistema de configuración basado en Kconfig (similar al kernel de Linux) que permite habilitar o deshabilitar características antes de compilar (\textit{buildear}) el proyecto. Se habilitaron los métodos de firma post-cuántica en esta configuración.
+    
+    \item \textbf{Actualización de OpenSSL:} Para el soporte de algoritmos post-cuánticos, se requiere OpenSSL versión 3.5 o superior. Dado que los repositorios de paquetes (APT) no disponen aún de esta versión, fue necesario descargarla del repositorio oficial de OpenSSL y realizar una instalación manual.
+\end{enumerate}
+
+\subsection{Modificaciones en SWUGenerator}
+
+La integración de los nuevos algoritmos criptográficos también requirió modificaciones sustanciales en SWUGenerator, la herramienta responsable de crear los paquetes SWU.
+
+\subsubsection{Cifrado con ASCON}
+
+Inicialmente, se evaluó el uso de la librería de Python de ASCON \cite{ascon-python}, disponible en PyPI. Sin embargo, las pruebas de rendimiento revelaron que esta implementación tardaba cientos de veces más que una implementación nativa, requiriendo varios segundos para procesar apenas unos pocos megabytes. Ante esta limitación de rendimiento inaceptables para paquetes de firmware que pueden ser de decenas o cientos de megabytes, se optó por integrar directamente el código C de ASCON, obteniendo una mejora drástica en el tiempo de procesamiento.
+
+\subsubsection{Métodos de Firma}
+
+Se han integrado dos modalidades de firma digital en SWUGenerator:
+
+\begin{itemize}
+    \item \textbf{Firma directa:} Acceso directo a la clave privada almacenada en el sistema de archivos. Este método es más simple pero requiere que la clave privada esté accesible en texto plano.
+    
+    \item \textbf{Firma CMS con PKCS\#11:} Utilización del estándar PKCS\#11 (\textit{Public-Key Cryptography Standards \#11}), que define una interfaz de programación independiente de la tecnología para dispositivos criptográficos como módulos de seguridad hardware (HSM). Este método permite que las claves privadas permanezcan protegidas dentro de hardware especializado, sin exponerlas nunca al sistema operativo.
+\end{itemize}
+
+El estándar CMS (\textit{Cryptographic Message Syntax}) proporciona un formato estandarizado para firmar, cifrar y autenticar mensajes, ampliamente utilizado en certificados digitales y comunicaciones seguras.
+
+\subsubsection{Comando Completo de Generación}
+
+El comando completo para crear un paquete SWU con cifrado y firma integrados es el siguiente:
+
+\begin{verbatim}
+swugenerator \
+  -k "CMS_PKCS11,pkcs11:object=key-name,cert.pem" \
+  create \
+  -K "key,iv,ascon-128a" \
+  -t \
+  -s sw-description \
+  -o output.swu \
+  -a artifacts/
+\end{verbatim}
+
+Donde:
+\begin{itemize}
+    \item \texttt{-k}: Especifica el método de firma (CMS con PKCS\#11), el objeto de la clave en el dispositivo criptográfico y el certificado asociado.
+    \item \texttt{-K}: Define la clave de cifrado, el vector de inicialización y el algoritmo a utilizar (en este caso, ASCON-128a).
+    \item \texttt{-t}: Cifra el descriptor también.
+    \item \texttt{-s}: Especifica el archivo descriptor del software.
+    \item \texttt{-o}: Define el nombre del archivo de salida.
+    \item \texttt{-a}: Indica el directorio que contiene los artefactos a empaquetar.
+\end{itemize}
+
+Con esto se habria realizado uno de los hitos de este TFM, que es la integración de criptografía ligera y post-cuántica en la cadena de actualización.
+
+\section{Modelo de Datos}
+
+Para entender el modulo de updates y su integración con Lamassu y WFX, es fundamental definir las entidades principales que componen el modelo de datos del sistema. Estas entidades representan los conceptos clave y las estructuras de información que se manejan en la plataforma de actualizaciones.
+
+\subsection{Entidades de Lamassu IoT}
+
+Desde la infraestructura Lamassu se obtienen dos entidades fundamentales que proporcionan la base organizativa y de identidad del sistema:
+
+\begin{itemize}
+    \item \textbf{Device (Dispositivo):} Representa cada dispositivo IoT registrado en el sistema. Cada dispositivo contiene información de identificación, credenciales y metadatos asociados a su configuración de seguridad.
+    
+    \item \textbf{DMS (Device Management System):} Agrupa lógicamente conjuntos de dispositivos. Un DMS puede representar una flota de dispositivos de un cliente específico, una zona geográfica determinada, o cualquier otra agrupación organizativa. Esta entidad es clave para aplicar políticas de actualización a grupos completos de dispositivos.
+\end{itemize}
+
+\subsection{Entidades de WFX}
+
+El sistema de orquestación de flujos de trabajo WFX aporta las siguientes entidades:
+
+\begin{itemize}
+    \item \textbf{Workflow:} Define el flujo de estados por los que pasa una actualización. Como se ha descrito anteriormente, existen workflows predefinidos como \textit{Direct} y \textit{Phased}, y es posible crear workflows personalizados adaptados a necesidades específicas.
+    
+    \item \textbf{Job:} Representa una instancia de actualización asignada a un dispositivo concreto. Encapsula toda la información necesaria para llevar a cabo la actualización, incluyendo el estado actual, progreso, historial de cambios, y los metadatos técnicos de la actualización en su campo \textit{Definition}.
+\end{itemize}
+
+\subsection{Entidades del Módulo Updates}
+
+El módulo de Updates introduce dos entidades primordiales que gestionan el ciclo de vida de las actualizaciones:
+
+\subsubsection{Update-Pack (Paquete de Actualización)}
+
+El \textbf{Update-Pack} es la entidad que representa una actualización disponible en el sistema. Contiene toda la información necesaria para construir, cifrar y firmar el paquete de actualización. Sus campos principales son:
+
+\begin{itemize}
+    \item \textbf{Name:} Nombre identificativo del paquete de actualización.
+    \item \textbf{Version:} Versión del software o firmware contenido en el paquete.
+    \item \textbf{Type:} Tipo de actualización, que puede ser \textit{firmware} (actualización completa del sistema embebido) o \textit{file} (fichero específico o componente de software).
+    \item \textbf{Alg\_Enc:} Algoritmo de cifrado utilizado para proteger el contenido del paquete (ej. AES-256, ASCON).
+    \item \textbf{Alg\_Sign:} Algoritmo de firma digital utilizado para garantizar la autenticidad e integridad del paquete (ej. RSA, ECDSA).
+    \item \textbf{IV (Initialization Vector):} Vector de inicialización utilizado en el proceso de cifrado simétrico.
+    \item \textbf{Descriptor\_Encrypted:} Indicador booleano que especifica si el descriptor del paquete está cifrado .
+\end{itemize}
+
+Esta entidad permite mantener un catálogo versionado de actualizaciones, facilitando el control de versiones y la trazabilidad de cada paquete desplegado.
+
+\subsubsection{Launch (Lanzamiento)}
+
+El \textbf{Launch} representa una campaña de despliegue de una versión específica de actualización. A diferencia del Update-Pack que define \textit{qué} se actualiza, el Launch define \textit{cómo} y \textit{cuándo} se despliega. Sus campos principales son:
+
+\begin{itemize}
+    \item \textbf{ID:} Identificador único del lanzamiento.
+    \item \textbf{ExecDate:} Fecha y hora de ejecución programada del lanzamiento.
+    \item \textbf{Workflow\_Type:} Tipo de workflow utilizado para este lanzamiento (ej. \textit{Direct}, \textit{Phased}, o un workflow personalizado).
+    \item \textbf{Devices\_Completed:} Número de dispositivos que han completado exitosamente la actualización.
+    \item \textbf{Devices\_Not\_Started:} Número de dispositivos que aún no han iniciado el proceso de actualización.
+    \item \textbf{Active\_Devices:} Número de dispositivos que están actualmente ejecutando la actualización.
+    \item \textbf{Rollout:} Estrategia de despliegue, que puede ser por porcentaje (\textit{\%}) o cantidad fija (\textit{fixed}).
+    \item \textbf{Rollout\_Value:} Valor asociado a la estrategia de rollout (porcentaje o número de dispositivos).
+    \item \textbf{Test\_Device\_ID:} Identificador del dispositivo utilizado para pruebas piloto antes del despliegue.
+    \item \textbf{Launched\_Version:} Referencia a la versión del Update-Pack que se está desplegando.
+\end{itemize}
+
+El Launch permite implementar estrategias de despliegue gradual (\textit{phased rollout}), minimizando riesgos al actualizar primero un subconjunto de dispositivos antes de extender la actualización a toda la flota.
+
+\subsection{Relaciones entre Entidades}
+
+Las relaciones entre las entidades del sistema se establecen de la siguiente manera:
+
+\begin{itemize}
+    \item Un \textbf{DMS} puede tener asociados múltiples \textbf{Update-Packs}, permitiendo gestionar diferentes versiones de software para una misma agrupación de dispositivos.
+    
+    \item Un \textbf{DMS} puede tener múltiples \textbf{Launches}, posibilitando campañas de actualización sucesivas o paralelas para diferentes componentes.
+    
+    \item Un \textbf{Launch} está asociado a un único \textbf{Update-Pack}, estableciendo una relación unívoca entre cada campaña de despliegue y la versión de software que distribuye.
+    
+    \item Cada \textbf{Job} creado en WFX está vinculado a un único dispositivo que forme parte del lanzamiento, por lo que en un lanzamiento finalizado habra tantos jobs como dispositivos planeados a actualizar.
+\end{itemize}
+
+La \autoref{fig:data_model} ilustra el diagrama completo del modelo de datos, mostrando cómo se relacionan las entidades del módulo de Updates con las entidades de Lamassu y WFX.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{imagenes/desarrollo/data_model.png}
+    \caption{Diagrama del modelo de datos de la plataforma}
+    \label{fig:data_model}
+\end{figure}
+
+

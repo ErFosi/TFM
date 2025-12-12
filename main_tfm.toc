@@ -5,7 +5,7 @@
 \contentsline {section}{\numberline {1.3}Antecedentes}{2}{section.1.3}%
 \contentsline {section}{\numberline {1.4}Estado del arte}{3}{section.1.4}%
 \contentsline {subsection}{\numberline {1.4.1}Panorama de vulnerabilidades en dispositivos IoT}{3}{subsection.1.4.1}%
-\contentsline {subsection}{\numberline {1.4.2}Plataformas OTA existentes: análisis comparativo}{4}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.2}Plataformas OTA existentes: análisis comparativo}{5}{subsection.1.4.2}%
 \contentsline {subsection}{\numberline {1.4.3}Necesidad de algoritmos criptográficos eficientes}{6}{subsection.1.4.3}%
 \contentsline {section}{\numberline {1.5}Objetivos}{6}{section.1.5}%
 \contentsline {subsection}{\numberline {1.5.1}Propósito y alcance}{6}{subsection.1.5.1}%
@@ -43,10 +43,27 @@
 \contentsline {subsubsection}{\numberline {2.3.2.1}Arquitectura modular}{26}{subsubsection.2.3.2.1}%
 \contentsline {subsubsection}{\numberline {2.3.2.2}Formato de paquete .swu y descriptor}{27}{subsubsection.2.3.2.2}%
 \contentsline {subsubsection}{\numberline {2.3.2.3}Flujo de actualización (Pulling)}{27}{subsubsection.2.3.2.3}%
-\contentsline {subsection}{\numberline {2.3.3}WFX: Workflow Executioner}{28}{subsection.2.3.3}%
-\contentsline {subsubsection}{\numberline {2.3.3.1}Tipos de Workflows}{28}{subsubsection.2.3.3.1}%
-\contentsline {paragraph}{Workflow Directo}{28}{paragraph*.23}%
-\contentsline {paragraph}{Workflow Por Fases}{29}{paragraph*.25}%
-\contentsline {subsubsection}{\numberline {2.3.3.2}La Entidad Job}{30}{subsubsection.2.3.3.2}%
-\contentsline {part}{Bibliografía}{33}{chapter*.28}%
-\contentsline {part}{Índice alfabético}{34}{chapter*.28}%
+\contentsline {subsection}{\numberline {2.3.3}Generación de paquetes: SWUGenerator}{28}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}WFX: Workflow Executioner}{28}{subsection.2.3.4}%
+\contentsline {subsubsection}{\numberline {2.3.4.1}Tipos de Workflows}{29}{subsubsection.2.3.4.1}%
+\contentsline {subsubsection}{\numberline {2.3.4.2}La Entidad Job}{31}{subsubsection.2.3.4.2}%
+\contentsline {subsection}{\numberline {2.3.5}Lamassu IoT}{32}{subsection.2.3.5}%
+\contentsline {section}{\numberline {2.4}Infraestructura Planteada}{32}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Integración de Criptografía Ligera y Post-Cuántica}{34}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Integración de Algoritmos de Cifrado Simétrico}{34}{subsection.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.5.1.1}Instalación Nativa}{34}{subsubsection.2.5.1.1}%
+\contentsline {subsubsection}{\numberline {2.5.1.2}Integración con WFX}{34}{subsubsection.2.5.1.2}%
+\contentsline {subsection}{\numberline {2.5.2}Integración de Firma Digital Post-Cuántica}{35}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Modificaciones en SWUGenerator}{35}{subsection.2.5.3}%
+\contentsline {subsubsection}{\numberline {2.5.3.1}Cifrado con ASCON}{35}{subsubsection.2.5.3.1}%
+\contentsline {subsubsection}{\numberline {2.5.3.2}Métodos de Firma}{36}{subsubsection.2.5.3.2}%
+\contentsline {subsubsection}{\numberline {2.5.3.3}Comando Completo de Generación}{36}{subsubsection.2.5.3.3}%
+\contentsline {section}{\numberline {2.6}Modelo de Datos}{37}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Entidades de Lamassu IoT}{37}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}Entidades de WFX}{37}{subsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.6.3}Entidades del Módulo Updates}{37}{subsection.2.6.3}%
+\contentsline {subsubsection}{\numberline {2.6.3.1}Update-Pack (Paquete de Actualización)}{37}{subsubsection.2.6.3.1}%
+\contentsline {subsubsection}{\numberline {2.6.3.2}Launch (Lanzamiento)}{38}{subsubsection.2.6.3.2}%
+\contentsline {subsection}{\numberline {2.6.4}Relaciones entre Entidades}{39}{subsection.2.6.4}%
+\contentsline {part}{Bibliografía}{43}{chapter*.28}%
+\contentsline {part}{Índice alfabético}{44}{chapter*.28}%
