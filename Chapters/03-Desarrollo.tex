@@ -773,11 +773,20 @@ El \textbf{Launch} representa una campaña de despliegue de una versión especí
     \item \textbf{Active\_Devices:} Número de dispositivos que están actualmente ejecutando la actualización.
     \item \textbf{Rollout:} Estrategia de despliegue, que puede ser por porcentaje (\textit{\%}) o cantidad fija (\textit{fixed}).
     \item \textbf{Rollout\_Value:} Valor asociado a la estrategia de rollout (porcentaje o número de dispositivos).
+    \item \textbf{Rollout\_Mode:} Modo de progresión entre batches, que puede ser \textit{auto} (automático) o \textit{manual}.
     \item \textbf{Test\_Device\_ID:} Identificador del dispositivo utilizado para pruebas piloto antes del despliegue.
     \item \textbf{Launched\_Version:} Referencia a la versión del Update-Pack que se está desplegando.
 \end{itemize}
 
 El Launch permite implementar estrategias de despliegue gradual (\textit{phased rollout}), minimizando riesgos al actualizar primero un subconjunto de dispositivos antes de extender la actualización a toda la flota.
+
+Las actualizaciones se despliegan organizadas en batches (lotes) de dispositivos según la estrategia definida en el campo \textit{Rollout}. El sistema ofrece dos modos de progresión entre batches:
+
+\begin{itemize}
+    \item \textbf{Modo Automático:} Una vez que todos los dispositivos de un batch completan exitosamente la actualización, el sistema procede automáticamente a lanzar el siguiente batch sin intervención manual. Este modo es ideal para despliegues donde se confía en la estabilidad de la actualización y se desea una distribución rápida.
+    
+    \item \textbf{Modo Manual:} Tras la finalización de cada batch, el sistema espera confirmación explícita del desarrollador o administrador antes de proceder con el siguiente lote. Este enfoque proporciona un mayor control y permite verificar el comportamiento de la actualización en producción antes de expandir el despliegue, siendo especialmente útil para actualizaciones críticas o de alto riesgo.
+\end{itemize}
 
 \subsection{Relaciones entre Entidades}
 

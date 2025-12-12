@@ -1,0 +1,44 @@
+\chapter{Conclusiones}
+
+Este trabajo ha abordado el desafío de desarrollar una plataforma segura y escalable para la distribución de actualizaciones OTA en dispositivos IoT, incorporando algoritmos de criptografía ligera (LWC) y resistentes a ataques cuánticos (PQ). Los resultados obtenidos demuestran que los objetivos planteados se han alcanzado de manera satisfactoria.
+
+\section{Cumplimiento de Objetivos}
+
+Se ha desarrollado con éxito una plataforma completa que permite distribuir actualizaciones de manera segura mediante cifrado y firma digital. La plataforma integra:
+
+\begin{itemize}
+    \item \textbf{Soporte para criptografía ligera:} Integración de ASCON como alternativa eficiente a AES para dispositivos con recursos limitados.
+    \item \textbf{Criptografía post-cuántica:} Incorporación de algoritmos de firma digital resistentes a ataques cuánticos.
+    \item \textbf{Interfaz de gestión:} Desarrollo de una interfaz web intuitiva que abstrae la complejidad del proceso de actualización.
+\end{itemize}
+
+\section{Validación de Criptografía Ligera en Dispositivos Limitados}
+
+Uno de los hallazgos más relevantes es la demostración práctica de que la criptografía ligera merece la pena en dispositivos con recursos limitados. Los algoritmos LWC, específicamente ASCON, han probado ofrecer:
+
+\begin{itemize}
+    \item Menor consumo de recursos computacionales y de memoria.
+    \item Rendimiento superior en dispositivos embebidos cuando se utiliza la implementación en C nativo.
+    \item Seguridad equivalente a los estándares tradicionales.
+\end{itemize}
+
+Esta validación resulta especialmente importante para el ecosistema IoT, donde millones de dispositivos operan con recursos estrictamente limitados. La posibilidad de proporcionar seguridad robusta sin comprometer la viabilidad técnica representa un avance significativo.
+
+\section{Preparación para Amenazas Post-Cuánticas}
+
+La integración de algoritmos post-cuánticos constituye un cambio que merece la pena de cara al futuro. Aunque las computadoras cuánticas no son aún una amenaza práctica inmediata, la preparación anticipada es esencial considerando que:
+
+\begin{itemize}
+    \item Los dispositivos IoT tienen ciclos de vida prolongados (10-20 años).
+    \item Los adversarios pueden interceptar comunicaciones cifradas hoy para descifrarlas en el futuro.
+    \item La migración a criptografía post-cuántica requiere tiempo de maduración y estandarización.
+\end{itemize}
+
+La plataforma proporciona la flexibilidad necesaria para soportar tanto algoritmos tradicionales como post-cuánticos, permitiendo una transición gradual según las necesidades específicas de cada despliegue.
+
+\section{Reflexión Final}
+
+La plataforma desarrollada demuestra que es posible construir infraestructuras de actualización seguras para dispositivos IoT sin comprometer la viabilidad técnica. La integración de criptografía ligera permite proteger dispositivos con recursos limitados, mientras que la incorporación de algoritmos post-cuánticos asegura la relevancia a largo plazo de la solución.
+
+Al proporcionar una solución completa, usable y escalable, se facilita que organizaciones puedan implementar actualizaciones OTA seguras mediante cifrado y firma digital, preparadas para las amenazas del futuro.
+

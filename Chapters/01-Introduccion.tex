@@ -202,3 +202,214 @@ La planificación temporal de estas fases y tareas se detalla en el diagrama de 
     \label{fig:gantt}
 \end{figure}
 
+\section{Pliego de condiciones}
+
+Este apartado detalla los recursos, requisitos y condiciones específicas necesarias para el desarrollo, despliegue e implantación de la plataforma de actualización OTA segura para dispositivos IoT. El pliego se ha adaptado a las características particulares de este proyecto, siguiendo las directrices de la norma UNE 157001 de AENOR y las especificaciones de la EPS-MU.
+
+\subsection{Descripción del producto}
+
+La plataforma desarrollada en este TFM constituye un sistema distribuido de gestión de actualizaciones OTA compuesto por:
+
+\begin{itemize}
+    \item \textbf{Módulo de gestión centralizado (Updates):} Servicio backend implementado en Go que orquesta la creación, firma, cifrado y distribución de paquetes de actualización. Proporciona una API REST para la gestión del ciclo de vida completo de las actualizaciones.
+    
+    \item \textbf{Interfaz web de administración:} Aplicación frontend desarrollada que permite a los administradores gestionar flotas de dispositivos, crear campañas de actualización, monitorizar el estado de los despliegues y configurar políticas de seguridad criptográfica.
+    
+    \item \textbf{Motor de flujos de trabajo (WFX):} Sistema de orquestación de estados que gestiona el ciclo de vida de las actualizaciones en los dispositivos, soportando workflows directos, por fases y personalizados.
+    
+    \item \textbf{Agente de actualización en dispositivo:} Cliente basado en SWUpdate extendido con soporte para algoritmos de criptografía ligera (ASCON) y post-cuántica (MLDSA), que se ejecuta en los dispositivos IoT con Linux embebido.
+\end{itemize}
+
+El sistema garantiza la confidencialidad mediante cifrado AEAD, la integridad y autenticidad mediante firmas digitales, y proporciona trazabilidad completa del proceso de actualización.
+
+\subsection{Requisitos de hardware y software para el entorno de desarrollo}
+
+Para la configuración del entorno de desarrollo de la plataforma se requieren los siguientes componentes:
+
+\subsubsection{Hardware mínimo requerido}
+
+\begin{itemize}
+    \item \textbf{Procesador:} CPU x86\_64 de 4 núcleos o superior (recomendado: 8 núcleos para compilación paralela).
+    \item \textbf{Memoria RAM:} 16 GB mínimo (recomendado: 32 GB para desarrollo con contenedores y máquinas virtuales simultáneas).
+    \item \textbf{Almacenamiento:} 100 GB de espacio libre en disco SSD para repositorios, contenedores, imágenes de sistema y artefactos de compilación.
+    \item \textbf{Red:} Conexión de red estable para descarga de dependencias, acceso a registros de contenedores y comunicación con servicios en la nube.
+\end{itemize}
+
+\subsubsection{Software de desarrollo requerido}
+
+\begin{itemize}
+    \item \textbf{Sistema operativo:} Linux (Ubuntu 22.04 LTS o superior, Debian 12, Fedora 38+). Otras distribuciones son compatibles siempre que cumplan los requisitos de las herramientas.
+    
+    \item \textbf{Lenguajes y runtimes:}
+    \begin{itemize}
+        \item Go 1.21 o superior (requerido para el desarrollo del módulo Updates y WFX).
+        \item Node.js 18 LTS o superior y npm/yarn (para el desarrollo del frontend).
+        \item Python 3.10+ (para scripts de automatización y SWUGenerator).
+        \item GCC/G++ 11+ (para compilación de componentes nativos y SWUpdate).
+    \end{itemize}
+    
+    \item \textbf{Herramientas de contenedores y orquestación:}
+    \begin{itemize}
+        \item Docker Engine 24.0+ o Podman 4.0+.
+        \item Docker Compose 2.0+ para desarrollo local.
+        \item Kubernetes 1.27+ (minikube, kind o k3s para desarrollo local; clúster productivo para despliegue).
+        \item kubectl y helm para gestión de despliegues.
+    \end{itemize}
+    
+    \item \textbf{Librerías criptográficas:}
+    \begin{itemize}
+        \item OpenSSL 3.5 o superior (requisito crítico para soporte de algoritmos post-cuánticos).
+        \item Implementación oficial de ASCON en C (versión 1.3.0 o superior).
+        \item liboqs (Open Quantum Safe) para esquemas PQC adicionales.
+    \end{itemize}
+    
+    \item \textbf{Herramientas de compilación para sistemas embebidos:}
+    \begin{itemize}
+        \item Yocto Project 4.0+ (Kirkstone) para generación de imágenes Linux embebidas.
+        \item Buildroot 2023.02+ como alternativa para sistemas más restringidos.
+        \item Toolchains cruzados para las arquitecturas objetivo (ARM, ARM64, RISC-V, etc.).
+    \end{itemize}
+    
+    \item \textbf{Control de versiones y CI/CD:}
+    \begin{itemize}
+        \item Git 2.30+.
+        \item GitLab Runner o GitHub Actions para pipelines de integración continua.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Requisitos de hardware y software para dispositivos objetivo}
+
+Los dispositivos IoT que ejecutarán el agente de actualización deben cumplir las siguientes especificaciones mínimas:
+
+\subsubsection{Hardware del dispositivo}
+
+\begin{itemize}
+    \item \textbf{Procesador:} ARM Cortex-A7 o superior, o equivalente (x86, RISC-V).
+    \item \textbf{Memoria RAM:} 128 MB mínimo (recomendado: 256 MB para actualizaciones con streaming).
+    \item \textbf{Almacenamiento:} 
+    \begin{itemize}
+        \item Flash/eMMC/SD con capacidad para esquema A/B: mínimo 2× tamaño del rootfs + 20\% de margen.
+        \item Ejemplo: para rootfs de 200 MB, se requieren al menos 500 MB de almacenamiento total.
+    \end{itemize}
+    \item \textbf{Conectividad:} Ethernet, Wi-Fi o módulo celular (4G/5G) para descarga de actualizaciones OTA.
+\end{itemize}
+
+\subsubsection{Software del dispositivo}
+
+\begin{itemize}
+    \item \textbf{Sistema operativo:} Linux embebido (kernel 5.10 LTS o superior) generado mediante Yocto Project o Buildroot.
+    \item \textbf{Bootloader:} U-Boot 2022.01+ con soporte para variables de entorno persistentes y arranque condicional para estrategia A/B.
+    \item \textbf{Estructura de particiones:} Esquema de doble partición (Slot A / Slot B) para rootfs y kernel, con partición de datos persistente separada.
+    \item \textbf{SWUpdate:} Versión modificada con soporte para ASCON y MLDSA (proporcionada como parte de este proyecto).
+    \item \textbf{Librerías criptográficas en dispositivo:}
+    \begin{itemize}
+        \item OpenSSL 3.5+ (compilado estáticamente o como librería compartida).
+        \item Implementación de ASCON integrada en SWUpdate.
+    \end{itemize}
+    \item \textbf{Agente SWUpdate configurado:} Cliente compilado con módulo WFX habilitado para comunicación con el backend de gestión.
+\end{itemize}
+
+\subsection{Requisitos del entorno de producción}
+
+El despliegue en producción de la plataforma de gestión centralizada requiere:
+
+\subsubsection{Infraestructura de nube o on-premise}
+
+\begin{itemize}
+    \item \textbf{Clúster Kubernetes:} Versión 1.27+ con al menos 3 nodos worker para alta disponibilidad.
+    \item \textbf{Recursos por nodo:}
+    \begin{itemize}
+        \item CPU: 4 vCPUs.
+        \item RAM: 8 GB.
+        \item Almacenamiento: 50 GB de almacenamiento persistente (PersistentVolume) para base de datos y repositorio de artefactos.
+    \end{itemize}
+    \item \textbf{Balanceador de carga:} Ingress controller (NGINX, Traefik) o balanceador externo para distribución de tráfico.
+    \item \textbf{Almacenamiento de objetos:} S3-compatible (AWS S3, MinIO, Ceph) para almacenamiento de paquetes de actualización \texttt{.swu}.
+    \item \textbf{Base de datos:} PostgreSQL 14+ o MySQL 8.0+ con soporte para transacciones ACID.
+\end{itemize}
+
+\subsubsection{Requisitos de red}
+
+\begin{itemize}
+    \item \textbf{Ancho de banda:} Suficiente para soportar descargas simultáneas de firmware por los dispositivos de la flota (se recomienda planificar despliegues por lotes).
+    \item \textbf{Certificados SSL/TLS:} Certificados válidos para comunicación cifrada entre dispositivos y backend (Let's Encrypt, CA corporativa).
+    \item \textbf{Conectividad dispositivos:} Los dispositivos deben poder alcanzar la API del backend (puertos HTTPS 443) mediante resolución DNS o IP estática.
+\end{itemize}
+
+\subsection{Condiciones de seguridad}
+
+La plataforma debe operar bajo las siguientes condiciones de seguridad:
+
+\begin{itemize}
+    \item \textbf{Gestión de claves criptográficas:} 
+    \begin{itemize}
+        \item Las claves privadas de firma deben almacenarse en un HSM (Hardware Security Module) o mediante PKCS\#11.
+        \item Las claves simétricas de cifrado deben gestionarse a través del módulo KMS integrado con Lamassu PKI.
+        \item Rotación de claves conforme a política definida (recomendado: cada 12 meses o tras compromiso detectado).
+    \end{itemize}
+    
+    \item \textbf{Autenticación y autorización:}
+    \begin{itemize}
+        \item Autenticación mutua TLS (mTLS) entre dispositivos y backend utilizando certificados X.509 emitidos por Lamassu PKI.
+        \item Control de acceso basado en roles (RBAC) para administradores de la plataforma.
+    \end{itemize}
+    
+    \item \textbf{Integridad y trazabilidad:}
+    \begin{itemize}
+        \item Toda actualización debe estar firmada digitalmente (ECDSA-P256, RSA-2048 o MLDSA según configuración).
+        \item Registro auditable de todas las operaciones: creación de paquetes, despliegues, éxitos y fallos.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Condiciones de cumplimiento normativo}
+
+El sistema ha sido diseñado para facilitar el cumplimiento de las siguientes normativas:
+
+\begin{itemize}
+    \item \textbf{Cyber Resilience Act (CRA):} Requisitos de actualización segura durante todo el ciclo de vida del producto, reporte de vulnerabilidades y gestión de incidentes.
+    
+    \item \textbf{IEC 62443-4-2 (CR 3.10 - Support for Updates):} Mecanismos robustos para la actualización de componentes de software y firmware en sistemas de control industrial.
+    
+    \item \textbf{NIST SP 800-193:} Protección de la integridad de la plataforma mediante actualizaciones autenticadas y rollback seguro.
+    
+    \item \textbf{ETSI EN 303 645:} Requisitos de ciberseguridad para dispositivos IoT de consumo, incluyendo actualizaciones seguras y gestión del ciclo de vida.
+\end{itemize}
+
+\subsection{Condiciones de implantación para cliente final}
+
+En proyectos donde se despliegue esta plataforma para un cliente específico, se deben considerar las siguientes condiciones adicionales:
+
+\subsubsection{Plan de onboarding de dispositivos}
+
+\begin{itemize}
+    \item \textbf{Provisión inicial:} Configuración de certificados digitales para cada dispositivo mediante Lamassu PKI.
+    \item \textbf{Registro en DMS:} Asignación de dispositivos a grupos lógicos (Device Management Systems) según criterios del cliente (geográficos, funcionales, etc.).
+    \item \textbf{Primera actualización:} Validación del canal OTA mediante actualización de prueba controlada en dispositivo piloto.
+\end{itemize}
+
+\subsubsection{Capacitación}
+
+\begin{itemize}
+    \item Formación de administradores en el uso de la interfaz web y API de gestión.
+    \item Documentación de procedimientos de emergencia: rollback manual, recuperación de dispositivo bloqueado.
+\end{itemize}
+
+\subsubsection{Soporte y mantenimiento}
+
+\begin{itemize}
+    \item Definición de SLA (Service Level Agreement) para disponibilidad del servicio de actualizaciones.
+    \item Política de actualizaciones de seguridad de la propia plataforma (parches del backend, dependencias críticas).
+    \item Monitorización continua y alertas ante fallos de actualización en dispositivos.
+\end{itemize}
+
+\subsection{Condiciones de ejecución del proyecto}
+
+Durante el desarrollo de este TFM se han aplicado las siguientes condiciones:
+
+\begin{itemize}
+    \item \textbf{Metodología ágil:} Desarrollo iterativo con entregas incrementales y revisiones periódicas con tutores.
+    \item \textbf{Control de versiones:} Todo el código fuente se gestiona mediante Git con repositorios públicos para componentes open source y privados para extensiones propietarias.
+    \item \textbf{Pruebas continuas:} Pipeline CI/CD que ejecuta tests unitarios y de integración en cada commit.
+    \item \textbf{Documentación técnica:} Generación automática de documentación de API mediante herramientas como Swagger/OpenAPI.
+\end{itemize}
+

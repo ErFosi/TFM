@@ -1,0 +1,507 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    
+    {\huge\bfseries Informe de Proyecto\\[0.5cm] Trabajo Fin de Máster\par}
+    
+    \vspace{2cm}
+    
+    {\Large\bfseries Plataforma OTA segura y escalable para dispositivos IoT con criptografía ligera y post-cuántica\par}
+    
+    \vspace{3cm}
+    
+    \begin{tabular}{ll}
+        \textbf{Alumno:} & Álvaro Díez-Andino Herrera \\[0.3cm]
+        \textbf{Director:} & Iñaki Garitano \\[0.3cm]
+        \textbf{Tutor:} & Haritz Saiz \\[0.3cm]
+        \textbf{Empresa:} & Ikerlan S. Coop. \\[0.3cm]
+        \textbf{Máster:} & Máster en análisis de datos, ciberseguridad \\
+                         & y computación en la nube \\[0.3cm]
+        \textbf{Universidad:} & Mondragón Unibertsitatea \\
+    \end{tabular}
+    
+    \vfill
+    
+    {\large Curso 2025-2026\par}
+\end{titlepage}
+
+\newpage
+
+\section{Título del Proyecto}
+
+Plataforma OTA segura y escalable para dispositivos IoT con criptografía ligera y post-cuántica
+
+\section{Área de conocimiento}
+
+El proyecto se enmarca en las siguientes áreas de conocimiento:
+
+\begin{itemize}
+    \item Ciberseguridad y criptografía
+    \item Internet of Things (IoT)
+    \item Sistemas embebidos
+    \item Arquitecturas de software distribuidas
+    \item DevOps y gestión del ciclo de vida del software
+\end{itemize}
+
+\section{Sector industrial}
+
+El proyecto se desarrolla en \textbf{Ikerlan S. Coop.}, centro tecnológico perteneciente al sector de la \textbf{investigación y desarrollo tecnológico}, con aplicación directa en los sectores de:
+
+\begin{itemize}
+    \item Industria 4.0 y manufactura avanzada
+    \item Internet of Things (IoT)
+    \item Infraestructuras críticas
+    \item Dispositivos embebidos y sistemas ciber-físicos
+\end{itemize}
+
+\section{Equipo del Proyecto}
+
+\begin{itemize}
+    \item \textbf{Director:} Iñaki Garitano
+    \item \textbf{Tutor:} Haritz Saiz
+    \item \textbf{Alumno:} Álvaro Díez-Andino Herrera
+\end{itemize}
+
+\section{Descripción del Proyecto}
+
+El proyecto se desarrolla en Ikerlan S. Coop., específicamente en el grupo SDZ (Sistemas Distribuidos) formado por 60 expertos analistas especializados en IoT, ciberseguridad y arquitecturas distribuidas.
+
+El proyecto aborda el desarrollo de una plataforma integral para la gestión segura de actualizaciones OTA (Over-The-Air) en dispositivos IoT. La solución implementada integra algoritmos de criptografía ligera (LWC) y resistente a ataques cuánticos (PQ) para garantizar la seguridad de las actualizaciones en dispositivos con recursos limitados.
+
+La plataforma desarrollada permite cifrar y firmar paquetes de actualización utilizando algoritmos como ASCON (LWC) y algoritmos post-cuánticos estandarizados por el NIST, proporcionando confidencialidad, integridad y autenticidad. Se ha desarrollado una interfaz web completa que abstrae la complejidad criptográfica, facilitando la gestión de claves, la creación de paquetes de actualización y el despliegue mediante estrategias de rollout controladas.
+
+El proyecto incluye modificaciones significativas en herramientas de código abierto (SWUpdate y SWUGenerator) para extender su soporte criptográfico, así como la integración con sistemas de orquestación de workflows (WFX) y gestión de identidades (Lamassu IoT PKI).
+
+\section{Competencias adquiridas}
+
+Durante el desarrollo del TFM, he adquirido y demostrado las siguientes competencias del máster:
+
+\subsection{M2N111 - Gestión del ciclo de vida del software}
+
+Diseño y automatización de procesos de gestión de pruebas, cambios, despliegue y actualizaciones de soluciones empresariales optimizando el ciclo de vida del software.
+
+ La gestión completa del ciclo de vida (pruebas automatizadas, pipelines CI/CD, etc.) queda pendiente de implementación en fases futuras del proyecto.
+
+\subsection{M2N110 - Arquitecturas escalables y flexibles}
+
+Definición, diseño e implementación de arquitecturas escalables, flexibles y resistentes que aborden problemas existentes y aceleren el despliegue de aplicaciones.
+
+\textbf{Aplicación en el proyecto:}
+\begin{itemize}
+    \item Diseño de una arquitectura basada en microservicios que separa responsabilidades (KMS, Updates, WFX)
+    \item Implementación de una capa de abstracción que permite integrar múltiples algoritmos criptográficos
+    \item Desarrollo de un modelo de datos escalable para gestión de flotas de dispositivos
+    \item Creación de APIs RESTful que facilitan la integración con otros sistemas
+\end{itemize}
+
+\textbf{Nota:} La orquestación con Kubernetes para despliegue en entornos de producción queda como trabajo futuro para completar la arquitectura cloud-native.
+
+\subsection{M2N206 - Investigación e innovación}
+
+Poseer y comprender conocimientos que aporten una base u oportunidad de ser originales en el desarrollo y/o aplicación de ideas, a menudo en un contexto de investigación.
+
+\textbf{Aplicación en el proyecto:}
+\begin{itemize}
+    \item Investigación sobre algoritmos de criptografía ligera y su aplicabilidad en dispositivos IoT
+    \item Estudio de algoritmos post-cuánticos y su integración en cadenas de actualización
+    \item Evaluación comparativa de rendimiento entre algoritmos tradicionales y ligeros
+    \item Contribución original mediante la extensión de herramientas open-source existentes
+\end{itemize}
+
+\section{Objetivos del Proyecto}
+
+Los objetivos principales del proyecto son:
+
+\begin{enumerate}
+    \item Desarrollar una plataforma segura y escalable para la distribución de actualizaciones OTA en dispositivos IoT que garantice confidencialidad, integridad y autenticidad mediante cifrado y firma digital.
+    
+    \item Integrar algoritmos de criptografía ligera (ASCON) en toda la cadena de actualización, demostrando su viabilidad en dispositivos con recursos limitados y validando las ventajas en términos de rendimiento y consumo de recursos.
+    
+    \item Incorporar soporte para algoritmos post-cuánticos en los mecanismos de firma digital, preparando la infraestructura para amenazas futuras y garantizando la relevancia a largo plazo de la solución.
+    
+    \item Diseñar una interfaz de usuario intuitiva que abstraiga la complejidad criptográfica y de gestión de actualizaciones, facilitando su adopción por organizaciones sin equipos especializados en seguridad.
+\end{enumerate}
+
+\section{Pliego de condiciones}
+
+Este apartado detalla los recursos, requisitos y condiciones específicas del proyecto, siguiendo las directrices de la norma UNE 157001 de AENOR y adaptado a las características de este TFM.
+
+\subsection{Descripción del producto desarrollado}
+
+La plataforma desarrollada constituye un sistema distribuido de gestión de actualizaciones OTA seguras compuesto por:
+
+\begin{itemize}
+    \item \textbf{Módulo de gestión centralizado (Updates):} Servicio backend implementado en Go que orquesta la creación, firma, cifrado y distribución de paquetes de actualización mediante API REST.
+    
+    \item \textbf{Interfaz web de administración:} Aplicación frontend que permite gestionar flotas de dispositivos, crear campañas de actualización y monitorizar despliegues.
+    
+    \item \textbf{Motor de flujos de trabajo (WFX):} Sistema de orquestación de estados para gestión del ciclo de vida de actualizaciones con workflows directos, por fases y personalizados.
+    
+    \item \textbf{Agente de actualización en dispositivo:} Cliente basado en SWUpdate extendido con soporte para ASCON (LWC) y MLDSA (PQC) para dispositivos Linux embebido.
+\end{itemize}
+
+\subsection{Recursos de hardware y software utilizados}
+
+\textbf{Hardware de desarrollo:}
+\begin{itemize}
+    \item Estación de trabajo: Intel Core i7, 32 GB RAM, 512 GB SSD
+    \item Dispositivos de prueba: Raspberry Pi 3, Arduino UNO R4
+    \item Servidor de desarrollo para despliegue de la plataforma
+\end{itemize}
+
+\textbf{Software de desarrollo:}
+\begin{itemize}
+    \item \textbf{Sistema operativo:} Linux Ubuntu 22.04 LTS
+    \item \textbf{Lenguajes y runtimes:} Go 1.21+, Python 3.10+, Node.js 18 LTS, GCC/G++ 11+
+    \item \textbf{Herramientas de contenedores:} Docker 24.0+, Kubernetes 1.27+, kubectl, helm
+    \item \textbf{Librerías criptográficas:} OpenSSL 3.5+ (compilado manualmente para soporte PQC), ASCON 1.3.0 (implementación oficial en C), liboqs
+    \item \textbf{Herramientas embebidas:} Yocto Project 4.0+, U-Boot, toolchains ARM/ARM64
+    \item \textbf{Frameworks del proyecto:} SWUpdate (modificado), WFX, Lamassu IoT PKI, SWUGenerator (extendido)
+\end{itemize}
+
+\subsection{Requisitos funcionales}
+
+\begin{itemize}
+    \item Soporte para múltiples algoritmos de cifrado simétrico: AES (CBC/CTR/GCM en 128/192/256 bits) y ASCON
+    \item Soporte para firma digital tradicional (RSA, ECDSA) y post-cuántica (MLDSA)
+    \item Gestión de claves criptográficas mediante integración con Lamassu KMS
+    \item Creación automatizada de paquetes de actualización en formato SWU
+    \item Distribución de actualizaciones mediante workflows configurables (directo, por fases, personalizado)
+    \item Despliegue gradual con estrategias de rollout (porcentaje/cantidad fija)
+    \item Progresión entre batches en modo automático o manual
+    \item Monitorización en tiempo real del estado de las actualizaciones
+    \item Interfaz web completa para gestión del sistema
+    \item Integración con Lamassu DMS para organización de dispositivos
+\end{itemize}
+
+\subsection{Requisitos no funcionales}
+
+\begin{itemize}
+    \item \textbf{Seguridad:} 
+    \begin{itemize}
+        \item Cumplimiento de estándares NIST para algoritmos criptográficos
+        \item Autenticación mutua TLS (mTLS) entre dispositivos y backend
+        \item Almacenamiento seguro de claves mediante HSM o PKCS\#11
+        \item Cumplimiento de Cyber Resilience Act (CRA) e IEC 62443-4-2
+    \end{itemize}
+    
+    \item \textbf{Escalabilidad:} Capacidad para gestionar miles de dispositivos mediante arquitectura cloud-native en Kubernetes
+    
+    \item \textbf{Rendimiento:} ASCON 2-5× más rápido que AES en dispositivos sin aceleración hardware
+    
+    \item \textbf{Usabilidad:} Interfaz intuitiva que abstrae complejidad criptográfica
+    
+    \item \textbf{Trazabilidad:} Registro auditable completo del ciclo de vida de cada actualización
+    
+    \item \textbf{Confiabilidad:} Estrategia A/B con rollback automático ante fallos
+\end{itemize}
+
+\subsection{Especificaciones técnicas de dispositivos objetivo}
+
+Los dispositivos IoT que ejecutan el agente de actualización requieren:
+
+\textbf{Hardware mínimo:}
+\begin{itemize}
+    \item Procesador: ARM Cortex-A7 o superior
+    \item RAM: 128 MB (recomendado 256 MB)
+    \item Almacenamiento: 500 MB mínimo para esquema A/B
+    \item Conectividad: Ethernet, Wi-Fi o módulo celular
+\end{itemize}
+
+\textbf{Software:}
+\begin{itemize}
+    \item Linux embebido (kernel 5.10 LTS+) generado con Yocto/Buildroot
+    \item U-Boot 2022.01+ con soporte para arranque condicional
+    \item Estructura de particiones A/B (dual-copy)
+    \item SWUpdate modificado con ASCON y MLDSA
+    \item OpenSSL 3.5+ en dispositivo
+\end{itemize}
+
+\subsection{Condiciones específicas del desarrollo}
+
+\begin{itemize}
+    \item \textbf{Modificación de código open-source:} Extensión de SWUpdate y SWUGenerator con nuevos algoritmos criptográficos manteniendo compatibilidad con versiones estándar
+    
+    \item \textbf{Integración con infraestructura Ikerlan:} Uso de Lamassu PKI para gestión de identidades y claves
+    
+    \item \textbf{Compatibilidad multiplataforma:} Solución debe funcionar en arquitecturas ARM, ARM64, x86 y RISC-V
+    
+    \item \textbf{Metodología ágil:} Desarrollo iterativo con entregas incrementales y revisiones periódicas
+    
+    \item \textbf{Control de versiones:} Gestión mediante Git con repositorios diferenciados para componentes públicos y privados
+    
+    \item \textbf{Documentación técnica:} Generación de documentación de API y guías de implementación
+\end{itemize}
+
+\subsection{Condiciones de seguridad aplicadas}
+
+\begin{itemize}
+    \item Todas las claves privadas de firma almacenadas en HSM o mediante PKCS\#11
+    \item Rotación de claves conforme a política de seguridad (12 meses o tras compromiso)
+    \item Autenticación de dispositivos mediante certificados X.509 de Lamassu PKI
+    \item Cifrado en tránsito (TLS 1.3) y en reposo para paquetes de actualización
+    \item Auditoría completa de operaciones sensibles (firma, despliegue, fallos)
+\end{itemize}
+
+\subsection{Pruebas y validación realizadas}
+
+\begin{itemize}
+    \item \textbf{Benchmarks de rendimiento:} Comparativa ASCON vs AES en Raspberry Pi 3 y Arduino UNO R4
+    \item \textbf{Pruebas de integración:} Validación del flujo completo de actualización OTA
+    \item \textbf{Pruebas de seguridad:} Verificación de firmas digitales y cifrado de paquetes
+    \item \textbf{Pruebas de rollback:} Validación de recuperación automática ante actualizaciones fallidas
+    \item \textbf{Pruebas de escalabilidad:} Simulación de despliegues con múltiples dispositivos
+\end{itemize}
+
+
+
+\section{Tareas desarrolladas}
+
+\subsection{Investigación y análisis (Semanas 1-4)}
+
+\begin{itemize}
+    \item Estudio del estado del arte en criptografía ligera y post-cuántica
+    \item Análisis de algoritmos candidatos: AES, ASCON, algoritmos PQ del NIST
+    \item Evaluación de herramientas existentes: SWUpdate, WFX, Lamassu
+    \item Diseño de la arquitectura de la solución
+\end{itemize}
+
+\textbf{Departamentos implicados:} Área de ciberseguridad, Área de IoT
+
+\subsection{Modificación de SWUpdate (Semanas 5-8)}
+
+\begin{itemize}
+    \item Análisis del código fuente de SWUpdate
+    \item Implementación de selector de algoritmos de cifrado simétrico
+    \item Integración de ASCON en implementación C nativa
+    \item Soporte para autodetección de algoritmo con OpenSSL
+    \item Extensión de metadatos para incluir información del algoritmo
+    \item Habilitación de firma post-cuántica mediante menuconfig
+    \item Actualización a OpenSSL 3.5+ con compilación manual
+\end{itemize}
+
+\textbf{Departamentos implicados:} Área de sistemas embebidos, Área de ciberseguridad
+
+\subsection{Desarrollo de SWUGenerator extendido (Semanas 9-12)}
+
+\begin{itemize}
+    \item Evaluación de librería Python de ASCON y detección de problemas de rendimiento
+    \item Integración de código C de ASCON para optimización
+    \item Implementación de firma directa con acceso a clave privada
+    \item Implementación de firma CMS con PKCS\#11
+    \item Desarrollo de interfaz CLI para generación de paquetes
+    \item Pruebas de compatibilidad con SWUpdate modificado
+\end{itemize}
+
+\textbf{Departamentos implicados:} Área de desarrollo de software
+
+\subsection{Desarrollo del módulo Updates (Semanas 13-16)}
+
+\begin{itemize}
+    \item Diseño del modelo de datos (Update-Pack, Launch)
+    \item Implementación de API REST en Go
+    \item Integración con Lamassu KMS para operaciones criptográficas
+    \item Integración con Lamassu DMS para gestión de dispositivos
+    \item Integración con WFX para creación y gestión de Jobs
+    \item Lógica de rollout gradual (porcentaje/fixed)
+    \item Sistema de monitorización del estado de actualizaciones
+\end{itemize}
+
+\textbf{Departamentos implicados:} Área de desarrollo de software, Área de IoT
+
+\subsection{Desarrollo de la interfaz web (Semanas 17-20)}
+
+\begin{itemize}
+    \item Diseño de la experiencia de usuario (UX)
+    \item Implementación en React de las vistas principales
+    \item Módulo de gestión de claves (KMS)
+    \item Módulo de creación de actualizaciones
+    \item Módulo de gestión de lanzamientos
+    \item Visualización temporal del estado de dispositivos
+    \item Dashboard con estadísticas agregadas
+\end{itemize}
+
+\textbf{Departamentos implicados:} Área de desarrollo de software
+
+\subsection{Validación y demostración (Semanas 21-24)}
+
+\begin{itemize}
+    \item Configuración de entorno de demostración
+    \item Desarrollo del caso de uso (sistema de control de tanques)
+    \item Pruebas de actualización en dispositivos reales
+    \item Validación de cifrado con ASCON vs AES
+    \item Validación de firma post-cuántica
+    \item Documentación técnica y memoria del TFM
+\end{itemize}
+
+\textbf{Departamentos implicados:} Área de IoT, Área de sistemas embebidos
+
+\section{Valoración de competencias adquiridas}
+
+El desarrollo del TFM ha permitido aplicar y ampliar significativamente los conocimientos adquiridos durante el máster:
+
+\subsection{Ciberseguridad}
+
+Los conceptos teóricos de criptografía simétrica y asimétrica estudiados en las asignaturas del máster se han puesto en práctica mediante la implementación de sistemas reales de cifrado y firma. La incorporación de algoritmos post-cuánticos ha requerido investigación adicional más allá del temario, proporcionando una visión prospectiva del campo.
+
+\subsection{Arquitecturas de software}
+
+Los principios de diseño de arquitecturas escalables y microservicios se han aplicado directamente en la descomposición de responsabilidades entre los diferentes módulos (KMS, Updates, WFX). La experiencia práctica ha reforzado conceptos como separación de concerns, diseño de APIs y patrones de integración.
+
+\subsection{Investigación e innovación}
+
+La necesidad de evaluar algoritmos emergentes (ASCON) y tecnologías anticipatorias (PQ) ha desarrollado competencias de investigación, análisis crítico de literatura científica y evaluación empírica de soluciones. La contribución a proyectos open-source mediante modificaciones de SWUpdate representa una aportación tangible a la comunidad.
+
+\section{Problemas planteados y resolución}
+
+\subsection{Problema 1: Rendimiento de ASCON en Python}
+
+\textbf{Planteamiento:} La librería Python de ASCON presentaba un rendimiento inaceptable, tardando segundos en cifrar pocos megabytes, lo que imposibilitaba su uso para paquetes de firmware de tamaño real.
+
+\textbf{Resolución:} Se optó por integrar directamente la implementación en C de ASCON, obteniendo una mejora de rendimiento de varios órdenes de magnitud. Esto requirió desarrollar wrappers de Python para invocar el código C nativo.
+
+\subsection{Problema 2: Limitaciones arquitecturales de SWUpdate}
+
+\textbf{Planteamiento:} SWUpdate solo soportaba AES-CBC sin mecanismo de selección de algoritmo, requiriendo modificaciones profundas en el código fuente.
+
+\textbf{Resolución:} Se implementó un sistema de selección de algoritmo mediante parámetros CLI y autodetección con OpenSSL. Se modificó el parser del descriptor sw-description para incluir información del algoritmo. Se estableció una convención de nomenclatura de archivos de claves para facilitar la selección automática.
+
+\subsection{Problema 3: Dependencia de OpenSSL 3.5+}
+
+\textbf{Planteamiento:} El soporte post-cuántico requiere OpenSSL 3.5 o superior, versión no disponible en los repositorios oficiales de las distribuciones Linux actuales.
+
+\textbf{Resolución:} Compilación e instalación manual de OpenSSL desde el repositorio oficial. Documentación detallada del proceso para facilitar la reproducibilidad del entorno de desarrollo.
+
+\subsection{Problema 4: Integración de metadatos en WFX Jobs}
+
+\textbf{Planteamiento:} WFX no proporciona un mecanismo estándar para transmitir información sobre algoritmos de cifrado a los dispositivos.
+
+\textbf{Resolución:} Utilización del campo "definition" (diseñado para usos personalizados) en los Jobs de WFX para inyectar metadatos JSON con información del algoritmo, IV y URI de descarga. Modificación del agente SWUpdate para parsear estos metadatos y configurar el proceso de descifrado dinámicamente.
+
+\subsection{Problema 5: Gestión de claves en Lamassu}
+
+\textbf{Planteamiento:} Lamassu originalmente solo gestionaba claves asimétricas (PKI), sin soporte para claves simétricas requeridas por el cifrado.
+
+\textbf{Resolución:} Extensión del módulo KMS de Lamassu para soportar generación, importación y almacenamiento de claves simétricas. Implementación de operaciones de cifrado/descifrado y generación de MAC directamente en el KMS.
+
+\section{Conclusiones y resultados obtenidos}
+
+El proyecto ha alcanzado satisfactoriamente todos los objetivos planteados, resultando en una plataforma funcional y completa para la gestión segura de actualizaciones OTA en dispositivos IoT.
+
+Se ha demostrado empíricamente que la criptografía ligera, específicamente ASCON, merece la pena en dispositivos con recursos limitados. Los resultados muestran un menor consumo de recursos computacionales y de memoria comparado con AES, sin comprometer la seguridad. Esta validación es especialmente relevante para el ecosistema IoT, donde millones de dispositivos operan con restricciones estrictas de hardware.
+
+La integración de algoritmos post-cuánticos constituye una preparación estratégica para amenazas futuras. Aunque las computadoras cuánticas no son una amenaza inmediata, la incorporación de estos algoritmos es un cambio que merece la pena de cara al futuro, considerando los largos ciclos de vida de los dispositivos IoT (10-20 años) y la posibilidad de ataques "harvest now, decrypt later".
+
+La plataforma desarrollada permite distribuir actualizaciones de manera segura mediante cifrado y firma digital, proporcionando confidencialidad, integridad y autenticidad. La interfaz web abstrae la complejidad técnica, facilitando que organizaciones sin equipos especializados puedan implementar actualizaciones OTA seguras.
+
+Los resultados técnicos incluyen:
+\begin{itemize}
+    \item Extensión exitosa de SWUpdate y SWUGenerator con nuevos algoritmos criptográficos
+    \item Desarrollo de un servicio Updates completo con API REST
+    \item Implementación de una interfaz web intuitiva y funcional
+    \item Integración coherente con WFX y Lamassu
+    \item Demostración práctica mediante caso de uso real (sistema de control de tanques)
+\end{itemize}
+
+\section{Nuevos productos y desarrollos derivados}
+
+El TFM ha generado las bases para varios desarrollos y oportunidades de negocio:
+
+\subsection{Producto: Plataforma OTA Segura como Servicio}
+
+La plataforma desarrollada puede comercializarse como solución SaaS (Software as a Service) para empresas que necesiten gestionar actualizaciones de dispositivos IoT. El valor diferencial reside en el soporte nativo de criptografía ligera y post-cuántica, características únicas en el mercado actual.
+
+
+
+\subsection{Proyectos de I+D derivados}
+
+El proyecto abre líneas de investigación en:
+\begin{itemize}
+    \item Optimizaciones hardware-específicas de algoritmos LWC en microcontroladores
+    \item Certificación formal de implementaciones criptográficas
+    \item Mecanismos de recuperación ante actualizaciones fallidas
+    \item Análisis de métricas de despliegue para optimización de estrategias de rollout
+\end{itemize}
+
+\section{Aportaciones en materia de aprendizaje}
+
+El desarrollo del TFM en entorno empresarial ha supuesto aportaciones significativas más allá del aprendizaje académico:
+
+\subsection{Experiencia en entorno profesional real}
+
+Trabajar en Ikerlan ha proporcionado exposición a metodologías de trabajo profesionales, estándares de calidad de código, procesos de revisión y documentación técnica. Esta experiencia complementa la formación teórica del máster con competencias prácticas directamente aplicables en el mercado laboral.
+
+\subsection{Competencias de investigación aplicada}
+
+El proyecto ha desarrollado la capacidad de identificar, evaluar e integrar tecnologías emergentes (ASCON, algoritmos PQ) en soluciones prácticas. Esta competencia de investigación aplicada, que conecta la literatura científica con la implementación real, es fundamental para roles de I+D.
+
+\subsection{Visión integral de proyectos tecnológicos}
+
+La necesidad de abordar aspectos diversos (criptografía, sistemas embebidos, desarrollo web, arquitectura de software, UX) ha proporcionado una visión holística de proyectos tecnológicos complejos. Esta perspectiva transversal es especialmente valiosa para roles de arquitectura de soluciones o gestión técnica de proyectos.
+
+
+
+
+\section{Evaluación y sugerencias de mejora}
+
+\subsection{Evaluación de las prácticas}
+
+\textbf{Aspectos positivos:}
+\begin{itemize}
+    \item Libertad para investigar y proponer soluciones innovadoras
+    \item Apoyo constante del tutor y equipo de Ikerlan
+    \item Proyecto con aplicabilidad real y potencial comercial
+    \item Integración en equipos multidisciplinares (ciberseguridad, IoT, desarrollo)
+    \item Oportunidad de trabajar con tecnologías emergentes (PQ)
+\end{itemize}
+
+
+
+\vspace{3cm}
+
+\section{Firmas y fecha}
+
+\vspace{2cm}
+
+\noindent
+\begin{minipage}{0.45\textwidth}
+    \centering
+    \rule{6cm}{0.4pt}\\
+    \textbf{Director del Proyecto}\\
+    Iñaki Garitano\\
+    Fecha: \underline{\hspace{3cm}}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+    \centering
+    \rule{6cm}{0.4pt}\\
+    \textbf{Tutor del Proyecto}\\
+    Haritz Saiz\\
+    Fecha: \underline{\hspace{3cm}}
+\end{minipage}
+
+\vspace{2cm}
+
+\begin{center}
+    \rule{6cm}{0.4pt}\\
+    \textbf{Alumno}\\
+    Álvaro Díez-Andino Herrera\\
+    Fecha: \underline{\hspace{3cm}}
+\end{center}
+
+\end{document}

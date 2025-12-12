@@ -1,0 +1,217 @@
+\chapter{Resultados}
+
+Como resultado de este trabajo se ha desarrollado una interfaz web completa para gestionar todo el proceso de actualizaciones de dispositivos IoT, así como una demostración práctica donde validar la arquitectura propuesta. Esta sección presenta el caso de uso implementado y describe en detalle las funcionalidades de la interfaz web desarrollada.
+
+\section{Caso de Uso: Sistema de Control de Tanques}
+
+Para demostrar las capacidades de la plataforma, se ha implementado un caso de uso basado en un sistema de control de tanques de agua. El escenario planteado simula un problema real: un error en el software de control provoca que los tanques se desborden, representando un fallo crítico que debe corregirse mediante una actualización remota.
+
+En este ejemplo, el software defectuoso está implementado como una aplicación HTML simple que simula el comportamiento de los sensores y actuadores del tanque. El objetivo es actualizar todos los dispositivos afectados a una versión corregida que solucione el problema de desbordamiento.
+
+La demostración utiliza dos dispositivos virtuales, cada uno ejecutando una instancia del sistema de control.
+
+
+La \autoref{fig:tanques_error} muestra la interfaz del sistema con el error de desbordamiento, mientras que la \autoref{fig:tanques_v2} presenta la versión corregida tras la actualización.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{imagenes/resultados/tanques_error.png}
+    \caption{Sistema de control de tanques con error de desbordamiento}
+    \label{fig:tanques_error}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{imagenes/resultados/tanques_v2.png}
+    \caption{Sistema de control de tanques versión corregida}
+    \label{fig:tanques_v2}
+\end{figure}
+
+\section{Interfaz Web de Gestión}
+
+La interfaz web desarrollada proporciona una experiencia de usuario completa para la gestión de claves criptográficas, paquetes de actualización y campañas de despliegue. A continuación se describen las principales funcionalidades implementadas.
+
+\subsection{Gestión de Claves Criptográficas (KMS)}
+
+El módulo KMS (\textit{Key Management System}) constituye el punto de entrada para la gestión de las claves criptográficas utilizadas en el cifrado y firma de las actualizaciones.
+
+\subsubsection{Vista General del KMS}
+
+La página principal del KMS, mostrada en la \autoref{fig:kms_general}, permite visualizar todas las claves disponibles en el sistema. Desde esta interfaz, el usuario puede realizar las siguientes operaciones:
+
+\begin{itemize}
+    \item \textbf{Crear nuevas claves:} Generación de claves simétricas (AES, ASCON).
+    \item \textbf{Importar claves existentes:} Carga de claves previamente generadas desde archivos locales.
+    \item \textbf{Visualizar metadatos:} Inspección de las propiedades de cada clave (algoritmo, longitud, fecha de creación, etc.).
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/resultados/kms_general.png}
+    \caption{Vista general del sistema de gestión de claves (KMS)}
+    \label{fig:kms_general}
+\end{figure}
+
+\subsubsection{Detalles y Operaciones de una Clave}
+
+Al seleccionar una clave específica, se accede a una vista detallada (ver \autoref{fig:kms_detalles}) que proporciona información completa sobre la clave y permite realizar operaciones criptográficas:
+
+\begin{itemize}
+    \item \textbf{Cifrado:} Cifrado de datos utilizando la clave seleccionada.
+    \item \textbf{Descifrado:} Descifrado de datos previamente cifrados con esta clave.
+    \item \textbf{MAC (Message Authentication Code):} Generación de códigos de autenticación de mensajes para verificar la integridad de los datos.
+\end{itemize}
+
+Estas operaciones permiten validar el correcto funcionamiento de las claves antes de utilizarlas en el proceso de actualización.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/resultados/kms_detalles_one_key.png}
+    \caption{Vista detallada de una clave con operaciones disponibles}
+    \label{fig:kms_detalles}
+\end{figure}
+
+\subsection{Gestión de Actualizaciones}
+
+\subsubsection{Página Principal de Actualizaciones}
+
+La página principal del módulo de actualizaciones (ver \autoref{fig:pagina_actualizaciones}) presenta una vista consolidada de todos los lanzamientos agrupados por paquete de actualización (Update Pack). Esta interfaz permite:
+
+\begin{itemize}
+    \item \textbf{Crear nuevas actualizaciones:} Iniciar el proceso de creación de un nuevo paquete de actualización.
+    \item \textbf{Crear nuevas versiones:} Añadir versiones adicionales a un paquete existente.
+    \item \textbf{Lanzar actualizaciones:} Iniciar una campaña de despliegue para una versión específica.
+    \item \textbf{Visualizar el estado:} Monitorizar el progreso de las campañas activas y el histórico de despliegues.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/resultados/pagina_actualizaciones.png}
+    \caption{Página principal de gestión de actualizaciones}
+    \label{fig:pagina_actualizaciones}
+\end{figure}
+
+\subsubsection{Creación de una Nueva Actualización}
+
+El formulario de creación de actualizaciones (ver \autoref{fig:subir_actualizacion}) guía al usuario a través del proceso de construcción de un paquete SWU. Los pasos incluyen:
+
+\begin{enumerate}
+    \item \textbf{Subida de ficheros:} Carga de los binarios, scripts o archivos que componen la actualización.
+    \item \textbf{Descriptor de actualización:} Especificación del archivo \texttt{sw-description} que define la estructura y el proceso de instalación.
+    \item \textbf{Selección de claves:} Elección de las claves criptográficas para cifrado y firma.
+    \item \textbf{Configuración de cifrado:} Decisión sobre qué ficheros específicos deben cifrarse y cuáles pueden permanecer en texto plano.
+\end{enumerate}
+
+Este proceso abstrae la complejidad de invocar SWUGenerator directamente, proporcionando una interfaz intuitiva que valida las entradas y genera automáticamente el paquete SWU con las configuraciones criptográficas seleccionadas.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/resultados/subir_actualizacion.png}
+    \caption{Formulario de creación de una nueva actualización}
+    \label{fig:subir_actualizacion}
+\end{figure}
+
+\subsubsection{Detalles de un Update Pack}
+
+Al hacer clic en un paquete de actualización, se accede a una vista detallada (ver \autoref{fig:detalles_update_pack}) que muestra:
+
+\begin{itemize}
+    \item \textbf{Metadatos completos:} Nombre, versión, tipo (firmware/file), algoritmos utilizados, etc.
+    \item \textbf{Historial de versiones:} Todas las versiones creadas para este paquete.
+    \item \textbf{Descarga del paquete:} Posibilidad de descargar el archivo \texttt{.swu} generado para inspección o instalación manual.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/resultados/detalles_update_pack.png}
+    \caption{Vista detallada de un paquete de actualización}
+    \label{fig:detalles_update_pack}
+\end{figure}
+
+\subsection{Gestión de Lanzamientos}
+
+\subsubsection{Configuración de un Lanzamiento}
+
+Al iniciar un lanzamiento, se presenta un formulario de configuración (ver \autoref{fig:web_configuracion_launch}) donde se especifican los parámetros de la campaña:
+
+\begin{itemize}
+    \item \textbf{Tipo de workflow:} Selección entre Direct, Phased o workflows personalizados.
+    \item \textbf{Estrategia de rollout:} Configuración de despliegue gradual por porcentaje o cantidad fija de dispositivos.
+    \item \textbf{Cantidad}: Número o porcentaje de dispositivos a actualizar en cada fase (si aplica).
+    \item \textbf{Paquete de actualización:} Selección del paquete de actualización que se desplegará.
+    \item \textbf{Modo auto:} Activación o desactivación del modo automático para el despliegue de subgrupos.
+    \item \textbf{Dispositivo de prueba:} Designación de un dispositivo piloto para validar la actualización antes del despliegue masivo.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{imagenes/resultados/web_configuracion_launch.png}
+    \caption{Formulario de configuración de un lanzamiento}
+    \label{fig:web_configuracion_launch}
+\end{figure}
+
+\subsubsection{Detalles de un Lanzamiento}
+
+La vista de detalles de un lanzamiento (ver \autoref{fig:detalles_launch}) proporciona visibilidad completa sobre el estado de la campaña:
+
+\begin{itemize}
+    \item \textbf{Estado de cada dispositivo:} Lista de todos los dispositivos objetivo con su estado actual (pendiente, descargando, instalando, completado, error).
+    \item \textbf{Estadísticas adicionales:} Número de dispositivos completados, activos y sin iniciar.
+    \item \textbf{Control de flujo (workflows por fases):} En caso de utilizar un workflow Phased, se proporciona control manual para decidir qué dispositivos avanzan a la siguiente fase, o aprobar el avance de todos los dispositivos elegibles simultáneamente.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/resultados/detalles_launch.png}
+    \caption{Vista detallada de un lanzamiento con estado de dispositivos}
+    \label{fig:detalles_launch}
+\end{figure}
+
+\subsection{Monitorización de Dispositivos Individuales}
+
+\subsubsection{Línea Temporal de Estados}
+
+Para cada dispositivo involucrado en un lanzamiento, se proporciona una visualización temporal del proceso de actualización (ver \autoref{fig:estado_instalacion}). Esta interfaz presenta:
+
+\begin{itemize}
+    \item \textbf{Diagrama de estados:} Representación gráfica del workflow utilizado, mostrando todos los estados posibles.
+    \item \textbf{Estados completados:} Indicación visual de los estados por los que ha pasado el dispositivo.
+    \item \textbf{Estado actual:} Resaltado del estado en el que se encuentra actualmente el dispositivo.
+    \item \textbf{Información detallada:} Detalles adicionales de cada estado al pasar el cursor sobre él.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/resultados/estado_instalación_dispositivo.png}
+    \caption{Línea temporal de estados de instalación de un dispositivo}
+    \label{fig:estado_instalacion}
+\end{figure}
+
+\subsubsection{Detalles de Estados Específicos}
+
+Al interactuar con un estado en la línea temporal, se despliega información contextual (ver \autoref{fig:detalles_un_estado}):
+
+\begin{itemize}
+    \item \textbf{Tiempos de permanencia:} Duración que el dispositivo permaneció en ese estado.
+    \item \textbf{Timestamp de entrada y salida:} Momentos exactos de las transiciones.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{imagenes/resultados/detalles_un_estado.png}
+    \caption{Detalles temporales de un estado específico}
+    \label{fig:detalles_un_estado}
+\end{figure}
+
+En caso de errores durante el proceso de actualización, la interfaz proporciona información detallada del fallo (ver \autoref{fig:detalles_error_estado}):
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{imagenes/resultados/detalles_error_estado.png}
+    \caption{Visualización de detalles de error en un estado}
+    \label{fig:detalles_error_estado}
+\end{figure}
+
+Con esto se prueba la arquitectura propuesta con los cambios a las herramientas definidas, integrando criptografía ligera y post-cuántica en toda la cadena de actualización (generación, distribución e instalación) en una prueba de concepto funcional. 
+

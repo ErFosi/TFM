@@ -2,20 +2,34 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Planificación temporal del proyecto (Diagrama de Gantt)}}{9}{figure.caption.10}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Uso de cifrado simétrico}}{11}{figure.caption.11}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Creación de las llaves por parte de Bob}}{13}{figure.caption.12}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Alice introduce el mensaje en la caja y la cierra con la clave pública de Bob.}}{14}{figure.caption.13}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Bob abre la caja y obtiene el mensaje.}}{14}{figure.caption.14}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Bob inserta el mensaje y usa su llave privada.}}{14}{figure.caption.15}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Alice utiliza la clave pública de Bob para abrir la caja y verificar la autenticidad del mensaje.}}{15}{figure.caption.16}%
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Jerarquía de las Autoridades Certificadoras.}}{18}{figure.caption.17}%
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Resultados de rendimiento en Raspberry Pi 3}}{21}{figure.caption.18}%
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Resultados de rendimiento en Arduino UNO R4}}{21}{figure.caption.19}%
-\contentsline {figure}{\numberline {2.10}{\ignorespaces Tamaño máximo de texto plano admitido en Arduino}}{22}{figure.caption.20}%
-\contentsline {figure}{\numberline {2.11}{\ignorespaces Bytes adicionales requeridos por algoritmos AEAD}}{22}{figure.caption.21}%
-\contentsline {figure}{\numberline {2.12}{\ignorespaces Proceso de instalación de actualización A/B.}}{25}{figure.caption.22}%
-\contentsline {figure}{\numberline {2.13}{\ignorespaces Diagrama de estados del Workflow Directo.}}{29}{figure.caption.23}%
-\contentsline {figure}{\numberline {2.14}{\ignorespaces Diagrama de estados del Workflow Por Fases.}}{30}{figure.caption.24}%
-\contentsline {figure}{\numberline {2.15}{\ignorespaces Estructura de la entidad Job en WFX.}}{31}{figure.caption.25}%
-\contentsline {figure}{\numberline {2.16}{\ignorespaces Arquitectura de la plataforma de actualizaciones propuesta}}{33}{figure.caption.26}%
-\contentsline {figure}{\numberline {2.17}{\ignorespaces Diagrama del modelo de datos de la plataforma}}{40}{figure.caption.27}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Uso de cifrado simétrico}}{17}{figure.caption.11}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Creación de las llaves por parte de Bob}}{19}{figure.caption.12}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Alice introduce el mensaje en la caja y la cierra con la clave pública de Bob.}}{20}{figure.caption.13}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Bob abre la caja y obtiene el mensaje.}}{20}{figure.caption.14}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Bob inserta el mensaje y usa su llave privada.}}{20}{figure.caption.15}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Alice utiliza la clave pública de Bob para abrir la caja y verificar la autenticidad del mensaje.}}{21}{figure.caption.16}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Jerarquía de las Autoridades Certificadoras.}}{24}{figure.caption.17}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Resultados de rendimiento en Raspberry Pi 3}}{27}{figure.caption.18}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Resultados de rendimiento en Arduino UNO R4}}{27}{figure.caption.19}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Tamaño máximo de texto plano admitido en Arduino}}{28}{figure.caption.20}%
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Bytes adicionales requeridos por algoritmos AEAD}}{28}{figure.caption.21}%
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Proceso de instalación de actualización A/B.}}{31}{figure.caption.22}%
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Diagrama de estados del Workflow Directo.}}{35}{figure.caption.23}%
+\contentsline {figure}{\numberline {2.14}{\ignorespaces Diagrama de estados del Workflow Por Fases.}}{36}{figure.caption.24}%
+\contentsline {figure}{\numberline {2.15}{\ignorespaces Estructura de la entidad Job en WFX.}}{37}{figure.caption.25}%
+\contentsline {figure}{\numberline {2.16}{\ignorespaces Arquitectura de la plataforma de actualizaciones propuesta}}{39}{figure.caption.26}%
+\contentsline {figure}{\numberline {2.17}{\ignorespaces Diagrama del modelo de datos de la plataforma}}{46}{figure.caption.27}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Sistema de control de tanques con error de desbordamiento}}{48}{figure.caption.28}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Sistema de control de tanques versión corregida}}{48}{figure.caption.29}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Vista general del sistema de gestión de claves (KMS)}}{49}{figure.caption.30}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Vista detallada de una clave con operaciones disponibles}}{50}{figure.caption.31}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Página principal de gestión de actualizaciones}}{51}{figure.caption.32}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Formulario de creación de una nueva actualización}}{52}{figure.caption.33}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Vista detallada de un paquete de actualización}}{53}{figure.caption.34}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Formulario de configuración de un lanzamiento}}{54}{figure.caption.35}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Vista detallada de un lanzamiento con estado de dispositivos}}{55}{figure.caption.36}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Línea temporal de estados de instalación de un dispositivo}}{56}{figure.caption.37}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Detalles temporales de un estado específico}}{57}{figure.caption.38}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Visualización de detalles de error en un estado}}{57}{figure.caption.39}%
+\addvspace {10\p@ }
