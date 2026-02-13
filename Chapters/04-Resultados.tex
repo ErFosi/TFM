@@ -213,5 +213,57 @@ En caso de errores durante el proceso de actualización, la interfaz proporciona
     \label{fig:detalles_error_estado}
 \end{figure}
 
-Con esto se prueba la arquitectura propuesta con los cambios a las herramientas definidas, integrando criptografía ligera y post-cuántica en toda la cadena de actualización (generación, distribución e instalación) en una prueba de concepto funcional. 
+Con esto se prueba la arquitectura propuesta con los cambios a las herramientas definidas, integrando criptografía ligera y post-cuántica en toda la cadena de actualización (generación, distribución e instalación) en una prueba de concepto funcional.
 
+\section{Resultados de Pruebas y Cobertura de Código}
+
+Como parte de la validación del sistema, se han ejecutado las baterías de tests descritas en la sección de desarrollo. A continuación se presentan los resultados obtenidos.
+
+\subsection{Cobertura de Código}
+
+La ejecución completa de los tests arroja los siguientes porcentajes de cobertura:
+
+\begin{itemize}
+    \item \textbf{SymKMS:} 83.0\% de cobertura de código, con más de 150 tests ejecutados.
+    \item \textbf{Updates:} 74.4\% de cobertura de código, con más de 70 tests ejecutados.
+\end{itemize}
+
+Las \autoref{fig:cover_symkms} y \autoref{fig:cover_updates} muestran los \textit{treemaps} de cobertura de ambos servicios, donde el tamaño de cada bloque es proporcional al volumen de código del paquete y el color indica el nivel de cobertura alcanzado (verde para alta cobertura, rojo para baja).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/resultados/test_cover_symkms.png}
+    \caption{Treemap de cobertura de código del servicio SymKMS (83.0\%)}
+    \label{fig:cover_symkms}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/resultados/test_cover_updates.png}
+    \caption{Treemap de cobertura de código del servicio Updates (74.4\%)}
+    \label{fig:cover_updates}
+\end{figure}
+
+\subsection{Validación Criptográfica}
+
+Los resultados de la validación criptográfica confirman la correctitud de las implementaciones:
+
+\begin{itemize}
+    \item \textbf{AES-CMAC (RFC 4493):} Los 4 vectores de test oficiales pasan correctamente tras la validación cruzada con la implementación de referencia en Python. Se documentaron 2 errores tipográficos en la propia RFC, confirmados mediante la librería \texttt{cryptography} de Python.
+
+    \item \textbf{ASCON:} Las 3 variantes (Ascon-128, Ascon-128a, Ascon-80pq) superan todas las pruebas de \textit{round-trip}, detección de corrupción y validación con datos de longitud variable (desde vacío hasta 10 KB).
+
+    \item \textbf{Interoperabilidad CMS/PKCS\#7 con OpenSSL:} Se ha verificado la compatibilidad bidireccional: cifrado con la implementación propia y descifrado con OpenSSL, y viceversa. Todas las estructuras ASN.1 y OIDs (tanto estándar como personalizados para ASCON) son correctamente interpretados por ambas partes.
+\end{itemize}
+
+\subsection{Tests de Integración}
+
+Los tests de integración, ejecutados contra contenedores Docker reales de PostgreSQL y WFX, validan el funcionamiento de la plataforma en condiciones similares a producción:
+
+\begin{itemize}
+    \item \textbf{Persistencia:} Todas las operaciones CRUD sobre \textit{UpdatePacks} y \textit{LaunchTracks} funcionan correctamente, incluyendo consultas con paginación, filtrado y ordenación.
+    \item \textbf{Concurrencia:} Las pruebas de 10 inserciones paralelas se completan sin conflictos ni pérdida de datos.
+    \item \textbf{Orquestación WFX:} La carga de \textit{workflows}, creación de \textit{jobs} y gestión de estrategias de lanzamiento (directas y por fases) operan correctamente a través de la API de WFX.
+\end{itemize}
+
+Estos resultados confirman que los componentes desarrollados cumplen con los requisitos de correctitud criptográfica, interoperabilidad con herramientas estándar y fiabilidad en entornos de integración realistas.

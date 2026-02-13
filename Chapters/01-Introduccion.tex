@@ -17,27 +17,69 @@ Este problema se complica por dos retos técnicos básicos:
 \end{enumerate}
 Si a esto se le suma la cantidad de dispositivos que hay, las actualizaciones poco seguras y las amenazas futuras, tenemos un escenario de riesgo importante. Por eso hace falta buscar soluciones nuevas, aprovechando lo que dice la investigación y la experiencia de la industria.
 
-\section{Motivaci\'on}
+Además, hay que tener en cuenta que los dispositivos IoT no son
+ordenadores ni teléfonos. Un sensor industrial, una bombilla
+inteligente o un monitor de salud tienen restricciones de hardware
+muy diferentes: procesadores de bajo consumo, memoria limitada y
+fuentes de energía restringidas. Aplicar los mismos mecanismos de
+actualización que usamos en un ordenador simplemente no funciona, y eso ha
+llevado a prácticas inseguras: fabricantes que envían
+actualizaciones sin cifrar, dispositivos que aceptan firmware sin
+verificar su origen, o productos que salen al mercado sin capacidad
+de actualización. Estos problemas han facilitado la creación de
+botnets y ataques DDoS a gran escala en el pasado, por ejemplo,
+Mirai \cite{Kaspersky:Mirai:2025}. Estudios académicos han
+identificado además la presencia de SDKs y flujos de actualización
+inseguros que amplían la superficie de ataque a millones de
+dispositivos \cite{Ibrahim:AoT:2023}.
 
-Lo interesante, y lo que motiva este trabajo, es que ambas perspectivas cuentan historias diferentes pero complementarias. Los estudios han demostrado que es posible construir sistemas de actualización seguros, eficientes y adaptados a dispositivos con recursos limitados. La industria, sin embargo, muestra que estas soluciones no se han adoptado de forma generalizada: los frameworks más usados siguen dependiendo de criptografía tradicional, ninguno integra algoritmos ligeros co ni esquemas post-cuánticos.
+Por otra parte, los dispositivos IoT tienen ciclos de vida
+larguísimos, a veces de décadas, lo que dificulta mucho la gestión
+de vulnerabilidades y actualizaciones con el
+tiempo \cite{Hassan:IIoTSecurity:2023}. Durante ese periodo,
+aparecen nuevas vulnerabilidades, se descubren fallos en algoritmos
+criptográficos y la amenaza de la computación cuántica pone en
+evidencia la necesidad de pensar en opciones resistentes a largo
+plazo. Todo esto subraya la urgencia de adoptar un método
+centralizado y auditable de gestión de actualizaciones que permita
+controlar despliegues, gestionar rollbacks y garantizar la
+ciberresiliencia.
 
-Para abordar esta problemática de forma rigurosa, este trabajo adopta una doble perspectiva. Por un lado, el \textbf{estado del arte académico}: qué dice la investigación sobre las vulnerabilidades reales, qué arquitecturas de actualización segura se han propuesto, y qué avances hay en criptografía ligera y post-cuántica. Por otro lado, el \textbf{estado de la práctica}: qué soluciones existen realmente en el mercado (SWUpdate, Mender, hawkBit...), qué limitaciones tienen, y por qué las empresas siguen desplegando dispositivos vulnerables a pesar de que técnicamente existen alternativas mejores.
+Este trabajo se centra explícitamente en la distribución de
+actualizaciones remotas para dispositivos IoT que ejecutan Linux
+embebido, el entorno mayoritario en dispositivos industriales y
+comerciales. \enquote{Linux embebido} hace referencia a
+distribuciones y stacks (Buildroot, Yocto, u-boot, etc.) y a
+imágenes rootfs y toolchains optimizados para entornos con recursos
+limitados; no debe confundirse con una instalación de Linux de
+escritorio o servidor con servicios y recursos plenos. Por tanto,
+las adaptaciones que este entorno exige son tanto de naturaleza
+operativa como de límite de recursos.
 
-Ese hueco entre lo que se puede hacer técnicamente y lo que se hace en realidad es donde se centra este TFM. El objetivo es demostrar que se pueden juntar herramientas probadas como SWUpdate con criptografía moderna (ligera y post-cuántica) en una plataforma centralizada que permita gestionar grandes flotas de forma segura.
+\section{Motivación}
 
-A esto se suma una fuerte motivación regulatoria. La inminente entrada en vigor de la Cyber Resilience Act (CRA) de la Unión Europea \cite{CRA:2024} convertirá la gestión segura del ciclo de vida en un requisito legal. Asimismo, estándares industriales como la IEC 62443, específicamente en su requisito CR 3.10 (Support for Updates) \cite{IEC62443}, exigen mecanismos robustos para la actualización de componentes. Gracias a la plataforma desarrollada en este trabajo, se facilita el cumplimiento de estos requisitos normativos, proporcionando la infraestructura necesaria para gestionar actualizaciones de forma segura y auditada.
+El ecosistema de los dispositivosIoT enfrenta una discrepancia crítica
+entre las capacidades teóricas y la implementación real. Si bien la literatura
+académica demuestra la viabilidad de sistemas de actualización seguros y
+eficientes, la realidad industrial muestra una adopción limitada de estas
+tecnologías avanzadas. Los frameworks comerciales predominantes continúan
+dependiendo de esquemas criptográficos tradicionales, sin integrar algoritmos
+ligeros para dispositivos restringidos ni prepararse para la amenaza
+post-cuántica.
 
-\section{Antecedentes}
+Esta brecha tecnológica, sumada a la persistencia de vulnerabilidades en
+dispositivos desplegados, fundamenta la necesidad de una nueva plataforma. El
+presente trabajo busca demostrar la viabilidad técnica de integrar herramientas
+de actualización maduras, como SWUpdate, con criptografía de vanguardia (ligera
+y post-cuántica) en un entorno de gestión centralizado y escalable.
 
+Adicionalmente, el marco regulatorio actual impulsa esta transformación. La
+Cyber Resilience Act (CRA) de la Unión Europea \cite{CRA:2024} y estándares
+como la IEC 62443 (requisito CR 3.10) \cite{IEC62443} establecen la gestión
+segura del ciclo de vida y las actualizaciones como requisitos obligatorios.
+Esta propuesta facilita el cumplimiento normativo al proporcionar una
+infraestructura auditable y robusta para la gestión de actualizaciones.
 
-Este trabajo surge de una necesidad identificada durante las prácticas laborales realizadas en Ikerlan, donde se trabajó agregando funcionalidades a Lamassu, una Infraestructura de Clave Pública (PKI) especializada en dispositivos IoT. Lamassu proporciona gestión centralizada de dispositivos IoT con gestión de claves asímetricas y autenticación e identificación de dispositivos: desde la provisión inicial de certificados hasta su renovación y revocación de forma segura a escala.
-Se propuso la idea de añadir la funcionalidad modular de distribucion de actualizaciones OTA seguras, aprovechando la infraestructura de Lamassu para gestionar las claves y certificados necesarios para firmar y verificar las actualizaciones. 
-
-Este trabajo se centra explícitamente en la distribución de actualizaciones remotas para dispositivos IoT que ejecutan Linux embebido, el entorno mayoritario en dispositivos industriales y comerciales. \enquote{Linux embebido} hace referencia a distribuciones y stacks (Buildroot, Yocto, u-boot, etc.) y a imágenes rootfs y toolchains optimizados para entornos con recursos limitados; no debe confundirse con una instalación de Linux de escritorio o servidor con servicios y recursos plenos. Por tanto, las adaptaciones que este entorno exige son tanto de naturaleza operativa como de límite de recursos.
-
-El problema de fondo es que los dispositivos IoT no son ordenadores ni teléfonos. Un sensor industrial, una bombilla inteligente o un monitor de salud tienen restricciones de hardware muy diferentes: procesadores de bajo consumo, memoria limitada y fuentes de energía restringidas. Aplicar los mismos mecanismos de actualización que usamos en un PC simplemente no funciona, y eso ha llevado a prácticas inseguras: fabricantes que envían actualizaciones sin cifrar, dispositivos que aceptan firmware sin verificar su origen, o productos que salen al mercado sin capacidad de actualización. Estos problemas han facilitado la creación de botnets y ataques DDoS a gran escala en el pasado, por ejemplo, Mirai \cite{Kaspersky:Mirai:2025}. Estudios académicos han identificado además la presencia de SDKs y flujos de actualización inseguros que amplían la superficie de ataque a millones de dispositivos \cite{Ibrahim:AoT:2023}.
-
-Por otra parte, los dispositivos IoT tienen ciclos de vida larguísimos, a veces de décadas, lo que dificulta mucho la gestión de vulnerabilidades y actualizaciones con el tiempo\cite{Hassan:IIoTSecurity:2023}. Durante ese periodo, aparecen nuevas vulnerabilidades, se descubren fallos en algoritmos criptográficos y la amenaza de la computación cuántica pone en evidencia la necesidad de pensar en opciones resistentes a largo plazo. Todo esto subraya la urgencia de adoptar un método centralizado y auditable de gestión de actualizaciones que permita controlar despliegues, gestionar rollbacks y garantizar la ciberresiliencia.
 \section{Estado del arte}
 
 Esta sección analiza sistemáticamente la literatura académica y las soluciones tecnológicas existentes para identificar las contribuciones científicas, las limitaciones de las implementaciones actuales, y las brechas que justifican la propuesta de este trabajo. El análisis se estructura en cuatro partes: evidencia empírica sobre vulnerabilidades, plataformas OTA existentes, familias de algoritmos criptográficos emergentes, y análisis crítico de las limitaciones identificadas.
@@ -124,37 +166,89 @@ Para las actualizaciones OTA, ASCON es ideal: es hasta cinco veces más eficient
 
 Los ordenadores cuánticos son una amenaza real a medio plazo para los algoritmos que usamos hoy (RSA, ECDSA). Como los dispositivos IoT duran muchos años, es de sentido común pensar en esto desde ya.
 
-El NIST ha seleccionado tres esquemas de firma post-cuántica: MLDSA (buen equilibrio), Falcon (firmas pequeñas) y SPHINCS+ (muy seguro teóricamente). Las firmas digitales son clave para asegurar que el firmware es auténtico, incluso frente a ataques cuánticos.
+El NIST ha seleccionado tres esquemas de firma post-cuántica: ML-DSA (buen equilibrio), Falcon (firmas pequeñas) y SPHINCS+ (muy seguro teóricamente). Las firmas digitales son clave para asegurar que el firmware es auténtico, incluso frente a ataques cuánticos.
 
-Que el NIST haya estandarizado estos algoritmos significa que técnicamente es posible usarlos. Pero integrarlos en plataformas reales va despacio. En este proyecto he elegido MLDSA como esquema principal para las firmas digitales, combinándolo con cifrado ligero.
+Que el NIST haya estandarizado estos algoritmos significa que técnicamente es posible usarlos. Pero integrarlos en plataformas reales va despacio. En este proyecto he elegido ML-DSA como esquema principal para las firmas digitales, combinándolo con cifrado ligero.
+
+\section{Antecedentes}
+
+Este trabajo tiene su origen en las prácticas realizadas
+en Ikerlan durante el master, donde se propuso la idea de crear un servicio de
+distribución de actualizaciones OTA para dispositivos con recursos limitados.
+
+Se llevó a cabo una búsqueda y evaluación de
+diferentes estrategias para la distribución de actualizaciones en
+dispositivos IoT. Tras analizar distintas alternativas, se acabó
+probando una arquitectura basada en la integración de tres
+componentes: \textbf{WFX} como motor de flujos de trabajo para
+orquestar los estados de la actualización, un \textbf{servicio
+gestor de actualizaciones} encargado de la lógica de distribución
+en el backend, y \textbf{SWUpdate} como agente de actualización
+instalado en el dispositivo.
+
+El resultado de esa fase inicial fue un prototipo funcional con una
+interfaz web simple que permitía gestionar actualizaciones de forma
+básica. Sin embargo, este prototipo presentaba limitaciones
+significativas:
+
+\begin{itemize}
+	\item \textbf{Uso limitado de las funcionalidades:} La interfaz
+	web se diseñó como una prueba de concepto, por lo que no
+	exprimía todo el potencial del gestor de actualizaciones subyacente.
+	Esta limitación se veía agravada por un backend incompleto, que
+	impedía el uso de capacidades avanzadas como los workflows por
+	fases, el rollout progresivo y la monitorización detallada.
+
+	\item \textbf{Backend sin capacidades criptográficas:} El servicio de
+	gestión de actualizaciones carecía completamente de funcionalidades para
+	cifrar o firmar los paquetes de actualización. No existía integración con
+	ningún sistema de gestión de claves para firma o cifrado ni mecanismos para aplicar medidas de
+	seguridad antes de distribuir las actualizaciones, dejando los paquetes
+	expuestos a manipulación o interceptación durante su distribución.
+
+	\item \textbf{Cifrado en dispositivo limitado y sin uso:} Aunque SWUpdate disponía de capacidades criptográficas básicas, estas no se aprovechaban en el prototipo debido a la ausencia de soporte en el backend. Adicionalmente, la configuración de seguridad en el dispositivo era rígida, ofreciendo poca flexibilidad para personalizar algoritmos criptográficos o adaptarse a diferentes requisitos de seguridad según el tipo de dispositivo o escenario de despliegue.
+
+	\item \textbf{Falta de integración con infraestructura PKI:} El servicio estaba concebido para integrarse con Lamassu, una infraestructura de clave pública (PKI) especializada en la gestión de identidad y ciclo de vida de dispositivos IoT. Sin embargo, esta integración no se había materializado en el prototipo.
+\end{itemize}
+
+Estas limitaciones dieron lugar a la necesidad de un desarrollo más
+completo y ambicioso, que es precisamente el objetivo de este TFM:
+partir de esa base probada y construir una plataforma robusta,
+con soporte criptográfico avanzado y una interfaz de gestión
+completa que aproveche al máximo las capacidades de cada
+componente.
 
 
 \section{Objetivos}
 
-A partir del análisis de la problemática y lo comentado previamente, se establecen los siguientes objetivos para este Trabajo de Fin de Máster.
+Por tanto, los objetivos de este proyecto nacen directamente de los problemas encontrados en el prototipo anterior. La idea es resolver esas limitaciones (funcionalidades restringidas, criptografía básica y gestión incompleta) desarrollando una plataforma nueva que cubra todas esas carencias.
+
+A partir de esta base y del análisis de la problemática general, se establecen los siguientes objetivos para este Trabajo de Fin de Máster.
 
 \subsection{Propósito y alcance}
 
-Visto el panorama de vulnerabilidades en el ecosistema IoT, las limitaciones de las plataformas OTA existentes y la brecha entre la investigación y la aplicación, este trabajo propone una solución que combina tecnologías consolidadas con algoritmos criptográficos modernos y necesarios.
+Visto el panorama de vulnerabilidades en el ecosistema IoT, las limitaciones de las plataformas OTA existentes y la brecha entre la investigación y la aplicación, este trabajo propone una solución que combina tecnologías consolidadas junto a algoritmos criptográficos modernos.
 
 La estrategia adoptada consiste en utilizar \textbf{SWUpdate} como instalador de actualizaciones en el dispositivo, aprovechando su madurez y robustez probada en entornos de producción industrial, pero extendiendo sus capacidades criptográficas para incluir soporte tanto para \textbf{algoritmos de criptografía ligera (LWC)} como para \textbf{esquemas post-cuánticos}. Esta extensión se integra con una \textbf{plataforma de gestión centralizada de flotas de dispositivos}, diseñada para escalar horizontalmente y proporcionar trazabilidad completa del ciclo de vida de las actualizaciones.
 
 
 \textbf{Objetivo general:}
 
-Diseñar, implementar y evaluar una plataforma de actualización OTA segura y escalable para dispositivos IoT basada en SWUpdate, extendida con soporte para criptografía ligera (LWC) y post-cuántica, e integrada con una arquitectura de gestión centralizada de flotas, abordando las limitaciones identificadas en soluciones existentes.
+Diseñar, implementar y validar una plataforma de actualización OTA segura y escalable para dispositivos IoT basada en SWUpdate, extendida con soporte para criptografía ligera (LWC) y post-cuántica, e integrada con una arquitectura de gestión centralizada de flotas, abordando las limitaciones identificadas en soluciones existentes.
 
 \textbf{Objetivos específicos:}
 
 \begin{enumerate}
-	\item \textbf{Implementar verificación criptográfica robusta:} Desarrollar mecanismos de firma digital basados en algoritmos tradicionales (RSA/ECDSA) y post-cuánticos (MLDSA) para garantizar la autenticidad e integridad de cada paquete de actualización, mitigando el riesgo de distribución de firmware malicioso documentado en estudios como \enquote{AoT: Attack on Things} \cite{Ibrahim:AoT:2023}.
+	\item \textbf{Implementar cifrado de actualizaciones:} Desarrollar capacidades completas de cifrado simétrico en dos niveles: por un lado, implementar en el backend la generación de paquetes cifrados con múltiples algoritmos (AES en sus variantes CBC, CTR y GCM, y ASCON para criptografía ligera); y por otro lado, extender SWUpdate en el dispositivo para descifrar estos paquetes con configuración flexible y adapatable a cada actualizacion con los algoritmos mencionados.
 
-	\item \textbf{Integrar nuevas opciones criptográficas:} Dar soporte a algoritmos ligeros (ASCON) y post-cuánticos (MLDSA), para cubrir tanto dispositivos muy limitados como aquellos que necesitan protegerse del futuro.
+	\item \textbf{Implementar firma digital de actualizaciones:} Desarrollar mecanismos de firma digital por un lado, implementar en el backend la firma de paquetes con algoritmos tradicionales (RSA, ECDSA) y post-cuánticos (ML-DSA); y por otro lado, extender SWUpdate en el dispositivo con capacidades de verificación de estas firmas, mitigando el riesgo de distribución de firmware malicioso documentado en estudios como \enquote{AoT: Attack on Things} \cite{Ibrahim:AoT:2023}.
 
-	\item \textbf{Arquitectura escalable en la nube:} Crear una plataforma de gestión que pueda crecer horizontalmente para administrar muchos dispositivos y tener control total sobre las actualizaciones (saber si han fallado, reintentarlas, etc.).
-	
-	\item \textbf{Integrar frameworks maduros de actualización:} Construir la solución sobre SWUpdate como agente de actualización en el dispositivo, aprovechando su robustez probada en entornos de producción industrial mientras se añade la capa de gestión centralizada y las familias de algoritmos criptográficos avanzadas ausentes en su implementación estándar.
-	
+	\item \textbf{Integración con infraestructura PKI Lamassu:} Integrar el sistema de actualización con Lamassu tanto a nivel de servicio backend como en la interfaz web, aprovechando su infraestructura de gestión de claves, dispositivos, certificados digitales y políticas de seguridad para establecer cadenas de confianza robustas en todo el ecosistema de dispositivos.
+
+	\item \textbf{Integración continua (CI):} Implementar pipelines de integración continua que ejecuten automáticamente tests unitarios y de extremo a extremo (e2e) del servicio de gestión, validando la correcta interoperabilidad de los componentes y el funcionamiento completo de la arquitectura en cada cambio del código.
+
+	\item \textbf{Despliegue continuo (CD):} Automatizar la construcción de imágenes de contenedor versionadas de todos los componentes de la plataforma y su despliegue en infraestructura cloud basada en Kubernetes, garantizando escalabilidad horizontal y alta disponibilidad del sistema de gestión.
+
 \end{enumerate}
 
 \section{Planificación}
@@ -178,9 +272,9 @@ Esta fase constituye el núcleo del desarrollo técnico, donde se diseñan e imp
 \begin{description}
     \item[2.1 Diseño de la arquitectura requerida.] Definición de la arquitectura global del sistema, especificando los componentes del backend, la base de datos, la API de comunicación y la estructura del cliente en el dispositivo IoT.
     \item[2.2 Integración de algoritmos de cifrado y/o firma.] Implementación e integración de las librerías criptográficas seleccionadas en la Fase 1 dentro de los servicios de la plataforma, habilitando las capacidades de firma digital y cifrado de los paquetes de actualización tanto en el backend como en el dispositivo IoT.
-    \item[2.3 Desarrollo del módulo de distribución segura de actualizaciones.] Creación del servicio encargado de gestionar el repositorio de actualizaciones, verificar la autenticidad de las peticiones y distribuir los binarios de forma segura a los dispositivos autorizados.
+    \item[2.3 Desarrollo del módulo de distribución segura de actualizaciones.] Creación del servicio encargado de gestionar el repositorio de actualizaciones y distribución de las actualizaciones de forma segura a los dispositivos autorizados.
     \item[2.4 Integración de firma y cifrado Backend y Frontend.] Desarrollo de la interfaz web (frontend) y su conexión con el backend, permitiendo a los administradores y desarrolladores subir nuevos firmwares, firmarlos criptográficamente y gestionar las campañas de actualización de manera intuitiva.
-    \item[2.5 Contenerización y despliegue en k8s.] Empaquetado de todos los microservicios de la plataforma en contenedores (Docker) y orquestación de su despliegue en un clúster de Kubernetes (k8s) para garantizar la escalabilidad, disponibilidad y facilidad de gestión.
+    \item[2.5 Contenerización, pruebas y despliegue en k8s.] Construcción de imágenes de contenedor (Docker) para los microservicios, ejecución de pruebas de integración y despliegue en un clúster de Kubernetes (k8s) para garantizar la escalabilidad y disponibilidad.
 \end{description}
 
 \subsection{Fase 3: Automatización de pruebas, despliegue y ciclo de vida}
@@ -188,14 +282,14 @@ Esta fase constituye el núcleo del desarrollo técnico, donde se diseñan e imp
 La fase final se centra en la calidad, la automatización y la validación del sistema en entornos realistas.
 
 \begin{description}
-    \item[3.1 Creación o adaptación del pipeline CICD.] Implementación de flujos de Integración y Despliegue Continuo (CI/CD) para automatizar la construcción de las imágenes, la ejecución de pruebas y el despliegue de nuevas versiones de la plataforma.
-    \item[3.2 Definición de tests unitarios y e2e.] Desarrollo de una batería de pruebas automatizadas que incluya tests unitarios para validar la lógica de los componentes individuales y tests de extremo a extremo (e2e) para verificar el flujo completo de actualización OTA.
-    \item[3.3 Monitorización y validación para entornos de desarrollo y producción.] Puesta en marcha de herramientas de observabilidad y monitorización para supervisar el rendimiento y la salud del sistema, validando su correcto funcionamiento tanto en entornos de prueba como en producción.
+    \item[3.1 Creación o adaptación del pipeline CICD.] Implementación de flujos de CI/CD que ejecutan pruebas automáticamente en cada commit. Además, se habilita una etapa opcional para la construcción de imágenes de contenedor versionadas y su despliegue en Kubernetes.
+    \item[3.2 Definición de tests unitarios y e2e.] Desarrollo de una batería de pruebas que incluye tests unitarios y de extremo a extremo (e2e) para validar la interoperabilidad de los componentes y el flujo completo de actualización.
+    \item[3.3 Monitorización básica y validación.] Supervisión del despliegue y funcionamiento de los servicios mediante el análisis de logs y herramientas de gestión de contenedores, verificando la correcta disponibilidad de los recursos en el clúster.
 \end{description}
 
 La planificación temporal de estas fases y tareas se detalla en el diagrama de Gantt de la Figura \ref{fig:gantt}.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{imagenes/gantt.png}
     \caption{Planificación temporal del proyecto (Diagrama de Gantt)}
@@ -212,12 +306,12 @@ La plataforma desarrollada en este TFM constituye un sistema distribuido de gest
 
 \begin{itemize}
     \item \textbf{Módulo de gestión centralizado (Updates):} Servicio backend implementado en Go que orquesta la creación, firma, cifrado y distribución de paquetes de actualización. Proporciona una API REST para la gestión del ciclo de vida completo de las actualizaciones.
-    
+
     \item \textbf{Interfaz web de administración:} Aplicación frontend desarrollada que permite a los administradores gestionar flotas de dispositivos, crear campañas de actualización, monitorizar el estado de los despliegues y configurar políticas de seguridad criptográfica.
-    
+
     \item \textbf{Motor de flujos de trabajo (WFX):} Sistema de orquestación de estados que gestiona el ciclo de vida de las actualizaciones en los dispositivos, soportando workflows directos, por fases y personalizados.
-    
-    \item \textbf{Agente de actualización en dispositivo:} Cliente basado en SWUpdate extendido con soporte para algoritmos de criptografía ligera (ASCON) y post-cuántica (MLDSA), que se ejecuta en los dispositivos IoT con Linux embebido.
+
+    \item \textbf{Agente de actualización en dispositivo:} Cliente basado en SWUpdate extendido con soporte para algoritmos tradicionales, de criptografía ligera (ASCON) y post-cuántica (ML-DSA), que se ejecuta en los dispositivos IoT con Linux embebido.
 \end{itemize}
 
 El sistema garantiza la confidencialidad mediante cifrado AEAD, la integridad y autenticidad mediante firmas digitales, y proporciona trazabilidad completa del proceso de actualización.
@@ -229,7 +323,7 @@ Para la configuración del entorno de desarrollo de la plataforma se requieren l
 \subsubsection{Hardware mínimo requerido}
 
 \begin{itemize}
-    \item \textbf{Procesador:} CPU x86\_64 de 4 núcleos o superior (recomendado: 8 núcleos para compilación paralela).
+    \item \textbf{Procesador:} CPU x86\_64 de 4 núcleos o superior .
     \item \textbf{Memoria RAM:} 16 GB mínimo (recomendado: 32 GB para desarrollo con contenedores y máquinas virtuales simultáneas).
     \item \textbf{Almacenamiento:} 100 GB de espacio libre en disco SSD para repositorios, contenedores, imágenes de sistema y artefactos de compilación.
     \item \textbf{Red:} Conexión de red estable para descarga de dependencias, acceso a registros de contenedores y comunicación con servicios en la nube.
@@ -239,15 +333,15 @@ Para la configuración del entorno de desarrollo de la plataforma se requieren l
 
 \begin{itemize}
     \item \textbf{Sistema operativo:} Linux (Ubuntu 22.04 LTS o superior, Debian 12, Fedora 38+). Otras distribuciones son compatibles siempre que cumplan los requisitos de las herramientas.
-    
+
     \item \textbf{Lenguajes y runtimes:}
     \begin{itemize}
-        \item Go 1.21 o superior (requerido para el desarrollo del módulo Updates y WFX).
+        \item Fork de Go mantenido por Cloudflare (\texttt{cfgo}, \texttt{github.com/cloudflare/go}) basado en la versión 1.21 o superior (estrictamente requerido para el soporte de criptografía poscuántica en el desarrollo del módulo Updates).
         \item Node.js 18 LTS o superior y npm/yarn (para el desarrollo del frontend).
         \item Python 3.10+ (para scripts de automatización y SWUGenerator).
         \item GCC/G++ 11+ (para compilación de componentes nativos y SWUpdate).
     \end{itemize}
-    
+
     \item \textbf{Herramientas de contenedores y orquestación:}
     \begin{itemize}
         \item Docker Engine 24.0+ o Podman 4.0+.
@@ -255,25 +349,24 @@ Para la configuración del entorno de desarrollo de la plataforma se requieren l
         \item Kubernetes 1.27+ (minikube, kind o k3s para desarrollo local; clúster productivo para despliegue).
         \item kubectl y helm para gestión de despliegues.
     \end{itemize}
-    
+
     \item \textbf{Librerías criptográficas:}
     \begin{itemize}
         \item OpenSSL 3.5 o superior (requisito crítico para soporte de algoritmos post-cuánticos).
         \item Implementación oficial de ASCON en C (versión 1.3.0 o superior).
-        \item liboqs (Open Quantum Safe) para esquemas PQC adicionales.
     \end{itemize}
-    
+
     \item \textbf{Herramientas de compilación para sistemas embebidos:}
     \begin{itemize}
         \item Yocto Project 4.0+ (Kirkstone) para generación de imágenes Linux embebidas.
         \item Buildroot 2023.02+ como alternativa para sistemas más restringidos.
         \item Toolchains cruzados para las arquitecturas objetivo (ARM, ARM64, RISC-V, etc.).
     \end{itemize}
-    
+
     \item \textbf{Control de versiones y CI/CD:}
     \begin{itemize}
         \item Git 2.30+.
-        \item GitLab Runner o GitHub Actions para pipelines de integración continua.
+        \item GitHub Actions para pipelines de integración continua.
     \end{itemize}
 \end{itemize}
 
@@ -284,14 +377,14 @@ Los dispositivos IoT que ejecutarán el agente de actualización deben cumplir l
 \subsubsection{Hardware del dispositivo}
 
 \begin{itemize}
-    \item \textbf{Procesador:} ARM Cortex-A7 o superior, o equivalente (x86, RISC-V).
-    \item \textbf{Memoria RAM:} 128 MB mínimo (recomendado: 256 MB para actualizaciones con streaming).
-    \item \textbf{Almacenamiento:} 
+    \item \textbf{Procesador:} ARM Cortex-A5 o superior, o equivalente (x86, RISC-V).
+    \item \textbf{Memoria RAM:} 16 MB mínimo.
+    \item \textbf{Almacenamiento:}
     \begin{itemize}
         \item Flash/eMMC/SD con capacidad para esquema A/B: mínimo 2× tamaño del rootfs + 20\% de margen.
         \item Ejemplo: para rootfs de 200 MB, se requieren al menos 500 MB de almacenamiento total.
     \end{itemize}
-    \item \textbf{Conectividad:} Ethernet, Wi-Fi o módulo celular (4G/5G) para descarga de actualizaciones OTA.
+    \item \textbf{Conectividad:} Ethernet, Wi-Fi o módulo (4G/5G) para descarga de actualizaciones OTA.
 \end{itemize}
 
 \subsubsection{Software del dispositivo}
@@ -300,7 +393,7 @@ Los dispositivos IoT que ejecutarán el agente de actualización deben cumplir l
     \item \textbf{Sistema operativo:} Linux embebido (kernel 5.10 LTS o superior) generado mediante Yocto Project o Buildroot.
     \item \textbf{Bootloader:} U-Boot 2022.01+ con soporte para variables de entorno persistentes y arranque condicional para estrategia A/B.
     \item \textbf{Estructura de particiones:} Esquema de doble partición (Slot A / Slot B) para rootfs y kernel, con partición de datos persistente separada.
-    \item \textbf{SWUpdate:} Versión modificada con soporte para ASCON y MLDSA (proporcionada como parte de este proyecto).
+    \item \textbf{SWUpdate:} Versión modificada con soporte para ASCON y ML-DSA (proporcionada como parte de este proyecto).
     \item \textbf{Librerías criptográficas en dispositivo:}
     \begin{itemize}
         \item OpenSSL 3.5+ (compilado estáticamente o como librería compartida).
@@ -316,16 +409,31 @@ El despliegue en producción de la plataforma de gestión centralizada requiere:
 \subsubsection{Infraestructura de nube o on-premise}
 
 \begin{itemize}
-    \item \textbf{Clúster Kubernetes:} Versión 1.27+ con al menos 3 nodos worker para alta disponibilidad.
+  \item \textbf{Clúster Kubernetes:}
+  \begin{itemize}
+    \item Versión 1.24+ (compatible con las versiones de Helm y componentes utilizados)
+    \item Al menos 1 nodo worker (recomendado 3 para alta disponibilidad)
+  \end{itemize}
     \item \textbf{Recursos por nodo:}
-    \begin{itemize}
-        \item CPU: 4 vCPUs.
-        \item RAM: 8 GB.
-        \item Almacenamiento: 50 GB de almacenamiento persistente (PersistentVolume) para base de datos y repositorio de artefactos.
-    \end{itemize}
-    \item \textbf{Balanceador de carga:} Ingress controller (NGINX, Traefik) o balanceador externo para distribución de tráfico.
-    \item \textbf{Almacenamiento de objetos:} S3-compatible (AWS S3, MinIO, Ceph) para almacenamiento de paquetes de actualización \texttt{.swu}.
-    \item \textbf{Base de datos:} PostgreSQL 14+ o MySQL 8.0+ con soporte para transacciones ACID.
+  \begin{itemize}
+    \item CPU: 4 núcleos (2.0 GHz o superior)
+    \item RAM: 8 GB
+    \item Almacenamiento: 50 GB (SSD recomendado)
+  \end{itemize}
+  \item \textbf{Balanceador de carga:}
+  \begin{itemize}
+    \item LoadBalancer service support (para exposición externa)
+    \item Ingress controller (se incluye Envoy Gateway en el chart)
+  \end{itemize}
+  \item \textbf{Almacenamiento de objetos:}
+  \begin{itemize}
+    \item StorageClass con soporte ReadWriteOnce (para PVCs persistentes)
+    \item Mínimo 13 GB distribuidos: Updates (11GB), VA (1GB), KMS (1GB)
+  \end{itemize}
+  \item \textbf{Base de datos:}
+  \begin{itemize}
+    \item PostgreSQL 13+ (incluido en el despliegue)
+  \end{itemize}
 \end{itemize}
 
 \subsubsection{Requisitos de red}
@@ -341,22 +449,21 @@ El despliegue en producción de la plataforma de gestión centralizada requiere:
 La plataforma debe operar bajo las siguientes condiciones de seguridad:
 
 \begin{itemize}
-    \item \textbf{Gestión de claves criptográficas:} 
+    \item \textbf{Gestión de claves criptográficas:}
     \begin{itemize}
         \item Las claves privadas de firma deben almacenarse en un HSM (Hardware Security Module) o mediante PKCS\#11.
-        \item Las claves simétricas de cifrado deben gestionarse a través del módulo KMS integrado con Lamassu PKI.
+        \item Las claves simétricas de cifrado deben gestionarse a través del módulo KMS.
         \item Rotación de claves conforme a política definida (recomendado: cada 12 meses o tras compromiso detectado).
     \end{itemize}
-    
+
     \item \textbf{Autenticación y autorización:}
     \begin{itemize}
-        \item Autenticación mutua TLS (mTLS) entre dispositivos y backend utilizando certificados X.509 emitidos por Lamassu PKI.
         \item Control de acceso basado en roles (RBAC) para administradores de la plataforma.
     \end{itemize}
-    
+
     \item \textbf{Integridad y trazabilidad:}
     \begin{itemize}
-        \item Toda actualización debe estar firmada digitalmente (ECDSA-P256, RSA-2048 o MLDSA según configuración).
+        \item Las actualizaciones pueden estar firmada digitalmente (ECDSA, RSA o ML-DSA según configuración).
         \item Registro auditable de todas las operaciones: creación de paquetes, despliegues, éxitos y fallos.
     \end{itemize}
 \end{itemize}
@@ -367,11 +474,11 @@ El sistema ha sido diseñado para facilitar el cumplimiento de las siguientes no
 
 \begin{itemize}
     \item \textbf{Cyber Resilience Act (CRA):} Requisitos de actualización segura durante todo el ciclo de vida del producto, reporte de vulnerabilidades y gestión de incidentes.
-    
+
     \item \textbf{IEC 62443-4-2 (CR 3.10 - Support for Updates):} Mecanismos robustos para la actualización de componentes de software y firmware en sistemas de control industrial.
-    
+
     \item \textbf{NIST SP 800-193:} Protección de la integridad de la plataforma mediante actualizaciones autenticadas y rollback seguro.
-    
+
     \item \textbf{ETSI EN 303 645:} Requisitos de ciberseguridad para dispositivos IoT de consumo, incluyendo actualizaciones seguras y gestión del ciclo de vida.
 \end{itemize}
 
@@ -382,17 +489,11 @@ En proyectos donde se despliegue esta plataforma para un cliente específico, se
 \subsubsection{Plan de onboarding de dispositivos}
 
 \begin{itemize}
-    \item \textbf{Provisión inicial:} Configuración de certificados digitales para cada dispositivo mediante Lamassu PKI.
+    \item \textbf{Provisión inicial:} Configuración de certificados digitales para cada dispositivo.
     \item \textbf{Registro en DMS:} Asignación de dispositivos a grupos lógicos (Device Management Systems) según criterios del cliente (geográficos, funcionales, etc.).
-    \item \textbf{Primera actualización:} Validación del canal OTA mediante actualización de prueba controlada en dispositivo piloto.
+
 \end{itemize}
 
-\subsubsection{Capacitación}
-
-\begin{itemize}
-    \item Formación de administradores en el uso de la interfaz web y API de gestión.
-    \item Documentación de procedimientos de emergencia: rollback manual, recuperación de dispositivo bloqueado.
-\end{itemize}
 
 \subsubsection{Soporte y mantenimiento}
 
@@ -407,9 +508,8 @@ En proyectos donde se despliegue esta plataforma para un cliente específico, se
 Durante el desarrollo de este TFM se han aplicado las siguientes condiciones:
 
 \begin{itemize}
-    \item \textbf{Metodología ágil:} Desarrollo iterativo con entregas incrementales y revisiones periódicas con tutores.
+    \item \textbf{Metodología ágil:} Desarrollo iterativo con entregas incrementales y revisiones periódicas con tutor.
     \item \textbf{Control de versiones:} Todo el código fuente se gestiona mediante Git con repositorios públicos para componentes open source y privados para extensiones propietarias.
     \item \textbf{Pruebas continuas:} Pipeline CI/CD que ejecuta tests unitarios y de integración en cada commit.
-    \item \textbf{Documentación técnica:} Generación automática de documentación de API mediante herramientas como Swagger/OpenAPI.
 \end{itemize}
 

@@ -16,15 +16,15 @@
 \begin{titlepage}
     \centering
     \vspace*{2cm}
-    
+
     {\huge\bfseries Informe de Proyecto\\[0.5cm] Trabajo Fin de Máster\par}
-    
+
     \vspace{2cm}
-    
+
     {\Large\bfseries Plataforma OTA segura y escalable para dispositivos IoT con criptografía ligera y post-cuántica\par}
-    
+
     \vspace{3cm}
-    
+
     \begin{tabular}{ll}
         \textbf{Alumno:} & Álvaro Díez-Andino Herrera \\[0.3cm]
         \textbf{Director:} & Iñaki Garitano \\[0.3cm]
@@ -34,9 +34,9 @@
                          & y computación en la nube \\[0.3cm]
         \textbf{Universidad:} & Mondragón Unibertsitatea \\
     \end{tabular}
-    
+
     \vfill
-    
+
     {\large Curso 2025-2026\par}
 \end{titlepage}
 
@@ -129,11 +129,11 @@ Los objetivos principales del proyecto son:
 
 \begin{enumerate}
     \item Desarrollar una plataforma segura y escalable para la distribución de actualizaciones OTA en dispositivos IoT que garantice confidencialidad, integridad y autenticidad mediante cifrado y firma digital.
-    
+
     \item Integrar algoritmos de criptografía ligera (ASCON) en toda la cadena de actualización, demostrando su viabilidad en dispositivos con recursos limitados y validando las ventajas en términos de rendimiento y consumo de recursos.
-    
+
     \item Incorporar soporte para algoritmos post-cuánticos en los mecanismos de firma digital, preparando la infraestructura para amenazas futuras y garantizando la relevancia a largo plazo de la solución.
-    
+
     \item Diseñar una interfaz de usuario intuitiva que abstraiga la complejidad criptográfica y de gestión de actualizaciones, facilitando su adopción por organizaciones sin equipos especializados en seguridad.
 \end{enumerate}
 
@@ -147,12 +147,12 @@ La plataforma desarrollada constituye un sistema distribuido de gestión de actu
 
 \begin{itemize}
     \item \textbf{Módulo de gestión centralizado (Updates):} Servicio backend implementado en Go que orquesta la creación, firma, cifrado y distribución de paquetes de actualización mediante API REST.
-    
+
     \item \textbf{Interfaz web de administración:} Aplicación frontend que permite gestionar flotas de dispositivos, crear campañas de actualización y monitorizar despliegues.
-    
+
     \item \textbf{Motor de flujos de trabajo (WFX):} Sistema de orquestación de estados para gestión del ciclo de vida de actualizaciones con workflows directos, por fases y personalizados.
-    
-    \item \textbf{Agente de actualización en dispositivo:} Cliente basado en SWUpdate extendido con soporte para ASCON (LWC) y MLDSA (PQC) para dispositivos Linux embebido.
+
+    \item \textbf{Agente de actualización en dispositivo:} Cliente basado en SWUpdate extendido con soporte para ASCON (LWC) y ML-DSA (PQC) para dispositivos Linux embebido.
 \end{itemize}
 
 \subsection{Recursos de hardware y software utilizados}
@@ -178,7 +178,7 @@ La plataforma desarrollada constituye un sistema distribuido de gestión de actu
 
 \begin{itemize}
     \item Soporte para múltiples algoritmos de cifrado simétrico: AES (CBC/CTR/GCM en 128/192/256 bits) y ASCON
-    \item Soporte para firma digital tradicional (RSA, ECDSA) y post-cuántica (MLDSA)
+    \item Soporte para firma digital tradicional (RSA, ECDSA) y post-cuántica (ML-DSA)
     \item Gestión de claves criptográficas mediante integración con Lamassu KMS
     \item Creación automatizada de paquetes de actualización en formato SWU
     \item Distribución de actualizaciones mediante workflows configurables (directo, por fases, personalizado)
@@ -192,22 +192,22 @@ La plataforma desarrollada constituye un sistema distribuido de gestión de actu
 \subsection{Requisitos no funcionales}
 
 \begin{itemize}
-    \item \textbf{Seguridad:} 
+    \item \textbf{Seguridad:}
     \begin{itemize}
         \item Cumplimiento de estándares NIST para algoritmos criptográficos
         \item Autenticación mutua TLS (mTLS) entre dispositivos y backend
         \item Almacenamiento seguro de claves mediante HSM o PKCS\#11
         \item Cumplimiento de Cyber Resilience Act (CRA) e IEC 62443-4-2
     \end{itemize}
-    
+
     \item \textbf{Escalabilidad:} Capacidad para gestionar miles de dispositivos mediante arquitectura cloud-native en Kubernetes
-    
+
     \item \textbf{Rendimiento:} ASCON 2-5× más rápido que AES en dispositivos sin aceleración hardware
-    
+
     \item \textbf{Usabilidad:} Interfaz intuitiva que abstrae complejidad criptográfica
-    
+
     \item \textbf{Trazabilidad:} Registro auditable completo del ciclo de vida de cada actualización
-    
+
     \item \textbf{Confiabilidad:} Estrategia A/B con rollback automático ante fallos
 \end{itemize}
 
@@ -228,7 +228,7 @@ Los dispositivos IoT que ejecutan el agente de actualización requieren:
     \item Linux embebido (kernel 5.10 LTS+) generado con Yocto/Buildroot
     \item U-Boot 2022.01+ con soporte para arranque condicional
     \item Estructura de particiones A/B (dual-copy)
-    \item SWUpdate modificado con ASCON y MLDSA
+    \item SWUpdate modificado con ASCON y ML-DSA
     \item OpenSSL 3.5+ en dispositivo
 \end{itemize}
 
@@ -236,15 +236,15 @@ Los dispositivos IoT que ejecutan el agente de actualización requieren:
 
 \begin{itemize}
     \item \textbf{Modificación de código open-source:} Extensión de SWUpdate y SWUGenerator con nuevos algoritmos criptográficos manteniendo compatibilidad con versiones estándar
-    
+
     \item \textbf{Integración con infraestructura Ikerlan:} Uso de Lamassu PKI para gestión de identidades y claves
-    
+
     \item \textbf{Compatibilidad multiplataforma:} Solución debe funcionar en arquitecturas ARM, ARM64, x86 y RISC-V
-    
+
     \item \textbf{Metodología ágil:} Desarrollo iterativo con entregas incrementales y revisiones periódicas
-    
+
     \item \textbf{Control de versiones:} Gestión mediante Git con repositorios diferenciados para componentes públicos y privados
-    
+
     \item \textbf{Documentación técnica:} Generación de documentación de API y guías de implementación
 \end{itemize}
 

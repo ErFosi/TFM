@@ -1,19 +1,14 @@
 \begin{thebibliography}{10}
 
+\bibitem{schemitt2025assessingimpactpostquantumdigital}
+Alison~Gonçalves Schemitt, Henrique~Fan da~Silva, Roben~Castagna Lunardi, Diego Kreutz, Rodrigo~Brandão Mansilha, and Avelino~Francisco Zorzo.
+\newblock Assessing the impact of post-quantum digital signature algorithms on blockchains, 2025.
+
 \bibitem{Gartner:IoTSecurity:2023}
 {Gartner}.
 \newblock {IoT security surveys and reports}.
 \newblock Technical report, {Gartner}, 2023.
 \newblock Consultado en 2023.
-
-\bibitem{CRA:2024}
-Cyber resilience act, 2024.
-\newblock Regulation (EU) 2024/1689.
-
-\bibitem{IEC62443}
-Iec 62443-3-3: Industrial communication networks - network and system security - part 3-3: System security requirements and security levels.
-\newblock Technical report, International Electrotechnical Commission (IEC), 2021.
-\newblock Standard for industrial automation and control systems security.
 
 \bibitem{Kaspersky:Mirai:2025}
 {Kaspersky Security}.
@@ -31,6 +26,15 @@ Yewande~Goodness Hassan, Anuoluwapo Collins, Gideon~Opeyemi Babatunde, Abidemi~A
 \newblock {Security Challenges in Industrial IoT: Update Mechanisms and Firmware Vulnerabilities}.
 \newblock {\em {International Journal/Conference Name}}, 04(01):697--703, January-February 2023.
 \newblock Received: 12-12-2022; Accepted: 19-01-2023.
+
+\bibitem{CRA:2024}
+Cyber resilience act, 2024.
+\newblock Regulation (EU) 2024/1689.
+
+\bibitem{IEC62443}
+Iec 62443-3-3: Industrial communication networks - network and system security - part 3-3: System security requirements and security levels.
+\newblock Technical report, International Electrotechnical Commission (IEC), 2021.
+\newblock Standard for industrial automation and control systems security.
 
 \bibitem{Cisco:IoTForecast:2025}
 {Cisco Systems}.
@@ -137,5 +141,16 @@ Stefano Babic.
 \newblock {SWUGenerator: Tool to generate SWUpdate update packages}.
 \newblock \url{https://github.com/sbabic/swugenerator}, 2024.
 \newblock Accedido: 12-12-2025.
+
+\bibitem{ascon-python}
+{ascon: Ascon v1.2 authenticated encryption and hashing}.
+\newblock \url{https://pypi.org/project/ascon/}.
+\newblock Accessed: 2026-02-12.
+
+\bibitem{pqm4}
+Matthias~J. Kannwischer, Joost Rijneveld, Peter Schwabe, and Ko~Stoffelen.
+\newblock pqm4: Testing and benchmarking {NIST} {PQC} on {ARM} {Cortex-M4}.
+\newblock In {\em Second PQC Standardization Conference}, 2019.
+\newblock Updated results available at \url{https://github.com/mupq/pqm4}.
 
 \end{thebibliography}

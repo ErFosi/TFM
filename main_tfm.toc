@@ -1,108 +1,124 @@
 \babel@toc {spanish}{}\relax 
 \contentsline {chapter}{\numberline {1}Introducción}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Problemática}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Motivaci\'on}{2}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Antecedentes}{2}{section.1.3}%
-\contentsline {section}{\numberline {1.4}Estado del arte}{3}{section.1.4}%
-\contentsline {subsection}{\numberline {1.4.1}Panorama de vulnerabilidades en dispositivos IoT}{3}{subsection.1.4.1}%
-\contentsline {subsection}{\numberline {1.4.2}Plataformas OTA existentes: análisis comparativo}{5}{subsection.1.4.2}%
-\contentsline {subsection}{\numberline {1.4.3}Necesidad de algoritmos criptográficos eficientes}{6}{subsection.1.4.3}%
-\contentsline {section}{\numberline {1.5}Objetivos}{6}{section.1.5}%
-\contentsline {subsection}{\numberline {1.5.1}Propósito y alcance}{6}{subsection.1.5.1}%
-\contentsline {section}{\numberline {1.6}Planificación}{7}{section.1.6}%
-\contentsline {subsection}{\numberline {1.6.1}Fase 1: Investigación}{7}{subsection.1.6.1}%
-\contentsline {subsection}{\numberline {1.6.2}Fase 2: Diseño e integración de módulos de seguridad para dispositivos IoT}{8}{subsection.1.6.2}%
-\contentsline {subsection}{\numberline {1.6.3}Fase 3: Automatización de pruebas, despliegue y ciclo de vida}{8}{subsection.1.6.3}%
-\contentsline {section}{\numberline {1.7}Pliego de condiciones}{9}{section.1.7}%
-\contentsline {subsection}{\numberline {1.7.1}Descripción del producto}{9}{subsection.1.7.1}%
-\contentsline {subsection}{\numberline {1.7.2}Requisitos de hardware y software para el entorno de desarrollo}{10}{subsection.1.7.2}%
-\contentsline {subsubsection}{\numberline {1.7.2.1}Hardware mínimo requerido}{10}{subsubsection.1.7.2.1}%
-\contentsline {subsubsection}{\numberline {1.7.2.2}Software de desarrollo requerido}{10}{subsubsection.1.7.2.2}%
-\contentsline {subsection}{\numberline {1.7.3}Requisitos de hardware y software para dispositivos objetivo}{11}{subsection.1.7.3}%
-\contentsline {subsubsection}{\numberline {1.7.3.1}Hardware del dispositivo}{11}{subsubsection.1.7.3.1}%
-\contentsline {subsubsection}{\numberline {1.7.3.2}Software del dispositivo}{12}{subsubsection.1.7.3.2}%
-\contentsline {subsection}{\numberline {1.7.4}Requisitos del entorno de producción}{12}{subsection.1.7.4}%
-\contentsline {subsubsection}{\numberline {1.7.4.1}Infraestructura de nube o on-premise}{12}{subsubsection.1.7.4.1}%
-\contentsline {subsubsection}{\numberline {1.7.4.2}Requisitos de red}{13}{subsubsection.1.7.4.2}%
-\contentsline {subsection}{\numberline {1.7.5}Condiciones de seguridad}{13}{subsection.1.7.5}%
-\contentsline {subsection}{\numberline {1.7.6}Condiciones de cumplimiento normativo}{14}{subsection.1.7.6}%
-\contentsline {subsection}{\numberline {1.7.7}Condiciones de implantación para cliente final}{14}{subsection.1.7.7}%
-\contentsline {subsubsection}{\numberline {1.7.7.1}Plan de onboarding de dispositivos}{14}{subsubsection.1.7.7.1}%
-\contentsline {subsubsection}{\numberline {1.7.7.2}Capacitación}{14}{subsubsection.1.7.7.2}%
-\contentsline {subsubsection}{\numberline {1.7.7.3}Soporte y mantenimiento}{14}{subsubsection.1.7.7.3}%
+\contentsline {section}{\numberline {1.2}Motivación}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Estado del arte}{3}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Panorama de vulnerabilidades en dispositivos IoT}{3}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Plataformas OTA existentes: análisis comparativo}{4}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Necesidad de algoritmos criptográficos eficientes}{5}{subsection.1.3.3}%
+\contentsline {section}{\numberline {1.4}Antecedentes}{6}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Objetivos}{7}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}Propósito y alcance}{7}{subsection.1.5.1}%
+\contentsline {section}{\numberline {1.6}Planificación}{8}{section.1.6}%
+\contentsline {subsection}{\numberline {1.6.1}Fase 1: Investigación}{8}{subsection.1.6.1}%
+\contentsline {subsection}{\numberline {1.6.2}Fase 2: Diseño e integración de módulos de seguridad para dispositivos IoT}{9}{subsection.1.6.2}%
+\contentsline {subsection}{\numberline {1.6.3}Fase 3: Automatización de pruebas, despliegue y ciclo de vida}{9}{subsection.1.6.3}%
+\contentsline {section}{\numberline {1.7}Pliego de condiciones}{10}{section.1.7}%
+\contentsline {subsection}{\numberline {1.7.1}Descripción del producto}{10}{subsection.1.7.1}%
+\contentsline {subsection}{\numberline {1.7.2}Requisitos de hardware y software para el entorno de desarrollo}{11}{subsection.1.7.2}%
+\contentsline {subsubsection}{\numberline {1.7.2.1}Hardware mínimo requerido}{11}{subsubsection.1.7.2.1}%
+\contentsline {subsubsection}{\numberline {1.7.2.2}Software de desarrollo requerido}{11}{subsubsection.1.7.2.2}%
+\contentsline {subsection}{\numberline {1.7.3}Requisitos de hardware y software para dispositivos objetivo}{12}{subsection.1.7.3}%
+\contentsline {subsubsection}{\numberline {1.7.3.1}Hardware del dispositivo}{12}{subsubsection.1.7.3.1}%
+\contentsline {subsubsection}{\numberline {1.7.3.2}Software del dispositivo}{13}{subsubsection.1.7.3.2}%
+\contentsline {subsection}{\numberline {1.7.4}Requisitos del entorno de producción}{13}{subsection.1.7.4}%
+\contentsline {subsubsection}{\numberline {1.7.4.1}Infraestructura de nube o on-premise}{13}{subsubsection.1.7.4.1}%
+\contentsline {subsubsection}{\numberline {1.7.4.2}Requisitos de red}{14}{subsubsection.1.7.4.2}%
+\contentsline {subsection}{\numberline {1.7.5}Condiciones de seguridad}{14}{subsection.1.7.5}%
+\contentsline {subsection}{\numberline {1.7.6}Condiciones de cumplimiento normativo}{15}{subsection.1.7.6}%
+\contentsline {subsection}{\numberline {1.7.7}Condiciones de implantación para cliente final}{15}{subsection.1.7.7}%
+\contentsline {subsubsection}{\numberline {1.7.7.1}Plan de onboarding de dispositivos}{15}{subsubsection.1.7.7.1}%
+\contentsline {subsubsection}{\numberline {1.7.7.2}Soporte y mantenimiento}{15}{subsubsection.1.7.7.2}%
 \contentsline {subsection}{\numberline {1.7.8}Condiciones de ejecución del proyecto}{15}{subsection.1.7.8}%
-\contentsline {chapter}{\numberline {2}Desarrollo}{16}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Bases teóricas de la criptografía}{16}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Criptografía simétrica}{17}{subsection.2.1.1}%
-\contentsline {subsubsection}{\numberline {2.1.1.1}Autenticación usando cifrado simétrico: AEAD}{18}{subsubsection.2.1.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Criptografía asimétrica }{19}{subsection.2.1.2}%
-\contentsline {subsubsection}{\numberline {2.1.2.1}Cifrado con clave pública (Confidencialidad)}{19}{subsubsection.2.1.2.1}%
-\contentsline {subsubsection}{\numberline {2.1.2.2}Cifrado con clave privada (Autenticidad)}{20}{subsubsection.2.1.2.2}%
-\contentsline {subsection}{\numberline {2.1.3}Principios de seguridad asegurados con cifrado asimétrico}{21}{subsection.2.1.3}%
-\contentsline {subsection}{\numberline {2.1.4}Firma digital}{21}{subsection.2.1.4}%
-\contentsline {subsection}{\numberline {2.1.5}Autoridades Certificadoras y certificados digitales}{23}{subsection.2.1.5}%
-\contentsline {subsubsection}{\numberline {2.1.5.1}Autoridad Certificadora}{23}{subsubsection.2.1.5.1}%
-\contentsline {subsubsection}{\numberline {2.1.5.2}Certificado digital}{23}{subsubsection.2.1.5.2}%
-\contentsline {subsubsection}{\numberline {2.1.5.3}Proceso de Verificación de Certificados}{24}{subsubsection.2.1.5.3}%
-\contentsline {subsubsection}{\numberline {2.1.5.4}Jerarquía de las Autoridades Certificadoras}{24}{subsubsection.2.1.5.4}%
-\contentsline {section}{\numberline {2.2}Elección de algoritmos criptográficos}{24}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}ASCON: Estándar de criptografía ligera}{25}{subsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.1.1}Ventajas de rendimiento frente a AES}{26}{subsubsection.2.2.1.1}%
-\contentsline {subsubsection}{\numberline {2.2.1.2}Validación experimental}{26}{subsubsection.2.2.1.2}%
-\contentsline {subsubsection}{\numberline {2.2.1.3}Consideraciones de seguridad post-cuántica}{28}{subsubsection.2.2.1.3}%
-\contentsline {subsubsection}{\numberline {2.2.1.4}Seguridad post cuantica en la firma digital: MLDSA}{29}{subsubsection.2.2.1.4}%
-\contentsline {section}{\numberline {2.3}Actualizaciones de software en sistemas embebidos}{29}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Conceptos fundamentales}{30}{subsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.1.1}Yocto Project}{30}{subsubsection.2.3.1.1}%
-\contentsline {subsubsection}{\numberline {2.3.1.2}Bootloader}{30}{subsubsection.2.3.1.2}%
-\contentsline {subsubsection}{\numberline {2.3.1.3}Rootfs (Sistema de archivos raíz)}{30}{subsubsection.2.3.1.3}%
-\contentsline {subsubsection}{\numberline {2.3.1.4}Estrategia de actualización A/B}{31}{subsubsection.2.3.1.4}%
-\contentsline {subsection}{\numberline {2.3.2}SWUpdate: Gestor de actualizaciones}{31}{subsection.2.3.2}%
-\contentsline {subsubsection}{\numberline {2.3.2.1}Arquitectura modular}{32}{subsubsection.2.3.2.1}%
-\contentsline {subsubsection}{\numberline {2.3.2.2}Formato de paquete .swu y descriptor}{33}{subsubsection.2.3.2.2}%
-\contentsline {subsubsection}{\numberline {2.3.2.3}Flujo de actualización (Pulling)}{33}{subsubsection.2.3.2.3}%
-\contentsline {subsection}{\numberline {2.3.3}Generación de paquetes: SWUGenerator}{34}{subsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.3.4}WFX: Workflow Executioner}{34}{subsection.2.3.4}%
-\contentsline {subsubsection}{\numberline {2.3.4.1}Tipos de Workflows}{35}{subsubsection.2.3.4.1}%
-\contentsline {subsubsection}{\numberline {2.3.4.2}La Entidad Job}{37}{subsubsection.2.3.4.2}%
-\contentsline {subsection}{\numberline {2.3.5}Lamassu IoT}{38}{subsection.2.3.5}%
-\contentsline {section}{\numberline {2.4}Infraestructura Planteada}{38}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Integración de Criptografía Ligera y Post-Cuántica}{40}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Integración de Algoritmos de Cifrado Simétrico}{40}{subsection.2.5.1}%
-\contentsline {subsubsection}{\numberline {2.5.1.1}Instalación Nativa}{40}{subsubsection.2.5.1.1}%
-\contentsline {subsubsection}{\numberline {2.5.1.2}Integración con WFX}{40}{subsubsection.2.5.1.2}%
-\contentsline {subsection}{\numberline {2.5.2}Integración de Firma Digital Post-Cuántica}{41}{subsection.2.5.2}%
-\contentsline {subsection}{\numberline {2.5.3}Modificaciones en SWUGenerator}{41}{subsection.2.5.3}%
-\contentsline {subsubsection}{\numberline {2.5.3.1}Cifrado con ASCON}{41}{subsubsection.2.5.3.1}%
-\contentsline {subsubsection}{\numberline {2.5.3.2}Métodos de Firma}{42}{subsubsection.2.5.3.2}%
-\contentsline {subsubsection}{\numberline {2.5.3.3}Comando Completo de Generación}{42}{subsubsection.2.5.3.3}%
-\contentsline {section}{\numberline {2.6}Modelo de Datos}{43}{section.2.6}%
-\contentsline {subsection}{\numberline {2.6.1}Entidades de Lamassu IoT}{43}{subsection.2.6.1}%
-\contentsline {subsection}{\numberline {2.6.2}Entidades de WFX}{43}{subsection.2.6.2}%
-\contentsline {subsection}{\numberline {2.6.3}Entidades del Módulo Updates}{43}{subsection.2.6.3}%
-\contentsline {subsubsection}{\numberline {2.6.3.1}Update-Pack (Paquete de Actualización)}{43}{subsubsection.2.6.3.1}%
-\contentsline {subsubsection}{\numberline {2.6.3.2}Launch (Lanzamiento)}{44}{subsubsection.2.6.3.2}%
-\contentsline {subsection}{\numberline {2.6.4}Relaciones entre Entidades}{45}{subsection.2.6.4}%
-\contentsline {chapter}{\numberline {3}Resultados}{47}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Caso de Uso: Sistema de Control de Tanques}{47}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Interfaz Web de Gestión}{48}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Gestión de Claves Criptográficas (KMS)}{48}{subsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.1.1}Vista General del KMS}{49}{subsubsection.3.2.1.1}%
-\contentsline {subsubsection}{\numberline {3.2.1.2}Detalles y Operaciones de una Clave}{49}{subsubsection.3.2.1.2}%
-\contentsline {subsection}{\numberline {3.2.2}Gestión de Actualizaciones}{50}{subsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.2.1}Página Principal de Actualizaciones}{50}{subsubsection.3.2.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2.2}Creación de una Nueva Actualización}{51}{subsubsection.3.2.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.2.3}Detalles de un Update Pack}{52}{subsubsection.3.2.2.3}%
-\contentsline {subsection}{\numberline {3.2.3}Gestión de Lanzamientos}{53}{subsection.3.2.3}%
-\contentsline {subsubsection}{\numberline {3.2.3.1}Configuración de un Lanzamiento}{53}{subsubsection.3.2.3.1}%
-\contentsline {subsubsection}{\numberline {3.2.3.2}Detalles de un Lanzamiento}{55}{subsubsection.3.2.3.2}%
-\contentsline {subsection}{\numberline {3.2.4}Monitorización de Dispositivos Individuales}{55}{subsection.3.2.4}%
-\contentsline {subsubsection}{\numberline {3.2.4.1}Línea Temporal de Estados}{55}{subsubsection.3.2.4.1}%
-\contentsline {subsubsection}{\numberline {3.2.4.2}Detalles de Estados Específicos}{56}{subsubsection.3.2.4.2}%
-\contentsline {chapter}{\numberline {4}Conclusiones}{58}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Cumplimiento de Objetivos}{58}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Validación de Criptografía Ligera en Dispositivos Limitados}{58}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Preparación para Amenazas Post-Cuánticas}{59}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Reflexión Final}{59}{section.4.4}%
-\contentsline {part}{Bibliografía}{62}{chapter*.40}%
-\contentsline {part}{Índice alfabético}{63}{chapter*.40}%
+\contentsline {chapter}{\numberline {2}Desarrollo}{17}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Bases teóricas de la criptografía}{17}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Criptografía simétrica}{18}{subsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.1.1}Autenticación usando cifrado simétrico: AEAD}{19}{subsubsection.2.1.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Criptografía asimétrica }{20}{subsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.2.1}Cifrado con clave pública (Confidencialidad)}{20}{subsubsection.2.1.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.2.2}Cifrado con clave privada (Autenticidad)}{21}{subsubsection.2.1.2.2}%
+\contentsline {subsection}{\numberline {2.1.3}Principios de seguridad asegurados con cifrado asimétrico}{22}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Firma digital}{22}{subsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.1.5}Autoridades Certificadoras y certificados digitales}{24}{subsection.2.1.5}%
+\contentsline {subsubsection}{\numberline {2.1.5.1}Autoridad Certificadora}{24}{subsubsection.2.1.5.1}%
+\contentsline {subsubsection}{\numberline {2.1.5.2}Certificado digital}{24}{subsubsection.2.1.5.2}%
+\contentsline {subsubsection}{\numberline {2.1.5.3}Proceso de Verificación de Certificados}{25}{subsubsection.2.1.5.3}%
+\contentsline {subsubsection}{\numberline {2.1.5.4}Jerarquía de las Autoridades Certificadoras}{25}{subsubsection.2.1.5.4}%
+\contentsline {subsection}{\numberline {2.1.6}Estándar de sintaxis de mensajes criptográficos (CMS)}{25}{subsection.2.1.6}%
+\contentsline {section}{\numberline {2.2}Elección de algoritmos criptográficos}{26}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}ASCON: Estándar de criptografía ligera}{27}{subsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.1.1}Ventajas de rendimiento frente a AES}{27}{subsubsection.2.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.2.1.2}Validación experimental}{28}{subsubsection.2.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.2.1.3}Consideraciones de seguridad post-cuántica}{30}{subsubsection.2.2.1.3}%
+\contentsline {subsubsection}{\numberline {2.2.1.4}Seguridad post cuantica en la firma digital: ML-DSA}{30}{subsubsection.2.2.1.4}%
+\contentsline {section}{\numberline {2.3}Actualizaciones de software en sistemas embebidos}{31}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Conceptos fundamentales}{32}{subsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.1.1}Yocto Project}{32}{subsubsection.2.3.1.1}%
+\contentsline {subsubsection}{\numberline {2.3.1.2}Bootloader}{32}{subsubsection.2.3.1.2}%
+\contentsline {subsubsection}{\numberline {2.3.1.3}Rootfs (Sistema de archivos raíz)}{32}{subsubsection.2.3.1.3}%
+\contentsline {subsubsection}{\numberline {2.3.1.4}Estrategia de actualización A/B}{32}{subsubsection.2.3.1.4}%
+\contentsline {subsection}{\numberline {2.3.2}SWUpdate: Gestor de actualizaciones}{33}{subsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.2.1}Arquitectura modular}{34}{subsubsection.2.3.2.1}%
+\contentsline {subsubsection}{\numberline {2.3.2.2}Formato de paquete .swu y descriptor}{34}{subsubsection.2.3.2.2}%
+\contentsline {subsubsection}{\numberline {2.3.2.3}Flujo de actualización (Pulling)}{35}{subsubsection.2.3.2.3}%
+\contentsline {subsection}{\numberline {2.3.3}Generación de paquetes: SWUGenerator}{36}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}WFX: Workflow Executioner}{36}{subsection.2.3.4}%
+\contentsline {subsubsection}{\numberline {2.3.4.1}Tipos de Workflows}{37}{subsubsection.2.3.4.1}%
+\contentsline {subsubsection}{\numberline {2.3.4.2}La Entidad Job}{39}{subsubsection.2.3.4.2}%
+\contentsline {subsection}{\numberline {2.3.5}LamassuIoT}{40}{subsection.2.3.5}%
+\contentsline {subsection}{\numberline {2.3.6}Extensión del KMS para Criptografía Simétrica}{40}{subsection.2.3.6}%
+\contentsline {section}{\numberline {2.4}Infraestructura Planteada}{41}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Integración de Criptografía Ligera y Post-Cuántica}{42}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Integración de Algoritmos de Cifrado Simétrico}{42}{subsection.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.5.1.1}Instalación Nativa}{43}{subsubsection.2.5.1.1}%
+\contentsline {subsubsection}{\numberline {2.5.1.2}Integración con WFX}{43}{subsubsection.2.5.1.2}%
+\contentsline {subsection}{\numberline {2.5.2}Integración de Firma Digital Post-Cuántica}{44}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Modificaciones en SWUGenerator}{44}{subsection.2.5.3}%
+\contentsline {subsubsection}{\numberline {2.5.3.1}Cifrado con ASCON}{44}{subsubsection.2.5.3.1}%
+\contentsline {subsubsection}{\numberline {2.5.3.2}Métodos de Firma}{44}{subsubsection.2.5.3.2}%
+\contentsline {subsubsection}{\numberline {2.5.3.3}Comando Completo de Generación}{45}{subsubsection.2.5.3.3}%
+\contentsline {subsubsection}{\numberline {2.5.3.4}Proceso de Creación y Verificación de Actualizaciones Seguras}{45}{subsubsection.2.5.3.4}%
+\contentsline {section}{\numberline {2.6}Modelo de Datos}{46}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Entidades de Lamassu IoT}{46}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}Entidades de WFX}{46}{subsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.6.3}Entidades del Módulo Updates}{47}{subsection.2.6.3}%
+\contentsline {subsubsection}{\numberline {2.6.3.1}Update-Pack (Paquete de Actualización)}{47}{subsubsection.2.6.3.1}%
+\contentsline {subsubsection}{\numberline {2.6.3.2}Launch (Lanzamiento)}{47}{subsubsection.2.6.3.2}%
+\contentsline {subsection}{\numberline {2.6.4}Relaciones entre Entidades}{48}{subsection.2.6.4}%
+\contentsline {section}{\numberline {2.7}Estrategia de Pruebas y Validación}{50}{section.2.7}%
+\contentsline {subsection}{\numberline {2.7.1}Infraestructura de Tests}{50}{subsection.2.7.1}%
+\contentsline {subsection}{\numberline {2.7.2}Tests del Servicio SymKMS}{50}{subsection.2.7.2}%
+\contentsline {subsubsection}{\numberline {2.7.2.1}Tests Unitarios del Servicio Core}{50}{subsubsection.2.7.2.1}%
+\contentsline {subsubsection}{\numberline {2.7.2.2}Validación con Vectores de Test Oficiales}{51}{subsubsection.2.7.2.2}%
+\contentsline {subsubsection}{\numberline {2.7.2.3}Tests de API REST}{51}{subsubsection.2.7.2.3}%
+\contentsline {subsection}{\numberline {2.7.3}Tests del Servicio Updates}{51}{subsection.2.7.3}%
+\contentsline {subsubsection}{\numberline {2.7.3.1}Tests Unitarios del Servicio}{51}{subsubsection.2.7.3.1}%
+\contentsline {subsubsection}{\numberline {2.7.3.2}Tests de Integración con PostgreSQL}{52}{subsubsection.2.7.3.2}%
+\contentsline {subsubsection}{\numberline {2.7.3.3}Tests de Integración con WFX}{52}{subsubsection.2.7.3.3}%
+\contentsline {chapter}{\numberline {3}Resultados}{53}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Caso de Uso: Sistema de Control de Tanques}{53}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Interfaz Web de Gestión}{54}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Gestión de Claves Criptográficas (KMS)}{54}{subsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.1.1}Vista General del KMS}{55}{subsubsection.3.2.1.1}%
+\contentsline {subsubsection}{\numberline {3.2.1.2}Detalles y Operaciones de una Clave}{55}{subsubsection.3.2.1.2}%
+\contentsline {subsection}{\numberline {3.2.2}Gestión de Actualizaciones}{56}{subsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.1}Página Principal de Actualizaciones}{56}{subsubsection.3.2.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2.2}Creación de una Nueva Actualización}{57}{subsubsection.3.2.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.3}Detalles de un Update Pack}{58}{subsubsection.3.2.2.3}%
+\contentsline {subsection}{\numberline {3.2.3}Gestión de Lanzamientos}{59}{subsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.3.1}Configuración de un Lanzamiento}{59}{subsubsection.3.2.3.1}%
+\contentsline {subsubsection}{\numberline {3.2.3.2}Detalles de un Lanzamiento}{61}{subsubsection.3.2.3.2}%
+\contentsline {subsection}{\numberline {3.2.4}Monitorización de Dispositivos Individuales}{61}{subsection.3.2.4}%
+\contentsline {subsubsection}{\numberline {3.2.4.1}Línea Temporal de Estados}{61}{subsubsection.3.2.4.1}%
+\contentsline {subsubsection}{\numberline {3.2.4.2}Detalles de Estados Específicos}{62}{subsubsection.3.2.4.2}%
+\contentsline {section}{\numberline {3.3}Resultados de Pruebas y Cobertura de Código}{64}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Cobertura de Código}{64}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Validación Criptográfica}{65}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Tests de Integración}{65}{subsection.3.3.3}%
+\contentsline {chapter}{\numberline {4}Conclusiones}{67}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Cumplimiento de Objetivos}{67}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Validación de Criptografía Ligera en Dispositivos Limitados}{67}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Preparación para Amenazas Post-Cuánticas}{68}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Reflexión Final}{68}{section.4.4}%
+\contentsline {part}{Bibliografía}{71}{chapter*.43}%
+\contentsline {part}{Índice alfabético}{72}{chapter*.43}%

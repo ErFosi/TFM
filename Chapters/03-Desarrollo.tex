@@ -18,11 +18,11 @@ Por otro lado, existen principios clave que son esenciales para proteger la info
 
 \begin{itemize}
     \item \textbf{Confidencialidad:} Este principio asegura que la información es accesible solo para aquellas personas autorizadas a tener acceso. Protege los datos de accesos no autorizados y garantiza la privacidad de la información.
-    
+
     \item \textbf{Integridad:} La integridad se refiere a la exactitud y completitud de la información y los métodos de procesamiento. Este principio asegura que la información no ha sido alterada de manera no autorizada y que se mantiene tal como fue creada, enviada y recibida.
-    
+
     \item \textbf{No repudio:} Garantiza que una vez realizada una transacción, no se pueda negar su autoría, proporcionando evidencia de la participación de las partes involucradas.
-    
+
     \item \textbf{Autenticidad:} La autenticidad garantiza que las transacciones, las comunicaciones y los datos son genuinos y que las identidades de las partes involucradas son verificadas. Este principio evita la suplantación de identidad y asegura que los datos provienen de una fuente legítima.
 \end{itemize}
 
@@ -54,7 +54,10 @@ La criptografía simétrica presenta ciertas limitaciones importantes:
 
 Desde la perspectiva de la computación cuántica, el cifrado simétrico goza de una posición relativamente privilegiada. Según el NIST, algoritmos simétricos como AES-256 siguen siendo seguros a largo plazo incluso ante amenazas de computación cuántica \cite{NIST:SP800232:2023}. Esto se debe a que el algoritmo de Grover, que es el ataque cuántico más efectivo contra criptografía simétrica, reduce la seguridad efectiva a la mitad del tamaño de clave. Por ejemplo, una clave de 256 bits proporciona una seguridad equivalente a 128 bits ante un ataque cuántico, lo que sigue siendo considerado seguro por el NIST para aplicaciones sensibles.
 
-Sin embargo, en el contexto de dispositivos IoT con recursos limitados, algoritmos como ASCON ofrecen ventajas adicionales. ASCON proporciona una variante de 80 bits de seguridad cuántica (ASCON-80pq) específicamente diseñada para resistir ataques cuánticos mientras mantiene un consumo eficiente de recursos \cite{NIST:SP800232:2023}. Esta característica lo hace particularmente atractivo para entornos donde tanto la eficiencia computacional como la resistencia cuántica son requisitos críticos.
+% Si bien AES-256 se considera el estándar de resistencia cuántica debido a la degradación de seguridad impuesta por el algoritmo de Grover, su implementación en dispositivos de recursos limitados puede resultar costosa en términos de ciclos de CPU y consumo energético. En este escenario, ASCON-80pq surge como una alternativa estratégica.
+
+% Al emplear una clave de 160 bits, ASCON-80pq logra mitigar la amenaza cuántica de manera equilibrada: proporciona una seguridad post-cuántica efectiva de 80 bits sin incurrir en la penalización de rendimiento de los algoritmos simétricos de mayor tamaño \cite{NIST:SP800232:2023}. Esta configuración permite mantener la agilidad del sistema de actualizaciones y la baja latencia en la telemetría, resolviendo la problemática de seguridad sin comprometer la viabilidad operativa del hardware embebido.
+
 
 \subsubsection{Autenticación usando cifrado simétrico: AEAD}
 
@@ -101,16 +104,16 @@ La criptografía de clave pública y privada se puede entender mediante el sími
 
 \begin{enumerate}
     \item \textbf{Cerrando la caja (Encriptación con la clave pública):} Alice quiere enviar un mensaje confidencial a Bob. Para hacerlo, primero coloca el mensaje en la caja, y posteriormente utiliza la llave pública de Bob para cerrarla. Al cerrar la caja con la llave pública de Bob, Alice garantiza que solo Bob podrá abrirla, dado que solo él posee la llave privada correspondiente (ver~\autoref{fig:caja_cerr}).
-    
+
     \begin{figure}[H]
         \centering
         \includegraphics[width=1\textwidth]{imagenes/desarrollo/alice_cierra (1).jpg}
         \caption{Alice introduce el mensaje en la caja y la cierra con la clave pública de Bob.}
         \label{fig:caja_cerr}
     \end{figure}
-    
+
     \item \textbf{Abriendo la caja (Descifrado con la clave privada):} Cuando Bob recibe la caja cerrada, utiliza su llave privada para abrirla. Esta llave privada es única y está en su exclusiva posesión. Nadie más puede abrir la caja porque no disponen de la llave privada de Bob (ver~\autoref{fig:caja_abr}).
-    
+
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.8\textwidth]{imagenes/desarrollo/primera_parte_foto2.drawio (1).jpg}
@@ -134,7 +137,7 @@ En el ejemplo anterior se ha demostrado cómo la criptografía asimétrica puede
     \end{figure}
 
     \item \textbf{Abriendo la caja (Descifrado con la clave pública):} Alice recibe la caja y utiliza la clave pública de Bob para abrirla (ver~\autoref{fig:alice_usa_clvpb2}). Al hacerlo, Alice puede estar segura de que el mensaje fue realmente enviado por Bob, ya que solo la llave pública de Bob puede abrir la caja que fue cerrada con su llave privada. Esto proporciona autenticidad y no repudio, ya que Bob no puede negar haber enviado el mensaje.
-    
+
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.8\textwidth]{imagenes/desarrollo/segunda parte_2.drawio (1).jpg}
@@ -151,11 +154,11 @@ Con el cifrado asimétrico únicamente se logran los siguientes principios:
 
 \begin{itemize}
     \item \textbf{Confidencialidad:} Se cumple, ya que el cifrado asimétrico permite proteger los datos para que solo sean accesibles por las personas autorizadas con la clave privada correspondiente.
-    
+
     \item \textbf{Integridad:} No se puede asegurar completamente, ya que no hay un mecanismo inherente en el cifrado asimétrico que garantice que los datos no han sido alterados.
-    
+
     \item \textbf{No repudio:} No se puede garantizar completamente, ya que el cifrado asimétrico por sí solo no proporciona una manera de evitar que una de las partes niegue haber realizado una acción.
-    
+
     \item \textbf{Autenticidad:} No se puede asegurar completamente, ya que el cifrado asimétrico por sí solo no proporciona un método para verificar la identidad de manera confiable en una comunicación no física.
 \end{itemize}
 
@@ -169,7 +172,7 @@ Al firmar digitalmente un documento o mensaje, se utiliza la clave privada para 
 
 Para crear la firma se siguen los siguientes pasos:
 \begin{itemize}
-    \item \textbf{Creación del hash}: Primero, el remitente crea un resumen del mensaje original utilizando una función hash criptográfica. 
+    \item \textbf{Creación del hash}: Primero, el remitente crea un resumen del mensaje original utilizando una función hash criptográfica.
     \item \textbf{Firmado del hash}: A continuación, el remitente cifra el hash del mensaje con su clave privada. La firma digital no es el cifrado completo del mensaje, sino el cifrado del hash del mensaje.
     \item \textbf{Adjuntar al mensaje}: El hash cifrado (la firma) se adjunta al mensaje original. Este mensaje firmado se puede enviar al receptor.
 \end{itemize}
@@ -186,7 +189,7 @@ De esta manera se puede garantizar la autenticidad, la integridad y el no repudi
 
 \begin{itemize}
     \item \textbf{Integridad}: Si la verificación es exitosa, se puede estar seguro de que el mensaje no ha sido alterado desde que fue firmado.
- 
+
     \item \textbf{Autenticidad}: Al verificar con éxito la firma digital, se confirma que el mensaje fue realmente enviado por quien posee la clave privada correspondiente.
 
     \item \textbf{No Repudio}: Una vez enviado un mensaje firmado digitalmente, el remitente no puede negar haberlo enviado, ya que la firma digital creada con su clave privada es única y verificable por cualquier persona que tenga su clave pública.
@@ -262,15 +265,35 @@ En la \autoref{fig:ca-hierarchy}, se presenta un diagrama que ilustra esta jerar
 \label{fig:ca-hierarchy}
 \end{figure}
 
+\subsection{Estándar de sintaxis de mensajes criptográficos (CMS)}
+
+El Cryptographic Message Syntax (CMS), estandarizado en la RFC 5652, es un marco flexible para proteger mensajes. Este estándar define una sintaxis para encapsular datos firmados, cifrados, autenticados o comprimidos.
+
+Una de las características más potentes de CMS es su capacidad para soportar arquitecturas de confianza jerárquicas mediante la inclusión de certificados. En un esquema de firma tradicional, el receptor necesita tener previamente la clave pública del remitente. CMS permite un modelo más dinámico:
+
+\begin{enumerate}
+    \item \textbf{Confianza anclada en la CA:} El verificador posee únicamente el certificado de una Autoridad de Certificación (CA) de confianza.
+
+    \item \textbf{Estructura de datos firmados (SignedData):} El mensaje CMS encapsula no solo el contenido y la firma digital, sino también el certificado digital del firmante (y potencialmente toda la cadena de certificación hasta la CA raíz).
+
+    \item \textbf{Proceso de validación:} Al recibir el mensaje, el verificador realiza una validación en dos etapas:
+    \begin{itemize}
+        \item Primero, extrae el certificado del firmante incluido en el mensaje y comprueba que es válido y que ha sido emitido por la CA de confianza que ya posee.
+        \item Una vez validada la identidad del firmante, utiliza la clave pública contenida en ese certificado para verificar la firma digital del mensaje.
+    \end{itemize}
+\end{enumerate}
+
+Este mecanismo desacopla la verificación de la identidad específica del firmante. Permite que el emisor rote sus claves o que existan múltiples entidades emisoras diferentes, siempre que todas posean certificados válidos emitidos por la CA común, el receptor podrá validar los mensajes sin necesidad de reconfiguración.
+
 \section{Elección de algoritmos criptográficos}
 
-Para este proyecto, la selección de algoritmos criptográficos se ha basado en las necesidades actuales del ecosistema IoT y en la gran diversidad de dispositivos que lo componen. El panorama IoT abarca desde microcontroladores con recursos extremadamente limitados (pocos kilobytes de RAM y MHz de procesamiento) hasta dispositivos más potentes como gateways o sistemas embebidos basados en Linux. Esta heterogeneidad hace inviable la adopción de una única solución criptográfica que se adapte óptimamente a todos los escenarios.
+Para este proyecto, la selección de algoritmos criptográficos se ha basado en las necesidades actuales del ecosistema IoT y en la gran diversidad de dispositivos que lo componen. El panorama IoT abarca desde dispositivos con recursos extremadamente limitados (pocos kilobytes de RAM y MHz de procesamiento) hasta dispositivos más potentes como gateways o sistemas embebidos basados en Linux. Esta heterogeneidad hace inviable la adopción de una única solución criptográfica que se adapte óptimamente a todos los escenarios.
 
 Actualmente, el estándar de facto para el cifrado simétrico es AES (Advanced Encryption Standard). Este algoritmo es extremadamente robusto y eficiente en plataformas que disponen de recursos suficientes, especialmente aquellas que cuentan con aceleración por hardware (instrucciones AES-NI o similares). Sin embargo, en dispositivos restringidos sin soporte hardware específico, la implementación de AES puede resultar costosa en términos de ciclos de reloj, consumo de energía y uso de memoria, además de ser susceptible a ataques de canal lateral si no se implementa con complejas contramedidas.
 
-En el ámbito de la criptografía asimétrica, y específicamente en lo referente a la firma digital, los estándares actuales más utilizados son RSA y ECDSA. Este último, basado en curvas elípticas, destaca por su eficiencia frente a RSA, permitiendo longitudes de clave mucho menores para un mismo nivel de seguridad. Adicionalmente, en este proyecto se tiene la intención de añadir soporte para MLDSA (Module-Lattice-Based Digital Signature Standard), un algoritmo de firma post-cuántica que será detallado más adelante.
+En el ámbito de la criptografía asimétrica, y específicamente en lo referente a la firma digital, los estándares actuales más utilizados son RSA y ECDSA. Este último, basado en curvas elípticas, destaca por su eficiencia frente a RSA, permitiendo longitudes de clave mucho menores para un mismo nivel de seguridad. Adicionalmente, en este proyecto se tiene la intención de añadir soporte para ML-DSA (Module-Lattice-Based Digital Signature Standard), un algoritmo de firma post-cuántica que será detallado más adelante.
 
-Por esta razón, se ha decidido ofrecer soporte para múltiples familias de algoritmos, permitiendo que cada despliegue seleccione la opción más adecuada según las capacidades del hardware objetivo. 
+Por esta razón, se ha decidido ofrecer soporte para múltiples familias de algoritmos, permitiendo que cada despliegue seleccione la opción más adecuada según las capacidades del hardware objetivo.
 
 \subsection{ASCON: Estándar de criptografía ligera}
 
@@ -342,7 +365,7 @@ ASCON resulta ser el claro ganador. Además, es importante destacar la eficienci
     \label{fig:max_plaintext_arduino}
 \end{figure}
 
-Adicionalmente, al considerar el uso de ASCON como algoritmo AEAD, el tamaño del tag y los bytes adicionales que se añaden al texto plano son aspectos cruciales a evaluar. En la \autoref{fig:tag_tamaño} se ilustra la cantidad de bytes extra requeridos por cada algoritmo en comparación con el texto plano original. ASCON ocupa la mejor posición con solo 16 bytes adicionales, junto con AES-CTR y ChaCha20 sin autenticación.
+Adicionalmente, al considerar el uso de ASCON como algoritmo AEAD, el tamaño del tag de autenticación y los bytes adicionales que se añaden al texto plano son aspectos cruciales a evaluar. En la \autoref{fig:tag_tamaño} se ilustra la cantidad de bytes extra requeridos por cada algoritmo en comparación con el texto plano original. ASCON ocupa la mejor posición con solo 16 bytes adicionales, junto con AES-CTR y ChaCha20 sin autenticación.
 
 \begin{figure}[H]
     \centering
@@ -357,15 +380,33 @@ Más allá de las ventajas de rendimiento, ASCON ofrece también protección con
 
 Sin embargo, ASCON-80pq proporciona una protección algo más robusta. Esta variante está específicamente diseñada con una clave de 160 bits para garantizar 80 bits de seguridad efectiva incluso ante ataques cuánticos basados en el algoritmo de Grover \cite{NIST:SP800232:2023}. Si bien no es la variante más recomendada para entornos con recursos abundantes, donde AES-256 ofrecería una mayor seguridad a largo plazo, no está mal considerada, especialmente en dispositivos con recursos limitados o en entornos IoT donde la eficiencia computacional es un factor crítico. Esta característica lo hace particularmente atractivo para entornos IoT donde tanto la eficiencia computacional como la resistencia cuántica a largo plazo son requisitos críticos.
 
-\subsubsection{Seguridad post cuantica en la firma digital: MLDSA}
+\subsubsection{Seguridad post cuantica en la firma digital: ML-DSA}
 
 El panorama es significativamente diferente en el caso de la criptografía asimétrica. El algoritmo de Shor \cite{shor1997}, propuesto en 1997, demostró teóricamente que los sistemas criptográficos asimétricos actuales, como RSA y ECDSA, son completamente vulnerables a un computador cuántico suficientemente potente. Este algoritmo puede factorizar números grandes y resolver logaritmos discretos en tiempo polinómico, haciendo que los métodos de clave pública actuales sean obsoletos ante una amenaza cuántica.
 
-En respuesta a esta amenaza, el NIST ha recomendado la transición hacia algoritmos basados en retículos (lattice-based cryptography). Para firmas digitales, el estándar recomendado es MLDSA (Module-Lattice-Based Digital Signature Algorithm), estandarizado en el FIPS 204 \cite{NIST:FIPS204}. MLDSA ofrece seguridad matemáticamente resistente a ataques cuánticos mientras mantiene una eficiencia computacional aceptable para la mayoría de aplicaciones, incluyendo dispositivos con recursos limitados.
+En respuesta a esta amenaza, el NIST ha recomendado la transición hacia algoritmos basados en retículos (lattice-based cryptography). Para firmas digitales, el estándar recomendado es ML-DSA (Module-Lattice-Based Digital Signature Algorithm), estandarizado en el FIPS 204 \cite{NIST:FIPS204}. ML-DSA ofrece seguridad matemáticamente resistente a ataques cuánticos mientras mantiene una eficiencia computacional aceptable para la mayoría de aplicaciones, incluyendo dispositivos con recursos limitados.
+
+Es importante destacar que, en términos de eficiencia de verificación, ML-DSA presenta un rendimiento competitivo frente a algoritmos tradicionales. Según benchmarks realizados en arquitecturas modernas x64 \cite{schemitt2025assessingimpactpostquantumdigital}, la verificación de una firma ML-DSA es más rápida que la de una curva elíptica equivalente (ECDSA), lo cual es relevante para dispositivos IoT que actúan frecuentemente como verificadores en procesos de actualización OTA. Por otro lado, la generación de firmas presenta tiempos similares.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|r|r|}
+        \hline
+        \textbf{Algoritmo} & \textbf{Firma (ms)} & \textbf{Verificación (ms)} \\
+        \hline
+        ECDSA (Level 5) & 0.1754 & 0.3126 \\
+        ML-DSA (Level 5) & 0.0956 & 0.0479 \\
+        \hline
+    \end{tabular}
+    \caption{Comparativa de tiempos de firma y verificación en x64 (ms) \cite{schemitt2025assessingimpactpostquantumdigital}}
+    \label{tab:pq_benchmark_new}
+\end{table}
+
+Sin embargo, el punto crítico de ML-DSA radica en el tamaño de sus claves y firmas. A diferencia de ECDSA o RSA, ML-DSA requiere tamaños significativamente mayores. Por ejemplo, mientras una firma ECDSA P-256 ocupa 64 bytes, una firma ML-DSA-44 asciende a 2420 bytes ($\sim$2.4 KB). Este incremento impacta en el almacenamiento y el ancho de banda necesario para la transmisión de las firmas.
 
 Si bien la transición no es urgente, dado que actualmente no existen computadores cuánticos capaces de ejecutar el algoritmo de Shor a escala práctica y todas las firmas verificadas hoy en día permanecen seguras, realizar el salto hacia algoritmos post-cuánticos es altamente recomendado para garantizar la seguridad a largo plazo.
 
-La combinación de cifrado simétrico resistente a la computación cuántica (ASCON-80pq para confidencialidad) con firmas digitales basadas en retículos (MLDSA para autenticidad) constituye un enfoque integral para garantizar la seguridad criptográfica a largo plazo, tanto ante amenazas actuales como futuras.
+La combinación de cifrado simétrico resistente a la computación cuántica (ASCON-80pq o AES-256-GCM) con firmas digitales basadas en retículos (ML-DSA) constituye un enfoque integral para garantizar la seguridad criptográfica a largo plazo, tanto ante amenazas actuales como futuras.
 
 \section{Actualizaciones de software en sistemas embebidos}
 
@@ -561,7 +602,7 @@ Un componente crítico del \textit{Job} es el campo \textbf{Definition} (metadat
     \item \textbf{DMSID y LaunchID:} Etiquetas utilizadas como identificadores únicos para búsquedas y trazabilidad dentro del sistema de gestión.
 \end{itemize}
 
-\subsection{Lamassu IoT}
+\subsection{LamassuIoT}
 
 Lamassu es una infraestructura de clave pública (PKI) diseñada específicamente para dispositivos IoT. Ofrece capacidades completas para la gestión de claves asimétricas, autoridades certificadoras (CA) y certificados digitales. Esta infraestructura se integra directamente con los dispositivos, permitiéndoles utilizar estos materiales criptográficos para procesos de autenticación robusta.
 
@@ -573,7 +614,17 @@ En el alcance de este proyecto, Lamassu desempeña un papel fundamental como pro
     \item \textbf{Infraestructura de Confianza:} Suministra los mecanismos de firma digital y emisión de certificados necesarios para validar la autenticidad del firmware y de los propios dispositivos.
 \end{itemize}
 
-Es importante destacar que, en su estado actual, Lamassu no dispone de un sistema de gestión de claves (KMS) para criptografía simétrica. El desarrollo de este soporte, habilitando el uso de algoritmos como AES y ASCON para el cifrado de datos, forma parte de los objetivos de este trabajo y se detallará en las secciones de implementación.
+\subsection{Extensión del KMS para Criptografía Simétrica}
+
+Es importante destacar que, en su estado actual, Lamassu no disponía de un sistema de gestión de claves (KMS) para criptografía simétrica. Como parte de los objetivos de este trabajo, se ha desarrollado esta capacidad, extendiendo el KMS de Lamassu para soportar:
+
+\begin{itemize}
+    \item \textbf{Gestión de claves simétricas:} Generación, importación, almacenamiento y rotación de claves para algoritmos de cifrado simétrico (AES en sus variantes y ASCON).
+    \item \textbf{Operaciones de cifrado/descifrado:} Ejecución de operaciones criptográficas directamente en el KMS, manteniendo las claves protegidas sin exponerlas.
+    \item \textbf{Generación de MAC (Message Authentication Code):} Soporte para algoritmos de autenticación de mensajes, incluyendo AES-CMAC y ASCON-MAC, permitiendo verificar la integridad y autenticidad de los datos sin cifrarlos.
+\end{itemize}
+
+Esta extensión permite que el servicio de Updates utilice el KMS de Lamassu para todas las operaciones criptográficas necesarias en el proceso de creación de paquetes de actualización, garantizando una gestión centralizada y segura de las claves criptográficas.
 
 \section{Infraestructura Planteada}
 
@@ -637,7 +688,7 @@ En el caso de despliegues orquestados mediante WFX, la información del algoritm
 
 El formato de metadatos utilizado en los Jobs de WFX es el siguiente:
 
-\begin{lstlisting}[language=json, caption={Formato de metadatos del Job en WFX}, label={lst:wfx_metadata}]
+\begin{lstlisting}[caption={Formato de metadatos del Job en WFX}, label={lst:wfx_metadata}]
 {
   "id": "update-001",
   "definition": {
@@ -664,8 +715,8 @@ Los campos clave son:
 La integración de mecanismos de firma digital resistentes a ataques cuánticos resultó relativamente más sencilla que la del cifrado simétrico. El proceso requirió dos modificaciones principales:
 
 \begin{enumerate}
-    \item \textbf{Habilitación en menuconfig:} SWUpdate utiliza un sistema de configuración basado en Kconfig (similar al kernel de Linux) que permite habilitar o deshabilitar características antes de compilar (\textit{buildear}) el proyecto. Se habilitaron los métodos de firma post-cuántica en esta configuración.
-    
+    \item \textbf{Habilitación en menuconfig:} SWUpdate utiliza un sistema de configuración basado en Kconfig (similar al kernel de Linux) que permite habilitar o deshabilitar características antes de compilar (\textit{buildear}) el proyecto. Se habilitaron los métodos de firma en esta configuración, en especifico verificación de firma con formato CMS.
+
     \item \textbf{Actualización de OpenSSL:} Para el soporte de algoritmos post-cuánticos, se requiere OpenSSL versión 3.5 o superior. Dado que los repositorios de paquetes (APT) no disponen aún de esta versión, fue necesario descargarla del repositorio oficial de OpenSSL y realizar una instalación manual.
 \end{enumerate}
 
@@ -683,11 +734,11 @@ Se han integrado dos modalidades de firma digital en SWUGenerator:
 
 \begin{itemize}
     \item \textbf{Firma directa:} Acceso directo a la clave privada almacenada en el sistema de archivos. Este método es más simple pero requiere que la clave privada esté accesible en texto plano.
-    
+
     \item \textbf{Firma CMS con PKCS\#11:} Utilización del estándar PKCS\#11 (\textit{Public-Key Cryptography Standards \#11}), que define una interfaz de programación independiente de la tecnología para dispositivos criptográficos como módulos de seguridad hardware (HSM). Este método permite que las claves privadas permanezcan protegidas dentro de hardware especializado, sin exponerlas nunca al sistema operativo.
+    \item \textbf{Firma custom con certificado CMS provenientes de PKI}: Para este caso, se ha utilizado la API de Lamassu especificando el identificador de la clave privada y el certificado asociado a esa clave privada para crear el CMS que contenga la firma y el certificado. Esto proporciona una capa adicional de seguridad y autenticidad, ya que el certificado puede ser verificado por el dispositivo durante la instalación del paquete, aprovechando la infraestructura de gestión de claves de Lamassu.
 \end{itemize}
 
-El estándar CMS (\textit{Cryptographic Message Syntax}) proporciona un formato estandarizado para firmar, cifrar y autenticar mensajes, ampliamente utilizado en certificados digitales y comunicaciones seguras.
 
 \subsubsection{Comando Completo de Generación}
 
@@ -716,6 +767,18 @@ Donde:
 
 Con esto se habria realizado uno de los hitos de este TFM, que es la integración de criptografía ligera y post-cuántica en la cadena de actualización.
 
+\subsubsection{Proceso de Creación y Verificación de Actualizaciones Seguras}
+
+En el caso de integración con Lamassu, el proceso completo de creación y verificación de actualizaciones seguras sigue estos pasos:
+
+\begin{enumerate}
+    \item \textbf{Creación en el backend:} El usuario sube los archivos de actualización a través de la interfaz web, selecciona la clave privada y su certificado asociado desde Lamassu, y elige la clave simétrica para cifrar la actualización. SWUGenerator crea el paquete cifrando tanto la actualización como el descriptor, y firma el conjunto usando el método custom con CMS, incorporando el certificado en la estructura CMS.
+
+    \item \textbf{Verificación en el dispositivo:} El dispositivo, con SWUpdate configurado previamente para validar firmas y cifrado, verifica la firma del paquete examinando el certificado incluido en el CMS contra la CA raíz instalada. Una vez validada la firma, descifra el contenido utilizando la clave privada correspondiente al algoritmo de cifrado especificado en el paquete.
+\end{enumerate}
+
+Este flujo garantiza la integridad, autenticidad y confidencialidad de las actualizaciones, aprovechando la infraestructura PKI de Lamassu para la gestión segura de claves y certificados.
+
 \section{Modelo de Datos}
 
 Para entender el modulo de updates y su integración con Lamassu y WFX, es fundamental definir las entidades principales que componen el modelo de datos del sistema. Estas entidades representan los conceptos clave y las estructuras de información que se manejan en la plataforma de actualizaciones.
@@ -726,7 +789,7 @@ Desde la infraestructura Lamassu se obtienen dos entidades fundamentales que pro
 
 \begin{itemize}
     \item \textbf{Device (Dispositivo):} Representa cada dispositivo IoT registrado en el sistema. Cada dispositivo contiene información de identificación, credenciales y metadatos asociados a su configuración de seguridad.
-    
+
     \item \textbf{DMS (Device Management System):} Agrupa lógicamente conjuntos de dispositivos. Un DMS puede representar una flota de dispositivos de un cliente específico, una zona geográfica determinada, o cualquier otra agrupación organizativa. Esta entidad es clave para aplicar políticas de actualización a grupos completos de dispositivos.
 \end{itemize}
 
@@ -736,7 +799,7 @@ El sistema de orquestación de flujos de trabajo WFX aporta las siguientes entid
 
 \begin{itemize}
     \item \textbf{Workflow:} Define el flujo de estados por los que pasa una actualización. Como se ha descrito anteriormente, existen workflows predefinidos como \textit{Direct} y \textit{Phased}, y es posible crear workflows personalizados adaptados a necesidades específicas.
-    
+
     \item \textbf{Job:} Representa una instancia de actualización asignada a un dispositivo concreto. Encapsula toda la información necesaria para llevar a cabo la actualización, incluyendo el estado actual, progreso, historial de cambios, y los metadatos técnicos de la actualización en su campo \textit{Definition}.
 \end{itemize}
 
@@ -784,7 +847,7 @@ Las actualizaciones se despliegan organizadas en batches (lotes) de dispositivos
 
 \begin{itemize}
     \item \textbf{Modo Automático:} Una vez que todos los dispositivos de un batch completan exitosamente la actualización, el sistema procede automáticamente a lanzar el siguiente batch sin intervención manual. Este modo es ideal para despliegues donde se confía en la estabilidad de la actualización y se desea una distribución rápida.
-    
+
     \item \textbf{Modo Manual:} Tras la finalización de cada batch, el sistema espera confirmación explícita del desarrollador o administrador antes de proceder con el siguiente lote. Este enfoque proporciona un mayor control y permite verificar el comportamiento de la actualización en producción antes de expandir el despliegue, siendo especialmente útil para actualizaciones críticas o de alto riesgo.
 \end{itemize}
 
@@ -794,11 +857,11 @@ Las relaciones entre las entidades del sistema se establecen de la siguiente man
 
 \begin{itemize}
     \item Un \textbf{DMS} puede tener asociados múltiples \textbf{Update-Packs}, permitiendo gestionar diferentes versiones de software para una misma agrupación de dispositivos.
-    
+
     \item Un \textbf{DMS} puede tener múltiples \textbf{Launches}, posibilitando campañas de actualización sucesivas o paralelas para diferentes componentes.
-    
+
     \item Un \textbf{Launch} está asociado a un único \textbf{Update-Pack}, estableciendo una relación unívoca entre cada campaña de despliegue y la versión de software que distribuye.
-    
+
     \item Cada \textbf{Job} creado en WFX está vinculado a un único dispositivo que forme parte del lanzamiento, por lo que en un lanzamiento finalizado habra tantos jobs como dispositivos planeados a actualizar.
 \end{itemize}
 
@@ -811,4 +874,63 @@ La \autoref{fig:data_model} ilustra el diagrama completo del modelo de datos, mo
     \label{fig:data_model}
 \end{figure}
 
+\section{Estrategia de Pruebas y Validación}
 
+Para garantizar la fiabilidad y correctitud de los dos componentes principales desarrollados, SymKMS (servicio de gestión de claves simétricas) y Updates (servicio de gestión de actualizaciones), se ha diseñado una estrategia de pruebas exhaustiva que abarca tests unitarios, de integración y validación criptográfica contra vectores oficiales.
+
+\subsection{Infraestructura de Tests}
+
+La ejecución de los tests de integración requiere servicios externos reales (PostgreSQL, WFX). Para garantizar la reproducibilidad y el aislamiento de las pruebas, se ha implementado una infraestructura basada en contenedores Docker mediante la librería \texttt{dockertest}. Esta infraestructura levanta automáticamente contenedores limpios de PostgreSQL 15 y WFX (Siemens Workflow Executor) antes de cada suite de tests, asigna puertos dinámicos para evitar conflictos y elimina los contenedores tras la finalización de las pruebas. De este modo, cada ejecución parte de un estado conocido e idéntico, independientemente del entorno.
+
+\subsection{Tests del Servicio SymKMS}
+
+El servicio SymKMS cuenta con más de 150 tests distribuidos en cuatro categorías principales:
+
+\subsubsection{Tests Unitarios del Servicio Core}
+
+Los tests unitarios del servicio core validan las operaciones criptográficas fundamentales:
+
+\begin{itemize}
+    \item \textbf{Gestión de claves (15 tests):} Validación del ciclo de vida completo de las claves (creación, lectura, listado, eliminación), incluyendo paginación, ordenación y aislamiento multi-usuario para garantizar que las claves de un usuario no son accesibles por otro.
+
+    \item \textbf{Creación de claves (9 tests):} Cobertura de todas las variantes soportadas: AES (128/192/256 bits en modos CBC, CTR y GCM), ASCON (128, 128a, 80pq), normalización de nombres de algoritmo y validación de tamaños de clave.
+
+    \item \textbf{Cifrado y descifrado (21 tests):} Pruebas de \textit{round-trip} (cifrar y descifrar recuperando el mensaje original) para todos los algoritmos. Se incluyen tests de detección de corrupción del \textit{ciphertext} (especialmente relevantes para GCM y ASCON al ser modos AEAD), validación de \textit{padding} en CBC, manejo de vectores de inicialización incorrectos y aislamiento por usuario.
+
+    \item \textbf{Operaciones MAC (40 tests):} Validación de los tres algoritmos de MAC soportados: AES-CMAC con todos los tamaños de clave, HMAC-SHA3 (256, 384 y 512 bits) y ASCON-MAC. Se evalúa el determinismo (mismo input produce mismo MAC), comportamiento con datos de gran tamaño (hasta 1 MB), y casos límite como datos vacíos, de 1 byte, de 15 bytes (borde de bloque AES) y múltiplos exactos del tamaño de bloque. También se prueban patrones especiales (\textit{all-zeros}, \textit{all-ones}).
+
+    \item \textbf{Verificación de MAC (12 tests):} Validación de verificación correcta e incorrecta, detección de modificación de datos y detección de \textit{tags} truncados o alterados.
+\end{itemize}
+
+\subsubsection{Validación con Vectores de Test Oficiales}
+
+La correctitud criptográfica se ha validado contra fuentes de referencia:
+
+\begin{itemize}
+    \item \textbf{AES-CMAC según RFC 4493 (4 tests oficiales):} Se han implementado los cuatro vectores de test definidos en la RFC 4493, cubriendo mensajes de 0, 16, 40 y 64 bytes. Durante este proceso se detectaron dos errores tipográficos en la propia RFC (discrepancias en los últimos bytes del vector 1 y tag incorrecto en el vector 4). Para confirmar la correctitud de la implementación, se realizó una validación cruzada con la librería \texttt{cryptography} de Python, obteniendo coincidencia del 100\%.
+
+    \item \textbf{AES-CMAC condiciones de borde (10 tests):} Tests con longitudes de datos diseñadas para ejercitar todos los caminos del algoritmo de \textit{padding}: 0, 1, 15, 16, 17, 32, 33, 48, 1024 y 65536 bytes.
+
+    \item \textbf{AES-CMAC propiedades de seguridad (21 sub-tests):} Verificación de detección de \textit{bit-flip} (primer y último byte), manipulación de \textit{tag} y resistencia general a ataques de modificación.
+\end{itemize}
+
+
+\subsubsection{Tests de API REST}
+
+Finalmente, se incluyen tests de los controladores HTTP que validan el correcto funcionamiento de todos los \textit{endpoints} REST expuestos por el servicio, así como su input.
+
+\subsection{Tests del Servicio Updates}
+
+El servicio de Updates cuenta con más de 70 tests distribuidos en las siguientes categorías:
+
+\subsubsection{Tests Unitarios del Servicio}
+
+Los tests unitarios (10 tests) validan la lógica de negocio del servicio, incluyendo la creación de modelos \textit{UpdatePack} con y sin cifrado y firma, la estructura correcta de los archivos SWU generados, y las combinaciones de algoritmos de cifrado (AES-256-CBC, AES-256-GCM, ASCON-128, ASCON-128a, ASCON-80pq) y firma (RSA-PSS, ECDSA, ML-DSA post-cuántico).
+
+\subsubsection{Tests de Integración con PostgreSQL}
+
+Los tests de integración con base de datos real (más de 25 tests) verifican las operaciones CRUD completas para las entidades \textit{UpdatePack} y \textit{LaunchTrack}, consultas avanzadas (por DMS ID, por nombre, con paginación), almacenamiento y recuperación de metadatos de cifrado y firma, concurrencia (10 inserciones paralelas) y todas las estrategias de despliegue (\textit{Phased+Percentage}, \textit{Direct+Fixed}, \textit{Auto-deploy}).
+
+\subsubsection{Tests de Integración con WFX}
+
+Los tests de integración con WFX real (más de 15 tests) validan la carga de \textit{workflows} en WFX, la creación y gestión de \textit{jobs} a través de su API, las estrategias de lanzamiento con la base de datos real, la paginación del historial de actualizaciones y el versionado de \textit{UpdatePacks}.
