@@ -386,23 +386,24 @@ El panorama es significativamente diferente en el caso de la criptografía asim�
 
 En respuesta a esta amenaza, el NIST ha recomendado la transición hacia algoritmos basados en retículos (lattice-based cryptography). Para firmas digitales, el estándar recomendado es ML-DSA (Module-Lattice-Based Digital Signature Algorithm), estandarizado en el FIPS 204 \cite{NIST:FIPS204}. ML-DSA ofrece seguridad matemáticamente resistente a ataques cuánticos mientras mantiene una eficiencia computacional aceptable para la mayoría de aplicaciones, incluyendo dispositivos con recursos limitados.
 
-Es importante destacar que, en términos de eficiencia de verificación, ML-DSA presenta un rendimiento competitivo frente a algoritmos tradicionales. Según benchmarks realizados en arquitecturas modernas x64 \cite{schemitt2025assessingimpactpostquantumdigital}, la verificación de una firma ML-DSA es más rápida que la de una curva elíptica equivalente (ECDSA), lo cual es relevante para dispositivos IoT que actúan frecuentemente como verificadores en procesos de actualización OTA. Por otro lado, la generación de firmas presenta tiempos similares.
+Es importante destacar que, en términos de eficiencia de verificación, ML-DSA presenta un rendimiento competitivo frente a algoritmos tradicionales. Según benchmarks realizados en arquitecturas modernas x64 \cite{schemitt2025assessingimpactpostquantumdigital}, la verificación de una firma ML-DSA es más rápida que la de una curva elíptica equivalente (ECDSA), lo cual es relevante para dispositivos IoT que actúan frecuentemente como verificadores en procesos de actualización OTA. Por otro lado, la generación de firmas presenta tiempos similares e incluso mejores cuanto mayor sea el nivel de seguridad.
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|l|r|r|}
+    \small
+    \begin{tabular}{|l|r|r|r|r|}
         \hline
-        \textbf{Algoritmo} & \textbf{Firma (ms)} & \textbf{Verificación (ms)} \\
+        \textbf{Algoritmo} & \textbf{Firma (ms)} & \textbf{Verif. (ms)} & \textbf{Tam. clave (B)} & \textbf{Tam. firma (B)} \\
         \hline
-        ECDSA (Level 5) & 0.1754 & 0.3126 \\
-        ML-DSA (Level 5) & 0.0956 & 0.0479 \\
+        ECDSA P-521 (L5) & 0.1754 & 0.3126 & 66 & 132 \\
+        ML-DSA-87 (L5) & 0.0956 & 0.0479 & 2592 & 4627 \\
         \hline
     \end{tabular}
-    \caption{Comparativa de tiempos de firma y verificación en x64 (ms) \cite{schemitt2025assessingimpactpostquantumdigital}}
+    \caption{Comparativa de rendimiento y tamaños para nivel de seguridad 5 \cite{schemitt2025assessingimpactpostquantumdigital}}
     \label{tab:pq_benchmark_new}
 \end{table}
 
-Sin embargo, el punto crítico de ML-DSA radica en el tamaño de sus claves y firmas. A diferencia de ECDSA o RSA, ML-DSA requiere tamaños significativamente mayores. Por ejemplo, mientras una firma ECDSA P-256 ocupa 64 bytes, una firma ML-DSA-44 asciende a 2420 bytes ($\sim$2.4 KB). Este incremento impacta en el almacenamiento y el ancho de banda necesario para la transmisión de las firmas.
+Sin embargo, el punto crítico de ML-DSA radica en el tamaño de sus claves y firmas. A diferencia de ECDSA o RSA, ML-DSA requiere tamaños significativamente mayores. Por ejemplo, en el nivel de seguridad 5, mientras una firma ECDSA P-521 ocupa 132 bytes, una firma ML-DSA-87 asciende a 4627 bytes ($\sim$4.5 KB), lo que representa un incremento de aproximadamente 34 veces el tamaño (3405\% mayor). Este incremento impacta en el almacenamiento y el ancho de banda necesario para la transmisión de las firmas.
 
 Si bien la transición no es urgente, dado que actualmente no existen computadores cuánticos capaces de ejecutar el algoritmo de Shor a escala práctica y todas las firmas verificadas hoy en día permanecen seguras, realizar el salto hacia algoritmos post-cuánticos es altamente recomendado para garantizar la seguridad a largo plazo.
 
@@ -599,7 +600,7 @@ Un componente crítico del \textit{Job} es el campo \textbf{Definition} (metadat
     \item \textbf{Artifacts:} Lista de objetos a instalar. Cada artefacto incluye un \textbf{Name} y una \textbf{Uri} (ruta de descarga para el dispositivo).
     \item \textbf{Version:} Versión del paquete de software.
     \item \textbf{Type:} Tipo de actualización.
-    \item \textbf{DMSID y LaunchID:} Etiquetas utilizadas como identificadores únicos para búsquedas y trazabilidad dentro del sistema de gestión.
+    \item \textbf{Campos personalizables:} Se pueden incluir campos adicionales según las necesidades del proyecto, como por ejemplo, el identificador de la campaña de actualización, el tipo de dispositivo o cualquier otro dato relevante para la lógica de negocio del sistema de actualizaciones.
 \end{itemize}
 
 \subsection{LamassuIoT}
@@ -655,133 +656,121 @@ La arquitectura global de la solución y la interacción entre estos componentes
     \label{fig:plataforma_arquitectura}
 \end{figure}
 
-\section{Integración de Criptografía Ligera y Post-Cuántica}
+\section{Casos de Uso del Sistema}
 
-Una de las contribuciones principales de este trabajo es la integración de algoritmos criptográficos ligeros (LWC) y resistentes a ataques cuánticos (PQ) en la cadena de actualización de dispositivos IoT. Esta integración ha requerido modificaciones tanto en SWUpdate como en SWUGenerator, presentando desafíos técnicos considerables.
+Una vez presentada la arquitectura de la plataforma, resulta fundamental identificar y describir los principales casos de uso que ilustran las interacciones entre los diferentes actores y componentes del sistema. Esta sección define quiénes interactúan con la plataforma y cómo lo hacen, proporcionando una visión funcional del sistema antes de profundizar en los detalles técnicos de implementación.
 
-\subsection{Integración de Algoritmos de Cifrado Simétrico}
+\subsection{Actores del sistema}
 
-La incorporación de nuevas alternativas de criptografía simétrica, en particular ASCON, si bien swupdate es muy personalizable, este cambio ha supuesto una dificultad considerable. Originalmente, SWUpdate únicamente admitía cifrado simétrico mediante AES-CBC, sin ningún mecanismo de selección de algoritmo. Esta restricción se debía a que, al existir una sola opción, no se requería un selector explícito en el diseño original.
-
-Para superar esta limitación, se ha modificado el código fuente de SWUpdate para incorporar las siguientes capacidades:
+Los actores principales que interactúan con la plataforma son:
 
 \begin{itemize}
-    \item \textbf{Selector de algoritmo:} Posibilidad de definir explícitamente qué algoritmo de cifrado se utilizará.
-    \item \textbf{Soporte para variantes de AES:} Integración de las variantes CBC, CTR y GCM de AES para las longitudes de clave de 128, 192 y 256 bits.
-    \item \textbf{Soporte para ASCON:} Integración de la implementación en C de ASCON en su variante más eficiente.
+    \item \textbf{Desarrollador:} Usuario responsable de gestionar las actualizaciones, crear paquetes de actualización, configurar campañas de despliegue y monitorizar el estado de la flota de dispositivos. Interactúa con el sistema a través de la interfaz web y, ocasionalmente, mediante la API REST del servicio Updates.
+
+    \item \textbf{Dispositivo IoT:} Dispositivo embebido que ejecuta el agente SWUpdate y realiza consultas periódicas (polling) al sistema WFX para comprobar la disponibilidad de nuevas actualizaciones, descargarlas e instalarlas.
 \end{itemize}
 
-Por defecto, el sistema asume que las claves criptográficas se encuentran almacenadas en \texttt{/etc/swupdate/keys/alg\_variant.key}, siguiendo una convención de nomenclatura que incluye el algoritmo con sub variante, el IV y la clave.
+\subsection{Componentes del sistema}
 
-\subsubsection{Instalación Nativa}
-
-Para mantener la flexibilidad y no cerrar puertas a diferentes escenarios de uso, se ha conservado la opción de instalación nativa. Esto puede ocurrir si se requiere de una instalación mediante USB practica muy común en el ambito de dispositivos linux embebidos. En este modo, el algoritmo y la clave se especifican directamente por línea de comandos:
-
-\begin{verbatim}
-swupdate -i test_aes_192_ctr.swu -K ./aes192-ctr.txt
-\end{verbatim}
-
-
-\subsubsection{Integración con WFX}
-
-En el caso de despliegues orquestados mediante WFX, la información del algoritmo de cifrado se transmite a través de los metadatos del Job. Al recibir una tarea pendiente, el agente SWUpdate extrae el algoritmo especificado en el campo \textit{definition}, que WFX proporciona para usos personalizados.
-
-El formato de metadatos utilizado en los Jobs de WFX es el siguiente:
-
-\begin{lstlisting}[caption={Formato de metadatos del Job en WFX}, label={lst:wfx_metadata}]
-{
-  "id": "update-001",
-  "definition": {
-    "artifacts": [
-      {
-        "uri": "https://cdn.example.com/firmware.swu.enc",
-        "ivt": "0123456789abcdef0123456789abcdef",
-        "algorithm": "aes256-cbc"
-      }
-    ]
-  }
-}
-\end{lstlisting}
-
-Los campos clave son:
-\begin{itemize}
-    \item \textbf{uri:} Ubicación desde donde el dispositivo descargará el paquete de actualización.
-    \item \textbf{ivt:} Vector de inicialización utilizado en el cifrado.
-    \item \textbf{algorithm:} Algoritmo de cifrado empleado (ej. \texttt{aes256-cbc}, \texttt{ascon-128a}).
-\end{itemize}
-
-\subsection{Integración de Firma Digital Post-Cuántica}
-
-La integración de mecanismos de firma digital resistentes a ataques cuánticos resultó relativamente más sencilla que la del cifrado simétrico. El proceso requirió dos modificaciones principales:
-
-\begin{enumerate}
-    \item \textbf{Habilitación en menuconfig:} SWUpdate utiliza un sistema de configuración basado en Kconfig (similar al kernel de Linux) que permite habilitar o deshabilitar características antes de compilar (\textit{buildear}) el proyecto. Se habilitaron los métodos de firma en esta configuración, en especifico verificación de firma con formato CMS.
-
-    \item \textbf{Actualización de OpenSSL:} Para el soporte de algoritmos post-cuánticos, se requiere OpenSSL versión 3.5 o superior. Dado que los repositorios de paquetes (APT) no disponen aún de esta versión, fue necesario descargarla del repositorio oficial de OpenSSL y realizar una instalación manual.
-\end{enumerate}
-
-\subsection{Modificaciones en SWUGenerator}
-
-La integración de los nuevos algoritmos criptográficos también requirió modificaciones sustanciales en SWUGenerator, la herramienta responsable de crear los paquetes SWU.
-
-\subsubsection{Cifrado con ASCON}
-
-Inicialmente, se evaluó el uso de la librería de Python de ASCON \cite{ascon-python}, disponible en PyPI. Sin embargo, las pruebas de rendimiento revelaron que esta implementación tardaba cientos de veces más que una implementación nativa, requiriendo varios segundos para procesar apenas unos pocos megabytes. Ante esta limitación de rendimiento inaceptables para paquetes de firmware que pueden ser de decenas o cientos de megabytes, se optó por integrar directamente el código C de ASCON, obteniendo una mejora drástica en el tiempo de procesamiento.
-
-\subsubsection{Métodos de Firma}
-
-Se han integrado dos modalidades de firma digital en SWUGenerator:
+La plataforma OTA se organiza en dos subsistemas principales:
 
 \begin{itemize}
-    \item \textbf{Firma directa:} Acceso directo a la clave privada almacenada en el sistema de archivos. Este método es más simple pero requiere que la clave privada esté accesible en texto plano.
+    \item \textbf{Backend:} Módulo de gestión centralizada (Updates) que proporciona las funcionalidades de creación, versionado, cifrado y firma de paquetes de actualización. Se integra con Lamassu para las operaciones criptográficas.
 
-    \item \textbf{Firma CMS con PKCS\#11:} Utilización del estándar PKCS\#11 (\textit{Public-Key Cryptography Standards \#11}), que define una interfaz de programación independiente de la tecnología para dispositivos criptográficos como módulos de seguridad hardware (HSM). Este método permite que las claves privadas permanezcan protegidas dentro de hardware especializado, sin exponerlas nunca al sistema operativo.
-    \item \textbf{Firma custom con certificado CMS provenientes de PKI}: Para este caso, se ha utilizado la API de Lamassu especificando el identificador de la clave privada y el certificado asociado a esa clave privada para crear el CMS que contenga la firma y el certificado. Esto proporciona una capa adicional de seguridad y autenticidad, ya que el certificado puede ser verificado por el dispositivo durante la instalación del paquete, aprovechando la infraestructura de gestión de claves de Lamassu.
+    \item \textbf{WFX:} Motor de orquestación de workflows que mantiene el estado de las tareas de actualización y actúa como punto de sincronización entre el backend y los dispositivos.
 \end{itemize}
 
+Como se ha comentado anteiormente, el sistema se integra con:
 
-\subsubsection{Comando Completo de Generación}
-
-El comando completo para crear un paquete SWU con cifrado y firma integrados es el siguiente:
-
-\begin{verbatim}
-swugenerator \
-  -k "CMS_PKCS11,pkcs11:object=key-name,cert.pem" \
-  create \
-  -K "key,iv,ascon-128a" \
-  -t \
-  -s sw-description \
-  -o output.swu \
-  -a artifacts/
-\end{verbatim}
-
-Donde:
 \begin{itemize}
-    \item \texttt{-k}: Especifica el método de firma (CMS con PKCS\#11), el objeto de la clave en el dispositivo criptográfico y el certificado asociado.
-    \item \texttt{-K}: Define la clave de cifrado, el vector de inicialización y el algoritmo a utilizar (en este caso, ASCON-128a).
-    \item \texttt{-t}: Cifra el descriptor también.
-    \item \texttt{-s}: Especifica el archivo descriptor del software.
-    \item \texttt{-o}: Define el nombre del archivo de salida.
-    \item \texttt{-a}: Indica el directorio que contiene los artefactos a empaquetar.
+    \item \textbf{Lamassu PKI:} Infraestructura de gestión de identidades, claves y certificados que proporciona los servicios criptográficos necesarios para firma y cifrado de paquetes, así como la gestión de dispositivos (DMS) y sus agrupaciones.
 \end{itemize}
 
-Con esto se habria realizado uno de los hitos de este TFM, que es la integración de criptografía ligera y post-cuántica en la cadena de actualización.
+\subsection{Diagrama de casos de uso}
 
-\subsubsection{Proceso de Creación y Verificación de Actualizaciones Seguras}
+La \autoref{fig:use_cases} presenta el diagrama de casos de uso del sistema, mostrando las principales interacciones entre los actores y los subsistemas de la plataforma.
 
-En el caso de integración con Lamassu, el proceso completo de creación y verificación de actualizaciones seguras sigue estos pasos:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{imagenes/desarrollo/casosusootaq.png}
+    \caption{Diagrama de casos de uso de la plataforma de actualizaciones OTA}
+    \label{fig:use_cases}
+\end{figure}
 
-\begin{enumerate}
-    \item \textbf{Creación en el backend:} El usuario sube los archivos de actualización a través de la interfaz web, selecciona la clave privada y su certificado asociado desde Lamassu, y elige la clave simétrica para cifrar la actualización. SWUGenerator crea el paquete cifrando tanto la actualización como el descriptor, y firma el conjunto usando el método custom con CMS, incorporando el certificado en la estructura CMS.
+\subsection{Descripción de los casos de uso}
 
-    \item \textbf{Verificación en el dispositivo:} El dispositivo, con SWUpdate configurado previamente para validar firmas y cifrado, verifica la firma del paquete examinando el certificado incluido en el CMS contra la CA raíz instalada. Una vez validada la firma, descifra el contenido utilizando la clave privada correspondiente al algoritmo de cifrado especificado en el paquete.
-\end{enumerate}
+El sistema se organiza en dos subsistemas principales dentro de la Plataforma OTA, cada uno con sus casos de uso específicos:
 
-Este flujo garantiza la integridad, autenticidad y confidencialidad de las actualizaciones, aprovechando la infraestructura PKI de Lamassu para la gestión segura de claves y certificados.
+\subsubsection{Casos de uso del Backend}
+
+Los casos de uso gestionados por el desarrollador en el subsistema Backend son:
+
+\begin{itemize}
+    \item \textbf{Crear actualización:} El desarrollador proporciona los archivos de firmware o software que componen la nueva versión. El sistema valida los archivos y los prepara para su empaquetado.
+
+    \item \textbf{Gestionar versión:} El desarrollador define los metadatos de la versión (nombre, número de versión, si es firmware...).
+
+    \item \textbf{Firmar/Encriptar actualización (<<include>> desde Lamassu):} Tanto la creación como la gestión de versiones permiten operaciones criptográficas. El desarrollador selecciona las claves de cifrado simétricas y las claves privadas para firma digital desde Lamassu. El sistema utiliza el KMS de Lamassu para cifrar el paquete (con algoritmos como AES-256-GCM o ASCON-128a) y firmar digitalmente el contenido (con RSA, ECDSA o ML-DSA post-cuántico), generando un paquete .swu firmado y cifrado.
+
+    \item \textbf{Lanzar actualización:} El desarrollador configura una campaña de despliegue, especificando la estrategia de despliegue (por porcentajes o cantidades fijas de dispositivos), el tipo de workflow (directo o por fases) y el modo de progresión (automático o manual).
+
+    \item \textbf{Crear tarea (<<include>> en WFX):} Al lanzar una actualización, el backend crea automáticamente tareas (Jobs) en WFX para cada dispositivo o batch de dispositivos objetivo, inyectando los metadatos necesarios (URI del paquete, algoritmos de cifrado/firma, identificadores).
+
+    \item \textbf{Ver estado lanzamiento:} El desarrollador monitoriza el progreso de la campaña de actualización a través de la interfaz web, visualizando cuántos dispositivos han completado exitosamente, cuántos están en progreso y cuántos han fallado.
+
+    \item \textbf{Consultar tarea (<<include>> en WFX):} Para obtener el estado actualizado del lanzamiento, el backend consulta el estado de los Jobs en WFX, agregando la información de todos los dispositivos para presentarla al desarrollador.
+\end{itemize}
+
+\subsubsection{Casos de uso de WFX}
+
+Los casos de uso gestionados por el dispositivo IoT en el subsistema WFX son:
+
+\begin{itemize}
+    \item \textbf{Consultar tarea:} El dispositivo realiza polling periódico a la API Sur de WFX consultando si existe algún Job (tarea de actualización) asignado a su DeviceID. Si existe una tarea pendiente, descarga los metadatos del Job, incluyendo la URI del paquete, el algoritmo de cifrado y firma utilizado, y el tipo de workflow a seguir.
+
+    \item \textbf{Descargar actualización:} Una vez detectada una tarea pendiente, el dispositivo descarga el paquete .swu detallado en el Job. Durante el proceso, verifica la firma digital del paquete contra el certificado de la CA raíz configurada localmente, confirma la integridad criptográfica, descifra el contenido utilizando la clave simétrica correspondiente al algoritmo especificado (almacenada previamente en el dispositivo) y procede con la instalación. Finalmente, actualiza el estado del Job en WFX, reportando el progreso y resultado de la operación (éxito o fallo).
+\end{itemize}
+
+\subsection{Diagramas de Secuencia}
+
+Los diagramas de secuencia siguientes detallan la comunicación entre los distintos servicios de la plataforma para cada uno de los flujos principales del sistema.
+
+\subsubsection{Creación de un Update Pack}
+
+El diagrama de la \autoref{fig:seq_updatepack} ilustra el flujo de creación de un paquete de actualización. El punto más destacable es la integración con Lamassu para las operaciones criptográficas: en lugar de gestionar las claves localmente, el servicio Updates delega la firma del paquete en el KMS de Lamassu a través de SWUGenerator. De este modo, la clave privada nunca abandona la infraestructura PKI y el paquete resultante incorpora el certificado en la estructura CMS para su posterior verificación en el dispositivo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/desarrollo/DiagramasSecuencia-UpdateUPDPack.png}
+    \caption{Diagrama de secuencia de creación de un Update Pack}
+    \label{fig:seq_updatepack}
+\end{figure}
+
+\subsubsection{Lanzamiento de una Actualización}
+
+La \autoref{fig:seq_lanzamiento} muestra el flujo de lanzamiento de una campaña de actualización. Se aprecian dos interacciones clave con la infraestructura Lamassu: primero, la consulta al \textit{Device Manager} (DMS) para obtener la lista de dispositivos asociados al grupo objetivo; segundo, la creación de un \textit{Job} en WFX por cada dispositivo, inyectando los metadatos necesarios (URI del paquete, algoritmo de cifrado y firma) para que cada agente SWUpdate pueda procesarlo de forma autónoma.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/desarrollo/DiagramasSecuencia-Lanzamiento de Actualización.png}
+    \caption{Diagrama de secuencia de lanzamiento de una actualización}
+    \label{fig:seq_lanzamiento}
+\end{figure}
+
+\subsubsection{Flujo en el Dispositivo}
+
+El diagrama de la \autoref{fig:seq_device} describe el comportamiento del agente SWUpdate en el dispositivo. El flujo se basa en un modelo de \textit{polling}: el dispositivo consulta periódicamente la API Sur de WFX buscando tareas asignadas a su \textit{DeviceID}. Cuando detecta un Job activo, descarga el paquete desde la URI indicada en los metadatos, verifica la firma y descifra el contenido, instala la actualización en la partición inactiva y finalmente reporta el resultado a WFX para cerrar el ciclo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/desarrollo/DiagramasSecuencia-device.png}
+    \caption{Diagrama de secuencia del flujo de actualización en el dispositivo}
+    \label{fig:seq_device}
+\end{figure}
 
 \section{Modelo de Datos}
 
-Para entender el modulo de updates y su integración con Lamassu y WFX, es fundamental definir las entidades principales que componen el modelo de datos del sistema. Estas entidades representan los conceptos clave y las estructuras de información que se manejan en la plataforma de actualizaciones.
+Para entender el módulo de Updates y su integración con Lamassu y WFX, es fundamental definir las entidades principales que componen el modelo de datos del sistema. Estas entidades representan los conceptos clave y las estructuras de información que se manejan en la plataforma de actualizaciones.
 
 \subsection{Entidades de Lamassu IoT}
 
@@ -874,9 +863,510 @@ La \autoref{fig:data_model} ilustra el diagrama completo del modelo de datos, mo
     \label{fig:data_model}
 \end{figure}
 
+\section{Integración de Criptografía Ligera y Post-Cuántica}
+
+Una de las contribuciones principales de este trabajo es la integración de algoritmos criptográficos ligeros (LWC) y resistentes a ataques cuánticos (PQ) en la cadena de actualización de dispositivos IoT. Esta integración ha requerido modificaciones tanto en SWUpdate como en SWUGenerator, presentando desafíos técnicos considerables.
+
+\subsection{Integración de Algoritmos de Cifrado Simétrico}
+
+La incorporación de nuevas alternativas de criptografía simétrica, en particular ASCON, si bien swupdate es muy personalizable, este cambio ha supuesto una dificultad considerable. Originalmente, SWUpdate únicamente admitía cifrado simétrico mediante AES-CBC, sin ningún mecanismo de selección de algoritmo. Esta restricción se debía a que, al existir una sola opción, no se requería un selector explícito en el diseño original.
+
+Para superar esta limitación, se ha modificado el código fuente de SWUpdate para incorporar las siguientes capacidades:
+
+\begin{itemize}
+    \item \textbf{Selector de algoritmo:} Posibilidad de definir explícitamente qué algoritmo de cifrado se utilizará.
+    \item \textbf{Soporte para variantes de AES:} Integración de las variantes CBC, CTR y GCM de AES para las longitudes de clave de 128, 192 y 256 bits.
+    \item \textbf{Soporte para ASCON:} Integración de la implementación en C de ASCON en su variante más eficiente.
+\end{itemize}
+
+Por defecto, el sistema asume que las claves criptográficas se encuentran almacenadas en la ruta \texttt{/etc/swupdate/}\texttt{keys/alg\_variant.key}, siguiendo una convención de nomenclatura que incluye el algoritmo con sub variante, el IV y la clave.
+
+\subsubsection{Instalación Nativa}
+
+Para mantener la flexibilidad y no cerrar puertas a diferentes escenarios de uso, se ha conservado la opción de instalación nativa. Esto puede ocurrir si se requiere de una instalación mediante USB practica muy común en el ambito de dispositivos linux embebidos. En este modo, el algoritmo y la clave se especifican directamente por línea de comandos:
+
+\begin{verbatim}
+swupdate -i test.swu -K ./test\_key.key
+\end{verbatim}
+
+
+\subsubsection{Integración con WFX}
+
+En el caso de despliegues orquestados mediante WFX, la información del algoritmo de cifrado se transmite a través de los metadatos del Job. Al recibir una tarea pendiente, el agente SWUpdate extrae el algoritmo especificado en el campo \textit{definition}, que WFX proporciona para usos personalizados.
+
+El formato de metadatos utilizado en los Jobs de WFX es el siguiente:
+
+\begin{lstlisting}[caption={Formato de metadatos del Job en WFX}, label={lst:wfx_metadata}]
+{
+  "id": "update-001",
+  "definition": {
+    "artifacts": [
+      {
+        "uri": "https://cdn.example.com/firmware.swu.enc",
+        "ivt": "0123456789abcdef0123456789abcdef",
+        "algorithm": "aes256-cbc"
+      }
+    ]
+  }
+}
+\end{lstlisting}
+
+Los campos clave son:
+\begin{itemize}
+    \item \textbf{uri:} Ubicación desde donde el dispositivo descargará el paquete de actualización.
+    \item \textbf{ivt:} Vector de inicialización utilizado en el cifrado.
+    \item \textbf{algorithm:} Algoritmo de cifrado empleado (ej. \texttt{aes256-cbc}, \texttt{ascon-128a}).
+\end{itemize}
+
+\subsection{Integración de Firma Digital Post-Cuántica}
+
+La integración de mecanismos de firma digital resistentes a ataques cuánticos resultó relativamente más sencilla que la del cifrado simétrico. El proceso requirió dos modificaciones principales:
+
+\begin{enumerate}
+    \item \textbf{Habilitación en menuconfig:} SWUpdate utiliza un sistema de configuración basado en Kconfig (similar al kernel de Linux) que permite habilitar o deshabilitar características antes de compilar (\textit{buildear}) el proyecto. Se habilitaron los métodos de firma en esta configuración, en especifico verificación de firma con formato CMS.
+
+    \item \textbf{Actualización de OpenSSL:} Para el soporte de algoritmos post-cuánticos, se requiere OpenSSL versión 3.5 o superior. Dado que los repositorios de paquetes (APT) no disponen aún de esta versión, fue necesario descargarla del repositorio oficial de OpenSSL y realizar una instalación manual.
+\end{enumerate}
+
+
+\subsubsection{Métodos de Firma}
+
+Se han integrado dos modalidades de firma digital en SWUGenerator:
+
+\begin{itemize}
+    \item \textbf{Firma directa:} Acceso directo a la clave privada almacenada en el sistema. Este método es más simple pero requiere que la clave privada esté accesible.
+
+    \item \textbf{Firma CMS con PKCS\#11:} Utilización del estándar PKCS\#11 (\textit{Public-Key Cryptography Standards \#11}), que define una interfaz de programación independiente de la tecnología para dispositivos criptográficos como módulos de seguridad hardware (HSM). Este método permite que las claves privadas permanezcan protegidas dentro de hardware especializado, sin exponerlas nunca al sistema operativo.
+    \item \textbf{Firma custom con certificado CMS provenientes de PKI}: Para este caso, se ha utilizado la API de Lamassu especificando el identificador de la clave privada y el certificado asociado a esa clave privada para crear el CMS que contenga la firma y el certificado. Esto proporciona una capa adicional de seguridad y autenticidad, ya que el certificado puede ser verificado por el dispositivo durante la instalación del paquete, aprovechando la infraestructura de gestión de claves de Lamassu.
+\end{itemize}
+
+
+\subsection{Extensión del KMS para Criptografía Simétrica}
+
+Dentro del KMS de Lamassu, se ha implementado una extensión para gestionar claves simétricas. Este módulo permite almacenar y administrar claves simétricas (AES, ASCON) utilizadas en operaciones de cifrado y descifrado, proporcionando una interfaz unificada para:
+\begin{itemize}
+    \item Generación y almacenamiento de claves simétricas.
+    \item Operaciones de cifrado y descifrado de datos.
+    \item Generación de códigos de autenticación de mensajes (MAC), específicamente AES-CMAC y ASCON-MAC.
+\end{itemize}
+
+\subsection{Modificaciones en SWUGenerator}
+
+La integración de los nuevos algoritmos criptográficos también requirió modificaciones sustanciales en SWUGenerator, la herramienta responsable de crear los paquetes SWU.
+
+\subsubsection{Cifrado con ASCON}
+
+Inicialmente, se evaluó el uso de la librería de Python de ASCON \cite{ascon-python}, disponible en PyPI. Sin embargo, las pruebas de rendimiento revelaron que esta implementación tardaba cientos de veces más que una implementación nativa, requiriendo varios segundos para procesar apenas unos pocos megabytes. Ante esta limitación de rendimiento inaceptables para paquetes de firmware que pueden ser de decenas o cientos de megabytes, se optó por integrar directamente el código C de ASCON, obteniendo una mejora drástica en el tiempo de procesamiento.
+
+
+\subsubsection{Comandos de Generación de Paquetes}
+
+SWUGenerator soporta diferentes métodos de firma según el entorno de despliegue. A continuación se presentan los dos métodos principales integrados en este proyecto.
+
+\paragraph{Método PKCS\#11 con HSM}
+
+Para entornos que utilizan módulos de seguridad hardware (HSM), el comando completo es:
+
+\begin{verbatim}
+swugenerator \
+  -k "CMS_PKCS11,pkcs11:object=key-name,cert.pem" \
+  create \
+  -K "key,iv,ascon-128a" \
+  -t \
+  -s sw-description \
+  -o output.swu \
+  -a artifacts/
+\end{verbatim}
+
+Donde:
+\begin{itemize}
+    \item \texttt{-k}: Especifica el método de firma (CMS con PKCS\#11), el objeto de la clave en el HSM y el certificado asociado.
+    \item \texttt{-K}: Define la clave de cifrado, el vector de inicialización y el algoritmo a utilizar (en este caso, ASCON-128a).
+    \item \texttt{-t}: Cifra el descriptor también.
+    \item \texttt{-s}: Especifica el archivo descriptor del software.
+    \item \texttt{-o}: Define el nombre del archivo de salida.
+    \item \texttt{-a}: Indica el directorio que contiene los artefactos a empaquetar.
+\end{itemize}
+
+\paragraph{Método Custom con Lamassu PKI}
+
+Para la integración con Lamassu, se utiliza un método custom que delega las operaciones criptográficas al KMS de Lamassu:
+
+\begin{verbatim}
+swugenerator \
+  -k "CUSTOM,sign_script.sh,key-id,https://lamassu.example.com,
+      RSA-PSS,/tmp/cert_dms_artifact.pem" \
+  create \
+  -K "hex_key,iv_hex,ascon-128a" \
+  -t \
+  -s sw-description \
+  -o output.swu \
+  -a artifacts/
+\end{verbatim}
+
+Donde:
+\begin{itemize}
+    \item \texttt{-k}: Especifica el método custom con los siguientes parámetros separados por comas:
+    \begin{itemize}
+        \item \textbf{CUSTOM:} Indica que se utiliza un método de firma personalizado.
+        \item \textbf{sign\_script.sh:} Script que se encarga de interactuar con la API de Lamassu para obtener la firma.
+        \item \textbf{key-id:} Identificador de la clave privada en el KMS de Lamassu.
+        \item \textbf{https://lamassu.example.com:} Endpoint del servicio KMS de Lamassu.
+        \item \textbf{RSA-PSS:} Algoritmo de firma digital (puede ser RSA-PSS, ECDSA o ML-DSA).
+        \item \textbf{/tmp/cert\_dms\_artifact.pem:} Ruta del certificado asociado a la clave privada.
+    \end{itemize}
+    \item \texttt{-K}: Define la clave de cifrado en hexadecimal, el vector de inicialización y el algoritmo.
+    \item Los demás parámetros son idénticos al método PKCS\#11.
+\end{itemize}
+
+El script de firma personalizado recibe estos parámetros y se comunica con la API de Lamassu para realizar la operación de firma sin exponer la clave privada, manteniendo ésta protegida dentro del KMS.
+
+Con esto se habría realizado uno de los hitos de este TFM, que es la integración de criptografía ligera y post-cuántica en la cadena de actualización.
+
+\subsubsection{Proceso de Creación y Verificación de Actualizaciones Seguras}
+
+En el caso de integración con Lamassu, el proceso completo de creación y verificación de actualizaciones seguras sigue estos pasos:
+
+\begin{enumerate}
+    \item \textbf{Creación en el backend:} El usuario sube los archivos de actualización a través de la interfaz web, selecciona la clave privada y su certificado asociado desde Lamassu, y elige la clave simétrica para cifrar la actualización. SWUGenerator crea el paquete cifrando tanto la actualización como el descriptor, y firma el conjunto usando el método custom con CMS, incorporando el certificado en la estructura CMS.
+
+    \item \textbf{Verificación en el dispositivo:} El dispositivo, con SWUpdate configurado previamente para validar firmas y cifrado, verifica la firma del paquete examinando el certificado incluido en el CMS contra la CA raíz instalada. Una vez validada la firma, descifra el contenido utilizando la clave privada correspondiente al algoritmo de cifrado especificado en el paquete.
+\end{enumerate}
+
+Este flujo garantiza la integridad, autenticidad y confidencialidad de las actualizaciones, aprovechando la infraestructura PKI de Lamassu para la gestión segura de claves y certificados.
+
+
+\section{Interfaz Web de Gestión}
+
+La interfaz web desarrollada proporciona una experiencia de usuario completa para la gestión de claves criptográficas, paquetes de actualización y campañas de despliegue. A continuación se describen las diferentes paginas elaboradas durante el desarrollo del proyecto.
+
+
+\subsection{Gestión de Claves Criptográficas (KMS)}
+
+El módulo KMS (\textit{Key Management System}) constituye el punto de entrada para la gestión de las claves criptográficas utilizadas en el cifrado y firma de las actualizaciones.
+
+\subsubsection{Vista General del KMS}
+
+La página principal del KMS, mostrada en la \autoref{fig:kms_general}, permite visualizar todas las claves disponibles en el sistema. Desde esta interfaz, el usuario puede realizar las siguientes operaciones:
+
+\begin{itemize}
+    \item \textbf{Crear nuevas claves:} Generación de claves simétricas (AES, ASCON).
+    \item \textbf{Importar claves existentes:} Carga de claves previamente generadas desde archivos locales.
+    \item \textbf{Visualizar metadatos:} Inspección de las propiedades de cada clave (algoritmo, longitud, fecha de creación, etc.).
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/desarrollo/UI/kms_general.png}
+    \caption{Vista general del sistema de gestión de claves (KMS)}
+    \label{fig:kms_general}
+\end{figure}
+
+\subsubsection{Creación e Importación de Claves}
+
+Al pulsar el botón de nueva clave, se presenta un selector (ver \autoref{fig:crear_llave_sim}) que permite elegir entre generar una clave nueva directamente en el sistema o importar una clave existente. La opción de importación resulta especialmente útil cuando la clave simétrica ya ha sido derivada o generada externamente y debe cargarse en el KMS para su custodia.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{imagenes/desarrollo/UI/crear_llave_sim.png}
+    \caption{Selector de creación o importación de clave simétrica}
+    \label{fig:crear_llave_sim}
+\end{figure}
+
+Una vez completado el formulario de creación, el sistema muestra la clave generada junto con un botón de descarga (ver \autoref{fig:key_generated}). La interfaz advierte explícitamente al usuario de que el valor de la clave únicamente es visible en ese momento: tras cerrar o navegar fuera de esta pantalla, el sistema no vuelve a exponerla, siguiendo las buenas prácticas de gestión de secretos. Este es el único momento en que el usuario puede copiar o descargar el material clave en claro.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/desarrollo/UI/key_generated.png}
+    \caption{Pantalla de confirmación de clave creada, con opción de descarga y aviso de visibilidad única}
+    \label{fig:key_generated}
+\end{figure}
+
+\subsubsection{Detalles y Operaciones de una Clave}
+
+Al seleccionar una clave específica, se accede a una vista detallada (ver \autoref{fig:kms_detalles}) que proporciona información completa sobre la clave y permite realizar operaciones criptográficas directamente desde el navegador: cifrado, descifrado y generación de MAC.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/desarrollo/UI/kms_detalles_one_key.png}
+    \caption{Vista detallada de una clave con operaciones disponibles}
+    \label{fig:kms_detalles}
+\end{figure}
+
+\paragraph{Cifrado.} El formulario de cifrado (ver \autoref{fig:ui_cifrar}) permite introducir el texto plano o subir un fichero directamente. El campo del vector de inicialización (IV) puede rellenarse manualmente o dejarse vacío, en cuyo caso se genera un IV aleatorio automáticamente. Tras la operación se obtiene el texto cifrado y el IV utilizado, ambos necesarios para el posterior descifrado.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/desarrollo/UI/encrypt.png}
+    \caption{Formulario de cifrado: entrada de texto o fichero e IV opcional}
+    \label{fig:ui_cifrar}
+\end{figure}
+
+\paragraph{Descifrado.} El formulario de descifrado (ver \autoref{fig:ui_descifrar}) requiere proporcionar el texto o fichero cifrado junto con el IV empleado durante el cifrado. Ambos campos son obligatorios, ya que sin el IV correcto no es posible recuperar el mensaje original.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/desarrollo/UI/decrypt.png}
+    \caption{Formulario de descifrado: entrada del texto cifrado y el IV}
+    \label{fig:ui_descifrar}
+\end{figure}
+
+\paragraph{Generación y verificación de MAC.} La interfaz también expone las operaciones de autenticación de mensajes. El formulario de generación (ver \autoref{fig:ui_compute_mac}) acepta texto en claro o un fichero y produce el código MAC correspondiente utilizando la clave seleccionada. Una vez obtenido el MAC, el formulario de verificación (ver \autoref{fig:ui_valid_mac}) permite comprobar su validez: el usuario introduce el texto o fichero original junto con el MAC a verificar, y el sistema responde indicando si el código es válido o ha sido alterado. Esta funcionalidad resulta útil para validar la integridad de los artefactos sin necesidad de cifrarlos.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/desarrollo/UI/compute_mac.png}
+    \caption{Formulario de generación de MAC a partir de texto o fichero}
+    \label{fig:ui_compute_mac}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/desarrollo/UI/valid_mac.png}
+    \caption{Formulario de verificación de MAC: entrada del texto original y el MAC a validar}
+    \label{fig:ui_valid_mac}
+\end{figure}
+
+\subsection{Gestión de Actualizaciones}
+
+\subsubsection{Página Principal de Actualizaciones}
+
+La página principal del módulo de actualizaciones (ver \autoref{fig:pagina_actualizaciones}) presenta una vista consolidada de todos los lanzamientos agrupados por paquete de actualización (Update Pack). Esta interfaz permite:
+
+\begin{itemize}
+    \item \textbf{Crear nuevas actualizaciones:} Iniciar el proceso de creación de un nuevo paquete de actualización.
+    \item \textbf{Crear nuevas versiones:} Añadir versiones adicionales a un paquete existente.
+    \item \textbf{Lanzar actualizaciones:} Iniciar una campaña de despliegue para una versión específica.
+    \item \textbf{Visualizar el estado:} Monitorizar el progreso de las campañas activas y el histórico de despliegues.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/desarrollo/UI/pagina_actualizaciones.png}
+    \caption{Página principal de gestión de actualizaciones}
+    \label{fig:pagina_actualizaciones}
+\end{figure}
+
+\subsubsection{Creación de una Nueva Actualización}
+
+El formulario de creación de actualizaciones (ver \autoref{fig:subir_actualizacion}) guía al usuario a través del proceso de construcción de un paquete SWU. Los pasos incluyen:
+
+\begin{enumerate}
+    \item \textbf{Subida de ficheros:} Carga de los binarios, scripts o archivos que componen la actualización.
+    \item \textbf{Descriptor de actualización:} Especificación del archivo \texttt{sw-description} que define la estructura y el proceso de instalación.
+    \item \textbf{Selección de claves:} Elección de las claves criptográficas para cifrado y firma con su respectivo certificado.
+    \item \textbf{Configuración de cifrado:} Decisión sobre qué ficheros específicos deben cifrarse y cuáles pueden permanecer en texto plano.
+\end{enumerate}
+
+Este proceso abstrae la complejidad de invocar SWUGenerator directamente, proporcionando una interfaz intuitiva que valida las entradas y genera automáticamente el paquete SWU con las configuraciones criptográficas seleccionadas.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/desarrollo/UI/subir_actualizacion.png}
+    \caption{Formulario de creación de una nueva actualización}
+    \label{fig:subir_actualizacion}
+\end{figure}
+
+\subsubsection{Detalles de un Update Pack}
+
+Al hacer clic en un paquete de actualización, se accede a una vista detallada (ver \autoref{fig:detalles_update_pack}) que muestra:
+
+\begin{itemize}
+    \item \textbf{Metadatos completos:} Nombre, versión, tipo (firmware/file), algoritmos utilizados, etc.
+    \item \textbf{Historial de versiones:} Todas las versiones creadas para este paquete.
+    \item \textbf{Descarga del paquete:} Posibilidad de descargar el archivo \texttt{.swu} generado para inspección o instalación manual.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/desarrollo/UI/detalles_update_pack.png}
+    \caption{Vista detallada de un paquete de actualización}
+    \label{fig:detalles_update_pack}
+\end{figure}
+
+\subsection{Gestión de Lanzamientos}
+
+\subsubsection{Configuración de un Lanzamiento}
+
+Al iniciar un lanzamiento, se presenta un formulario de configuración (ver \autoref{fig:web_configuracion_launch}) donde se especifican los parámetros de la campaña:
+
+\begin{itemize}
+    \item \textbf{Tipo de workflow:} Selección entre Direct, Phased o workflows personalizados.
+    \item \textbf{Estrategia de rollout:} Configuración de despliegue gradual por porcentaje o cantidad fija de dispositivos.
+    \item \textbf{Cantidad}: Número o porcentaje de dispositivos a actualizar en cada fase (si aplica).
+    \item \textbf{Paquete de actualización:} Selección del paquete de actualización que se desplegará.
+    \item \textbf{Modo auto:} Activación o desactivación del modo automático para el despliegue de subgrupos.
+    \item \textbf{Dispositivo de prueba:} Designación de un dispositivo piloto para validar la actualización antes del despliegue masivo.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{imagenes/desarrollo/UI/web_configuracion_launch.png}
+    \caption{Formulario de configuración de un lanzamiento}
+    \label{fig:web_configuracion_launch}
+\end{figure}
+
+\subsubsection{Detalles de un Lanzamiento}
+
+La vista de detalles de un lanzamiento (ver \autoref{fig:detalles_launch}) proporciona visibilidad completa sobre el estado de la campaña:
+
+\begin{itemize}
+    \item \textbf{Estado de cada dispositivo:} Lista de todos los dispositivos objetivo con su estado actual (pendiente, descargando, instalando, completado, error).
+    \item \textbf{Estadísticas adicionales:} Número de dispositivos completados, activos y sin iniciar.
+    \item \textbf{Control de flujo (workflows por fases):} En caso de utilizar un workflow Phased, se proporciona control manual para decidir qué dispositivos avanzan a la siguiente fase, o aprobar el avance de todos los dispositivos elegibles simultáneamente.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/desarrollo/UI/detalles_launch.png}
+    \caption{Vista detallada de un lanzamiento con estado de dispositivos}
+    \label{fig:detalles_launch}
+\end{figure}
+
+\subsection{Monitorización de Dispositivos Individuales}
+
+\subsubsection{Línea Temporal de Estados}
+
+Para cada dispositivo involucrado en un lanzamiento, se proporciona una visualización temporal del proceso de actualización (ver \autoref{fig:estado_instalacion}). Esta interfaz presenta:
+
+\begin{itemize}
+    \item \textbf{Diagrama de estados:} Representación gráfica del workflow utilizado, mostrando todos los estados posibles.
+    \item \textbf{Estados completados:} Indicación visual de los estados por los que ha pasado el dispositivo.
+    \item \textbf{Estado actual:} Resaltado del estado en el que se encuentra actualmente el dispositivo.
+    \item \textbf{Información detallada:} Detalles adicionales de cada estado al pasar el cursor sobre él.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/desarrollo/UI/estado_instalación_dispositivo.png}
+    \caption{Línea temporal de estados de instalación de un dispositivo}
+    \label{fig:estado_instalacion}
+\end{figure}
+
+\subsubsection{Detalles de Estados Específicos}
+
+Al interactuar con un estado en la línea temporal, se despliega información contextual (ver \autoref{fig:detalles_un_estado}):
+
+\begin{itemize}
+    \item \textbf{Tiempos de permanencia:} Duración que el dispositivo permaneció en ese estado.
+    \item \textbf{Timestamp de entrada y salida:} Momentos exactos de las transiciones.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{imagenes/desarrollo/UI/detalles_un_estado.png}
+    \caption{Detalles temporales de un estado específico}
+    \label{fig:detalles_un_estado}
+\end{figure}
+
+
+\section{Web de Demostración}
+
+Con anterioridad a este proyecto ya existía una aplicación web de demostración en el ecosistema Lamassu (ver \autoref{fig:web_previa}). Se trata de una simulación de un sistema de control de tanques de agua cuyo propósito era ilustrar la integración con la plataforma Lamassu.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{imagenes/desarrollo/web_previa.png}
+    \caption{Aplicación web de demostración previa al proyecto}
+    \label{fig:web_previa}
+\end{figure}
+
+La aplicación presentaba un fallo deliberado: al superar la capacidad del tanque el agua se desbordaba, como se aprecia en la \autoref{fig:web_error}. Este comportamiento erróneo sirve como punto de partida para demostrar el proceso de actualización OTA, representando un bug crítico que debe corregirse de forma remota.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{imagenes/desarrollo/web_error.png}
+    \caption{Error de desbordamiento en la aplicación de demostración original}
+    \label{fig:web_error}
+\end{figure}
+
+Como parte de este TFM se ha mejorado la aplicación de demostración incorporando un panel lateral con los logs en tiempo real del agente SWUpdate (ver \autoref{fig:web_post_v1}), de modo que el usuario pueda observar el progreso de la instalación directamente desde la propia web. La versión inicial desplegada lleva la etiqueta \texttt{v1.0} en la cabecera.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{imagenes/desarrollo/web_post_v1.png}
+    \caption{Web de demostración mejorada (v1.0) con panel de logs de SWUpdate}
+    \label{fig:web_post_v1}
+\end{figure}
+
+Tras ejecutar la actualización OTA, el dispositivo instala la versión corregida del software. La \autoref{fig:web_v2} muestra el resultado: la etiqueta de versión en la cabecera pasa de \texttt{v1.0} a \texttt{v2.0} y el error de desbordamiento ha desaparecido, confirmando que la actualización se ha aplicado correctamente.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{imagenes/desarrollo/web_v2.png}
+    \caption{Web de demostración tras la actualización OTA (v2.0), error corregido}
+    \label{fig:web_v2}
+\end{figure}
+
+Para facilitar la gestión de los certificados de confianza en el dispositivo de prueba, se ha desarrollado también una pequeña interfaz de administración embebida en el propio dispositivo (ver \autoref{fig:admin_device_certs}). Desde esta página es posible añadir certificados de CA que SWUpdate utilizará para verificar la firma de los paquetes de actualización, así como reiniciar el agente SWUpdate para que recargue la lista de certificados válidos sin necesidad de acceder al dispositivo por SSH.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{imagenes/desarrollo/admin_device_certs.png}
+    \caption{Interfaz de administración de certificados de CA en el dispositivo de prueba}
+    \label{fig:admin_device_certs}
+\end{figure}
+
+\section{Despliegue de los servicios en la nube}
+
+La plataforma se ha desplegado en el servidor \texttt{lab.lamassu.io} sobre un clúster de Kubernetes. Todo el ciclo de despliegue, configuración y actualización de los servicios se gestiona mediante \textbf{Helm}, lo que permite versionar la infraestructura y aplicar cambios de forma controlada y reproducible. La gestión de certificados TLS, actualmente autofirmados, del clúster se delega a \textbf{cert-manager}, que automatiza su emisión y renovación.
+
+La \autoref{fig:kubernetes_deployment} ilustra la arquitectura del despliegue. El punto de entrada es un \textbf{Envoy Gateway} que, además de enrutar las peticiones hacia cada servicio según la ruta de la URL, centraliza la aplicación de políticas de seguridad para toda la plataforma.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/desarrollo/kubernetes.png}
+    \caption{Arquitectura de despliegue en Kubernetes}
+    \label{fig:kubernetes_deployment}
+\end{figure}
+
+El gateway aplica las siguientes políticas antes de que cualquier petición alcance los servicios internos:
+
+\begin{itemize}
+    \item \textbf{mTLS (ClientTrafficPolicy):} Los dispositivos IoT se autentican presentando un certificado cliente firmado por la CA de Lamassu. El gateway verifica este certificado antes de permitir el acceso a las APIs.
+    \item \textbf{JWT / OIDC (SecurityPolicy):} Las peticiones dirigidas a las APIs de gestión se validan comprobando un token JWT emitido por Keycloak, asegurando que únicamente usuarios autenticados puedan operar sobre el sistema.
+    \item \textbf{CORS (CORSPolicy):} Políticas de origen cruzado que permiten a la interfaz web realizar llamadas a las APIs de backend desde el navegador.
+\end{itemize}
+
+En el diagrama, los componentes en \textbf{verde} son los incorporados o modificados en este TFM, mientras que los componentes en \textbf{azul} son los preexistentes de la infraestructura Lamassu.
+
+\paragraph{Componentes añadidos (verde).}
+\begin{itemize}
+    \item \textbf{\texttt{/api/wfx/north} y \texttt{/api/wfx/south}:} Rutas que exponen las dos APIs de WFX. La \textit{north API} está orientada al desarrollador para la creación y gestión de trabajos, mientras que la \textit{south API} es utilizada por los dispositivos para consultar y actualizar su estado. El servicio se despliega como un \textit{Deployment} con un único pod.
+
+    \item \textbf{\texttt{/api/updates}:} Servicio de gestión de actualizaciones desarrollado en este trabajo. Se despliega como un \textit{StatefulSet} con un PVC asociado, ya que los paquetes \texttt{.swu} generados se almacenan localmente en el pod para su posterior descarga por los dispositivos.
+
+    \item \textbf{\texttt{/}:} Interfaz web modificada para incorporar la consola de gestión de actualizaciones. La aplicación opera íntegramente como cliente API en el navegador del desarrollador, realizando llamadas REST directamente a los servicios de backend sin intermediarios adicionales.
+\end{itemize}
+
+\paragraph{Componentes de Lamassu (azul).}
+\begin{itemize}
+    \item \textbf{\texttt{/api/ca}:} Acceso a la API de la Autoridad Certificadora de Lamassu, responsable de la emisión y gestión de certificados digitales. Se despliega como un \textit{Deployment}.
+
+    \item \textbf{\texttt{/api/kms}:} Servicio de gestión de claves criptográficas, extendido en este TFM para dar soporte a criptografía simétrica. Se despliega como \textit{StatefulSet} con PVC, dado que las claves se persisten en el propio almacenamiento del pod.
+\end{itemize}
+
+\paragraph{Base de datos.} PostgreSQL se despliega como un \textit{StatefulSet} independiente con su propio PVC, dando soporte de persistencia relacional a todos los servicios de la plataforma.
+
+\subsection{Configurabilidad del servicio Updates}
+
+El servicio Updates está diseñado para ser completamente configurable, lo que facilita su adaptación a distintos entornos sin necesidad de recompilar la imagen de Docker.Esta configuracion es facilmente modificable en entornos cloud gracias a Helm, que permite inyectar variables de entorno en el momento del despliegue. Las principales variables de entorno utilizadas por el servicio son:
+
+\begin{itemize}
+    \item \textbf{\texttt{SERVER\_PORT} / \texttt{SERVER\_ADDRESS}:} Puerto y dirección en los que escucha el propio servicio.
+    \item \textbf{\texttt{DB\_HOST}, \texttt{DB\_PORT}, \texttt{DB\_USER}, \texttt{DB\_PASSWORD}:} Parámetros de conexión a la base de datos PostgreSQL.
+    \item \textbf{\texttt{WFX\_ENDPOINT}:} URL de la API de WFX para la creación y consulta de \textit{jobs}.
+    \item \textbf{\texttt{KMS\_ENDPOINT}:} URL del KMS para las operaciones criptográficas. Independiente del DMS, reflejando la naturaleza modular y configurable del proyecto.
+    \item \textbf{\texttt{DMS\_ENDPOINT}:} URL del DMS de Lamassu para la consulta de dispositivos y agrupaciones.
+    \item \textbf{\texttt{UPDATE\_DOMAIN}:} URL base que se inyecta en los \textit{jobs} de WFX como dirección de descarga. No es la dirección interna del clúster, sino la URL pública accesible desde los dispositivos IoT, que es la que el agente SWUpdate usará para descargar el paquete \texttt{.swu}.
+    \item \textbf{\texttt{UPDATE\_FILES\_BASE\_DIR}:} Directorio del PVC donde se almacenan los paquetes generados.
+    \item \textbf{\texttt{SIGN\_SCRIPT\_PATH}:} Ruta al script de firma empleado en el modo \textit{custom} de SWUGenerator para delegar la operación al KMS de Lamassu.
+    \item \textbf{\texttt{WORKFLOW\_FILE}:} Ruta al fichero de definición del workflow de WFX que se carga en el arranque del servicio.
+\end{itemize}
+
 \section{Estrategia de Pruebas y Validación}
 
-Para garantizar la fiabilidad y correctitud de los dos componentes principales desarrollados, SymKMS (servicio de gestión de claves simétricas) y Updates (servicio de gestión de actualizaciones), se ha diseñado una estrategia de pruebas exhaustiva que abarca tests unitarios, de integración y validación criptográfica contra vectores oficiales.
+Para garantizar la fiabilidad y correctitud de los dos componentes principales desarrollados, SymKMS (servicio de gestión de claves simétricas) y Updates (servicio de gestión de actualizaciones), se ha diseñado una estrategia de pruebas que abarca tests unitarios, de integración y validación criptográfica contra vectores oficiales.
 
 \subsection{Infraestructura de Tests}
 
@@ -884,22 +1374,22 @@ La ejecución de los tests de integración requiere servicios externos reales (P
 
 \subsection{Tests del Servicio SymKMS}
 
-El servicio SymKMS cuenta con más de 150 tests distribuidos en cuatro categorías principales:
+El servicio SymKMS cuenta con una gran variedad tests distribuidos en cuatro categorías principales:
 
 \subsubsection{Tests Unitarios del Servicio Core}
 
 Los tests unitarios del servicio core validan las operaciones criptográficas fundamentales:
 
 \begin{itemize}
-    \item \textbf{Gestión de claves (15 tests):} Validación del ciclo de vida completo de las claves (creación, lectura, listado, eliminación), incluyendo paginación, ordenación y aislamiento multi-usuario para garantizar que las claves de un usuario no son accesibles por otro.
+    \item \textbf{Gestión de claves:} Validación del ciclo de vida completo de las claves (creación, lectura, listado, eliminación), incluyendo paginación, ordenación y aislamiento multi-usuario para garantizar que las claves de un usuario no son accesibles por otro.
 
-    \item \textbf{Creación de claves (9 tests):} Cobertura de todas las variantes soportadas: AES (128/192/256 bits en modos CBC, CTR y GCM), ASCON (128, 128a, 80pq), normalización de nombres de algoritmo y validación de tamaños de clave.
+    \item \textbf{Creación de claves:} Cobertura de todas las variantes soportadas: AES (128/192/256 bits en modos CBC, CTR y GCM), ASCON (128, 128a, 80pq), normalización de nombres de algoritmo y validación de tamaños de clave.
 
-    \item \textbf{Cifrado y descifrado (21 tests):} Pruebas de \textit{round-trip} (cifrar y descifrar recuperando el mensaje original) para todos los algoritmos. Se incluyen tests de detección de corrupción del \textit{ciphertext} (especialmente relevantes para GCM y ASCON al ser modos AEAD), validación de \textit{padding} en CBC, manejo de vectores de inicialización incorrectos y aislamiento por usuario.
+    \item \textbf{Cifrado y descifrado:} Pruebas de \textit{round-trip} (cifrar y descifrar recuperando el mensaje original) para todos los algoritmos. Se incluyen tests de detección de corrupción del \textit{ciphertext} (especialmente relevantes para GCM y ASCON al ser modos AEAD), validación de \textit{padding} en CBC, manejo de vectores de inicialización incorrectos y aislamiento por usuario.
 
-    \item \textbf{Operaciones MAC (40 tests):} Validación de los tres algoritmos de MAC soportados: AES-CMAC con todos los tamaños de clave, HMAC-SHA3 (256, 384 y 512 bits) y ASCON-MAC. Se evalúa el determinismo (mismo input produce mismo MAC), comportamiento con datos de gran tamaño (hasta 1 MB), y casos límite como datos vacíos, de 1 byte, de 15 bytes (borde de bloque AES) y múltiplos exactos del tamaño de bloque. También se prueban patrones especiales (\textit{all-zeros}, \textit{all-ones}).
+    \item \textbf{Operaciones MAC:} Validación de los tres algoritmos de MAC soportados: AES-CMAC con todos los tamaños de clave, HMAC-SHA3 (256, 384 y 512 bits) y ASCON-MAC. Se evalúa el determinismo (mismo input produce mismo MAC), comportamiento con datos de gran tamaño (hasta 1 MB), y casos límite como datos vacíos, de 1 byte, de 15 bytes (borde de bloque AES) y múltiplos exactos del tamaño de bloque. También se prueban patrones especiales (\textit{all-zeros}, \textit{all-ones}).
 
-    \item \textbf{Verificación de MAC (12 tests):} Validación de verificación correcta e incorrecta, detección de modificación de datos y detección de \textit{tags} truncados o alterados.
+    \item \textbf{Verificación de MAC:} Validación de verificación correcta e incorrecta, detección de modificación de datos y detección de \textit{tags} truncados o alterados.
 \end{itemize}
 
 \subsubsection{Validación con Vectores de Test Oficiales}
@@ -907,11 +1397,11 @@ Los tests unitarios del servicio core validan las operaciones criptográficas fu
 La correctitud criptográfica se ha validado contra fuentes de referencia:
 
 \begin{itemize}
-    \item \textbf{AES-CMAC según RFC 4493 (4 tests oficiales):} Se han implementado los cuatro vectores de test definidos en la RFC 4493, cubriendo mensajes de 0, 16, 40 y 64 bytes. Durante este proceso se detectaron dos errores tipográficos en la propia RFC (discrepancias en los últimos bytes del vector 1 y tag incorrecto en el vector 4). Para confirmar la correctitud de la implementación, se realizó una validación cruzada con la librería \texttt{cryptography} de Python, obteniendo coincidencia del 100\%.
+    \item \textbf{AES-CMAC según RFC 4493:} Se han implementado los cuatro vectores de test definidos en la RFC 4493, cubriendo mensajes de 0, 16, 40 y 64 bytes. Durante este proceso se detectaron dos errores tipográficos en la propia RFC (discrepancias en los últimos bytes del vector 1 y tag incorrecto en el vector 4). Para confirmar la correctitud de la implementación, se realizó una validación cruzada con la librería \texttt{cryptography} de Python, obteniendo coincidencia del 100\%.
 
-    \item \textbf{AES-CMAC condiciones de borde (10 tests):} Tests con longitudes de datos diseñadas para ejercitar todos los caminos del algoritmo de \textit{padding}: 0, 1, 15, 16, 17, 32, 33, 48, 1024 y 65536 bytes.
+    \item \textbf{AES-CMAC condiciones de borde:} Tests con longitudes de datos diseñadas para ejercitar todos los caminos del algoritmo de \textit{padding}: 0, 1, 15, 16, 17, 32, 33, 48, 1024 y 65536 bytes.
 
-    \item \textbf{AES-CMAC propiedades de seguridad (21 sub-tests):} Verificación de detección de \textit{bit-flip} (primer y último byte), manipulación de \textit{tag} y resistencia general a ataques de modificación.
+    \item \textbf{AES-CMAC propiedades de seguridad:} Verificación de detección de \textit{bit-flip} (primer y último byte), manipulación de \textit{tag} y resistencia general a ataques de modificación.
 \end{itemize}
 
 
@@ -921,16 +1411,82 @@ Finalmente, se incluyen tests de los controladores HTTP que validan el correcto 
 
 \subsection{Tests del Servicio Updates}
 
-El servicio de Updates cuenta con más de 70 tests distribuidos en las siguientes categorías:
+El servicio de Updates cuenta con tests distribuidos en las siguientes categorías:
 
 \subsubsection{Tests Unitarios del Servicio}
 
-Los tests unitarios (10 tests) validan la lógica de negocio del servicio, incluyendo la creación de modelos \textit{UpdatePack} con y sin cifrado y firma, la estructura correcta de los archivos SWU generados, y las combinaciones de algoritmos de cifrado (AES-256-CBC, AES-256-GCM, ASCON-128, ASCON-128a, ASCON-80pq) y firma (RSA-PSS, ECDSA, ML-DSA post-cuántico).
+Los tests unitarios validan la lógica de negocio del servicio, incluyendo la creación de modelos \textit{UpdatePack} con y sin cifrado y firma, la estructura correcta de los archivos SWU generados, y las combinaciones de algoritmos de cifrado (AES-256-CBC, AES-256-GCM, ASCON-128, ASCON-128a, ASCON-80pq) y firma (RSA-PSS, ECDSA, ML-DSA post-cuántico).
 
 \subsubsection{Tests de Integración con PostgreSQL}
 
-Los tests de integración con base de datos real (más de 25 tests) verifican las operaciones CRUD completas para las entidades \textit{UpdatePack} y \textit{LaunchTrack}, consultas avanzadas (por DMS ID, por nombre, con paginación), almacenamiento y recuperación de metadatos de cifrado y firma, concurrencia (10 inserciones paralelas) y todas las estrategias de despliegue (\textit{Phased+Percentage}, \textit{Direct+Fixed}, \textit{Auto-deploy}).
+Los tests de integración con base de datos real verifican las operaciones CRUD completas para las entidades \textit{UpdatePack} y \textit{LaunchTrack}, consultas avanzadas (por DMS ID, por nombre, con paginación), almacenamiento y recuperación de metadatos de cifrado y firma, concurrencia (10 inserciones paralelas) y todas las estrategias de despliegue (\textit{Phased+Percentage}, \textit{Direct+Fixed}, \textit{Auto-deploy}).
 
 \subsubsection{Tests de Integración con WFX}
 
-Los tests de integración con WFX real (más de 15 tests) validan la carga de \textit{workflows} en WFX, la creación y gestión de \textit{jobs} a través de su API, las estrategias de lanzamiento con la base de datos real, la paginación del historial de actualizaciones y el versionado de \textit{UpdatePacks}.
+Los tests de integración con WFX real validan la carga de \textit{workflows} en WFX, la creación y gestión de \textit{jobs} a través de su API, las estrategias de lanzamiento con la base de datos real, la paginación del historial de actualizaciones y el versionado de \textit{UpdatePacks}.
+
+\subsection{Pipeline para automatización de tests}
+
+Para garantizar la calidad del código de forma continua, se han implementado pipelines de integración continua (CI) mediante GitHub Actions. Estos pipelines automatizan la ejecución de todos los tests descritos anteriormente, asegurando que cada cambio en el código sea validado antes de su integración.
+
+\subsubsection{Pipeline de Tests}
+
+El pipeline de tests se ejecuta automáticamente ante cada \textit{commit} o \textit{pull request} al repositorio. Su funcionamiento se basa en una estrategia matricial que ejecuta en paralelo los tests de los dos módulos principales (Updates y SymKMS), cada uno con su propia configuración de servicios.
+
+El pipeline levanta automáticamente los servicios necesarios como contenedores Docker dentro del entorno de GitHub Actions:
+
+\begin{itemize}
+    \item \textbf{PostgreSQL 16:} Base de datos para los tests de integración, con comprobaciones de salud (\textit{health checks}) para asegurar su disponibilidad antes de ejecutar los tests.
+    \item \textbf{WFX:} Instancia del motor de workflows con configuración de almacenamiento en PostgreSQL, exponiendo tanto la API de gestión (puerto 8080) como la API de cliente (puerto 8081).
+\end{itemize}
+
+Adicionalmente, para el módulo de Updates, el pipeline instala SWUGenerator y sus dependencias de Python, ya que los tests de integración requieren la generación real de paquetes SWU.
+
+Los tests se ejecutan con cobertura de código (\textit{coverage}) y generan un informe que permite evaluar qué porcentaje del código fuente está cubierto por las pruebas. La \autoref{fig:pipeline_tests} muestra la ejecución del pipeline de tests en GitHub Actions, y la \autoref{fig:coverage_report} el informe de cobertura generado.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{imagenes/desarrollo/pipeline_tests.png}
+    \caption{Pipeline de ejecución automática de tests en GitHub Actions}
+    \label{fig:pipeline_tests}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{imagenes/desarrollo/coverage_Report.png}
+    \caption{Informe de cobertura de código generado por el pipeline de tests}
+    \label{fig:coverage_report}
+\end{figure}
+
+\subsubsection{Pipeline de Build and Release}
+
+Además del pipeline de tests, se ha implementado un pipeline de construcción y despliegue que permite generar las imágenes Docker del servicio y desplegarlas en el entorno cloud de forma controlada. A diferencia del pipeline de tests, este se activa manualmente (\textit{workflow\_dispatch}) mediante un botón en la interfaz de GitHub, solicitando al desarrollador la versión a publicar en formato semántico (\texttt{x.y.z}). Si bien sería posible automatizar este proceso mediante \textit{tags} de Git (de forma que cada vez que se cree un tag se desencadene el despliegue), se ha optado deliberadamente por el enfoque manual. Esta decisión proporciona un mayor control sobre cuándo y qué versión se despliega en producción, evitando despliegues no intencionados, y además se alinea con la estrategia de releases adoptada en el propio proyecto Lamassu.
+
+El proceso consta de tres fases:
+
+\begin{enumerate}
+    \item \textbf{Validación de versión:} Se verifica que el formato de versión proporcionado sea válido (formato semántico \texttt{x.y.z}).
+
+    \item \textbf{Build and Push:} Se construye la imagen Docker del servicio utilizando Docker Buildx, inyectando metadatos de compilación (versión, timestamp, hash del commit). La imagen resultante se publica en GitHub Container Registry (GHCR) con dos tags: la versión específica y \texttt{latest}, como se aprecia en la \autoref{fig:registry}.
+
+    \item \textbf{Deploy:} Se establece una conexión SSH al servidor cloud y se ejecuta una actualización del despliegue Kubernetes mediante Helm. El proceso actualiza la referencia de imagen en la configuración de Helm, ejecuta un \texttt{helm upgrade} del chart de Lamassu y verifica que el \textit{rollout} del StatefulSet se complete correctamente.
+\end{enumerate}
+
+La \autoref{fig:build_and_release} muestra la interfaz de GitHub Actions para la ejecución de este pipeline.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{imagenes/desarrollo/build_and_release.png}
+    \caption{Pipeline de construcción y despliegue de imágenes}
+    \label{fig:build_and_release}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{imagenes/desarrollo/registry.png}
+    \caption{Imagen publicada en GitHub Container Registry (GHCR)}
+    \label{fig:registry}
+\end{figure}
+
+De esta manera, el ciclo de desarrollo queda completamente automatizado: los tests se ejecutan en cada cambio de código para detectar regresiones de forma temprana, y cuando una versión está lista para producción, el despliegue se realiza de forma controlada y reproducible con un único click.
+

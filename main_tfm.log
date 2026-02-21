@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2025.12.4)  13 FEB 2026 12:00
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2025.12.4)  20 FEB 2026 17:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1217,15 +1217,15 @@ LaTeX Info: Redefining \% on input line 1.
 
 
 
-])
+]
+LaTeX Font Info:    Font shape `TU/TeXGyreTermes(0)/m/sl' in size <12> not available
+(Font)              Font shape `TU/TeXGyreTermes(0)/m/it' tried instead on input line 142.
+LaTeX Info: Redefining \. on input line 142.
+LaTeX Info: Redefining \% on input line 142.
+ [6])
 \tf@toc=\write6
 \openout6 = `main_tfm.toc'.
 
-LaTeX Font Info:    Font shape `TU/TeXGyreTermes(0)/m/sl' in size <12> not available
-(Font)              Font shape `TU/TeXGyreTermes(0)/m/it' tried instead on input line 86.
-LaTeX Info: Redefining \. on input line 86.
-LaTeX Info: Redefining \% on input line 86.
- [6]
 LaTeX Info: Redefining \. on input line 86.
 LaTeX Info: Redefining \% on input line 86.
  [7] (./main_tfm.lof
@@ -1287,35 +1287,35 @@ LaTeX Info: Redefining \% on input line 212.
 LaTeX Info: Redefining \. on input line 245.
 LaTeX Info: Redefining \% on input line 245.
  [7]
-LaTeX Info: Redefining \. on input line 266.
-LaTeX Info: Redefining \% on input line 266.
+LaTeX Info: Redefining \. on input line 267.
+LaTeX Info: Redefining \% on input line 267.
  [8]
-Overfull \hbox (1.11514pt too wide) in paragraph at lines 275--276
+Overfull \hbox (1.11514pt too wide) in paragraph at lines 277--278
 []\TU/TeXGyreTermes(0)/m/n/12 Creación del servicio encar-
  []
 
-LaTeX Info: Redefining \. on input line 288.
-LaTeX Info: Redefining \% on input line 288.
+LaTeX Info: Redefining \. on input line 289.
+LaTeX Info: Redefining \% on input line 289.
 [9]
 File: imagenes/gantt.png Graphic file (type bmp)
 <imagenes/gantt.png>
 LaTeX Info: Redefining \. on input line 313.
 LaTeX Info: Redefining \% on input line 313.
  [10]
-LaTeX Info: Redefining \. on input line 348.
-LaTeX Info: Redefining \% on input line 348.
+LaTeX Info: Redefining \. on input line 345.
+LaTeX Info: Redefining \% on input line 345.
  [11]
-LaTeX Info: Redefining \. on input line 394.
-LaTeX Info: Redefining \% on input line 394.
+LaTeX Info: Redefining \. on input line 396.
+LaTeX Info: Redefining \% on input line 396.
  [12]
-LaTeX Info: Redefining \. on input line 432.
-LaTeX Info: Redefining \% on input line 432.
+LaTeX Info: Redefining \. on input line 434.
+LaTeX Info: Redefining \% on input line 434.
  [13]
-LaTeX Info: Redefining \. on input line 478.
-LaTeX Info: Redefining \% on input line 478.
+LaTeX Info: Redefining \. on input line 480.
+LaTeX Info: Redefining \% on input line 480.
  [14]
-LaTeX Info: Redefining \. on input line 513.
-LaTeX Info: Redefining \% on input line 513.
+LaTeX Info: Redefining \. on input line 515.
+LaTeX Info: Redefining \% on input line 515.
  [15])
 LaTeX Info: Redefining \. on input line 99.
 LaTeX Info: Redefining \% on input line 99.
@@ -1389,22 +1389,22 @@ LaTeX Info: Redefining \% on input line 376.
 LaTeX Info: Redefining \. on input line 386.
 LaTeX Info: Redefining \% on input line 386.
  [30]
-LaTeX Info: Redefining \. on input line 422.
-LaTeX Info: Redefining \% on input line 422.
+LaTeX Info: Redefining \. on input line 418.
+LaTeX Info: Redefining \% on input line 418.
  [31]
-LaTeX Info: Redefining \. on input line 441.
-LaTeX Info: Redefining \% on input line 441.
+LaTeX Info: Redefining \. on input line 439.
+LaTeX Info: Redefining \% on input line 439.
  [32]
 File: imagenes/desarrollo/AB_install.png Graphic file (type bmp)
 <imagenes/desarrollo/AB_install.png>
-LaTeX Info: Redefining \. on input line 464.
-LaTeX Info: Redefining \% on input line 464.
+LaTeX Info: Redefining \. on input line 460.
+LaTeX Info: Redefining \% on input line 460.
  [33]
-LaTeX Info: Redefining \. on input line 486.
-LaTeX Info: Redefining \% on input line 486.
+LaTeX Info: Redefining \. on input line 482.
+LaTeX Info: Redefining \% on input line 482.
  [34]
-LaTeX Info: Redefining \. on input line 520.
-LaTeX Info: Redefining \% on input line 520.
+LaTeX Info: Redefining \. on input line 519.
+LaTeX Info: Redefining \% on input line 519.
  [35]
 LaTeX Info: Redefining \. on input line 541.
 LaTeX Info: Redefining \% on input line 541.
@@ -1413,156 +1413,294 @@ File: imagenes/desarrollo/direct.png Graphic file (type bmp)
 <imagenes/desarrollo/direct.png>
 File: imagenes/desarrollo/phased.png Graphic file (type bmp)
 <imagenes/desarrollo/phased.png>
-LaTeX Info: Redefining \. on input line 566.
-LaTeX Info: Redefining \% on input line 566.
+LaTeX Info: Redefining \. on input line 567.
+LaTeX Info: Redefining \% on input line 567.
  [37]
-LaTeX Info: Redefining \. on input line 573.
-LaTeX Info: Redefining \% on input line 573.
+LaTeX Info: Redefining \. on input line 574.
+LaTeX Info: Redefining \% on input line 574.
  [38]
 File: imagenes/desarrollo/job_definition.png Graphic file (type bmp)
 <imagenes/desarrollo/job_definition.png>
-LaTeX Info: Redefining \. on input line 600.
-LaTeX Info: Redefining \% on input line 600.
+LaTeX Info: Redefining \. on input line 601.
+LaTeX Info: Redefining \% on input line 601.
  [39]
-Overfull \hbox (2.63016pt too wide) in paragraph at lines 613--614
+Overfull \hbox (2.63016pt too wide) in paragraph at lines 614--615
 []\TU/TeXGyreTermes(0)/b/n/12 Gestión de Dispositivos: \TU/TeXGyreTermes(0)/m/n/12 Provee las listas de dispositivos autorizados y sus agrupaciones (DMS). 
  []
 
-LaTeX Info: Redefining \. on input line 628.
-LaTeX Info: Redefining \% on input line 628.
+LaTeX Info: Redefining \. on input line 629.
+LaTeX Info: Redefining \% on input line 629.
 [40]
 File: imagenes/desarrollo/plataforma.png Graphic file (type bmp)
 <imagenes/desarrollo/plataforma.png>
-LaTeX Info: Redefining \. on input line 657.
-LaTeX Info: Redefining \% on input line 657.
+LaTeX Info: Redefining \. on input line 658.
+LaTeX Info: Redefining \% on input line 658.
  [41]
-Overfull \hbox (5.83913pt too wide) in paragraph at lines 664--665
+LaTeX Info: Redefining \. on input line 678.
+LaTeX Info: Redefining \% on input line 678.
+ [42]
+File: imagenes/desarrollo/casosusootaq.png Graphic file (type bmp)
+<imagenes/desarrollo/casosusootaq.png>
+LaTeX Info: Redefining \. on input line 704.
+LaTeX Info: Redefining \% on input line 704.
+ [43]
+LaTeX Info: Redefining \. on input line 731.
+LaTeX Info: Redefining \% on input line 731.
+ [44]
+File: imagenes/desarrollo/DiagramasSecuencia-UpdateUPDPack.png Graphic file (type bmp)
+<imagenes/desarrollo/DiagramasSecuencia-UpdateUPDPack.png>
+LaTeX Info: Redefining \. on input line 752.
+LaTeX Info: Redefining \% on input line 752.
+ [45]
+File: imagenes/desarrollo/DiagramasSecuencia-Lanzamiento de Actualización.png Graphic file (type bmp)
+<imagenes/desarrollo/DiagramasSecuencia-Lanzamiento de Actualización.png>
+File: imagenes/desarrollo/DiagramasSecuencia-device.png Graphic file (type bmp)
+<imagenes/desarrollo/DiagramasSecuencia-device.png>
+LaTeX Info: Redefining \. on input line 770.
+LaTeX Info: Redefining \% on input line 770.
+ [46]
+LaTeX Info: Redefining \. on input line 783.
+LaTeX Info: Redefining \% on input line 783.
+ [47]
+LaTeX Info: Redefining \. on input line 815.
+LaTeX Info: Redefining \% on input line 815.
+ [48]
+LaTeX Info: Redefining \. on input line 841.
+LaTeX Info: Redefining \% on input line 841.
+ [49]
+File: imagenes/desarrollo/data_model.png Graphic file (type bmp)
+<imagenes/desarrollo/data_model.png>
+LaTeX Info: Redefining \. on input line 865.
+LaTeX Info: Redefining \% on input line 865.
+ [50]
+Overfull \hbox (5.83913pt too wide) in paragraph at lines 872--873
 \TU/TeXGyreTermes(0)/m/n/12 date es muy personalizable, este cambio ha supuesto una dificultad considerable. Originalmente, SWUp-
  []
 
-
-Overfull \hbox (145.53217pt too wide) in paragraph at lines 674--675
-[]\TU/TeXGyreTermes(0)/m/n/12 Por defecto, el sistema asume que las claves criptográficas se encuentran almacenadas en \TU/lmtt/m/n/12 /etc/swupdate/keys/alg_variant.key\TU/TeXGyreTermes(0)/m/n/12 ,
- []
-
-LaTeX Info: Redefining \. on input line 676.
-LaTeX Info: Redefining \% on input line 676.
-[42]
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 691.
-LaTeX Info: Redefining \. on input line 718.
-LaTeX Info: Redefining \% on input line 718.
- [43]
-LaTeX Info: Redefining \. on input line 740.
-LaTeX Info: Redefining \% on input line 740.
- [44]
-LaTeX Info: Redefining \. on input line 776.
-LaTeX Info: Redefining \% on input line 776.
- [45]
-LaTeX Info: Redefining \. on input line 804.
-LaTeX Info: Redefining \% on input line 804.
- [46]
-LaTeX Info: Redefining \. on input line 834.
-LaTeX Info: Redefining \% on input line 834.
- [47]
-LaTeX Info: Redefining \. on input line 862.
-LaTeX Info: Redefining \% on input line 862.
- [48]
-File: imagenes/desarrollo/data_model.png Graphic file (type bmp)
-<imagenes/desarrollo/data_model.png>
-LaTeX Info: Redefining \. on input line 880.
-LaTeX Info: Redefining \% on input line 880.
- [49]
-LaTeX Info: Redefining \. on input line 902.
-LaTeX Info: Redefining \% on input line 902.
- [50]
-LaTeX Info: Redefining \. on input line 933.
-LaTeX Info: Redefining \% on input line 933.
- [51])
+LaTeX Info: Redefining \. on input line 873.
+LaTeX Info: Redefining \% on input line 873.
+[51]
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 899.
+LaTeX Info: Redefining \. on input line 909.
+LaTeX Info: Redefining \% on input line 909.
+ [52]
+LaTeX Info: Redefining \. on input line 941.
+LaTeX Info: Redefining \% on input line 941.
+ [53]
+LaTeX Info: Redefining \. on input line 979.
+LaTeX Info: Redefining \% on input line 979.
+ [54]
+LaTeX Info: Redefining \. on input line 1015.
+LaTeX Info: Redefining \% on input line 1015.
+ [55]
+LaTeX Info: Redefining \. on input line 1048.
+LaTeX Info: Redefining \% on input line 1048.
+ [56]
+File: imagenes/desarrollo/UI/kms_general.png Graphic file (type bmp)
+<imagenes/desarrollo/UI/kms_general.png>
+File: imagenes/desarrollo/UI/crear_llave_sim.png Graphic file (type bmp)
+<imagenes/desarrollo/UI/crear_llave_sim.png>
+LaTeX Info: Redefining \. on input line 1075.
+LaTeX Info: Redefining \% on input line 1075.
+ [57]
+File: imagenes/desarrollo/UI/key_generated.png Graphic file (type bmp)
+<imagenes/desarrollo/UI/key_generated.png>
+LaTeX Info: Redefining \. on input line 1084.
+LaTeX Info: Redefining \% on input line 1084.
+ [58]
+File: imagenes/desarrollo/UI/kms_detalles_one_key.png Graphic file (type bmp)
+<imagenes/desarrollo/UI/kms_detalles_one_key.png>
+LaTeX Info: Redefining \. on input line 1095.
+LaTeX Info: Redefining \% on input line 1095.
+ [59]
+File: imagenes/desarrollo/UI/encrypt.png Graphic file (type bmp)
+<imagenes/desarrollo/UI/encrypt.png>
+File: imagenes/desarrollo/UI/decrypt.png Graphic file (type bmp)
+<imagenes/desarrollo/UI/decrypt.png>
+LaTeX Info: Redefining \. on input line 1113.
+LaTeX Info: Redefining \% on input line 1113.
+ [60]
+File: imagenes/desarrollo/UI/compute_mac.png Graphic file (type bmp)
+<imagenes/desarrollo/UI/compute_mac.png>
+File: imagenes/desarrollo/UI/valid_mac.png Graphic file (type bmp)
+<imagenes/desarrollo/UI/valid_mac.png>
+LaTeX Info: Redefining \. on input line 1129.
+LaTeX Info: Redefining \% on input line 1129.
+ [61]
+File: imagenes/desarrollo/UI/pagina_actualizaciones.png Graphic file (type bmp)
+<imagenes/desarrollo/UI/pagina_actualizaciones.png>
+LaTeX Info: Redefining \. on input line 1149.
+LaTeX Info: Redefining \% on input line 1149.
+ [62]
+File: imagenes/desarrollo/UI/subir_actualizacion.png Graphic file (type bmp)
+<imagenes/desarrollo/UI/subir_actualizacion.png>
+LaTeX Info: Redefining \. on input line 1169.
+LaTeX Info: Redefining \% on input line 1169.
+ [63]
+File: imagenes/desarrollo/UI/detalles_update_pack.png Graphic file (type bmp)
+<imagenes/desarrollo/UI/detalles_update_pack.png>
+LaTeX Info: Redefining \. on input line 1186.
+LaTeX Info: Redefining \% on input line 1186.
+ [64]
+File: imagenes/desarrollo/UI/web_configuracion_launch.png Graphic file (type bmp)
+<imagenes/desarrollo/UI/web_configuracion_launch.png>
+LaTeX Info: Redefining \. on input line 1208.
+LaTeX Info: Redefining \% on input line 1208.
+ [65]
+File: imagenes/desarrollo/UI/detalles_launch.png Graphic file (type bmp)
+<imagenes/desarrollo/UI/detalles_launch.png>
+LaTeX Info: Redefining \. on input line 1225.
+LaTeX Info: Redefining \% on input line 1225.
+ [66]
+File: imagenes/desarrollo/UI/estado_instalación_dispositivo.png Graphic file (type bmp)
+<imagenes/desarrollo/UI/estado_instalación_dispositivo.png>
+LaTeX Info: Redefining \. on input line 1245.
+LaTeX Info: Redefining \% on input line 1245.
+ [67]
+File: imagenes/desarrollo/UI/detalles_un_estado.png Graphic file (type bmp)
+<imagenes/desarrollo/UI/detalles_un_estado.png>
+LaTeX Info: Redefining \. on input line 1266.
+LaTeX Info: Redefining \% on input line 1266.
+ [68]
+File: imagenes/desarrollo/web_previa.png Graphic file (type bmp)
+<imagenes/desarrollo/web_previa.png>
+File: imagenes/desarrollo/web_error.png Graphic file (type bmp)
+<imagenes/desarrollo/web_error.png>
+LaTeX Info: Redefining \. on input line 1282.
+LaTeX Info: Redefining \% on input line 1282.
+ [69]
+File: imagenes/desarrollo/web_post_v1.png Graphic file (type bmp)
+<imagenes/desarrollo/web_post_v1.png>
+LaTeX Info: Redefining \. on input line 1291.
+LaTeX Info: Redefining \% on input line 1291.
+ [70]
+File: imagenes/desarrollo/web_v2.png Graphic file (type bmp)
+<imagenes/desarrollo/web_v2.png>
+File: imagenes/desarrollo/admin_device_certs.png Graphic file (type bmp)
+<imagenes/desarrollo/admin_device_certs.png>
+LaTeX Info: Redefining \. on input line 1308.
+LaTeX Info: Redefining \% on input line 1308.
+ [71]
+File: imagenes/desarrollo/kubernetes.png Graphic file (type bmp)
+<imagenes/desarrollo/kubernetes.png>
+LaTeX Info: Redefining \. on input line 1322.
+LaTeX Info: Redefining \% on input line 1322.
+ [72]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1335.
+LaTeX Info: Redefining \. on input line 1337.
+LaTeX Info: Redefining \% on input line 1337.
+ [73]
+LaTeX Info: Redefining \. on input line 1363.
+LaTeX Info: Redefining \% on input line 1363.
+ [74]
+LaTeX Info: Redefining \. on input line 1389.
+LaTeX Info: Redefining \% on input line 1389.
+ [75]
+LaTeX Info: Redefining \. on input line 1419.
+LaTeX Info: Redefining \% on input line 1419.
+ [76]
+LaTeX Info: Redefining \. on input line 1446.
+LaTeX Info: Redefining \% on input line 1446.
+ [77]
+File: imagenes/desarrollo/pipeline_tests.png Graphic file (type bmp)
+<imagenes/desarrollo/pipeline_tests.png>
+File: imagenes/desarrollo/coverage_Report.png Graphic file (type bmp)
+<imagenes/desarrollo/coverage_Report.png>
+LaTeX Info: Redefining \. on input line 1464.
+LaTeX Info: Redefining \% on input line 1464.
+ [78]
+File: imagenes/desarrollo/build_and_release.png Graphic file (type bmp)
+<imagenes/desarrollo/build_and_release.png>
+File: imagenes/desarrollo/registry.png Graphic file (type bmp)
+<imagenes/desarrollo/registry.png>
+LaTeX Info: Redefining \. on input line 1490.
+LaTeX Info: Redefining \% on input line 1490.
+ [79])
 LaTeX Info: Redefining \. on input line 101.
 LaTeX Info: Redefining \% on input line 101.
- [52]
+ [80]
 \openout2 = `Chapters/04-Resultados.aux'.
 
  (./Chapters/04-Resultados.tex
 Capítulo 3.
-File: imagenes/resultados/tanques_error.png Graphic file (type bmp)
-<imagenes/resultados/tanques_error.png>
-[53
+[81
 
 
 
 
 ]
-File: imagenes/resultados/tanques_v2.png Graphic file (type bmp)
-<imagenes/resultados/tanques_v2.png>
-LaTeX Info: Redefining \. on input line 43.
-LaTeX Info: Redefining \% on input line 43.
- [54]
-File: imagenes/resultados/kms_general.png Graphic file (type bmp)
-<imagenes/resultados/kms_general.png>
-File: imagenes/resultados/kms_detalles_one_key.png Graphic file (type bmp)
-<imagenes/resultados/kms_detalles_one_key.png>
-LaTeX Info: Redefining \. on input line 73.
-LaTeX Info: Redefining \% on input line 73.
- [55]
-File: imagenes/resultados/pagina_actualizaciones.png Graphic file (type bmp)
-<imagenes/resultados/pagina_actualizaciones.png>
-LaTeX Info: Redefining \. on input line 93.
-LaTeX Info: Redefining \% on input line 93.
- [56]
-File: imagenes/resultados/subir_actualizacion.png Graphic file (type bmp)
-<imagenes/resultados/subir_actualizacion.png>
-LaTeX Info: Redefining \. on input line 113.
-LaTeX Info: Redefining \% on input line 113.
- [57]
-File: imagenes/resultados/detalles_update_pack.png Graphic file (type bmp)
-<imagenes/resultados/detalles_update_pack.png>
-LaTeX Info: Redefining \. on input line 130.
-LaTeX Info: Redefining \% on input line 130.
- [58]
-LaTeX Info: Redefining \. on input line 139.
-LaTeX Info: Redefining \% on input line 139.
- [59]
-File: imagenes/resultados/web_configuracion_launch.png Graphic file (type bmp)
-<imagenes/resultados/web_configuracion_launch.png>
-LaTeX Info: Redefining \. on input line 158.
-LaTeX Info: Redefining \% on input line 158.
- [60]
-File: imagenes/resultados/detalles_launch.png Graphic file (type bmp)
-<imagenes/resultados/detalles_launch.png>
-File: imagenes/resultados/estado_instalación_dispositivo.png Graphic file (type bmp)
-<imagenes/resultados/estado_instalación_dispositivo.png>
-LaTeX Info: Redefining \. on input line 189.
-LaTeX Info: Redefining \% on input line 189.
- [61]
-File: imagenes/resultados/detalles_un_estado.png Graphic file (type bmp)
-<imagenes/resultados/detalles_un_estado.png>
-LaTeX Info: Redefining \. on input line 205.
-LaTeX Info: Redefining \% on input line 205.
- [62]
-File: imagenes/resultados/detalles_error_estado.png Graphic file (type bmp)
-<imagenes/resultados/detalles_error_estado.png>
-LaTeX Info: Redefining \. on input line 222.
-LaTeX Info: Redefining \% on input line 222.
- [63]
 File: imagenes/resultados/test_cover_symkms.png Graphic file (type bmp)
 <imagenes/resultados/test_cover_symkms.png>
 File: imagenes/resultados/test_cover_updates.png Graphic file (type bmp)
 <imagenes/resultados/test_cover_updates.png>
-LaTeX Info: Redefining \. on input line 246.
-LaTeX Info: Redefining \% on input line 246.
- [64]
-LaTeX Info: Redefining \. on input line 265.
-LaTeX Info: Redefining \% on input line 265.
- [65])
+LaTeX Info: Redefining \. on input line 58.
+LaTeX Info: Redefining \% on input line 58.
+ [82]
+File: imagenes/resultados/clave_asimetrica.png Graphic file (type bmp)
+<imagenes/resultados/clave_asimetrica.png>
+LaTeX Info: Redefining \. on input line 75.
+LaTeX Info: Redefining \% on input line 75.
+ [83]
+File: imagenes/resultados/csr_clave.png Graphic file (type bmp)
+<imagenes/resultados/csr_clave.png>
+File: imagenes/resultados/ca_post_cuantica.png Graphic file (type bmp)
+<imagenes/resultados/ca_post_cuantica.png>
+LaTeX Info: Redefining \. on input line 95.
+LaTeX Info: Redefining \% on input line 95.
+ [84]
+File: imagenes/resultados/certificado_clave.png Graphic file (type bmp)
+<imagenes/resultados/certificado_clave.png>
+File: imagenes/resultados/clave_simetrica.png Graphic file (type bmp)
+<imagenes/resultados/clave_simetrica.png>
+LaTeX Info: Redefining \. on input line 111.
+LaTeX Info: Redefining \% on input line 111.
+ [85]
+File: imagenes/resultados/crear_swu_firm_enc.png Graphic file (type bmp)
+<imagenes/resultados/crear_swu_firm_enc.png>
+LaTeX Info: Redefining \. on input line 121.
+LaTeX Info: Redefining \% on input line 121.
+ [86]
+File: imagenes/resultados/launch.png Graphic file (type bmp)
+<imagenes/resultados/launch.png>
+File: imagenes/resultados/lanzar_actualizacion.png Graphic file (type bmp)
+<imagenes/resultados/lanzar_actualizacion.png>
+LaTeX Info: Redefining \. on input line 142.
+LaTeX Info: Redefining \% on input line 142.
+ [87]
+File: imagenes/resultados/dispositivios_correctos.png Graphic file (type bmp)
+<imagenes/resultados/dispositivios_correctos.png>
+LaTeX Info: Redefining \. on input line 155.
+LaTeX Info: Redefining \% on input line 155.
+ [88]
+File: imagenes/resultados/device3_error_verificacion.png Graphic file (type bmp)
+<imagenes/resultados/device3_error_verificacion.png>
+File: imagenes/resultados/error_encriptacion.png Graphic file (type bmp)
+<imagenes/resultados/error_encriptacion.png>
+File: imagenes/resultados/workflow_correcto.png Graphic file (type bmp)
+<imagenes/resultados/workflow_correcto.png>
+LaTeX Info: Redefining \. on input line 182.
+LaTeX Info: Redefining \% on input line 182.
+ [89]
+File: imagenes/resultados/workflow_fallido.png Graphic file (type bmp)
+<imagenes/resultados/workflow_fallido.png>
+LaTeX Info: Redefining \. on input line 191.
+LaTeX Info: Redefining \% on input line 191.
+ [90]
+File: imagenes/resultados/resultado_final.png Graphic file (type bmp)
+<imagenes/resultados/resultado_final.png>
+)
 LaTeX Info: Redefining \. on input line 102.
 LaTeX Info: Redefining \% on input line 102.
- [66]
+ [91]
+LaTeX Info: Redefining \. on input line 102.
+LaTeX Info: Redefining \% on input line 102.
+ [92]
 \openout2 = `Chapters/05-Conclusiones.aux'.
 
  (./Chapters/05-Conclusiones.tex
 Capítulo 4.
-[67
+[93
 
 
 
@@ -1570,23 +1708,26 @@ Capítulo 4.
 ])
 LaTeX Info: Redefining \. on input line 103.
 LaTeX Info: Redefining \% on input line 103.
- [68] (./main_tfm.bbl [69
+ [94]
+LaTeX Info: Redefining \. on input line 103.
+LaTeX Info: Redefining \% on input line 103.
+ [95] (./main_tfm.bbl [96
 
 
 
 ]
 LaTeX Info: Redefining \. on input line 134.
 LaTeX Info: Redefining \% on input line 134.
- [70])
+ [97])
 LaTeX Info: Redefining \. on input line 122.
 LaTeX Info: Redefining \% on input line 122.
- [71]
+ [98]
 runsystem(makeindex main_tfm.idx)...executed safely (allowed).
 
  (./main_tfm.ind)
 File: Logos/tfm_contra.png Graphic file (type bmp)
 <Logos/tfm_contra.png>
- [72
+ [99
 
 
 ] (./main_tfm.aux
@@ -1598,15 +1739,15 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main_tfm.out' has not changed.
-(rerunfilecheck)             Checksum: 55990B2831C5B28D23D655E1B1D2D08E;16671.
+(rerunfilecheck)             Checksum: 6AA82A9A8D7D3A4BE8E0B0062706B51E;20178.
  ) 
 Here is how much of TeX's memory you used:
- 33234 strings out of 474878
- 693961 string characters out of 5762516
- 1937627 words of memory out of 5000000
- 54600 multiletter control sequences out of 15000+600000
- 568274 words of font info for 126 fonts, out of 8000000 for 9000
+ 33556 strings out of 474878
+ 707110 string characters out of 5762516
+ 1936627 words of memory out of 5000000
+ 54888 multiletter control sequences out of 15000+600000
+ 568282 words of font info for 127 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 86i,12n,96p,1050b,932s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 86i,12n,96p,1050b,1837s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main_tfm.xdv (86 pages, 1599360 bytes).
+Output written on main_tfm.xdv (113 pages, 1990456 bytes).

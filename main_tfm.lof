@@ -18,20 +18,51 @@
 \contentsline {figure}{\numberline {2.14}{\ignorespaces Diagrama de estados del Workflow Por Fases.}}{38}{figure.caption.25}%
 \contentsline {figure}{\numberline {2.15}{\ignorespaces Estructura de la entidad Job en WFX.}}{39}{figure.caption.26}%
 \contentsline {figure}{\numberline {2.16}{\ignorespaces Arquitectura de la plataforma de actualizaciones propuesta}}{42}{figure.caption.27}%
-\contentsline {figure}{\numberline {2.17}{\ignorespaces Diagrama del modelo de datos de la plataforma}}{49}{figure.caption.28}%
+\contentsline {figure}{\numberline {2.17}{\ignorespaces Diagrama de casos de uso de la plataforma de actualizaciones OTA}}{43}{figure.caption.28}%
+\contentsline {figure}{\numberline {2.18}{\ignorespaces Diagrama de secuencia de creación de un Update Pack}}{45}{figure.caption.29}%
+\contentsline {figure}{\numberline {2.19}{\ignorespaces Diagrama de secuencia de lanzamiento de una actualización}}{46}{figure.caption.30}%
+\contentsline {figure}{\numberline {2.20}{\ignorespaces Diagrama de secuencia del flujo de actualización en el dispositivo}}{47}{figure.caption.31}%
+\contentsline {figure}{\numberline {2.21}{\ignorespaces Diagrama del modelo de datos de la plataforma}}{51}{figure.caption.32}%
+\contentsline {figure}{\numberline {2.22}{\ignorespaces Vista general del sistema de gestión de claves (KMS)}}{57}{figure.caption.35}%
+\contentsline {figure}{\numberline {2.23}{\ignorespaces Selector de creación o importación de clave simétrica}}{58}{figure.caption.36}%
+\contentsline {figure}{\numberline {2.24}{\ignorespaces Pantalla de confirmación de clave creada, con opción de descarga y aviso de visibilidad única}}{59}{figure.caption.37}%
+\contentsline {figure}{\numberline {2.25}{\ignorespaces Vista detallada de una clave con operaciones disponibles}}{60}{figure.caption.38}%
+\contentsline {figure}{\numberline {2.26}{\ignorespaces Formulario de cifrado: entrada de texto o fichero e IV opcional}}{60}{figure.caption.40}%
+\contentsline {figure}{\numberline {2.27}{\ignorespaces Formulario de descifrado: entrada del texto cifrado y el IV}}{61}{figure.caption.42}%
+\contentsline {figure}{\numberline {2.28}{\ignorespaces Formulario de generación de MAC a partir de texto o fichero}}{61}{figure.caption.44}%
+\contentsline {figure}{\numberline {2.29}{\ignorespaces Formulario de verificación de MAC: entrada del texto original y el MAC a validar}}{62}{figure.caption.45}%
+\contentsline {figure}{\numberline {2.30}{\ignorespaces Página principal de gestión de actualizaciones}}{63}{figure.caption.46}%
+\contentsline {figure}{\numberline {2.31}{\ignorespaces Formulario de creación de una nueva actualización}}{64}{figure.caption.47}%
+\contentsline {figure}{\numberline {2.32}{\ignorespaces Vista detallada de un paquete de actualización}}{65}{figure.caption.48}%
+\contentsline {figure}{\numberline {2.33}{\ignorespaces Formulario de configuración de un lanzamiento}}{66}{figure.caption.49}%
+\contentsline {figure}{\numberline {2.34}{\ignorespaces Vista detallada de un lanzamiento con estado de dispositivos}}{67}{figure.caption.50}%
+\contentsline {figure}{\numberline {2.35}{\ignorespaces Línea temporal de estados de instalación de un dispositivo}}{68}{figure.caption.51}%
+\contentsline {figure}{\numberline {2.36}{\ignorespaces Detalles temporales de un estado específico}}{68}{figure.caption.52}%
+\contentsline {figure}{\numberline {2.37}{\ignorespaces Aplicación web de demostración previa al proyecto}}{69}{figure.caption.53}%
+\contentsline {figure}{\numberline {2.38}{\ignorespaces Error de desbordamiento en la aplicación de demostración original}}{70}{figure.caption.54}%
+\contentsline {figure}{\numberline {2.39}{\ignorespaces Web de demostración mejorada (v1.0) con panel de logs de SWUpdate}}{71}{figure.caption.55}%
+\contentsline {figure}{\numberline {2.40}{\ignorespaces Web de demostración tras la actualización OTA (v2.0), error corregido}}{71}{figure.caption.56}%
+\contentsline {figure}{\numberline {2.41}{\ignorespaces Interfaz de administración de certificados de CA en el dispositivo de prueba}}{72}{figure.caption.57}%
+\contentsline {figure}{\numberline {2.42}{\ignorespaces Arquitectura de despliegue en Kubernetes}}{73}{figure.caption.58}%
+\contentsline {figure}{\numberline {2.43}{\ignorespaces Pipeline de ejecución automática de tests en GitHub Actions}}{78}{figure.caption.62}%
+\contentsline {figure}{\numberline {2.44}{\ignorespaces Informe de cobertura de código generado por el pipeline de tests}}{78}{figure.caption.63}%
+\contentsline {figure}{\numberline {2.45}{\ignorespaces Pipeline de construcción y despliegue de imágenes}}{79}{figure.caption.64}%
+\contentsline {figure}{\numberline {2.46}{\ignorespaces Imagen publicada en GitHub Container Registry (GHCR)}}{80}{figure.caption.65}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Sistema de control de tanques con error de desbordamiento}}{54}{figure.caption.29}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Sistema de control de tanques versión corregida}}{54}{figure.caption.30}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Vista general del sistema de gestión de claves (KMS)}}{55}{figure.caption.31}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Vista detallada de una clave con operaciones disponibles}}{56}{figure.caption.32}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Página principal de gestión de actualizaciones}}{57}{figure.caption.33}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Formulario de creación de una nueva actualización}}{58}{figure.caption.34}%
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Vista detallada de un paquete de actualización}}{59}{figure.caption.35}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Formulario de configuración de un lanzamiento}}{60}{figure.caption.36}%
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Vista detallada de un lanzamiento con estado de dispositivos}}{61}{figure.caption.37}%
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Línea temporal de estados de instalación de un dispositivo}}{62}{figure.caption.38}%
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Detalles temporales de un estado específico}}{63}{figure.caption.39}%
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Visualización de detalles de error en un estado}}{63}{figure.caption.40}%
-\contentsline {figure}{\numberline {3.13}{\ignorespaces Treemap de cobertura de código del servicio SymKMS (83.0\%)}}{64}{figure.caption.41}%
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Treemap de cobertura de código del servicio Updates (74.4\%)}}{65}{figure.caption.42}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Treemap de cobertura de código del servicio SymKMS (83.0\%)}}{82}{figure.caption.66}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Treemap de cobertura de código del servicio Updates (74.4\%)}}{83}{figure.caption.67}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Creación de la clave asimétrica para firma digital}}{84}{figure.caption.68}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Generación del CSR a partir de la clave asimétrica}}{84}{figure.caption.69}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces CA post-cuántica basada en ML-DSA utilizada para firmar el CSR}}{84}{figure.caption.70}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Certificado emitido por la CA post-cuántica para la clave de firma}}{85}{figure.caption.71}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Creación de la clave simétrica ASCON para cifrado del paquete}}{86}{figure.caption.72}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Creación del paquete SWU firmado y cifrado}}{87}{figure.caption.73}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Indicación de creación de lanzamiento desde la pantalla de actualizaciones}}{87}{figure.caption.74}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Configuración y ejecución del lanzamiento de la actualización}}{88}{figure.caption.75}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Dispositivos 1 y 2: actualización completada correctamente}}{88}{figure.caption.76}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Dispositivo 3: error de verificación de firma por falta del certificado de la CA}}{89}{figure.caption.77}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Dispositivo 4: error al no poder descifrar los ficheros del paquete}}{89}{figure.caption.78}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Workflow completado correctamente en los dispositivos 1 y 2}}{90}{figure.caption.79}%
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Workflow fallido en los dispositivos 3 y 4 con mensaje de error}}{91}{figure.caption.80}%
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Resumen del lanzamiento: 2 dispositivos actualizados correctamente (azul) y 2 fallidos (rojo)}}{92}{figure.caption.81}%
 \addvspace {10\p@ }

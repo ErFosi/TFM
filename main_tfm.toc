@@ -56,10 +56,10 @@
 \contentsline {subsubsection}{\numberline {2.3.1.1}Yocto Project}{32}{subsubsection.2.3.1.1}%
 \contentsline {subsubsection}{\numberline {2.3.1.2}Bootloader}{32}{subsubsection.2.3.1.2}%
 \contentsline {subsubsection}{\numberline {2.3.1.3}Rootfs (Sistema de archivos raíz)}{32}{subsubsection.2.3.1.3}%
-\contentsline {subsubsection}{\numberline {2.3.1.4}Estrategia de actualización A/B}{32}{subsubsection.2.3.1.4}%
+\contentsline {subsubsection}{\numberline {2.3.1.4}Estrategia de actualización A/B}{33}{subsubsection.2.3.1.4}%
 \contentsline {subsection}{\numberline {2.3.2}SWUpdate: Gestor de actualizaciones}{33}{subsection.2.3.2}%
 \contentsline {subsubsection}{\numberline {2.3.2.1}Arquitectura modular}{34}{subsubsection.2.3.2.1}%
-\contentsline {subsubsection}{\numberline {2.3.2.2}Formato de paquete .swu y descriptor}{34}{subsubsection.2.3.2.2}%
+\contentsline {subsubsection}{\numberline {2.3.2.2}Formato de paquete .swu y descriptor}{35}{subsubsection.2.3.2.2}%
 \contentsline {subsubsection}{\numberline {2.3.2.3}Flujo de actualización (Pulling)}{35}{subsubsection.2.3.2.3}%
 \contentsline {subsection}{\numberline {2.3.3}Generación de paquetes: SWUGenerator}{36}{subsection.2.3.3}%
 \contentsline {subsection}{\numberline {2.3.4}WFX: Workflow Executioner}{36}{subsection.2.3.4}%
@@ -68,57 +68,89 @@
 \contentsline {subsection}{\numberline {2.3.5}LamassuIoT}{40}{subsection.2.3.5}%
 \contentsline {subsection}{\numberline {2.3.6}Extensión del KMS para Criptografía Simétrica}{40}{subsection.2.3.6}%
 \contentsline {section}{\numberline {2.4}Infraestructura Planteada}{41}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Integración de Criptografía Ligera y Post-Cuántica}{42}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Integración de Algoritmos de Cifrado Simétrico}{42}{subsection.2.5.1}%
-\contentsline {subsubsection}{\numberline {2.5.1.1}Instalación Nativa}{43}{subsubsection.2.5.1.1}%
-\contentsline {subsubsection}{\numberline {2.5.1.2}Integración con WFX}{43}{subsubsection.2.5.1.2}%
-\contentsline {subsection}{\numberline {2.5.2}Integración de Firma Digital Post-Cuántica}{44}{subsection.2.5.2}%
-\contentsline {subsection}{\numberline {2.5.3}Modificaciones en SWUGenerator}{44}{subsection.2.5.3}%
-\contentsline {subsubsection}{\numberline {2.5.3.1}Cifrado con ASCON}{44}{subsubsection.2.5.3.1}%
-\contentsline {subsubsection}{\numberline {2.5.3.2}Métodos de Firma}{44}{subsubsection.2.5.3.2}%
-\contentsline {subsubsection}{\numberline {2.5.3.3}Comando Completo de Generación}{45}{subsubsection.2.5.3.3}%
-\contentsline {subsubsection}{\numberline {2.5.3.4}Proceso de Creación y Verificación de Actualizaciones Seguras}{45}{subsubsection.2.5.3.4}%
-\contentsline {section}{\numberline {2.6}Modelo de Datos}{46}{section.2.6}%
-\contentsline {subsection}{\numberline {2.6.1}Entidades de Lamassu IoT}{46}{subsection.2.6.1}%
-\contentsline {subsection}{\numberline {2.6.2}Entidades de WFX}{46}{subsection.2.6.2}%
-\contentsline {subsection}{\numberline {2.6.3}Entidades del Módulo Updates}{47}{subsection.2.6.3}%
-\contentsline {subsubsection}{\numberline {2.6.3.1}Update-Pack (Paquete de Actualización)}{47}{subsubsection.2.6.3.1}%
-\contentsline {subsubsection}{\numberline {2.6.3.2}Launch (Lanzamiento)}{47}{subsubsection.2.6.3.2}%
-\contentsline {subsection}{\numberline {2.6.4}Relaciones entre Entidades}{48}{subsection.2.6.4}%
-\contentsline {section}{\numberline {2.7}Estrategia de Pruebas y Validación}{50}{section.2.7}%
-\contentsline {subsection}{\numberline {2.7.1}Infraestructura de Tests}{50}{subsection.2.7.1}%
-\contentsline {subsection}{\numberline {2.7.2}Tests del Servicio SymKMS}{50}{subsection.2.7.2}%
-\contentsline {subsubsection}{\numberline {2.7.2.1}Tests Unitarios del Servicio Core}{50}{subsubsection.2.7.2.1}%
-\contentsline {subsubsection}{\numberline {2.7.2.2}Validación con Vectores de Test Oficiales}{51}{subsubsection.2.7.2.2}%
-\contentsline {subsubsection}{\numberline {2.7.2.3}Tests de API REST}{51}{subsubsection.2.7.2.3}%
-\contentsline {subsection}{\numberline {2.7.3}Tests del Servicio Updates}{51}{subsection.2.7.3}%
-\contentsline {subsubsection}{\numberline {2.7.3.1}Tests Unitarios del Servicio}{51}{subsubsection.2.7.3.1}%
-\contentsline {subsubsection}{\numberline {2.7.3.2}Tests de Integración con PostgreSQL}{52}{subsubsection.2.7.3.2}%
-\contentsline {subsubsection}{\numberline {2.7.3.3}Tests de Integración con WFX}{52}{subsubsection.2.7.3.3}%
-\contentsline {chapter}{\numberline {3}Resultados}{53}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Caso de Uso: Sistema de Control de Tanques}{53}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Interfaz Web de Gestión}{54}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Gestión de Claves Criptográficas (KMS)}{54}{subsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.1.1}Vista General del KMS}{55}{subsubsection.3.2.1.1}%
-\contentsline {subsubsection}{\numberline {3.2.1.2}Detalles y Operaciones de una Clave}{55}{subsubsection.3.2.1.2}%
-\contentsline {subsection}{\numberline {3.2.2}Gestión de Actualizaciones}{56}{subsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.2.1}Página Principal de Actualizaciones}{56}{subsubsection.3.2.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2.2}Creación de una Nueva Actualización}{57}{subsubsection.3.2.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.2.3}Detalles de un Update Pack}{58}{subsubsection.3.2.2.3}%
-\contentsline {subsection}{\numberline {3.2.3}Gestión de Lanzamientos}{59}{subsection.3.2.3}%
-\contentsline {subsubsection}{\numberline {3.2.3.1}Configuración de un Lanzamiento}{59}{subsubsection.3.2.3.1}%
-\contentsline {subsubsection}{\numberline {3.2.3.2}Detalles de un Lanzamiento}{61}{subsubsection.3.2.3.2}%
-\contentsline {subsection}{\numberline {3.2.4}Monitorización de Dispositivos Individuales}{61}{subsection.3.2.4}%
-\contentsline {subsubsection}{\numberline {3.2.4.1}Línea Temporal de Estados}{61}{subsubsection.3.2.4.1}%
-\contentsline {subsubsection}{\numberline {3.2.4.2}Detalles de Estados Específicos}{62}{subsubsection.3.2.4.2}%
-\contentsline {section}{\numberline {3.3}Resultados de Pruebas y Cobertura de Código}{64}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Cobertura de Código}{64}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Validación Criptográfica}{65}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Tests de Integración}{65}{subsection.3.3.3}%
-\contentsline {chapter}{\numberline {4}Conclusiones}{67}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Cumplimiento de Objetivos}{67}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Validación de Criptografía Ligera en Dispositivos Limitados}{67}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Preparación para Amenazas Post-Cuánticas}{68}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Reflexión Final}{68}{section.4.4}%
-\contentsline {part}{Bibliografía}{71}{chapter*.43}%
-\contentsline {part}{Índice alfabético}{72}{chapter*.43}%
+\contentsline {section}{\numberline {2.5}Casos de Uso del Sistema}{42}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Actores del sistema}{42}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Componentes del sistema}{43}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Diagrama de casos de uso}{43}{subsection.2.5.3}%
+\contentsline {subsection}{\numberline {2.5.4}Descripción de los casos de uso}{44}{subsection.2.5.4}%
+\contentsline {subsubsection}{\numberline {2.5.4.1}Casos de uso del Backend}{44}{subsubsection.2.5.4.1}%
+\contentsline {subsubsection}{\numberline {2.5.4.2}Casos de uso de WFX}{44}{subsubsection.2.5.4.2}%
+\contentsline {subsection}{\numberline {2.5.5}Diagramas de Secuencia}{45}{subsection.2.5.5}%
+\contentsline {subsubsection}{\numberline {2.5.5.1}Creación de un Update Pack}{45}{subsubsection.2.5.5.1}%
+\contentsline {subsubsection}{\numberline {2.5.5.2}Lanzamiento de una Actualización}{46}{subsubsection.2.5.5.2}%
+\contentsline {subsubsection}{\numberline {2.5.5.3}Flujo en el Dispositivo}{46}{subsubsection.2.5.5.3}%
+\contentsline {section}{\numberline {2.6}Modelo de Datos}{47}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Entidades de Lamassu IoT}{47}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}Entidades de WFX}{48}{subsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.6.3}Entidades del Módulo Updates}{48}{subsection.2.6.3}%
+\contentsline {subsubsection}{\numberline {2.6.3.1}Update-Pack (Paquete de Actualización)}{48}{subsubsection.2.6.3.1}%
+\contentsline {subsubsection}{\numberline {2.6.3.2}Launch (Lanzamiento)}{49}{subsubsection.2.6.3.2}%
+\contentsline {subsection}{\numberline {2.6.4}Relaciones entre Entidades}{50}{subsection.2.6.4}%
+\contentsline {section}{\numberline {2.7}Integración de Criptografía Ligera y Post-Cuántica}{51}{section.2.7}%
+\contentsline {subsection}{\numberline {2.7.1}Integración de Algoritmos de Cifrado Simétrico}{51}{subsection.2.7.1}%
+\contentsline {subsubsection}{\numberline {2.7.1.1}Instalación Nativa}{52}{subsubsection.2.7.1.1}%
+\contentsline {subsubsection}{\numberline {2.7.1.2}Integración con WFX}{52}{subsubsection.2.7.1.2}%
+\contentsline {subsection}{\numberline {2.7.2}Integración de Firma Digital Post-Cuántica}{53}{subsection.2.7.2}%
+\contentsline {subsubsection}{\numberline {2.7.2.1}Métodos de Firma}{53}{subsubsection.2.7.2.1}%
+\contentsline {subsection}{\numberline {2.7.3}Extensión del KMS para Criptografía Simétrica}{54}{subsection.2.7.3}%
+\contentsline {subsection}{\numberline {2.7.4}Modificaciones en SWUGenerator}{54}{subsection.2.7.4}%
+\contentsline {subsubsection}{\numberline {2.7.4.1}Cifrado con ASCON}{54}{subsubsection.2.7.4.1}%
+\contentsline {subsubsection}{\numberline {2.7.4.2}Comandos de Generación de Paquetes}{54}{subsubsection.2.7.4.2}%
+\contentsline {paragraph}{Método PKCS\#11 con HSM}{54}{paragraph*.33}%
+\contentsline {paragraph}{Método Custom con Lamassu PKI}{55}{paragraph*.34}%
+\contentsline {subsubsection}{\numberline {2.7.4.3}Proceso de Creación y Verificación de Actualizaciones Seguras}{56}{subsubsection.2.7.4.3}%
+\contentsline {section}{\numberline {2.8}Interfaz Web de Gestión}{56}{section.2.8}%
+\contentsline {subsection}{\numberline {2.8.1}Gestión de Claves Criptográficas (KMS)}{57}{subsection.2.8.1}%
+\contentsline {subsubsection}{\numberline {2.8.1.1}Vista General del KMS}{57}{subsubsection.2.8.1.1}%
+\contentsline {subsubsection}{\numberline {2.8.1.2}Creación e Importación de Claves}{57}{subsubsection.2.8.1.2}%
+\contentsline {subsubsection}{\numberline {2.8.1.3}Detalles y Operaciones de una Clave}{59}{subsubsection.2.8.1.3}%
+\contentsline {paragraph}{Cifrado.}{60}{paragraph*.39}%
+\contentsline {paragraph}{Descifrado.}{60}{paragraph*.41}%
+\contentsline {paragraph}{Generación y verificación de MAC.}{61}{paragraph*.43}%
+\contentsline {subsection}{\numberline {2.8.2}Gestión de Actualizaciones}{62}{subsection.2.8.2}%
+\contentsline {subsubsection}{\numberline {2.8.2.1}Página Principal de Actualizaciones}{62}{subsubsection.2.8.2.1}%
+\contentsline {subsubsection}{\numberline {2.8.2.2}Creación de una Nueva Actualización}{63}{subsubsection.2.8.2.2}%
+\contentsline {subsubsection}{\numberline {2.8.2.3}Detalles de un Update Pack}{64}{subsubsection.2.8.2.3}%
+\contentsline {subsection}{\numberline {2.8.3}Gestión de Lanzamientos}{65}{subsection.2.8.3}%
+\contentsline {subsubsection}{\numberline {2.8.3.1}Configuración de un Lanzamiento}{65}{subsubsection.2.8.3.1}%
+\contentsline {subsubsection}{\numberline {2.8.3.2}Detalles de un Lanzamiento}{66}{subsubsection.2.8.3.2}%
+\contentsline {subsection}{\numberline {2.8.4}Monitorización de Dispositivos Individuales}{67}{subsection.2.8.4}%
+\contentsline {subsubsection}{\numberline {2.8.4.1}Línea Temporal de Estados}{67}{subsubsection.2.8.4.1}%
+\contentsline {subsubsection}{\numberline {2.8.4.2}Detalles de Estados Específicos}{68}{subsubsection.2.8.4.2}%
+\contentsline {section}{\numberline {2.9}Web de Demostración}{69}{section.2.9}%
+\contentsline {section}{\numberline {2.10}Despliegue de los servicios en la nube}{72}{section.2.10}%
+\contentsline {paragraph}{Componentes añadidos (verde).}{73}{paragraph*.59}%
+\contentsline {paragraph}{Componentes de Lamassu (azul).}{74}{paragraph*.60}%
+\contentsline {paragraph}{Base de datos.}{74}{paragraph*.61}%
+\contentsline {subsection}{\numberline {2.10.1}Configurabilidad del servicio Updates}{74}{subsection.2.10.1}%
+\contentsline {section}{\numberline {2.11}Estrategia de Pruebas y Validación}{75}{section.2.11}%
+\contentsline {subsection}{\numberline {2.11.1}Infraestructura de Tests}{75}{subsection.2.11.1}%
+\contentsline {subsection}{\numberline {2.11.2}Tests del Servicio SymKMS}{75}{subsection.2.11.2}%
+\contentsline {subsubsection}{\numberline {2.11.2.1}Tests Unitarios del Servicio Core}{75}{subsubsection.2.11.2.1}%
+\contentsline {subsubsection}{\numberline {2.11.2.2}Validación con Vectores de Test Oficiales}{76}{subsubsection.2.11.2.2}%
+\contentsline {subsubsection}{\numberline {2.11.2.3}Tests de API REST}{76}{subsubsection.2.11.2.3}%
+\contentsline {subsection}{\numberline {2.11.3}Tests del Servicio Updates}{76}{subsection.2.11.3}%
+\contentsline {subsubsection}{\numberline {2.11.3.1}Tests Unitarios del Servicio}{77}{subsubsection.2.11.3.1}%
+\contentsline {subsubsection}{\numberline {2.11.3.2}Tests de Integración con PostgreSQL}{77}{subsubsection.2.11.3.2}%
+\contentsline {subsubsection}{\numberline {2.11.3.3}Tests de Integración con WFX}{77}{subsubsection.2.11.3.3}%
+\contentsline {subsection}{\numberline {2.11.4}Pipeline para automatización de tests}{77}{subsection.2.11.4}%
+\contentsline {subsubsection}{\numberline {2.11.4.1}Pipeline de Tests}{77}{subsubsection.2.11.4.1}%
+\contentsline {subsubsection}{\numberline {2.11.4.2}Pipeline de Build and Release}{79}{subsubsection.2.11.4.2}%
+\contentsline {chapter}{\numberline {3}Resultados}{81}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Resultados de Pruebas y Cobertura de Código}{81}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Validación Criptográfica}{81}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Tests de Integración}{81}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Cobertura de Código}{82}{subsection.3.1.3}%
+\contentsline {section}{\numberline {3.2}Caso de Ejemplo: Actualización con Firma Post-Cuántica y Cifrado ASCON}{83}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Preparación del Material Criptográfico}{83}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Creación del Paquete de Actualización}{86}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Lanzamiento de la Actualización}{87}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Resultados en los Dispositivos}{88}{subsection.3.2.4}%
+\contentsline {subsection}{\numberline {3.2.5}Visualización del Estado de los Dispositivos}{89}{subsection.3.2.5}%
+\contentsline {subsection}{\numberline {3.2.6}Resumen del Lanzamiento}{91}{subsection.3.2.6}%
+\contentsline {chapter}{\numberline {4}Conclusiones}{93}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Cumplimiento de objetivos}{93}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Líneas futuras}{94}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Reflexión final}{94}{section.4.3}%
+\contentsline {part}{Bibliografía}{98}{chapter*.82}%
+\contentsline {part}{Índice alfabético}{99}{chapter*.82}%

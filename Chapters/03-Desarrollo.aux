@@ -60,21 +60,21 @@
 \citation{schemitt2025assessingimpactpostquantumdigital}
 \citation{schemitt2025assessingimpactpostquantumdigital}
 \citation{schemitt2025assessingimpactpostquantumdigital}
-\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Comparativa de tiempos de firma y verificación en x64 (ms) \cite  {schemitt2025assessingimpactpostquantumdigital}}}{31}{table.caption.22}\protected@file@percent }
-\newlabel{tab:pq_benchmark_new}{{2.1}{31}{Comparativa de tiempos de firma y verificación en x64 (ms) \cite {schemitt2025assessingimpactpostquantumdigital}}{table.caption.22}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Comparativa de rendimiento y tamaños para nivel de seguridad 5 \cite  {schemitt2025assessingimpactpostquantumdigital}}}{31}{table.caption.22}\protected@file@percent }
+\newlabel{tab:pq_benchmark_new}{{2.1}{31}{Comparativa de rendimiento y tamaños para nivel de seguridad 5 \cite {schemitt2025assessingimpactpostquantumdigital}}{table.caption.22}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {2.3}Actualizaciones de software en sistemas embebidos}{31}{section.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}Conceptos fundamentales}{32}{subsection.2.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1.1}Yocto Project}{32}{subsubsection.2.3.1.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1.2}Bootloader}{32}{subsubsection.2.3.1.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1.3}Rootfs (Sistema de archivos raíz)}{32}{subsubsection.2.3.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1.4}Estrategia de actualización A/B}{32}{subsubsection.2.3.1.4}\protected@file@percent }
 \citation{Yocto:SystemUpdate}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1.4}Estrategia de actualización A/B}{33}{subsubsection.2.3.1.4}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {2.12}{\ignorespaces Proceso de instalación de actualización A/B.}}{33}{figure.caption.23}\protected@file@percent }
 \newlabel{fig:ab_install}{{2.12}{33}{Proceso de instalación de actualización A/B}{figure.caption.23}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}SWUpdate: Gestor de actualizaciones}{33}{subsection.2.3.2}\protected@file@percent }
 \citation{WFX}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.2.1}Arquitectura modular}{34}{subsubsection.2.3.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.2.2}Formato de paquete .swu y descriptor}{34}{subsubsection.2.3.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.2.2}Formato de paquete .swu y descriptor}{35}{subsubsection.2.3.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.2.3}Flujo de actualización (Pulling)}{35}{subsubsection.2.3.2.3}\protected@file@percent }
 \citation{SWUGenerator}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}Generación de paquetes: SWUGenerator}{36}{subsection.2.3.3}\protected@file@percent }
@@ -92,42 +92,141 @@
 \@writefile{toc}{\contentsline {section}{\numberline {2.4}Infraestructura Planteada}{41}{section.2.4}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {2.16}{\ignorespaces Arquitectura de la plataforma de actualizaciones propuesta}}{42}{figure.caption.27}\protected@file@percent }
 \newlabel{fig:plataforma_arquitectura}{{2.16}{42}{Arquitectura de la plataforma de actualizaciones propuesta}{figure.caption.27}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.5}Integración de Criptografía Ligera y Post-Cuántica}{42}{section.2.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.1}Integración de Algoritmos de Cifrado Simétrico}{42}{subsection.2.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.5.1.1}Instalación Nativa}{43}{subsubsection.2.5.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.5.1.2}Integración con WFX}{43}{subsubsection.2.5.1.2}\protected@file@percent }
-\newlabel{lst:wfx_metadata}{{2.1}{43}{Formato de metadatos del Job en WFX}{lstlisting.2.1}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {2.1}{\ignorespaces Formato de metadatos del Job en WFX}}{43}{lstlisting.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.5}Casos de Uso del Sistema}{42}{section.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.1}Actores del sistema}{42}{subsection.2.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.2}Componentes del sistema}{43}{subsection.2.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.3}Diagrama de casos de uso}{43}{subsection.2.5.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.17}{\ignorespaces Diagrama de casos de uso de la plataforma de actualizaciones OTA}}{43}{figure.caption.28}\protected@file@percent }
+\newlabel{fig:use_cases}{{2.17}{43}{Diagrama de casos de uso de la plataforma de actualizaciones OTA}{figure.caption.28}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.4}Descripción de los casos de uso}{44}{subsection.2.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.5.4.1}Casos de uso del Backend}{44}{subsubsection.2.5.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.5.4.2}Casos de uso de WFX}{44}{subsubsection.2.5.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.5}Diagramas de Secuencia}{45}{subsection.2.5.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.5.5.1}Creación de un Update Pack}{45}{subsubsection.2.5.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.18}{\ignorespaces Diagrama de secuencia de creación de un Update Pack}}{45}{figure.caption.29}\protected@file@percent }
+\newlabel{fig:seq_updatepack}{{2.18}{45}{Diagrama de secuencia de creación de un Update Pack}{figure.caption.29}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.5.5.2}Lanzamiento de una Actualización}{46}{subsubsection.2.5.5.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.19}{\ignorespaces Diagrama de secuencia de lanzamiento de una actualización}}{46}{figure.caption.30}\protected@file@percent }
+\newlabel{fig:seq_lanzamiento}{{2.19}{46}{Diagrama de secuencia de lanzamiento de una actualización}{figure.caption.30}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.5.5.3}Flujo en el Dispositivo}{46}{subsubsection.2.5.5.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.20}{\ignorespaces Diagrama de secuencia del flujo de actualización en el dispositivo}}{47}{figure.caption.31}\protected@file@percent }
+\newlabel{fig:seq_device}{{2.20}{47}{Diagrama de secuencia del flujo de actualización en el dispositivo}{figure.caption.31}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.6}Modelo de Datos}{47}{section.2.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6.1}Entidades de Lamassu IoT}{47}{subsection.2.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6.2}Entidades de WFX}{48}{subsection.2.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6.3}Entidades del Módulo Updates}{48}{subsection.2.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.3.1}Update-Pack (Paquete de Actualización)}{48}{subsubsection.2.6.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.3.2}Launch (Lanzamiento)}{49}{subsubsection.2.6.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6.4}Relaciones entre Entidades}{50}{subsection.2.6.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.21}{\ignorespaces Diagrama del modelo de datos de la plataforma}}{51}{figure.caption.32}\protected@file@percent }
+\newlabel{fig:data_model}{{2.21}{51}{Diagrama del modelo de datos de la plataforma}{figure.caption.32}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.7}Integración de Criptografía Ligera y Post-Cuántica}{51}{section.2.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.7.1}Integración de Algoritmos de Cifrado Simétrico}{51}{subsection.2.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.7.1.1}Instalación Nativa}{52}{subsubsection.2.7.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.7.1.2}Integración con WFX}{52}{subsubsection.2.7.1.2}\protected@file@percent }
+\newlabel{lst:wfx_metadata}{{2.1}{52}{Formato de metadatos del Job en WFX}{lstlisting.2.1}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {2.1}{\ignorespaces Formato de metadatos del Job en WFX}}{52}{lstlisting.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.7.2}Integración de Firma Digital Post-Cuántica}{53}{subsection.2.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.7.2.1}Métodos de Firma}{53}{subsubsection.2.7.2.1}\protected@file@percent }
 \citation{ascon-python}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.2}Integración de Firma Digital Post-Cuántica}{44}{subsection.2.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.3}Modificaciones en SWUGenerator}{44}{subsection.2.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.5.3.1}Cifrado con ASCON}{44}{subsubsection.2.5.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.5.3.2}Métodos de Firma}{44}{subsubsection.2.5.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.5.3.3}Comando Completo de Generación}{45}{subsubsection.2.5.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.5.3.4}Proceso de Creación y Verificación de Actualizaciones Seguras}{45}{subsubsection.2.5.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.6}Modelo de Datos}{46}{section.2.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.6.1}Entidades de Lamassu IoT}{46}{subsection.2.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.6.2}Entidades de WFX}{46}{subsection.2.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.6.3}Entidades del Módulo Updates}{47}{subsection.2.6.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.3.1}Update-Pack (Paquete de Actualización)}{47}{subsubsection.2.6.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.3.2}Launch (Lanzamiento)}{47}{subsubsection.2.6.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.6.4}Relaciones entre Entidades}{48}{subsection.2.6.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.17}{\ignorespaces Diagrama del modelo de datos de la plataforma}}{49}{figure.caption.28}\protected@file@percent }
-\newlabel{fig:data_model}{{2.17}{49}{Diagrama del modelo de datos de la plataforma}{figure.caption.28}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.7}Estrategia de Pruebas y Validación}{50}{section.2.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.7.1}Infraestructura de Tests}{50}{subsection.2.7.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.7.2}Tests del Servicio SymKMS}{50}{subsection.2.7.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.7.2.1}Tests Unitarios del Servicio Core}{50}{subsubsection.2.7.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.7.2.2}Validación con Vectores de Test Oficiales}{51}{subsubsection.2.7.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.7.2.3}Tests de API REST}{51}{subsubsection.2.7.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.7.3}Tests del Servicio Updates}{51}{subsection.2.7.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.7.3.1}Tests Unitarios del Servicio}{51}{subsubsection.2.7.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.7.3.2}Tests de Integración con PostgreSQL}{52}{subsubsection.2.7.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.7.3.3}Tests de Integración con WFX}{52}{subsubsection.2.7.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.7.3}Extensión del KMS para Criptografía Simétrica}{54}{subsection.2.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.7.4}Modificaciones en SWUGenerator}{54}{subsection.2.7.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.7.4.1}Cifrado con ASCON}{54}{subsubsection.2.7.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.7.4.2}Comandos de Generación de Paquetes}{54}{subsubsection.2.7.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Método PKCS\#11 con HSM}{54}{paragraph*.33}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Método Custom con Lamassu PKI}{55}{paragraph*.34}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.7.4.3}Proceso de Creación y Verificación de Actualizaciones Seguras}{56}{subsubsection.2.7.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.8}Interfaz Web de Gestión}{56}{section.2.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.8.1}Gestión de Claves Criptográficas (KMS)}{57}{subsection.2.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.8.1.1}Vista General del KMS}{57}{subsubsection.2.8.1.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.22}{\ignorespaces Vista general del sistema de gestión de claves (KMS)}}{57}{figure.caption.35}\protected@file@percent }
+\newlabel{fig:kms_general}{{2.22}{57}{Vista general del sistema de gestión de claves (KMS)}{figure.caption.35}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.8.1.2}Creación e Importación de Claves}{57}{subsubsection.2.8.1.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.23}{\ignorespaces Selector de creación o importación de clave simétrica}}{58}{figure.caption.36}\protected@file@percent }
+\newlabel{fig:crear_llave_sim}{{2.23}{58}{Selector de creación o importación de clave simétrica}{figure.caption.36}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.24}{\ignorespaces Pantalla de confirmación de clave creada, con opción de descarga y aviso de visibilidad única}}{59}{figure.caption.37}\protected@file@percent }
+\newlabel{fig:key_generated}{{2.24}{59}{Pantalla de confirmación de clave creada, con opción de descarga y aviso de visibilidad única}{figure.caption.37}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.8.1.3}Detalles y Operaciones de una Clave}{59}{subsubsection.2.8.1.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.25}{\ignorespaces Vista detallada de una clave con operaciones disponibles}}{60}{figure.caption.38}\protected@file@percent }
+\newlabel{fig:kms_detalles}{{2.25}{60}{Vista detallada de una clave con operaciones disponibles}{figure.caption.38}{}}
+\@writefile{toc}{\contentsline {paragraph}{Cifrado.}{60}{paragraph*.39}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.26}{\ignorespaces Formulario de cifrado: entrada de texto o fichero e IV opcional}}{60}{figure.caption.40}\protected@file@percent }
+\newlabel{fig:ui_cifrar}{{2.26}{60}{Formulario de cifrado: entrada de texto o fichero e IV opcional}{figure.caption.40}{}}
+\@writefile{toc}{\contentsline {paragraph}{Descifrado.}{60}{paragraph*.41}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.27}{\ignorespaces Formulario de descifrado: entrada del texto cifrado y el IV}}{61}{figure.caption.42}\protected@file@percent }
+\newlabel{fig:ui_descifrar}{{2.27}{61}{Formulario de descifrado: entrada del texto cifrado y el IV}{figure.caption.42}{}}
+\@writefile{toc}{\contentsline {paragraph}{Generación y verificación de MAC.}{61}{paragraph*.43}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.28}{\ignorespaces Formulario de generación de MAC a partir de texto o fichero}}{61}{figure.caption.44}\protected@file@percent }
+\newlabel{fig:ui_compute_mac}{{2.28}{61}{Formulario de generación de MAC a partir de texto o fichero}{figure.caption.44}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.29}{\ignorespaces Formulario de verificación de MAC: entrada del texto original y el MAC a validar}}{62}{figure.caption.45}\protected@file@percent }
+\newlabel{fig:ui_valid_mac}{{2.29}{62}{Formulario de verificación de MAC: entrada del texto original y el MAC a validar}{figure.caption.45}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.8.2}Gestión de Actualizaciones}{62}{subsection.2.8.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.8.2.1}Página Principal de Actualizaciones}{62}{subsubsection.2.8.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.30}{\ignorespaces Página principal de gestión de actualizaciones}}{63}{figure.caption.46}\protected@file@percent }
+\newlabel{fig:pagina_actualizaciones}{{2.30}{63}{Página principal de gestión de actualizaciones}{figure.caption.46}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.8.2.2}Creación de una Nueva Actualización}{63}{subsubsection.2.8.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.31}{\ignorespaces Formulario de creación de una nueva actualización}}{64}{figure.caption.47}\protected@file@percent }
+\newlabel{fig:subir_actualizacion}{{2.31}{64}{Formulario de creación de una nueva actualización}{figure.caption.47}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.8.2.3}Detalles de un Update Pack}{64}{subsubsection.2.8.2.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.32}{\ignorespaces Vista detallada de un paquete de actualización}}{65}{figure.caption.48}\protected@file@percent }
+\newlabel{fig:detalles_update_pack}{{2.32}{65}{Vista detallada de un paquete de actualización}{figure.caption.48}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.8.3}Gestión de Lanzamientos}{65}{subsection.2.8.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.8.3.1}Configuración de un Lanzamiento}{65}{subsubsection.2.8.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.33}{\ignorespaces Formulario de configuración de un lanzamiento}}{66}{figure.caption.49}\protected@file@percent }
+\newlabel{fig:web_configuracion_launch}{{2.33}{66}{Formulario de configuración de un lanzamiento}{figure.caption.49}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.8.3.2}Detalles de un Lanzamiento}{66}{subsubsection.2.8.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.34}{\ignorespaces Vista detallada de un lanzamiento con estado de dispositivos}}{67}{figure.caption.50}\protected@file@percent }
+\newlabel{fig:detalles_launch}{{2.34}{67}{Vista detallada de un lanzamiento con estado de dispositivos}{figure.caption.50}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.8.4}Monitorización de Dispositivos Individuales}{67}{subsection.2.8.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.8.4.1}Línea Temporal de Estados}{67}{subsubsection.2.8.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.35}{\ignorespaces Línea temporal de estados de instalación de un dispositivo}}{68}{figure.caption.51}\protected@file@percent }
+\newlabel{fig:estado_instalacion}{{2.35}{68}{Línea temporal de estados de instalación de un dispositivo}{figure.caption.51}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.8.4.2}Detalles de Estados Específicos}{68}{subsubsection.2.8.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.36}{\ignorespaces Detalles temporales de un estado específico}}{68}{figure.caption.52}\protected@file@percent }
+\newlabel{fig:detalles_un_estado}{{2.36}{68}{Detalles temporales de un estado específico}{figure.caption.52}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.9}Web de Demostración}{69}{section.2.9}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.37}{\ignorespaces Aplicación web de demostración previa al proyecto}}{69}{figure.caption.53}\protected@file@percent }
+\newlabel{fig:web_previa}{{2.37}{69}{Aplicación web de demostración previa al proyecto}{figure.caption.53}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.38}{\ignorespaces Error de desbordamiento en la aplicación de demostración original}}{70}{figure.caption.54}\protected@file@percent }
+\newlabel{fig:web_error}{{2.38}{70}{Error de desbordamiento en la aplicación de demostración original}{figure.caption.54}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.39}{\ignorespaces Web de demostración mejorada (v1.0) con panel de logs de SWUpdate}}{71}{figure.caption.55}\protected@file@percent }
+\newlabel{fig:web_post_v1}{{2.39}{71}{Web de demostración mejorada (v1.0) con panel de logs de SWUpdate}{figure.caption.55}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.40}{\ignorespaces Web de demostración tras la actualización OTA (v2.0), error corregido}}{71}{figure.caption.56}\protected@file@percent }
+\newlabel{fig:web_v2}{{2.40}{71}{Web de demostración tras la actualización OTA (v2.0), error corregido}{figure.caption.56}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.41}{\ignorespaces Interfaz de administración de certificados de CA en el dispositivo de prueba}}{72}{figure.caption.57}\protected@file@percent }
+\newlabel{fig:admin_device_certs}{{2.41}{72}{Interfaz de administración de certificados de CA en el dispositivo de prueba}{figure.caption.57}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.10}Despliegue de los servicios en la nube}{72}{section.2.10}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.42}{\ignorespaces Arquitectura de despliegue en Kubernetes}}{73}{figure.caption.58}\protected@file@percent }
+\newlabel{fig:kubernetes_deployment}{{2.42}{73}{Arquitectura de despliegue en Kubernetes}{figure.caption.58}{}}
+\@writefile{toc}{\contentsline {paragraph}{Componentes añadidos (verde).}{73}{paragraph*.59}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Componentes de Lamassu (azul).}{74}{paragraph*.60}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Base de datos.}{74}{paragraph*.61}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.10.1}Configurabilidad del servicio Updates}{74}{subsection.2.10.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.11}Estrategia de Pruebas y Validación}{75}{section.2.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.11.1}Infraestructura de Tests}{75}{subsection.2.11.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.11.2}Tests del Servicio SymKMS}{75}{subsection.2.11.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.11.2.1}Tests Unitarios del Servicio Core}{75}{subsubsection.2.11.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.11.2.2}Validación con Vectores de Test Oficiales}{76}{subsubsection.2.11.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.11.2.3}Tests de API REST}{76}{subsubsection.2.11.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.11.3}Tests del Servicio Updates}{76}{subsection.2.11.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.11.3.1}Tests Unitarios del Servicio}{77}{subsubsection.2.11.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.11.3.2}Tests de Integración con PostgreSQL}{77}{subsubsection.2.11.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.11.3.3}Tests de Integración con WFX}{77}{subsubsection.2.11.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.11.4}Pipeline para automatización de tests}{77}{subsection.2.11.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.11.4.1}Pipeline de Tests}{77}{subsubsection.2.11.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.43}{\ignorespaces Pipeline de ejecución automática de tests en GitHub Actions}}{78}{figure.caption.62}\protected@file@percent }
+\newlabel{fig:pipeline_tests}{{2.43}{78}{Pipeline de ejecución automática de tests en GitHub Actions}{figure.caption.62}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.44}{\ignorespaces Informe de cobertura de código generado por el pipeline de tests}}{78}{figure.caption.63}\protected@file@percent }
+\newlabel{fig:coverage_report}{{2.44}{78}{Informe de cobertura de código generado por el pipeline de tests}{figure.caption.63}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.11.4.2}Pipeline de Build and Release}{79}{subsubsection.2.11.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.45}{\ignorespaces Pipeline de construcción y despliegue de imágenes}}{79}{figure.caption.64}\protected@file@percent }
+\newlabel{fig:build_and_release}{{2.45}{79}{Pipeline de construcción y despliegue de imágenes}{figure.caption.64}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.46}{\ignorespaces Imagen publicada en GitHub Container Registry (GHCR)}}{80}{figure.caption.65}\protected@file@percent }
+\newlabel{fig:registry}{{2.46}{80}{Imagen publicada en GitHub Container Registry (GHCR)}{figure.caption.65}{}}
 \@setckpt{Chapters/03-Desarrollo}{
-\setcounter{page}{53}
+\setcounter{page}{81}
 \setcounter{equation}{0}
-\setcounter{enumi}{2}
+\setcounter{enumi}{3}
 \setcounter{enumii}{0}
 \setcounter{enumiii}{0}
 \setcounter{enumiv}{0}
@@ -135,12 +234,12 @@
 \setcounter{mpfootnote}{0}
 \setcounter{part}{0}
 \setcounter{chapter}{2}
-\setcounter{section}{7}
-\setcounter{subsection}{3}
-\setcounter{subsubsection}{3}
+\setcounter{section}{11}
+\setcounter{subsection}{4}
+\setcounter{subsubsection}{2}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{17}
+\setcounter{figure}{46}
 \setcounter{table}{1}
 \setcounter{caption@flags}{2}
 \setcounter{continuedfloat}{0}
@@ -155,10 +254,10 @@
 \setcounter{NAT@ctr}{0}
 \setcounter{float@type}{8}
 \setcounter{section@level}{0}
-\setcounter{Item}{24}
+\setcounter{Item}{31}
 \setcounter{Hfootnote}{1}
 \setcounter{Hy@AnnotLevel}{0}
-\setcounter{bookmark@seq@number}{60}
+\setcounter{bookmark@seq@number}{76}
 \setcounter{tabularnotesi}{0}
 \setcounter{tabularnotes*i}{0}
 \setcounter{lstlisting}{1}

@@ -1,44 +1,46 @@
 \chapter{Conclusiones}
 
-Este trabajo ha abordado el desafío de desarrollar una plataforma segura y escalable para la distribución de actualizaciones OTA en dispositivos IoT, incorporando algoritmos de criptografía ligera (LWC) y resistentes a ataques cuánticos (PQ). Los resultados obtenidos demuestran que los objetivos planteados se han alcanzado de manera satisfactoria.
+Este proyecto partía de un prototipo desarrollado durante las prácticas en Ikerlan que, si bien demostró la viabilidad de una arquitectura basada en WFX, un servicio gestor y SWUpdate, se encontraba en un nivel de madurez tecnológica \textbf{TRL 3}: una prueba de concepto con funcionalidades básicas, sin capacidades criptográficas en el backend, con cifrado rígido y sin uso en el dispositivo, y sin integración con infraestructura PKI.
 
-\section{Cumplimiento de Objetivos}
+El trabajo realizado en este TFM ha transformado ese prototipo en una \textbf{plataforma completa y demostrable en entorno operativo (TRL 6)}. A continuación se detalla cómo se han abordado cada uno de los objetivos planteados.
 
-Se ha desarrollado con éxito una plataforma completa que permite distribuir actualizaciones de manera segura mediante cifrado y firma digital. La plataforma integra:
+\section{Cumplimiento de objetivos}
+
+\textbf{Objetivo 1 -- Cifrado de actualizaciones.}
+Se ha implementado cifrado simétrico completo en dos niveles. En el backend, el servicio genera paquetes cifrados con \textbf{AES} en sus variantes CBC, CTR y GCM, además de \textbf{ASCON} como algoritmo de criptografía ligera. En el dispositivo, se ha extendido SWUpdate para descifrar estos paquetes de forma flexible, permitiendo seleccionar el algoritmo y modo de operación en cada actualización de forma individual. Esto resuelve directamente la limitación del prototipo original, que carecía de cualquier capacidad criptográfica en el backend y no aprovechaba el cifrado en el dispositivo.
+
+\textbf{Objetivo 2 -- Firma digital de actualizaciones.}
+Se han desarrollado mecanismos de firma digital tanto en el backend como en el dispositivo. El servicio permite firmar paquetes con algoritmos tradicionales (\textbf{RSA}, \textbf{ECDSA}) y post-cuánticos (\textbf{ML-DSA}), mientras que SWUpdate ha sido extendido para verificar estas firmas. La inclusión de ML-DSA posiciona al sistema frente a la amenaza cuántica, un aspecto especialmente relevante en dispositivos IoT con ciclos de vida prolongados.
+
+\textbf{Objetivo 3 -- Integración con la PKI Lamassu.}
+La plataforma se ha integrado completamente con Lamassu, aprovechando su infraestructura para la gestión de \textbf{claves simétricas} (a través del KMS), \textbf{dispositivos} (mediante el DMS) y \textbf{certificados digitales} (con las CAs). Esta integración permite establecer cadenas de confianza robustas y gestionar el ciclo de vida criptográfico de los dispositivos de forma centralizada, tanto desde el backend como desde la interfaz web.
+
+\textbf{Objetivo 4 -- Integración continua (CI).}
+Se han implementado pipelines de CI mediante \textbf{GitHub Actions} que ejecutan automáticamente tests unitarios y de extremo a extremo en cada cambio del código. Esto garantiza la detección temprana de regresiones y valida la interoperabilidad de los componentes de forma continua.
+
+\textbf{Objetivo 5 -- Despliegue continuo (CD).}
+Se ha automatizado la construcción de imágenes de contenedor versionadas y su publicación en \textbf{GHCR} con despliegue automático en el clúster de Kubernetes mediante \textbf{Helm}. Esto permite que cada cambio aprobado en el código se refleje rápidamente en el entorno de producción, facilitando la iteración y mejora continua de la plataforma.
+
+\vspace{0.5em}
+
+Más allá de los objetivos específicos, el proyecto ha producido una \textbf{interfaz web de gestión completa} que permite administrar actualizaciones, lanzamientos, dispositivos y claves criptográficas de forma visual e intuitiva, así como una \textbf{web de demostración} que facilita la visualización del proceso de actualización en tiempo real.
+
+\section{Líneas futuras}
+
+Aunque la plataforma desarrollada cubre los objetivos planteados, existen varias líneas de trabajo que permitirían ampliar sus capacidades:
 
 \begin{itemize}
-    \item \textbf{Soporte para criptografía ligera:} Integración de ASCON como alternativa eficiente a AES para dispositivos con recursos limitados.
-    \item \textbf{Criptografía post-cuántica:} Incorporación de algoritmos de firma digital resistentes a ataques cuánticos.
-    \item \textbf{Interfaz de gestión:} Desarrollo de una interfaz web intuitiva que abstrae la complejidad del proceso de actualización.
+	\item \textbf{Mecanismo de rollback:} Implementar la capacidad de revertir dispositivos a una versión anterior de firmware en caso de que una actualización provoque fallos. Esto requeriría gestión de versiones en el dispositivo y coordinación con el backend para detectar estados erróneos post-actualización.
+
+	\item \textbf{Soporte para ChaCha20 y ChaChaPoly:} Incorporar estos algoritmos simétricos como alternativa a AES. ChaCha20 ofrece mejor rendimiento que AES en dispositivos sin aceleración hardware de AES, aunque para dispositivos altamente restringidos ASCON seguiría siendo la opción más eficiente.
+
+	\item \textbf{Lanzamientos a subconjuntos de grupos:} Actualmente, los lanzamientos se dirigen a un grupo completo de dispositivos. Permitir seleccionar subconjuntos facilitaría estrategias de despliegue para ciertos dispositivos o regiones específicas.
+
+	\item \textbf{Mejoras en la interfaz web:} Ampliar las capacidades de visualización con dashboards de monitorización más detallados, mejoras en la usabilidad para el usuario final.
 \end{itemize}
 
-\section{Validación de Criptografía Ligera en Dispositivos Limitados}
+\section{Reflexión final}
 
-Uno de los hallazgos más relevantes es la demostración práctica de que la criptografía ligera merece la pena en dispositivos con recursos limitados. Los algoritmos LWC, específicamente ASCON, han probado ofrecer:
+Este Trabajo de Fin de Máster ha demostrado que es posible construir una plataforma de actualización OTA que combine la robustez de herramientas consolidadas como SWUpdate con algoritmos criptográficos de última generación, incluyendo criptografía ligera y post-cuántica. El sistema resultante no solo resuelve las limitaciones del prototipo inicial, sino que establece una arquitectura extensible, desplegable en la nube y preparada para los retos de seguridad presentes y futuros del ecosistema IoT.
 
-\begin{itemize}
-    \item Menor consumo de recursos computacionales y de memoria.
-    \item Rendimiento superior en dispositivos embebidos cuando se utiliza la implementación en C nativo.
-    \item Seguridad equivalente a los estándares tradicionales.
-\end{itemize}
-
-Esta validación resulta especialmente importante para el ecosistema IoT, donde millones de dispositivos operan con recursos estrictamente limitados. La posibilidad de proporcionar seguridad robusta sin comprometer la viabilidad técnica representa un avance significativo.
-
-\section{Preparación para Amenazas Post-Cuánticas}
-
-La integración de algoritmos post-cuánticos constituye un cambio que merece la pena de cara al futuro. Aunque las computadoras cuánticas no son aún una amenaza práctica inmediata, la preparación anticipada es esencial considerando que:
-
-\begin{itemize}
-    \item Los dispositivos IoT tienen ciclos de vida prolongados (10-20 años).
-    \item Los adversarios pueden interceptar comunicaciones cifradas hoy para descifrarlas en el futuro.
-    \item La migración a criptografía post-cuántica requiere tiempo de maduración y estandarización.
-\end{itemize}
-
-La plataforma proporciona la flexibilidad necesaria para soportar tanto algoritmos tradicionales como post-cuánticos, permitiendo una transición gradual según las necesidades específicas de cada despliegue.
-
-\section{Reflexión Final}
-
-La plataforma desarrollada demuestra que es posible construir infraestructuras de actualización seguras para dispositivos IoT sin comprometer la viabilidad técnica. La integración de criptografía ligera permite proteger dispositivos con recursos limitados, mientras que la incorporación de algoritmos post-cuánticos asegura la relevancia a largo plazo de la solución.
-
-Al proporcionar una solución completa, usable y escalable, se facilita que organizaciones puedan implementar actualizaciones OTA seguras mediante cifrado y firma digital, preparadas para las amenazas del futuro.
-
+Como reflexión personal, me gustaría agradecer la oportunidad de trabajar en un proyecto tan desafiante y enriquecedor, que me ha permitido aplicar y ampliar mis conocimientos en áreas como la criptografía, la seguridad en IoT, el desarrollo de software y la gestión de infraestructuras en la nube. Tener que usar diferentes lenguajes y herramientas ha sido una experiencia valiosa que me ha permitido crecer como desarrollador y entender mejor las complejidades de construir sistemas seguros y escalables. Espero que esta plataforma pueda servir como base para futuras investigaciones y desarrollos en el ámbito de las actualizaciones OTA seguras.
